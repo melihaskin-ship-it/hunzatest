@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Programs — Hunza Longevity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+</noscript>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --brand:#8A73B4;
+    --brand-mid:#6E5A9A;
+    --brand-deep:#3D2B6B;
+    --brand-plum:#241640;
+    --brand-darkest:#160D2E;
+    --brand-tint-1:#F5F2FB;
+    --brand-tint-2:#EAE4F6;
+    --brand-tint-3:#CFC5E8;
+    --brand-tint-4:#A896CC;
+    --ivory:#FAF9F7;
+    --white:#FFFFFF;
+    --warm-gray-3:#C8C2B8;
+    --warm-gray-4:#9A9490;
+    --warm-gray-5:#5A5468;
+    --charcoal:#1E1428;
+    --gold:#C4AA78;
+    --ff-display:'Cormorant Garamond',Georgia,serif;
+    --ff-juana:'Playfair Display','Cormorant Garamond',Georgia,serif;
+    --ff-body:'Jost','Helvetica Neue',sans-serif;
+    --max-w:1280px;
+    --section-pad:120px 48px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--ff-body);background:var(--white);color:var(--charcoal);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;}
+  section{width:100%;}
+  .programs-hero>*,.inclusions-header>*,.inclusions-grid>*,.gallery-intro>*,.program-block>*,.design-own-features>*,.philosophy-grid>*,.consultation-grid>*,.form-row-2>*,.footer-inner>*{min-width:0;}
+
+  /* ── NAV ── */
+  .main-nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--brand-tint-2);
+    height:72px;display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:0 40px;
+  }
+  .nav-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;}
+  .hamburger span{display:block;width:24px;height:1.5px;background:var(--brand-deep);transition:all 0.3s;}
+  .hamburger:hover span{background:var(--brand);}
+  .nav-center{display:flex;justify-content:center;}
+  .nav-logo-img{height:38px;object-fit:contain;filter:invert(1) sepia(1) saturate(2) hue-rotate(230deg) brightness(0.4);}
+  .nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+  .nav-icon-btn{
+    background:none;border:none;cursor:pointer;
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    color:var(--brand-deep);border-radius:50%;transition:background 0.2s;
+    text-decoration:none;
+  }
+  .nav-icon-btn:hover{background:var(--brand-tint-1);}
+  .nav-icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-book-btn{
+    font-family:var(--ff-body);font-size:10px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--white);background:var(--brand-deep);
+    border:none;padding:10px 22px;cursor:pointer;
+    transition:background 0.25s;text-decoration:none;white-space:nowrap;
+    margin-left:8px;
+  }
+  .nav-book-btn:hover{background:var(--brand-mid);}
+
+  /* ── MEGA MENU ── */
+  .mega-overlay{
+    position:fixed;top:72px;left:0;right:0;bottom:0;z-index:199;
+    background:rgba(22,13,46,0.6);backdrop-filter:blur(4px);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;
+  }
+  .mega-menu{
+    position:fixed;top:72px;left:0;right:0;z-index:200;
+    background:var(--white);border-bottom:1px solid var(--brand-tint-2);
+    padding:48px 64px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+    transform:translateY(-20px);opacity:0;pointer-events:none;
+    transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:0 32px 64px rgba(36,22,64,0.15);
+  }
+  .mega-menu.open,.mega-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+  .mega-col-title{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--brand);font-weight:400;margin-bottom:20px;
+    padding-bottom:12px;border-bottom:1px solid var(--brand-tint-2);
+  }
+  .mega-link{
+    display:block;font-size:13px;color:var(--warm-gray-5);
+    text-decoration:none;padding:7px 0;
+    transition:color 0.2s;font-weight:300;
+    border-bottom:1px solid transparent;
+  }
+  .mega-link:hover{color:var(--brand-deep);}
+  .mega-link.active{color:var(--brand-deep);font-weight:400;}
+  .mega-close{
+    position:absolute;top:24px;right:32px;
+    background:none;border:none;cursor:pointer;
+    font-size:20px;color:var(--brand-tint-4);
+    font-family:var(--ff-display);font-weight:300;
+  }
+  .mega-close:hover{color:var(--brand-deep);}
+
+  /* ── BUTTONS ── */
+  .btn-primary{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--brand-deep);border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-primary:hover{background:var(--brand-mid);border-color:var(--brand-mid);}
+  .btn-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-deep);background:transparent;border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline:hover{background:var(--brand-deep);color:var(--white);}
+  .btn-outline-white{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,0.5);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.12);border-color:var(--white);}
+
+  /* ── OVERLINE ── */
+  .overline{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--brand);font-weight:400;display:block;margin-bottom:20px;}
+
+  /* ── SECTIONS ── */
+  section{max-width:var(--max-w);margin:0 auto;padding:var(--section-pad);}
+  .h-display{font-family:var(--ff-display);font-size:64px;font-weight:300;line-height:1.08;color:var(--brand-plum);letter-spacing:-0.01em;margin-bottom:28px;}
+  .h-display em{font-style:italic;color:var(--brand);}
+  .body-large{font-size:16px;line-height:1.9;color:var(--warm-gray-5);font-weight:300;margin-bottom:20px;text-align:justify;hyphens:auto;}
+  .divider{width:40px;height:1px;background:var(--brand);margin:36px 0;}
+
+  /* ── HERO ── */
+  .programs-hero{
+    padding-top:72px;
+    min-height:88vh;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    position:relative;
+    overflow:hidden;
+  }
+  .programs-hero-left{
+    background:var(--brand-tint-1);
+    padding:96px 64px 80px;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;
+  }
+  .programs-hero-right{position:relative;overflow:hidden;background:var(--brand-plum);}
+  .programs-hero-photo{width:100%;height:100%;object-fit:cover;display:block;opacity:0.95;}
+  .programs-hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(36,22,64,0.45) 0%,rgba(36,22,64,0.15) 50%,rgba(36,22,64,0.55) 100%);
+    pointer-events:none;
+  }
+  .programs-hero-imgtext{
+    position:absolute;bottom:24px;left:32px;
+    color:rgba(245,242,251,0.7);font-size:10px;
+    letter-spacing:0.2em;text-transform:uppercase;
+  }
+  .programs-hero-tag{
+    display:inline-block;font-size:10px;letter-spacing:0.25em;
+    text-transform:uppercase;color:var(--brand-mid);
+    border:1px solid var(--brand-tint-3);padding:6px 14px;
+    margin-bottom:40px;font-weight:400;align-self:flex-start;
+  }
+  .programs-hero-headline{
+    font-family:var(--ff-display);font-size:72px;font-weight:300;
+    line-height:1.04;color:var(--brand-plum);
+    letter-spacing:-0.01em;margin-bottom:8px;
+  }
+  .programs-hero-headline em{font-style:italic;color:var(--brand);}
+  .programs-hero-sub{
+    font-size:16px;color:var(--warm-gray-5);line-height:1.9;
+    max-width:480px;margin-top:28px;margin-bottom:48px;font-weight:300;
+  }
+  .programs-hero-meta{
+    display:flex;gap:48px;margin-top:8px;
+    padding-top:32px;border-top:1px solid var(--brand-tint-2);
+  }
+  .hero-meta-item{display:flex;flex-direction:column;gap:6px;}
+  .hero-meta-num{
+    font-family:var(--ff-juana);font-size:34px;font-weight:300;
+    color:var(--brand-deep);line-height:1;letter-spacing:0.01em;
+  }
+  .hero-meta-label{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--warm-gray-5);font-weight:300;
+  }
+
+  /* ── INCLUSIONS BAND ── */
+  .inclusions-bg{background:var(--brand-plum);color:var(--white);}
+  .inclusions-section{padding:96px 48px;}
+  .inclusions-header{
+    display:grid;grid-template-columns:5fr 7fr;gap:80px;
+    align-items:end;margin-bottom:64px;
+  }
+  .inclusions-overline{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--brand-tint-3);font-weight:400;display:block;margin-bottom:20px;
+  }
+  .inclusions-headline{
+    font-family:var(--ff-display);font-size:54px;font-weight:300;
+    line-height:1.1;color:var(--white);letter-spacing:-0.01em;
+  }
+  .inclusions-headline em{font-style:italic;color:var(--brand-tint-3);}
+  .inclusions-intro{
+    font-size:14px;color:rgba(207,197,232,0.7);
+    line-height:1.9;font-weight:300;max-width:480px;
+  }
+  .inclusions-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    background:rgba(138,115,180,0.18);
+  }
+  .inc-card{
+    background:rgba(255,255,255,0.03);
+    padding:44px 36px;
+    display:flex;flex-direction:column;gap:18px;
+    transition:background 0.3s;
+    min-height:240px;
+  }
+  .inc-card:hover{background:rgba(255,255,255,0.07);}
+  .inc-num{
+    font-family:var(--ff-juana);font-size:14px;
+    color:var(--brand-tint-3);letter-spacing:0.04em;font-weight:400;
+  }
+  .inc-icon{
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--brand-tint-3);
+    margin-bottom:4px;
+  }
+  .inc-icon svg{width:32px;height:32px;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;}
+  .inc-title{
+    font-family:var(--ff-display);font-size:22px;font-weight:400;
+    color:var(--white);line-height:1.25;
+  }
+  .inc-desc{
+    font-size:12.5px;color:rgba(207,197,232,0.65);
+    line-height:1.8;font-weight:300;
+  }
+  .inclusions-footnote{
+    margin-top:48px;padding-top:32px;
+    border-top:1px solid rgba(138,115,180,0.2);
+    display:flex;align-items:center;justify-content:space-between;
+    gap:32px;flex-wrap:wrap;
+  }
+  .inclusions-footnote-text{
+    font-size:13px;color:rgba(207,197,232,0.7);
+    font-weight:300;font-style:italic;
+    font-family:var(--ff-display);
+  }
+
+  /* ── PROGRAMS GALLERY ── */
+  .gallery-bg{background:var(--white);}
+  .gallery-section{padding:120px 48px;}
+  .gallery-intro{
+    display:grid;grid-template-columns:5fr 7fr;gap:80px;
+    align-items:end;margin-bottom:80px;
+  }
+  .gallery-intro-headline{
+    font-family:var(--ff-display);font-size:60px;font-weight:300;
+    line-height:1.08;color:var(--brand-plum);
+    letter-spacing:-0.01em;
+  }
+  .gallery-intro-headline em{font-style:italic;color:var(--brand);}
+  .gallery-intro-sub{
+    font-size:15px;color:var(--warm-gray-5);
+    line-height:1.9;font-weight:300;max-width:520px;
+  }
+
+  /* PROGRAM CARDS — large, alternating layout */
+  .program-block{
+    display:grid;grid-template-columns:7fr 5fr;
+    gap:0;margin-bottom:2px;
+    background:var(--brand-tint-1);
+    border:1px solid var(--brand-tint-2);
+    position:relative;
+    overflow:hidden;
+    transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .program-block:hover{
+    border-color:var(--brand-tint-3);
+    box-shadow:0 24px 60px rgba(36,22,64,0.08);
+  }
+  .program-block.reverse{grid-template-columns:5fr 7fr;}
+  .program-block.reverse .program-image-side{order:2;}
+  .program-block.reverse .program-content-side{order:1;}
+
+  .program-image-side{
+    position:relative;overflow:hidden;
+    min-height:480px;
+    background:var(--brand-plum);
+  }
+  .program-image-side img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .program-block:hover .program-image-side img{transform:scale(1.04);}
+  .program-image-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(36,22,64,0.25) 0%,transparent 40%,rgba(36,22,64,0.4) 100%);
+    pointer-events:none;
+  }
+  .program-image-number{
+    position:absolute;top:32px;left:32px;
+    font-family:var(--ff-juana);
+    font-size:64px;font-weight:300;
+    color:rgba(255,255,255,0.85);
+    line-height:1;
+    text-shadow:0 2px 24px rgba(36,22,64,0.4);
+    letter-spacing:0.02em;
+  }
+  .program-image-label{
+    position:absolute;bottom:32px;left:32px;
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:rgba(255,255,255,0.8);font-weight:400;
+  }
+
+  .program-content-side{
+    padding:64px 56px;
+    display:flex;flex-direction:column;justify-content:center;
+    background:var(--brand-tint-1);
+  }
+  .program-tag{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--brand);font-weight:400;margin-bottom:18px;
+  }
+  .program-title{
+    font-family:var(--ff-display);font-size:46px;font-weight:300;
+    color:var(--brand-plum);line-height:1.08;
+    letter-spacing:-0.01em;margin-bottom:20px;
+  }
+  .program-title em{font-style:italic;color:var(--brand);}
+  .program-desc{
+    font-size:14.5px;color:var(--warm-gray-5);
+    line-height:1.9;font-weight:300;margin-bottom:28px;
+  }
+  .program-highlights{
+    display:flex;flex-direction:column;gap:8px;
+    margin-bottom:36px;padding-top:24px;
+    border-top:1px solid var(--brand-tint-2);
+  }
+  .program-highlight{
+    font-size:12px;letter-spacing:0.08em;
+    color:var(--warm-gray-5);font-weight:300;
+    display:flex;align-items:center;gap:12px;
+  }
+  .program-highlight::before{
+    content:'';width:14px;height:1px;background:var(--brand);flex-shrink:0;
+  }
+  .program-meta{
+    display:flex;gap:24px;margin-bottom:32px;
+    flex-wrap:wrap;
+  }
+  .program-meta-item{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .program-meta-num{
+    font-family:var(--ff-juana);font-size:22px;font-weight:400;
+    color:var(--brand-deep);line-height:1;
+  }
+  .program-meta-label{
+    font-size:9px;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--warm-gray-5);font-weight:400;
+  }
+  .program-cta-row{
+    display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+  }
+  .program-cta{
+    font-family:var(--ff-body);font-size:10.5px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--brand-deep);background:transparent;
+    border:1px solid var(--brand-deep);padding:14px 28px;
+    cursor:pointer;transition:all 0.3s;
+    text-decoration:none;display:inline-block;
+  }
+  .program-cta:hover{background:var(--brand-deep);color:var(--white);}
+  .program-cta.filled{
+    background:var(--brand-deep);color:var(--white);
+  }
+  .program-cta.filled:hover{
+    background:var(--brand-mid);border-color:var(--brand-mid);
+  }
+
+  /* ── DESIGN YOUR OWN ── */
+  .design-own-bg{
+    background:var(--brand-darkest);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(138,115,180,0.18) 0%, transparent 45%),
+      radial-gradient(circle at 80% 70%, rgba(207,197,232,0.08) 0%, transparent 45%);
+  }
+  .design-own-section{
+    padding:120px 48px;
+    text-align:center;
+    max-width:var(--max-w);margin:0 auto;
+  }
+  .design-own-headline{
+    font-family:var(--ff-display);font-size:60px;font-weight:300;
+    color:var(--white);line-height:1.1;
+    letter-spacing:-0.01em;margin-bottom:24px;
+    max-width:720px;margin-left:auto;margin-right:auto;
+  }
+  .design-own-headline em{font-style:italic;color:var(--brand-tint-3);}
+  .design-own-sub{
+    font-size:15px;color:rgba(207,197,232,0.7);
+    line-height:1.9;font-weight:300;
+    max-width:600px;margin:0 auto 48px;
+  }
+  .design-own-features{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:40px;max-width:880px;margin:0 auto 56px;
+    padding-top:48px;border-top:1px solid rgba(138,115,180,0.2);
+  }
+  .design-feature{display:flex;flex-direction:column;gap:10px;}
+  .design-feature-title{
+    font-family:var(--ff-display);font-size:20px;
+    color:var(--brand-tint-2);font-weight:400;font-style:italic;
+  }
+  .design-feature-desc{
+    font-size:12px;color:rgba(207,197,232,0.6);
+    line-height:1.8;font-weight:300;
+  }
+
+  /* ── METHODOLOGY / PHILOSOPHY ── */
+  .philosophy-bg{background:var(--brand-tint-1);}
+  .philosophy-section{padding:120px 48px;max-width:var(--max-w);margin:0 auto;}
+  .philosophy-grid{
+    display:grid;grid-template-columns:5fr 6fr;
+    gap:80px;align-items:center;
+  }
+  .philosophy-image{position:relative;overflow:hidden;min-height:560px;}
+  .philosophy-image img{width:100%;height:100%;object-fit:cover;display:block;}
+  .philosophy-content{display:flex;flex-direction:column;}
+  .philosophy-quote{
+    font-family:var(--ff-display);font-size:30px;font-weight:300;
+    font-style:italic;color:var(--brand-deep);
+    line-height:1.45;margin-bottom:32px;
+  }
+  .philosophy-quote em{color:var(--brand);font-style:italic;}
+  .philosophy-text{
+    font-size:14px;color:var(--warm-gray-5);
+    line-height:1.9;font-weight:300;
+    margin-bottom:14px;text-align:justify;
+  }
+  .philosophy-cite{
+    margin-top:24px;font-size:10px;
+    letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--brand);font-weight:400;
+  }
+
+  /* ── CONTACT FORM (identical to longevity page) ── */
+  .consultation-bg{background:var(--white);}
+  .consultation-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:stretch;}
+  .consult-left-sticky{position:sticky;top:96px;display:flex;flex-direction:column;height:100%;}
+  .consult-sub{font-size:14px;color:var(--warm-gray-5);line-height:1.9;font-weight:300;margin-bottom:36px;}
+  .consult-promises{display:flex;flex-direction:column;gap:14px;}
+  .consult-promise{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm-gray-5);display:flex;align-items:center;gap:12px;}
+  .consult-promise::before{content:'';width:16px;height:1px;background:var(--brand);flex-shrink:0;}
+  .form-container{background:var(--brand-tint-1);padding:56px;border:1px solid var(--brand-tint-2);}
+  .form-section-title{font-family:var(--ff-display);font-size:28px;font-weight:300;color:var(--brand-deep);margin-bottom:32px;line-height:1.3;}
+  .form-input-light{width:100%;background:var(--white);border:1px solid var(--brand-tint-2);padding:14px 16px;font-family:var(--ff-body);font-size:14px;color:var(--charcoal);outline:none;margin-bottom:16px;transition:border-color 0.2s;font-weight:300;}
+  .form-input-light::placeholder{color:var(--warm-gray-3);}
+  .form-input-light:focus{border-color:var(--brand);}
+  .form-label-light{display:block;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray-5);font-weight:400;margin-bottom:8px;}
+  .form-privacy-light{font-size:11px;color:var(--warm-gray-4);line-height:1.6;margin-top:14px;font-weight:300;}
+  .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  select.form-input-light{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238A73B4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+  textarea.form-input-light{resize:vertical;min-height:100px;}
+
+  /* ── FOOTER ── */
+  footer{background:var(--brand-plum);padding:64px 48px;}
+  .footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:48px;border-bottom:1px solid rgba(138,115,180,0.2);}
+  .footer-brand-desc{font-size:12px;color:rgba(207,197,232,0.5);line-height:1.8;font-weight:300;}
+  .footer-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;margin-bottom:20px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:13px;color:rgba(207,197,232,0.55);text-decoration:none;font-weight:300;transition:color 0.2s;}
+  .footer-link:hover{color:var(--brand-tint-3);}
+  .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
+  .footer-legal{display:flex;gap:24px;}
+  .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
+  .footer-legal a:hover{color:rgba(207,197,232,0.7);}
+
+  /* ── RESPONSIVE ── */
+    :root{--section-pad:80px 32px;}
+    .programs-hero{grid-template-columns:1fr;}
+    .programs-hero-right{display:none;}
+    .programs-hero-headline{font-size:54px;}
+    .inclusions-header,.gallery-intro,.philosophy-grid,.consultation-grid{grid-template-columns:1fr;gap:40px;}
+    .inclusions-grid{grid-template-columns:repeat(2,1fr);}
+    .design-own-features{grid-template-columns:1fr;gap:24px;}
+    .program-block,.program-block.reverse{grid-template-columns:1fr;}
+    .program-block.reverse .program-image-side{order:1;}
+    .program-block.reverse .program-content-side{order:2;}
+    .program-image-side{min-height:300px;}
+    .program-content-side{padding:48px 36px;}
+    .program-title{font-size:36px;}
+    .inclusions-headline,.gallery-intro-headline,.design-own-headline{font-size:42px;}
+    .main-nav{padding:0 20px;}
+    .mega-menu{grid-template-columns:1fr 1fr;padding:32px;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+    :root{--section-pad:64px 22px;}
+    body{overflow-x:hidden;}
+    .main-nav{height:64px;padding:0 14px;grid-template-columns:auto minmax(0,1fr) auto;}
+    .nav-left{gap:0;}
+    .hamburger{padding:6px;}
+    .hamburger span{width:22px;}
+    .main-nav .nav-center img{height:30px!important;max-width:138px;}
+    .nav-right{gap:4px;}
+    .nav-icon-btn{width:34px;height:34px;}
+    .nav-book-btn{font-size:9px;letter-spacing:0.12em;padding:9px 12px;margin-left:2px;line-height:1.15;text-align:center;}
+    .mega-overlay{top:64px;}
+    .mega-menu{top:64px;bottom:0;grid-template-columns:1fr;gap:26px;padding:30px 24px;overflow-y:auto;transform:translateY(-12px);}
+    .mega-close{top:16px;right:20px;}
+    .mega-col-title{margin-bottom:12px;padding-bottom:10px;}
+    .mega-link{padding:6px 0;}
+    .programs-hero{padding-top:64px;min-height:auto;}
+    .programs-hero-left{padding:72px 22px 64px;}
+    .programs-hero-tag{max-width:100%;white-space:normal;line-height:1.5;}
+    .programs-hero-headline{font-size:44px;overflow-wrap:anywhere;}
+    .programs-hero-sub{font-size:15px;margin-bottom:36px;}
+    .programs-hero-meta{flex-wrap:wrap;gap:24px;}
+    .hero-meta-item{min-width:92px;}
+    .hero-meta-label{overflow-wrap:anywhere;}
+    .inclusions-section,.gallery-section,.design-own-section,.philosophy-section{padding:64px 22px;}
+    .inclusions-header,.gallery-intro,.philosophy-grid,.consultation-grid{gap:34px;}
+    .inclusions-headline,.gallery-intro-headline,.design-own-headline,.h-display{font-size:38px;overflow-wrap:anywhere;}
+    .inclusions-intro,.gallery-intro-sub,.design-own-sub{max-width:none;}
+    .inclusions-grid{grid-template-columns:1fr;}
+    .inc-card{padding:34px 26px;min-height:0;}
+    .inclusions-footnote{align-items:flex-start;}
+    .btn-primary,.btn-outline,.btn-outline-white,.program-cta{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;text-align:center;}
+    .program-image-side{min-height:260px;}
+    .program-image-number{font-size:48px;}
+    .program-image-label{left:24px;right:24px;overflow-wrap:anywhere;}
+    .program-title{font-size:30px;}
+    .program-content-side{padding:40px 24px;}
+    .program-desc,.program-highlight{overflow-wrap:anywhere;}
+    .program-meta{gap:18px;}
+    .program-cta-row{display:grid;grid-template-columns:1fr;}
+    .design-own-features{padding-top:36px;margin-bottom:44px;}
+    .philosophy-image{min-height:320px;}
+    .philosophy-quote{font-size:25px;}
+    .consult-left-sticky{position:static;}
+    .form-container{padding:36px 24px;}
+    .form-row-2{grid-template-columns:1fr;}
+    .form-input-light{min-width:0;}
+    footer{padding:54px 24px;}
+    .footer-inner{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;gap:14px;text-align:center;}
+    .footer-legal{flex-wrap:wrap;justify-content:center;gap:12px 20px;}
+  }
+    :root{--section-pad:56px 18px;}
+    .main-nav{padding:0 10px;}
+    .main-nav .nav-center img{height:26px!important;max-width:118px;}
+    .nav-icon-btn{width:30px;height:30px;}
+    .nav-icon-btn svg{width:16px;height:16px;}
+    .nav-book-btn{font-size:8.5px;letter-spacing:0.1em;padding:8px 9px;max-width:112px;white-space:normal;}
+    .programs-hero-left{padding:64px 18px 56px;}
+    .programs-hero-headline{font-size:38px;}
+    .programs-hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+    .hero-meta-num{font-size:28px;}
+    .inclusions-section,.gallery-section,.design-own-section,.philosophy-section{padding:56px 18px;}
+    .inclusions-headline,.gallery-intro-headline,.design-own-headline,.h-display{font-size:34px;}
+    .inc-card{padding:30px 22px;}
+    .program-image-side{min-height:230px;}
+    .program-image-number{top:24px;left:24px;font-size:42px;}
+    .program-content-side{padding:34px 20px;}
+    .program-title{font-size:28px;}
+    .program-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+    .program-meta-label{letter-spacing:0.14em;overflow-wrap:anywhere;}
+    .design-feature-title{font-size:18px;}
+    .philosophy-image{min-height:280px;}
+    .philosophy-quote{font-size:23px;}
+    .form-container{padding:30px 20px;}
+    .form-section-title{font-size:25px;}
+  }
+    .main-nav .nav-center img{max-width:104px;}
+    .nav-book-btn{max-width:108px;}
+    .programs-hero-headline{font-size:34px;}
+    .inclusions-headline,.gallery-intro-headline,.design-own-headline,.h-display{font-size:31px;}
+    .program-title{font-size:26px;}
+    .programs-hero-tag,.overline,.inclusions-overline,.program-tag,.program-image-label,.form-label-light,.footer-col-title{letter-spacing:0.18em;}
+    .program-meta{grid-template-columns:1fr 1fr;}
+  }
+</style>
+
+<style>
+.footer-col-toggle {
+  display: block;
+  width: auto;
+  appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  pointer-events: none;
+}
+
+.footer-col-icon {
+  display: none;
+}
+
+.footer-nav-group .footer-links {
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+}
+  .main-nav {
+    grid-template-columns: auto 1fr auto !important;
+  }
+
+  .main-nav .nav-book-btn {
+    display: none !important;
+  }
+
+  .main-nav .nav-left {
+    justify-self: start;
+  }
+
+  .main-nav .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center !important;
+    width: max-content;
+    max-width: calc(100% - 120px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .main-nav .nav-center a,
+  .main-nav .nav-center img {
+    pointer-events: auto;
+  }
+
+  .main-nav .nav-right {
+    justify-self: end;
+    margin-left: auto;
+    gap: 6px !important;
+    z-index: 2;
+  }
+
+  .footer-inner {
+    gap: 24px !important;
+  }
+
+  .footer-nav-group {
+    border-top: 1px solid rgba(207,197,232,0.16);
+    padding-top: 6px;
+  }
+
+  .footer-col-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: transparent;
+    border: 0;
+    padding: 12px 0;
+    cursor: pointer;
+    pointer-events: auto;
+    text-align: left;
+  }
+
+  .footer-col-toggle .footer-col-title {
+    margin-bottom: 0 !important;
+  }
+
+  .footer-col-icon {
+    display: inline;
+    color: rgba(207,197,232,0.75);
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .footer-nav-group.is-open .footer-col-icon {
+    transform: rotate(45deg);
+  }
+
+  .footer-nav-group .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding-top 0.2s ease;
+    padding-top: 0;
+  }
+
+  .footer-nav-group.is-open .footer-links {
+    max-height: 420px;
+    opacity: 1;
+    padding-top: 4px;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
+  }
+
+  /* Keep the next program card partially visible on mobile so swipe affordance is obvious. */
+  #programsViewport {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #programsTrack {
+    --prog-card-w: min(calc(84vw - 18px), 320px) !important;
+    gap: 12px !important;
+  }
+
+  .prog-card {
+    width: var(--prog-card-w) !important;
+    padding: 0 !important;
+  }
+
+  .prog-img {
+    height: auto !important;
+    aspect-ratio: 5 / 6 !important;
+  }
+
+  .prog-body {
+    padding-top: 16px !important;
+  }
+
+  .prog-title {
+    font-size: 20px !important;
+  }
+
+  .prog-desc {
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+  }
+
+  #programsDots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    margin-top: 22px !important;
+    padding: 0 20px !important;
+  }
+}
+
+.brochure-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 13, 46, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 320;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.brochure-popup-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brochure-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 560px);
+  max-height: min(86vh, 820px);
+  overflow: auto;
+  background: #fff;
+  color: var(--charcoal);
+  z-index: 321;
+  transform: translate(-50%, -50%) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 30px 80px rgba(36, 22, 64, 0.22);
+  border: 1px solid var(--brand-tint-2);
+}
+
+.brochure-popup.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.brochure-popup-inner {
+  padding: 32px 30px 28px;
+}
+
+.brochure-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: var(--brand-deep);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brochure-popup-kicker {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 14px;
+}
+
+.brochure-popup-title {
+  font-family: var(--ff-display);
+  font-size: clamp(34px, 5vw, 44px);
+  line-height: 1.02;
+  color: var(--brand-deep);
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.brochure-popup-title em {
+  font-style: italic;
+}
+
+.brochure-popup-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--warm-gray-5);
+  margin-bottom: 22px;
+}
+
+.brochure-popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.brochure-popup-field {
+  margin-bottom: 14px;
+}
+
+.brochure-popup-field.full {
+  grid-column: 1 / -1;
+}
+
+.brochure-popup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+}
+
+.brochure-popup-input {
+  width: 100%;
+  border: 1px solid var(--brand-tint-3);
+  padding: 14px 16px;
+  font: inherit;
+  color: var(--charcoal);
+  background: #fff;
+}
+
+.brochure-popup-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.brochure-popup-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 8px 0 18px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--warm-gray-5);
+}
+
+.brochure-popup-consent input {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.brochure-popup-consent a {
+  color: var(--brand-deep);
+}
+
+.brochure-popup-error {
+  display: none;
+  margin: -6px 0 14px;
+  color: #b43a3a;
+  font-size: 11px;
+}
+
+.brochure-popup-error.is-visible {
+  display: block;
+}
+  .brochure-popup-inner {
+    padding: 28px 20px 22px;
+  }
+
+  .brochure-popup-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+</style>
+<!-- Google Tag Manager -->
+<script>
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+(function (w, d, s, l, i) {
+  function injectGtm() {
+    if (d.getElementById('hunza-gtm-script')) {
+      return;
+    }
+
+    var f = d.getElementsByTagName(s)[0];
+    var j = d.createElement(s);
+    var dl = l !== 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.id = 'hunza-gtm-script';
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  }
+
+  if ('requestIdleCallback' in w) {
+    w.requestIdleCallback(injectGtm, { timeout: 2500 });
+  } else {
+    w.addEventListener('load', injectGtm, { once: true });
+  }
+})(window, document, 'script', 'dataLayer', 'GTM-KW5WQVCL');
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
+</head>
+<body class="">
+<!-- MEGA MENU OVERLAY -->
+<div class="mega-overlay" id="megaOverlay" onclick="closeMenu()"></div>
+
+<!-- MEGA MENU -->
+<div class="mega-menu" id="megaMenu">
+  <button class="mega-close" onclick="closeMenu()">&#x2715;</button>
+  <div>
+    <div class="mega-col-title">Signature Programs</div>
+    <a href="/advanced-longevity-hunza-handoff/" class="mega-link">Advanced Longevity & Vitality</a>
+    <a href="/immunity-support-gut-health/" class="mega-link">Immunity & Gut Health</a>
+    <a href="/de-stress-relaxtion-spa-retreat/" class="mega-link">Destress & Relaxation</a>
+    <a href="/mindfulness-sleep-well/" class="mega-link">Mindfulness & Sleep</a>
+    <a href="/weight-loss-fat-burn/" class="mega-link">Weight Loss & Fat Burn</a>
+    <a href="/detox-cleanse/" class="mega-link">Detox & Cleanse</a>
+    <a href="/design-your-own-program/" class="mega-link">Design Your Own Program</a>
+    <a href="/see-all-programs/" class="mega-link">See All Programs</a>
+  </div>
+  <div>
+    <div class="mega-col-title">The Experience</div>
+    <a href="/spa-wellness/" class="mega-link">Spa &amp; Wellness</a>
+    <a href="/accommodation/" class="mega-link">Accommodation</a>
+    <a href="/dining/" class="mega-link">Dining</a>
+    <a href="/special-offers/" class="mega-link">Special Offers</a>
+    <a href="/pool-fitness/" class="mega-link">Pool &amp; Fitness</a>
+    <a href="/explore-nearby/" class="mega-link">Explore Nearby</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Hunza</div>
+    <a href="/about_us/" class="mega-link">About Hunza</a>
+    <a href="/methodology/" class="mega-link">Methodology</a>
+    <a href="/contact_us/" class="mega-link">Contact Us</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Plan Your Stay</div>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="mega-link">Book Your Stay</a>
+    <a
+      href="#"
+      class="mega-link menu-brochure-trigger"
+      data-brochure-name="Hunza General Brochure"
+      data-brochure-url="https://hunzalongevity.com/hunza-catalog-desktop.pdf"
+    >Download Brochure</a>
+    <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="mega-link">Free Consultation</a>
+    <div style="margin-top:24px;">
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-primary" style="font-size:10px;padding:12px 20px;">Book Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="brochure-popup-overlay" id="brochurePopupOverlay"></div>
+<div
+  class="brochure-popup"
+  id="brochurePopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="brochurePopupTitle"
+  aria-hidden="true"
+>
+  <button type="button" class="brochure-popup-close" id="brochurePopupClose" aria-label="Close brochure form">&times;</button>
+  <div class="brochure-popup-inner">
+    <span class="brochure-popup-kicker">Plan Your Stay</span>
+    <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
+    <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
+    <form id="menuBrochureForm" novalidate>
+      <div class="brochure-popup-grid">
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureFirstName">First Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureFirstName" name="first_name" autocomplete="given-name">
+        </div>
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureLastName">Last Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureLastName" name="last_name" autocomplete="family-name">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochureEmail">Email Address</label>
+          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochurePhone">Telephone Number</label>
+          <input class="brochure-popup-input" type="tel" id="menuBrochurePhone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+      <label class="brochure-popup-consent">
+        <input type="checkbox" id="menuBrochureConsent" name="consent_marketing" required>
+        <span>I agree that Hunza may contact me about this brochure request and related updates. I accept the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/cookie-policy/">Cookie Policy</a>.</span>
+      </label>
+      <div class="brochure-popup-error" id="menuBrochureError">Please complete all fields and accept the consent checkbox.</div>
+      <button type="submit" class="btn-primary" id="menuBrochureSubmit" style="width:100%;">Email Me the Brochure</button>
+    </form>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="/">
+      <img src="data:image/png;base64,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" alt="Hunza" style="height:38px;object-fit:contain;filter:invert(18%) sepia(40%) saturate(1200%) hue-rotate(230deg) brightness(55%) contrast(110%);" />
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+905327333541" class="nav-icon-btn" aria-label="Call us">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.44l.01 1.48Z"/></svg>
+    </a>
+    <a href="https://wa.me/905327333541" class="nav-icon-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="nav-book-btn">Book Your Stay</a>
+  </div>
+</nav>
+
+
+
+<!-- HERO -->
+<div class="programs-hero">
+  <div class="programs-hero-left">
+    <span class="programs-hero-tag">Six Signature Programs · 2026</span>
+    <h1 class="programs-hero-headline">Programs<br>designed for<br><em>lasting change</em></h1>
+    <p class="programs-hero-sub">Every Hunza program is a carefully constructed framework — physician-guided, fully personalized, and built around the rhythm of your stay. Six distinct paths, one shared philosophy: meaningful, measurable transformation.</p>
+    <div class="programs-hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">6</span>
+        <span class="hero-meta-label">Signature Programs</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">7–21</span>
+        <span class="hero-meta-label">Day Durations</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">100%</span>
+        <span class="hero-meta-label">Personalized</span>
+      </div>
+    </div>
+  </div>
+  <div class="programs-hero-right">
+    <img src="https://hunzalongevity.com/uploads/see-all-programs/0%20-%20Hero%20See%20All%20Programs.png" alt="Hunza Signature Programs" class="programs-hero-photo" onerror="this.style.background='linear-gradient(160deg,#4A3578 0%,#2D1F55 45%,#160D2E 100%)'">
+    <div class="programs-hero-overlay"></div>
+    <div class="programs-hero-imgtext">Hunza Longevity & Wellness Estate</div>
+  </div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<div class="inclusions-bg">
+  <div class="inclusions-section" style="max-width:var(--max-w);margin:0 auto;">
+    <div class="inclusions-header">
+      <div>
+        <span class="inclusions-overline">What's Included</span>
+        <h2 class="inclusions-headline">Everything included<br>in your <em>nightly rate</em></h2>
+      </div>
+      <div>
+        <p class="inclusions-intro">Each Hunza signature program is delivered as a complete experience. From medical assessment to private transfer, every element of your stay is included in a single, transparent nightly rate — no fragmented add-ons, no hidden surprises.</p>
+      </div>
+    </div>
+
+    <div class="inclusions-grid">
+
+      <div class="inc-card">
+        <span class="inc-num">01</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M16 4l2.5 5 5.5 1-4 4 1 5.5-5-2.6-5 2.6 1-5.5-4-4 5.5-1z"/><circle cx="16" cy="16" r="13"/></svg>
+        </div>
+        <div class="inc-title">A comprehensive<br>health program</div>
+        <p class="inc-desc">A fully personalized program led by our specialist team — combining medical assessment, therapeutic care, and continuous expert guidance throughout your stay.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">02</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M4 26V12l12-8 12 8v14"/><path d="M10 26v-9h12v9"/><path d="M4 26h24"/></svg>
+        </div>
+        <div class="inc-title">Accommodation in a<br>Deluxe Bungalow villa</div>
+        <p class="inc-desc">A private bungalow villa designed for rest and recovery — quiet, generously proportioned, with garden views and the comforts of an exceptional retreat.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">03</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M8 8v16a4 4 0 008 0V8"/><path d="M12 8v6"/><path d="M20 8h2a2 2 0 012 2v8h-4z"/><path d="M22 18v6"/></svg>
+        </div>
+        <div class="inc-title">A full healthy<br>meal plan</div>
+        <p class="inc-desc">Three balanced, chef-prepared meals daily — adapted to your program, dietary needs, and personal preferences. Crafted to support outcomes, never to feel like restriction.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">04</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M4 22c4-4 8-4 12 0s8 4 12 0"/><path d="M4 16c4-4 8-4 12 0s8 4 12 0"/><path d="M4 10c4-4 8-4 12 0s8 4 12 0"/></svg>
+        </div>
+        <div class="inc-title">Unlimited access to<br>wellness facilities</div>
+        <p class="inc-desc">Spa, pool, hydrotherapy circuit, hammam, fitness center, and outdoor wellness spaces — yours to use freely, day after day, throughout your stay.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">05</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M4 22h24"/><path d="M6 22V14l4-4h12l4 4v8"/><circle cx="10" cy="22" r="2.5"/><circle cx="22" cy="22" r="2.5"/></svg>
+        </div>
+        <div class="inc-title">VIP round-trip<br>private transfer</div>
+        <p class="inc-desc">Discreet, private airport transfers in both directions — meet-and-greet on arrival, dedicated chauffeur, and the calm of a transition handled in full.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">06</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M6 14h20"/><path d="M8 14v10a2 2 0 002 2h12a2 2 0 002-2V14"/><path d="M12 10a4 4 0 018 0v4"/></svg>
+        </div>
+        <div class="inc-title">Taxes and<br>service included</div>
+        <p class="inc-desc">All taxes and service charges are included in your rate. Gratuities are entirely at your discretion — never expected, never added.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">07</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 8v8l5 3"/></svg>
+        </div>
+        <div class="inc-title">24-hour personal<br>guidance</div>
+        <p class="inc-desc">A dedicated wellness host available throughout your stay — to coordinate schedules, adjust the program in real time, and ensure every detail meets your needs.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">08</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M8 24V8h12l4 4v12z"/><path d="M20 8v4h4"/><path d="M12 16h8"/><path d="M12 20h8"/></svg>
+        </div>
+        <div class="inc-title">Bio-impedance &amp;<br>body composition</div>
+        <p class="inc-desc">Initial assessment and ongoing measurement of body composition, hydration, and metabolic markers — to track real, evidence-based progress through the program.</p>
+      </div>
+
+      <div class="inc-card">
+        <span class="inc-num">09</span>
+        <div class="inc-icon">
+          <svg viewBox="0 0 32 32"><path d="M16 4c-6 6-6 14 0 24"/><path d="M16 4c6 6 6 14 0 24"/><path d="M4 16h24"/><circle cx="16" cy="16" r="13"/></svg>
+        </div>
+        <div class="inc-title">Post-stay medical<br>follow-up</div>
+        <p class="inc-desc">A scheduled follow-up consultation after your return home — to extend the program's continuity, review outcomes, and refine the path forward.</p>
+      </div>
+
+    </div>
+
+    <div class="inclusions-footnote">
+      <p class="inclusions-footnote-text">"A single, transparent rate — because clarity is part of the experience."</p>
+      <a href="#consultation" class="btn-outline-white" style="font-size:10px;padding:13px 28px;">Request a Detailed Quotation</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMS GALLERY -->
+<div class="gallery-bg">
+  <div class="gallery-section" style="max-width:var(--max-w);margin:0 auto;">
+    <div class="gallery-intro">
+      <div>
+        <span class="overline">Six Signature Programs</span>
+        <h2 class="gallery-intro-headline">Choose your path<br>to <em>lasting wellbeing</em></h2>
+      </div>
+      <div>
+        <p class="gallery-intro-sub">Each program is a complete framework, refined through years of expert-led practice. Select the one that meets you where you are — or design your own with our specialist team. Every program is available in 7-, 14-, and 21-day durations.</p>
+        <div class="divider"></div>
+        <p style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);font-weight:400;">All programs · 7 / 14 / 21 days · From €4,800 per night</p>
+      </div>
+    </div>
+
+    <!-- PROGRAM 01 — Advanced Longevity & Vitality -->
+    <div class="program-block">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20hero%20longevity.png" alt="Advanced Longevity & Vitality" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">01</div>
+        <div class="program-image-label">For ages 35+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">Advanced Longevity<br>&amp; <em>Vitality</em></h3>
+        <p class="program-desc">A comprehensive, physician-guided program for those who wish to invest seriously in their long-term health. Designed for individuals 35 and above seeking measurable vitality, energy optimization, and sustainable well-being.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">6</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">35+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Longevity expert consultations</span>
+          <span class="program-highlight">Six-pillar integrated framework</span>
+          <span class="program-highlight">Post-stay medical follow-up</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/advanced-longevity-hunza-handoff/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM 02 — Immunity & Gut Health -->
+    <div class="program-block reverse">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20hero%20Immunity.png" alt="Immunity & Gut Health" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">02</div>
+        <div class="program-image-label">For ages 18+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">Immunity Support<br>&amp; <em>Gut Health</em></h3>
+        <p class="program-desc">A structured program for individuals seeking to support immune function, restore digestive balance, and build sustained resilience. Designed for adults aged 18 and above through a personalized combination of nutrition, restorative therapies, and gentle movement.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">4</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">18+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Targeted nutrition &amp; gut restoration</span>
+          <span class="program-highlight">Microbiome support protocols</span>
+          <span class="program-highlight">Immune-resilience therapies</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/immunity-support-gut-health/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM 03 — Destress & Relaxation -->
+    <div class="program-block">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20hero%20destress.png" alt="Destress & Relaxation Spa Retreat" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">03</div>
+        <div class="program-image-label">For ages 18+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">De-stress<br>&amp; <em>Relaxation</em><br>Spa Retreat</h3>
+        <p class="program-desc">A deeply restorative retreat designed for those seeking to unwind, recharge, and restore balance to body and mind. Combining soothing spa treatments, mindful relaxation, and gentle movement to release tension and renew inner calm.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">4</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">18+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Therapeutic massage program</span>
+          <span class="program-highlight">Hammam &amp; hydrotherapy rituals</span>
+          <span class="program-highlight">Mind-body restoration sessions</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/de-stress-relaxtion-spa-retreat/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM 04 — Mindfulness & Sleep Well -->
+    <div class="program-block reverse">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20Hero%20Mindfulness.png" alt="Mindfulness & Sleep Well" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">04</div>
+        <div class="program-image-label">For ages 21+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">Mindfulness<br>&amp; <em>Sleep</em> Well</h3>
+        <p class="program-desc">A carefully guided program for those who wish to restore deep, restorative sleep and regain mental clarity. Designed for individuals 21 and above seeking a calmer mind, steadier emotional balance, and a more grounded pace of life.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">5</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">21+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Sleep restoration protocols</span>
+          <span class="program-highlight">Mindfulness &amp; meditation training</span>
+          <span class="program-highlight">Stress regulation &amp; breathwork</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/mindfulness-sleep-well/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM 05 — Weight Loss & Fat Burn -->
+    <div class="program-block">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20Hero%20Weight%20Loss.png" alt="Weight Loss & Fat Burn" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">05</div>
+        <div class="program-image-label">For ages 21+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">Weight Loss<br>&amp; <em>Fat Burn</em></h3>
+        <p class="program-desc">A structured, expert-led program for individuals seeking to improve body composition, posture, and overall physical condition — through a personalized combination of targeted movement, nutrition strategy, and lifestyle guidance.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">5</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">21+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Personalized training &amp; movement</span>
+          <span class="program-highlight">Targeted nutrition strategy</span>
+          <span class="program-highlight">Body composition tracking</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/weight-loss-fat-burn/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAM 06 — Detox & Cleanse -->
+    <div class="program-block reverse">
+      <div class="program-image-side">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/Kopia%2001%20-%20Hero%20Detox.png" alt="Detox & Cleanse" onerror="this.style.background='linear-gradient(135deg,#3D2B6B 0%,#241640 100%)'">
+        <div class="program-image-overlay"></div>
+        <div class="program-image-number">06</div>
+        <div class="program-image-label">For ages 21+</div>
+      </div>
+      <div class="program-content-side">
+        <span class="program-tag">Signature Program</span>
+        <h3 class="program-title">Detox<br>&amp; <em>Cleanse</em></h3>
+        <p class="program-desc">A structured, expert-led program designed to support the body's natural renewal processes through nutrition, gentle movement, and restorative therapies. For individuals 21 and above seeking physical lightness, sustained energy, and a genuine reset of daily rhythm.</p>
+        <div class="program-meta">
+          <div class="program-meta-item">
+            <span class="program-meta-num">5</span>
+            <span class="program-meta-label">Pillars</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">21+</span>
+            <span class="program-meta-label">Age</span>
+          </div>
+          <div class="program-meta-item">
+            <span class="program-meta-num">7–21</span>
+            <span class="program-meta-label">Days</span>
+          </div>
+        </div>
+        <div class="program-highlights">
+          <span class="program-highlight">Targeted nutrition &amp; cleansing protocol</span>
+          <span class="program-highlight">Hydrotherapy &amp; detox rituals</span>
+          <span class="program-highlight">Restorative gentle movement</span>
+        </div>
+        <div class="program-cta-row">
+          <a href="/detox-cleanse/" class="program-cta filled">Discover the Program</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DESIGN YOUR OWN PROGRAM -->
+<div class="design-own-bg">
+  <div class="design-own-section">
+    <span class="overline" style="color:var(--brand-tint-3);">By Personal Invitation</span>
+    <h2 class="design-own-headline">Or, <em>design your own</em><br>program with our team.</h2>
+    <p class="design-own-sub">For those whose needs do not fit a single framework, our specialists can compose a fully bespoke program — drawing from every discipline within Hunza. Available by consultation, for stays of 10 days or longer.</p>
+
+    <div class="design-own-features">
+      <div class="design-feature">
+        <h4 class="design-feature-title">Specialist consultation</h4>
+        <p class="design-feature-desc">A pre-arrival call with our medical and wellness team to map your goals, history, and desired outcomes in detail.</p>
+      </div>
+      <div class="design-feature">
+        <h4 class="design-feature-title">Fully bespoke framework</h4>
+        <p class="design-feature-desc">A program composed specifically for you — drawing from longevity medicine, nutrition, movement, mind-body therapies, and aesthetics.</p>
+      </div>
+      <div class="design-feature">
+        <h4 class="design-feature-title">Continuous refinement</h4>
+        <p class="design-feature-desc">Your program adapts throughout your stay, refined daily by your specialist team based on response, progress, and preference.</p>
+      </div>
+    </div>
+
+    <a href="#consultation" class="btn-outline-white">Speak With Our Specialists</a>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy-bg">
+  <div class="philosophy-section">
+    <div class="philosophy-grid">
+      <div class="philosophy-image">
+        <img src="https://hunzalongevity.com/uploads/see-all-programs/7%20-%20THE%20HUNZA%20APPROACH.png" alt="Hunza Philosophy" onerror="this.style.background='linear-gradient(135deg,#EAE4F6 0%,#CFC5E8 100%)'">
+      </div>
+      <div class="philosophy-content">
+        <span class="overline">The Hunza Approach</span>
+        <p class="philosophy-quote">"We do not offer programs. We offer a <em>carefully constructed framework</em> for a different quality of life."</p>
+        <p class="philosophy-text">Every Hunza signature program is the result of years of refinement — built around an integrated team of specialists in longevity medicine, physiotherapy, dietetics, psychology, and aesthetics, working in coordination rather than in silos.</p>
+        <p class="philosophy-text">What you receive is not a menu of services, but a single, coherent experience. One framework, fully personalized to you, delivered by a team that knows your history, your goals, and the precise rhythm of your stay.</p>
+        <span class="philosophy-cite">— Hunza Longevity Philosophy</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT FORM (identical to longevity landing) -->
+<div id="consultation" class="consultation-bg">
+  <section>
+    <div class="consultation-grid">
+      <div>
+        <div class="consult-left-sticky">
+          <span class="overline">Get in Touch</span>
+          <h2 class="h-display">We would love to<br>hear from <em>you.</em></h2>
+          <p class="consult-sub">Have a question about a program, want to learn more about our approach, or ready to take the next step? Send us a message and a member of our team will get back to you personally within 24 hours.</p>
+          <div class="consult-promises">
+            <div class="consult-promise">Responded to within 24 hours</div>
+            <div class="consult-promise">Your information is fully confidential</div>
+            <div class="consult-promise">No obligation whatsoever</div>
+            <div class="consult-promise">Personal reply from our specialist team</div>
+          </div>
+          <div style="flex:1;min-height:180px;margin-top:32px;overflow:hidden;">
+            <img
+              src="https://hunzalongevity.com/uploads/see-all-programs/8%20-%20contact%20form%20see%20all%20programs.png"
+              alt="Hunza business card"
+              style="width:100%;height:100%;object-fit:cover;display:block;"
+              onerror="this.style.background='linear-gradient(135deg,#EAE4F6 0%,#CFC5E8 100%)'"
+            >
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-container">
+          <h3 class="form-section-title">Send Us a Message</h3>
+          <div class="form-row-2">
+            <div>
+              <label class="form-label-light">First Name</label>
+              <input type="text" class="form-input-light" placeholder="First name">
+            </div>
+            <div>
+              <label class="form-label-light">Last Name</label>
+              <input type="text" class="form-input-light" placeholder="Last name">
+            </div>
+          </div>
+          <label class="form-label-light">Email Address</label>
+          <input type="email" class="form-input-light" placeholder="Your email address">
+          <label class="form-label-light">Phone Number</label>
+          <input type="tel" class="form-input-light" placeholder="+1 000 000 0000">
+          <label class="form-label-light">Country of Residence</label>
+          <select class="form-input-light">
+            <option value="">Select your country</option>
+            <option>United Kingdom</option><option>United States</option><option>Germany</option>
+            <option>Switzerland</option><option>France</option><option>UAE</option>
+            <option>Turkey</option><option>Other</option>
+          </select>
+          <label class="form-label-light">Program of Interest</label>
+          <select class="form-input-light">
+            <option value="">Select a program</option>
+            <option>Advanced Longevity &amp; Vitality</option>
+            <option>Immunity &amp; Gut Health</option>
+            <option>Destress &amp; Relaxation</option>
+            <option>Mindfulness &amp; Sleep</option>
+            <option>Weight Loss &amp; Fat Burn</option>
+            <option>Detox &amp; Cleanse</option>
+            <option>Design Your Own Program</option>
+          </select>
+          <label class="form-label-light">Preferred Contact Method</label>
+          <select class="form-input-light">
+            <option value="">Select preference</option>
+            <option>Email</option><option>Phone Call</option>
+            <option>Video Call</option><option>WhatsApp</option>
+          </select>
+          <label class="form-label-light">Your Message (Optional)</label>
+          <textarea class="form-input-light" placeholder="Tell us about your health goals, questions, or anything else we should know to assist you best."></textarea>
+          <button class="btn-primary" style="width:100%;text-align:center;padding:20px;font-size:12px;">Send Your Message</button>
+          <p class="form-privacy-light">All information provided is held in strict confidence. We do not share personal data with third parties. You may withdraw consent at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="margin-bottom:20px;">
+        <img src="data:image/png;base64,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" alt="Hunza" style="height:44px;object-fit:contain;display:block;filter:invert(100%) brightness(200%);">
+      </div>
+      <p class="footer-brand-desc">A specialist longevity and medical wellness destination offering fully personalized programs designed to optimize health, extend vitality, and support meaningful, lasting transformation.</p>
+      <div style="margin-top:24px;">
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-outline-white" style="font-size:10px;padding:12px 24px;border-color:rgba(207,197,232,0.4);">Book Your Stay</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Signature Programs</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/advanced-longevity-hunza-handoff/" class="footer-link">Advanced Longevity &amp; Vitality</a>
+        <a href="/immunity-support-gut-health/" class="footer-link">Immunity &amp; Gut Health</a>
+        <a href="/de-stress-relaxtion-spa-retreat/" class="footer-link">Destress &amp; Relaxation</a>
+        <a href="/mindfulness-sleep-well/" class="footer-link">Mindfulness &amp; Sleep</a>
+        <a href="/weight-loss-fat-burn/" class="footer-link">Weight Loss &amp; Fat Burn</a>
+        <a href="/detox-cleanse/" class="footer-link">Detox &amp; Cleanse</a>
+        <a href="/design-your-own-program/" class="footer-link" style="font-style:italic;color:rgba(207,197,232,0.45);">Design Your Own Program</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">The Experience</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/spa-wellness/" class="footer-link">Spa &amp; Wellness</a>
+        <a href="/accommodation/" class="footer-link">Accommodation</a>
+        <a href="/dining/" class="footer-link">Dining</a>
+        <a href="/special-offers/" class="footer-link">Special Offers</a>
+        <a href="/pool-fitness/" class="footer-link">Pool &amp; Fitness</a>
+        <a href="/explore-nearby/" class="footer-link">Explore Nearby</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Hunza</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/about_us/" class="footer-link">About Hunza</a>
+        <a href="/methodology/" class="footer-link">Methodology</a>
+        <a href="/contact_us/" class="footer-link">Contact Us</a>
+        <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="footer-link">Free Consultation</a>
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="footer-link">Book Your Stay</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/hunzalongevity?igsh=NXdoYW41MGJybzU1" target="_blank" rel="noopener" aria-label="Instagram"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61558909949837" target="_blank" rel="noopener" aria-label="Facebook"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Hunza Longevity &amp; Wellness. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-use/">Terms of Use</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function loadFeatureScript(key, src) {
+    window.HunzaFeatureScripts = window.HunzaFeatureScripts || {};
+
+    if (window.HunzaFeatureScripts[key]) {
+      return window.HunzaFeatureScripts[key];
+    }
+
+    window.HunzaFeatureScripts[key] = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Failed to load ${key}`));
+      document.body.appendChild(script);
+    });
+
+    return window.HunzaFeatureScripts[key];
+  }
+
+  function isMobileBrochureViewport() {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  function syncBrochureLinks() {
+    document.querySelectorAll('.brochure-link').forEach((link) => {
+      link.href = isMobileBrochureViewport() ? link.dataset.mobileHref : link.dataset.desktopHref;
+    });
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('megaMenu');
+    const overlay = document.getElementById('megaOverlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('megaMenu').classList.remove('open');
+    document.getElementById('megaOverlay').classList.remove('open');
+  }
+
+  function openBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.add('is-open');
+    overlay.classList.add('is-open');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('menuBrochureFirstName')?.focus();
+  }
+
+  function closeBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  syncBrochureLinks();
+  window.addEventListener('resize', syncBrochureLinks);
+  document.querySelectorAll('.mega-link').forEach(l => l.addEventListener('click', closeMenu));
+  document.querySelectorAll('.menu-brochure-trigger').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      closeMenu();
+      openBrochurePopup();
+    });
+  });
+  document.getElementById('brochurePopupOverlay')?.addEventListener('click', closeBrochurePopup);
+  document.getElementById('brochurePopupClose')?.addEventListener('click', closeBrochurePopup);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeBrochurePopup();
+    }
+  });
+
+  function toggleFaq(element) {
+    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
+    if (!item) {
+      return;
+    }
+
+    const answer = item.querySelector('.faq-a, .faq-answer');
+    const isOpen = item.classList.toggle('open');
+    item.dataset.lastFaqToggleAt = String(Date.now());
+
+    if (answer) {
+      answer.style.display = isOpen ? 'block' : 'none';
+    }
+  }
+
+  window.toggleFaq = toggleFaq;
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('a, button, input, textarea, select')) {
+      return;
+    }
+
+    const trigger = event.target.closest('.faq-question, .faq-item');
+    if (!trigger) {
+      return;
+    }
+
+    const item = trigger.classList.contains('faq-item') ? trigger : trigger.closest('.faq-item');
+    const lastToggleAt = Number(item?.dataset.lastFaqToggleAt || 0);
+
+    if (Date.now() - lastToggleAt < 120) {
+      return;
+    }
+
+    toggleFaq(trigger);
+  });
+
+  function togglePillar(button) {
+    const trigger = button?.closest('.pillar-toggle');
+    const pillar = (trigger || button)?.closest('.pillar-card, .pillar');
+    if (!pillar || !trigger) {
+      return;
+    }
+
+    const hiddenItems = pillar.querySelectorAll('.pillar-items .pillar-more');
+    if (!hiddenItems.length) {
+      return;
+    }
+
+    const isExpanded = trigger.dataset.expanded === 'true';
+
+    hiddenItems.forEach((item) => {
+      item.style.display = isExpanded ? 'none' : 'flex';
+    });
+
+    trigger.dataset.expanded = isExpanded ? 'false' : 'true';
+    trigger.textContent = isExpanded ? '+ Show all services' : '- Show fewer services';
+  }
+
+  window.togglePillar = togglePillar;
+
+  document.querySelectorAll('.pillar-toggle:not([onclick])').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      togglePillar(event.currentTarget);
+    });
+  });
+
+  function syncFooterAccordions() {
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+    document.querySelectorAll('.footer-nav-group').forEach((group) => {
+      const button = group.querySelector('.footer-col-toggle');
+      if (!button) {
+        return;
+      }
+
+      if (!isMobile) {
+        group.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'true');
+      } else if (!group.classList.contains('is-open')) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  document.querySelectorAll('.footer-col-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!window.matchMedia('(max-width: 640px)').matches) {
+        return;
+      }
+
+      const group = button.closest('.footer-nav-group');
+      const isOpen = group?.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  syncFooterAccordions();
+  window.addEventListener('resize', syncFooterAccordions);
+
+  document.querySelectorAll('.cookie-settings-link').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (!window.Cookiebot || typeof window.Cookiebot.renew !== 'function') {
+        return;
+      }
+
+      event.preventDefault();
+      window.Cookiebot.renew();
+    });
+  });
+
+  window.HunzaFormsEndpoints = {
+    contact: '/forms/contact',
+    brochure: '/forms/brochure',
+  };
+
+  window.HunzaFormsPolicies = {
+    privacyUrl: '/privacy-policy/',
+    cookieUrl: '/cookie-policy/',
+  };
+
+  if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
+    loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
+  }
+
+  if (document.querySelector('.form-container button, .form-card button, #assessmentForm, #menuBrochureForm')) {
+    loadFeatureScript('hunza-forms', 'https://hunzalongevity.com/js/hunza-forms.js');
+  }
+</script>
+
+</body>
+</html>
