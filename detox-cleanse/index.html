@@ -2041,24 +2041,100 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
       window.Cookiebot.renew();
     });
   });
-
-  window.HunzaFormsEndpoints = {
-    contact: '/forms/contact',
-    brochure: '/forms/brochure',
-  };
-
-  window.HunzaFormsPolicies = {
-    privacyUrl: '/privacy-policy/',
-    cookieUrl: '/cookie-policy/',
-  };
-
   if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
     loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
   }
 
-  if (document.querySelector('.form-container button, .form-card button, #assessmentForm, #menuBrochureForm')) {
-    loadFeatureScript('hunza-forms', 'https://hunzalongevity.com/js/hunza-forms.js');
+  // ── Brochure forms → Make.com webhook ────────────────────────────────────
+  const BROCHURE_WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
+  const BROCHURE_NAME    = 'Detox & Cleanse';
+
+  async function sendBrochureRequest(firstName, email, country, consent) {
+    const payload = {
+      brochure_name:          BROCHURE_NAME,
+      first_name:             firstName,
+      email:                  email,
+      country:                country || '',
+      consent_marketing:      !!consent,
+      submitted_at:           new Date().toISOString(),
+      page_url:               window.location.href,
+      user_agent:             navigator.userAgent,
+    };
+    const response = await fetch(BROCHURE_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
   }
+
+  // ── 1. Nav popup brochure form (menuBrochureForm) ─────────────────────────
+  (function() {
+    const form = document.getElementById('menuBrochureForm');
+    const submitBtn = document.getElementById('menuBrochureSubmit');
+    const errorEl  = document.getElementById('menuBrochureError');
+    if (!form || !submitBtn) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email   = form.querySelector('input[type="email"]')?.value?.trim();
+      const consent = form.querySelector('input[name="consent_marketing"]')?.checked;
+      const firstName = form.querySelector('input[type="text"]')?.value?.trim();
+      if (!email || !consent) {
+        if (errorEl) { errorEl.textContent = 'Please fill in your email and accept the consent.'; errorEl.classList.add('is-visible'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.remove('is-visible');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      try {
+        await sendBrochureRequest(firstName, email, '', consent);
+        submitBtn.textContent = 'Sent! Check your inbox.';
+        form.reset();
+      } catch(err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Email Me the Brochure';
+        if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.add('is-visible'); }
+        console.error(err);
+      }
+    });
+  })();
+
+  // ── 2. Page-level brochure form (.form-card) ──────────────────────────────
+  (function() {
+    const card = document.querySelector('.form-card');
+    if (!card) return;
+    const btn     = card.querySelector('button');
+    const inputs  = card.querySelectorAll('input[type="text"], input[type="email"]');
+    const consent = card.querySelector('input[type="checkbox"]');
+    if (!btn || inputs.length < 2) return;
+
+    btn.addEventListener('click', async () => {
+      const firstName = inputs[0]?.value?.trim();
+      const email     = inputs[1]?.value?.trim();
+      const country   = inputs[2]?.value?.trim();
+      const ok        = consent?.checked;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      if (!ok) { alert('Please accept the consent checkbox.'); return; }
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        await sendBrochureRequest(firstName, email, country, ok);
+        btn.textContent = '✓ Sent! Check your inbox.';
+        card.querySelectorAll('input').forEach(i => i.value = '');
+        if (consent) consent.checked = false;
+      } catch(err) {
+        btn.disabled = false;
+        btn.textContent = 'Send Me the Program Brochure';
+        alert('Something went wrong. Please try again.');
+        console.error(err);
+      }
+    });
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
 </script>
 
 </body>
