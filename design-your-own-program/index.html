@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Your Own Program — Hunza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+</noscript>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    /* BRAND (menu + footer — identical across the whole site) */
+    --brand:#8A73B4;
+    --brand-mid:#6E5A9A;
+    --brand-deep:#3D2B6B;
+    --brand-plum:#241640;
+    --brand-darkest:#160D2E;
+    --brand-tint-1:#F5F2FB;
+    --brand-tint-2:#EAE4F6;
+    --brand-tint-3:#CFC5E8;
+    --brand-tint-4:#A896CC;
+
+    /* PAGE PALETTE — Design Your Own Program (warm violet / orchid) */
+    --dyo-main:#9B6BAE;
+    --dyo-mid:#7E4F94;
+    --dyo-deep:#5E3478;
+    --dyo-plum:#3A1F4F;
+    --dyo-darkest:#22122F;
+    --dyo-tint-1:#F8F3FA;
+    --dyo-tint-2:#EEE2F2;
+    --dyo-tint-3:#D5BEDE;
+    --dyo-tint-4:#B68FC4;
+
+    --ivory:#FAF9F7;
+    --white:#FFFFFF;
+    --warm-gray-3:#C8C2B8;
+    --warm-gray-4:#9A9490;
+    --warm-gray-5:#5A5468;
+    --charcoal:#1E1428;
+    --gold:#C4AA78;
+    --error:#B43A3A;
+
+    --ff-display:'Cormorant Garamond',Georgia,serif;
+    --ff-juana:'Playfair Display','Cormorant Garamond',Georgia,serif;
+    --ff-body:'Jost','Helvetica Neue',sans-serif;
+    --max-w:1280px;
+    --section-pad:120px 48px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--ff-body);background:var(--white);color:var(--charcoal);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img,svg{max-width:100%;}
+  .hero-inner>*,.form-frame>*,.form-panel>*,.field-group>*,.input-row>*,.input-row-3>*,.input-row-bw>*,.chip-grid-2>*,.chip-grid-3>*,.condition-list>*,.phone-row>*,.panel-actions>*,.panel-buttons>*,.footer-inner>*{min-width:0;}
+
+  /* ── NAV (identical across site) ── */
+  .main-nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--brand-tint-2);
+    height:72px;display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:0 40px;
+  }
+  .nav-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;}
+  .hamburger span{display:block;width:24px;height:1.5px;background:var(--brand-deep);transition:all 0.3s;}
+  .hamburger:hover span{background:var(--brand);}
+  .nav-center{display:flex;justify-content:center;}
+  .nav-logo-img{height:38px;object-fit:contain;filter:invert(1) sepia(1) saturate(2) hue-rotate(230deg) brightness(0.4);}
+  .nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+  .nav-icon-btn{
+    background:none;border:none;cursor:pointer;
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    color:var(--brand-deep);border-radius:50%;transition:background 0.2s;
+    text-decoration:none;
+  }
+  .nav-icon-btn:hover{background:var(--brand-tint-1);}
+  .nav-icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-book-btn{
+    font-family:var(--ff-body);font-size:10px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--white);background:var(--brand-deep);
+    border:none;padding:10px 22px;cursor:pointer;
+    transition:background 0.25s;text-decoration:none;white-space:nowrap;
+    margin-left:8px;
+  }
+  .nav-book-btn:hover{background:var(--brand-mid);}
+
+  /* ── MEGA MENU (identical across site) ── */
+  .mega-overlay{
+    position:fixed;top:72px;left:0;right:0;bottom:0;z-index:199;
+    background:rgba(22,13,46,0.6);backdrop-filter:blur(4px);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;
+  }
+  .mega-menu{
+    position:fixed;top:72px;left:0;right:0;z-index:200;
+    background:var(--white);border-bottom:1px solid var(--brand-tint-2);
+    padding:48px 64px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+    transform:translateY(-20px);opacity:0;pointer-events:none;
+    transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:0 32px 64px rgba(36,22,64,0.15);
+  }
+  .mega-menu.open,.mega-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+  .mega-col-title{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--brand);font-weight:400;margin-bottom:20px;
+    padding-bottom:12px;border-bottom:1px solid var(--brand-tint-2);
+  }
+  .mega-link{
+    display:block;font-size:13px;color:var(--warm-gray-5);
+    text-decoration:none;padding:7px 0;
+    transition:color 0.2s;font-weight:300;
+    border-bottom:1px solid transparent;
+  }
+  .mega-link:hover{color:var(--brand-deep);}
+  .mega-link.active{color:var(--brand-deep);font-weight:400;}
+  .mega-close{
+    position:absolute;top:24px;right:32px;
+    background:none;border:none;cursor:pointer;
+    font-size:20px;color:var(--brand-tint-4);
+    font-family:var(--ff-display);font-weight:300;
+  }
+  .mega-close:hover{color:var(--brand-deep);}
+
+  /* ── BUTTONS ── */
+  .btn-primary{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--dyo-deep);border:1px solid var(--dyo-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-primary:hover{background:var(--dyo-mid);border-color:var(--dyo-mid);}
+  .btn-primary:disabled{opacity:0.4;cursor:not-allowed;}
+  .btn-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--dyo-deep);background:transparent;border:1px solid var(--dyo-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline:hover{background:var(--dyo-deep);color:var(--white);}
+  .btn-outline-white{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,0.5);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.12);border-color:var(--white);}
+
+  /* ── OVERLINE ── */
+  .overline{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--dyo-main);font-weight:400;display:block;margin-bottom:20px;}
+
+  /* ── HERO ── */
+  .hero-wrap{
+    padding-top:72px;min-height:60vh;
+    background:linear-gradient(160deg, var(--dyo-tint-1) 0%, var(--white) 60%);
+    position:relative;overflow:hidden;
+  }
+  .hero-wrap::before{
+    content:"";position:absolute;top:140px;right:-180px;width:520px;height:520px;
+    background:radial-gradient(circle, rgba(155,107,174,0.08) 0%, transparent 70%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-wrap::after{
+    content:"";position:absolute;bottom:-200px;left:-160px;width:480px;height:480px;
+    background:radial-gradient(circle, rgba(213,190,222,0.22) 0%, transparent 70%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-inner{
+    max-width:920px;margin:0 auto;
+    padding:90px 48px 60px;text-align:center;position:relative;z-index:1;
+  }
+  .hero-tag{
+    display:inline-block;font-size:10px;letter-spacing:0.25em;
+    text-transform:uppercase;color:var(--dyo-mid);
+    border:1px solid var(--dyo-tint-3);padding:6px 16px;
+    margin-bottom:36px;font-weight:400;
+  }
+  .hero-headline{
+    font-family:var(--ff-display);font-size:64px;font-weight:300;
+    line-height:1.08;color:var(--dyo-plum);
+    letter-spacing:-0.01em;margin-bottom:24px;
+  }
+  .hero-headline em{font-style:italic;color:var(--dyo-main);}
+  .hero-sub{
+    font-size:16px;color:var(--warm-gray-5);
+    line-height:1.85;max-width:640px;margin:0 auto 40px;
+    font-weight:300;
+  }
+  .hero-meta{
+    display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+    padding-top:28px;border-top:1px solid var(--dyo-tint-2);
+    max-width:560px;margin:0 auto;
+  }
+  .hero-meta-item{display:flex;flex-direction:column;gap:4px;align-items:center;}
+  .hero-meta-num{font-family:var(--ff-juana);font-size:24px;font-weight:400;color:var(--dyo-deep);line-height:1;}
+  .hero-meta-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dyo-main);font-weight:300;}
+
+  /* ── FORM SECTION ── */
+  .form-section{
+    background:var(--white);
+    padding:80px 24px 120px;
+    position:relative;
+  }
+  .form-frame{
+    max-width:880px;margin:0 auto;
+    background:var(--white);
+    border:1px solid var(--dyo-tint-2);
+    box-shadow:0 24px 64px rgba(58,31,79,0.07);
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap{
+    padding:36px 48px 32px;border-bottom:1px solid var(--dyo-tint-2);
+    background:var(--dyo-tint-1);
+  }
+  .progress-steps{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    position:relative;gap:8px;
+  }
+  .progress-steps::before{
+    content:"";position:absolute;top:7px;left:5%;right:5%;height:1px;
+    background:var(--dyo-tint-3);z-index:0;
+  }
+  .progress-bar-fill{
+    content:"";position:absolute;top:7px;left:5%;height:1px;
+    background:var(--dyo-main);z-index:1;
+    transition:width 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .progress-step{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;
+    position:relative;z-index:2;cursor:default;
+  }
+  .progress-dot{
+    width:14px;height:14px;border-radius:50%;
+    background:var(--white);border:1.5px solid var(--dyo-tint-3);
+    transition:all 0.3s;
+  }
+  .progress-step.done .progress-dot{background:var(--dyo-main);border-color:var(--dyo-main);}
+  .progress-step.active .progress-dot{
+    background:var(--white);border-color:var(--dyo-main);
+    box-shadow:0 0 0 4px rgba(155,107,174,0.20);
+  }
+  .progress-label{
+    font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--warm-gray-4);font-weight:400;text-align:center;
+    line-height:1.3;max-width:100px;
+  }
+  .progress-step.active .progress-label{color:var(--dyo-deep);}
+  .progress-step.done .progress-label{color:var(--dyo-main);}
+
+  /* ── FORM PANEL ── */
+  .form-panel{padding:56px 56px 48px;display:none;}
+  .form-panel.active{display:block;animation:fadeUp 0.45s cubic-bezier(0.16,1,0.3,1);}
+
+  .panel-overline{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--dyo-main);font-weight:400;margin-bottom:14px;}
+  .panel-title{font-family:var(--ff-display);font-size:38px;font-weight:300;color:var(--dyo-plum);line-height:1.15;margin-bottom:10px;letter-spacing:-0.005em;}
+  .panel-title em{font-style:italic;color:var(--dyo-main);}
+  .panel-intro{font-size:14px;color:var(--warm-gray-5);line-height:1.8;margin-bottom:36px;max-width:600px;}
+
+  /* ── FIELD GROUPS ── */
+  .field-group{margin-bottom:32px;}
+  .field-label{
+    display:block;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--dyo-deep);font-weight:400;margin-bottom:14px;
+  }
+  .field-help{
+    font-size:12px;color:var(--warm-gray-4);font-style:italic;
+    margin-bottom:14px;margin-top:-6px;
+  }
+  .field-error{
+    font-size:11px;color:var(--error);margin-top:8px;
+    letter-spacing:0.04em;display:none;
+  }
+  .field-error.show{display:block;}
+
+  /* ── CHIP CHOICES (radio / multi-select buttons) ── */
+  .chip-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .chip-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .chip{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    padding:16px 22px;min-height:54px;text-align:center;
+    border:1px solid var(--dyo-tint-3);background:var(--white);
+    font-family:var(--ff-body);font-size:13px;font-weight:300;color:var(--charcoal);
+    cursor:pointer;transition:all 0.2s;line-height:1.4;
+  }
+  .chip:hover{border-color:var(--dyo-main);background:var(--dyo-tint-1);}
+  .chip input{position:absolute;opacity:0;pointer-events:none;}
+  .chip.selected{
+    background:var(--dyo-deep);border-color:var(--dyo-deep);color:var(--white);
+  }
+  .chip.selected:hover{background:var(--dyo-mid);border-color:var(--dyo-mid);}
+  .chip .chip-rank{
+    position:absolute;top:6px;right:8px;
+    font-size:10px;font-weight:500;color:var(--dyo-tint-3);
+    font-family:var(--ff-juana);letter-spacing:0.05em;
+  }
+  .chip.selected .chip-rank{color:var(--white);}
+
+  /* ── INPUTS ── */
+  .input-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .input-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .input-row-bw{display:grid;grid-template-columns:auto 1fr;gap:10px;}
+  .text-input,.select-input{
+    width:100%;padding:14px 16px;
+    border:1px solid var(--dyo-tint-3);background:var(--white);
+    font-family:var(--ff-body);font-size:14px;font-weight:300;color:var(--charcoal);
+    transition:border-color 0.2s;
+  }
+  .text-input:focus,.select-input:focus{
+    outline:none;border-color:var(--dyo-main);
+  }
+  .select-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%239B6BAE' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
+  .input-label-small{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm-gray-4);font-weight:400;margin-bottom:8px;display:block;}
+
+  /* ── UNIT TOGGLE ── */
+  .unit-toggle{display:flex;border:1px solid var(--dyo-tint-3);overflow:hidden;}
+  .unit-toggle button{
+    flex:1;padding:14px 14px;background:var(--white);
+    border:none;font-family:var(--ff-body);font-size:11px;letter-spacing:0.14em;
+    text-transform:uppercase;color:var(--warm-gray-5);
+    cursor:pointer;transition:all 0.2s;
+  }
+  .unit-toggle button.on{background:var(--dyo-deep);color:var(--white);}
+
+  /* ── SLIDER ── */
+  .slider-wrap{padding:8px 4px 4px;}
+  .slider-readout{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:18px;
+  }
+  .slider-readout-val{
+    font-family:var(--ff-juana);font-size:42px;font-weight:300;
+    color:var(--dyo-deep);line-height:1;letter-spacing:-0.01em;
+  }
+  .slider-readout-val em{font-style:normal;font-size:14px;color:var(--dyo-main);letter-spacing:0.12em;text-transform:uppercase;margin-left:8px;font-family:var(--ff-body);}
+  .slider-input{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:2px;background:var(--dyo-tint-3);
+    outline:none;border-radius:1px;
+  }
+  .slider-input::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--dyo-deep);cursor:pointer;
+    box-shadow:0 2px 8px rgba(58,31,79,0.25);
+    transition:transform 0.15s;
+  }
+  .slider-input::-webkit-slider-thumb:hover{transform:scale(1.1);}
+  .slider-input::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;border:none;
+    background:var(--dyo-deep);cursor:pointer;
+    box-shadow:0 2px 8px rgba(58,31,79,0.25);
+  }
+  .slider-scale{
+    display:flex;justify-content:space-between;
+    margin-top:10px;font-size:10px;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--warm-gray-4);
+  }
+  .slider-anchors{
+    display:flex;justify-content:space-between;
+    margin-top:14px;font-size:11px;color:var(--warm-gray-5);
+    font-style:italic;
+  }
+
+  /* ── CONDITION GRID (multi-column checkboxes for medical) ── */
+  .condition-toggle-row{
+    display:flex;gap:10px;margin-bottom:24px;
+  }
+  .condition-toggle-row .chip{flex:1;}
+  .condition-list{
+    display:none;grid-template-columns:repeat(2,1fr);
+    gap:8px;padding-top:8px;
+  }
+  .condition-list.show{display:grid;}
+  .condition-chip{
+    padding:11px 14px;min-height:auto;
+    font-size:12px;text-align:left;justify-content:flex-start;
+  }
+
+  /* ── CHECKBOX CONSENTS ── */
+  .consent-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .consent-row{
+    display:flex;gap:14px;align-items:flex-start;cursor:pointer;
+    padding:14px 16px;border:1px solid var(--dyo-tint-2);
+    background:var(--dyo-tint-1);transition:all 0.2s;
+  }
+  .consent-row:hover{border-color:var(--dyo-tint-3);}
+  .consent-row.checked{border-color:var(--dyo-main);background:var(--white);}
+  .consent-box{
+    width:16px;height:16px;border:1.5px solid var(--dyo-tint-4);
+    flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;
+    transition:all 0.2s;
+  }
+  .consent-row.checked .consent-box{background:var(--dyo-deep);border-color:var(--dyo-deep);}
+  .consent-box svg{width:10px;height:10px;stroke:var(--white);fill:none;stroke-width:2.5;opacity:0;}
+  .consent-row.checked .consent-box svg{opacity:1;}
+  .consent-row input{position:absolute;opacity:0;pointer-events:none;}
+  .consent-text{font-size:13px;color:var(--charcoal);line-height:1.6;font-weight:300;}
+  .consent-text a{color:var(--dyo-deep);text-decoration:underline;}
+  .consent-text em{color:var(--error);font-style:normal;}
+
+  /* ── PHONE INPUT ── */
+  .phone-row{display:grid;grid-template-columns:130px 1fr;gap:10px;}
+
+  /* ── PANEL ACTIONS ── */
+  .panel-actions{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:28px 56px;border-top:1px solid var(--dyo-tint-2);
+    background:var(--dyo-tint-1);
+  }
+  .panel-step-info{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--warm-gray-4);font-weight:400;}
+  .panel-step-info strong{color:var(--dyo-deep);font-weight:400;}
+  .btn-link{
+    background:none;border:none;cursor:pointer;
+    font-family:var(--ff-body);font-size:11px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;color:var(--warm-gray-5);
+    padding:14px 0;text-decoration:none;
+  }
+  .btn-link:hover{color:var(--dyo-deep);}
+  .panel-buttons{display:flex;gap:14px;align-items:center;}
+
+  /* ── SUCCESS / SUMMARY ── */
+  .success-panel{
+    text-align:center;padding:72px 56px;
+  }
+  .success-icon{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--dyo-tint-2);display:flex;align-items:center;justify-content:center;
+    margin:0 auto 32px;
+  }
+  .success-icon svg{width:28px;height:28px;stroke:var(--dyo-deep);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .success-title{font-family:var(--ff-display);font-size:42px;font-weight:300;color:var(--dyo-plum);line-height:1.15;margin-bottom:18px;}
+  .success-title em{font-style:italic;color:var(--dyo-main);}
+  .success-sub{font-size:15px;color:var(--warm-gray-5);line-height:1.85;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;font-weight:300;}
+  .success-id{
+    display:inline-block;padding:14px 28px;border:1px solid var(--dyo-tint-3);
+    background:var(--dyo-tint-1);font-family:var(--ff-juana);font-size:18px;
+    color:var(--dyo-deep);letter-spacing:0.12em;margin-bottom:36px;
+  }
+  .success-id-label{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dyo-main);display:block;margin-bottom:6px;font-family:var(--ff-body);}
+  .success-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
+  .summary-box{
+    text-align:left;border-top:1px solid var(--dyo-tint-2);
+    padding-top:36px;margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;
+  }
+  .summary-title{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dyo-main);font-weight:400;margin-bottom:18px;}
+  .summary-row{
+    display:flex;justify-content:space-between;gap:24px;
+    padding:10px 0;border-bottom:1px dotted var(--dyo-tint-2);
+    font-size:13px;
+  }
+  .summary-row:last-child{border-bottom:none;}
+  .summary-key{color:var(--warm-gray-5);font-weight:400;}
+  .summary-val{color:var(--charcoal);font-weight:300;text-align:right;max-width:60%;}
+
+  /* ── FOOTER (identical across site) ── */
+  footer{background:var(--brand-plum);padding:64px 48px;}
+  .footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:48px;border-bottom:1px solid rgba(138,115,180,0.2);}
+  .footer-brand-name{font-family:var(--ff-display);font-size:22px;font-weight:300;letter-spacing:0.2em;color:var(--brand-tint-2);text-transform:uppercase;margin-bottom:0;}
+  .footer-brand-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-tint-3);margin-bottom:20px;}
+  .footer-brand-desc{font-size:12px;color:rgba(207,197,232,0.5);line-height:1.8;font-weight:300;}
+  .footer-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;margin-bottom:20px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:13px;color:rgba(207,197,232,0.55);text-decoration:none;font-weight:300;transition:color 0.2s;}
+  .footer-link:hover{color:var(--brand-tint-3);}
+  .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
+  .footer-legal{display:flex;gap:24px;}
+  .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
+  .footer-legal a:hover{color:rgba(207,197,232,0.7);}
+
+  /* ── RESPONSIVE ── */
+    .footer-inner{grid-template-columns:1fr 1fr;}
+    .main-nav{padding:0 20px;}
+    .mega-menu{grid-template-columns:1fr 1fr;padding:32px;}
+    .hero-headline{font-size:48px;}
+  }
+    .hero-inner{padding:60px 24px 40px;}
+    .hero-headline{font-size:38px;}
+    .hero-meta{gap:24px;}
+    .form-section{padding:32px 12px 64px;}
+    .form-panel{padding:36px 24px 32px;}
+    .panel-actions{padding:20px 24px;flex-wrap:wrap;gap:14px;}
+    .progress-wrap{padding:24px 16px 20px;}
+    .progress-label{display:none;}
+    .panel-title{font-size:28px;}
+    .input-row,.input-row-3,.chip-grid-3,.chip-grid-2{grid-template-columns:1fr;}
+    .condition-list.show{grid-template-columns:1fr;}
+    .success-panel{padding:48px 24px;}
+    .success-title{font-size:30px;}
+    .footer-inner{grid-template-columns:1fr;gap:32px;}
+  }
+    body{overflow-x:hidden;}
+    .main-nav{height:64px;padding:0 14px;grid-template-columns:auto minmax(0,1fr) auto;}
+    .nav-left{gap:0;}
+    .hamburger{padding:6px;}
+    .hamburger span{width:22px;}
+    .nav-center{min-width:0;}
+    .nav-logo-img{height:30px;max-width:138px;}
+    .nav-right{gap:4px;}
+    .nav-icon-btn{width:34px;height:34px;}
+    .nav-book-btn{font-size:9px;letter-spacing:0.12em;padding:9px 12px;margin-left:2px;line-height:1.15;text-align:center;}
+    .mega-overlay{top:64px;}
+    .mega-menu{top:64px;bottom:0;grid-template-columns:1fr;gap:26px;padding:30px 24px;overflow-y:auto;transform:translateY(-12px);}
+    .mega-close{top:16px;right:20px;}
+    .mega-col-title{margin-bottom:12px;padding-bottom:10px;}
+    .mega-link{padding:6px 0;}
+
+    .btn-primary,.btn-outline,.btn-outline-white,.nav-book-btn{
+      max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;text-align:center;
+    }
+    .hero-wrap{padding-top:64px;min-height:auto;}
+    .hero-inner{padding:56px 22px 36px;}
+    .hero-tag{max-width:100%;white-space:normal;line-height:1.45;letter-spacing:0.18em;}
+    .hero-headline{font-size:38px;overflow-wrap:anywhere;}
+    .hero-sub{font-size:15px;margin-bottom:32px;}
+    .hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px;padding-top:22px;}
+    .hero-meta-item:last-child{grid-column:1 / -1;}
+    .hero-meta-num{font-size:22px;}
+    .hero-meta-label{overflow-wrap:anywhere;}
+
+    .form-section{padding:28px 14px 64px;}
+    .form-frame{box-shadow:0 16px 42px rgba(58,31,79,0.07);}
+    .progress-wrap{padding:22px 14px 18px;overflow:hidden;}
+    .progress-steps{gap:4px;}
+    .progress-dot{width:12px;height:12px;}
+    .progress-steps::before,.progress-bar-fill{top:6px;}
+    .form-panel{padding:34px 22px 30px;}
+    .panel-overline,.field-label{letter-spacing:0.18em;line-height:1.45;}
+    .panel-title{font-size:30px;overflow-wrap:anywhere;}
+    .panel-intro{font-size:14px;margin-bottom:30px;}
+    .field-group{margin-bottom:28px;}
+    .chip-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+    .chip-grid-2,.chip-grid-3,.condition-list.show,.input-row,.input-row-3,.phone-row{grid-template-columns:1fr;}
+    .chip[style*="grid-column:span 3"]{grid-column:auto!important;}
+    .chip{justify-content:center;padding:15px 16px;min-height:52px;overflow-wrap:anywhere;}
+    .condition-toggle-row{display:grid;grid-template-columns:1fr;gap:10px;}
+    .condition-chip{font-size:12px;line-height:1.45;justify-content:flex-start;text-align:left;}
+    .input-row-bw{grid-template-columns:1fr;}
+    .unit-toggle button{padding:13px 10px;}
+    .slider-readout{align-items:flex-start;gap:12px;}
+    .slider-readout-val{font-size:36px;}
+    .slider-readout-val em{display:block;margin-left:0;margin-top:4px;}
+    .slider-anchors{gap:14px;}
+    .consent-row{padding:14px;gap:12px;}
+    .panel-actions{display:grid;grid-template-columns:1fr;align-items:stretch;padding:20px 22px;gap:16px;}
+    .panel-step-info{text-align:center;order:1;}
+    .btn-link{order:2;text-align:center;}
+    .panel-buttons{order:3;display:grid;grid-template-columns:1fr;gap:10px;}
+    .panel-buttons .btn-primary{width:100%;}
+    .success-panel{padding:44px 22px;}
+    .success-title{font-size:32px;overflow-wrap:anywhere;}
+    .success-id{max-width:100%;overflow-wrap:anywhere;padding:14px 18px;}
+    .success-actions{display:grid;grid-template-columns:1fr;gap:12px;}
+    .success-actions a{width:100%;}
+    .summary-row{display:grid;grid-template-columns:1fr;gap:4px;}
+    .summary-val{text-align:left;max-width:100%;overflow-wrap:anywhere;}
+
+    footer{padding:54px 24px;}
+    .footer-inner{grid-template-columns:1fr;gap:32px;}
+    .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
+    .footer-legal{flex-wrap:wrap;justify-content:center;gap:12px 20px;}
+  }
+    .main-nav{padding:0 10px;}
+    .nav-logo-img{height:26px;max-width:118px;}
+    .nav-icon-btn{width:30px;height:30px;}
+    .nav-icon-btn svg{width:16px;height:16px;}
+    .nav-book-btn{font-size:8.5px;letter-spacing:0.1em;padding:8px 9px;max-width:112px;}
+    .hero-inner{padding:50px 18px 32px;}
+    .hero-headline{font-size:34px;}
+    .hero-meta{grid-template-columns:1fr;gap:16px;}
+    .hero-meta-item:last-child{grid-column:auto;}
+    .form-section{padding-left:10px;padding-right:10px;}
+    .form-panel{padding:30px 18px 28px;}
+    .progress-wrap{padding-left:12px;padding-right:12px;}
+    .panel-title{font-size:28px;}
+    .chip{font-size:12.5px;padding-left:14px;padding-right:14px;}
+    .panel-actions{padding:18px;}
+    .slider-readout{display:block;}
+    .slider-readout-val{font-size:34px;margin-top:6px;}
+    .success-title{font-size:30px;}
+    footer{padding-left:20px;padding-right:20px;}
+  }
+    .nav-logo-img{max-width:104px;}
+    .nav-book-btn{max-width:108px;}
+    .hero-headline{font-size:31px;}
+    .hero-tag,.panel-overline,.field-label,.input-label-small,.footer-col-title{letter-spacing:0.16em;}
+    .form-panel{padding-left:16px;padding-right:16px;}
+    .panel-title{font-size:26px;}
+    .success-title{font-size:27px;}
+  }
+</style>
+
+<style>
+.footer-col-toggle {
+  display: block;
+  width: auto;
+  appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  pointer-events: none;
+}
+
+.footer-col-icon {
+  display: none;
+}
+
+.footer-nav-group .footer-links {
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+}
+  .main-nav {
+    grid-template-columns: auto 1fr auto !important;
+  }
+
+  .main-nav .nav-book-btn {
+    display: none !important;
+  }
+
+  .main-nav .nav-left {
+    justify-self: start;
+  }
+
+  .main-nav .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center !important;
+    width: max-content;
+    max-width: calc(100% - 120px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .main-nav .nav-center a,
+  .main-nav .nav-center img {
+    pointer-events: auto;
+  }
+
+  .main-nav .nav-right {
+    justify-self: end;
+    margin-left: auto;
+    gap: 6px !important;
+    z-index: 2;
+  }
+
+  .footer-inner {
+    gap: 24px !important;
+  }
+
+  .footer-nav-group {
+    border-top: 1px solid rgba(207,197,232,0.16);
+    padding-top: 6px;
+  }
+
+  .footer-col-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: transparent;
+    border: 0;
+    padding: 12px 0;
+    cursor: pointer;
+    pointer-events: auto;
+    text-align: left;
+  }
+
+  .footer-col-toggle .footer-col-title {
+    margin-bottom: 0 !important;
+  }
+
+  .footer-col-icon {
+    display: inline;
+    color: rgba(207,197,232,0.75);
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .footer-nav-group.is-open .footer-col-icon {
+    transform: rotate(45deg);
+  }
+
+  .footer-nav-group .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding-top 0.2s ease;
+    padding-top: 0;
+  }
+
+  .footer-nav-group.is-open .footer-links {
+    max-height: 420px;
+    opacity: 1;
+    padding-top: 4px;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
+  }
+
+  /* Keep the next program card partially visible on mobile so swipe affordance is obvious. */
+  #programsViewport {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #programsTrack {
+    --prog-card-w: min(calc(84vw - 18px), 320px) !important;
+    gap: 12px !important;
+  }
+
+  .prog-card {
+    width: var(--prog-card-w) !important;
+    padding: 0 !important;
+  }
+
+  .prog-img {
+    height: auto !important;
+    aspect-ratio: 5 / 6 !important;
+  }
+
+  .prog-body {
+    padding-top: 16px !important;
+  }
+
+  .prog-title {
+    font-size: 20px !important;
+  }
+
+  .prog-desc {
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+  }
+
+  #programsDots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    margin-top: 22px !important;
+    padding: 0 20px !important;
+  }
+}
+
+.brochure-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 13, 46, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 320;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.brochure-popup-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brochure-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 560px);
+  max-height: min(86vh, 820px);
+  overflow: auto;
+  background: #fff;
+  color: var(--charcoal);
+  z-index: 321;
+  transform: translate(-50%, -50%) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 30px 80px rgba(36, 22, 64, 0.22);
+  border: 1px solid var(--brand-tint-2);
+}
+
+.brochure-popup.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.brochure-popup-inner {
+  padding: 32px 30px 28px;
+}
+
+.brochure-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: var(--brand-deep);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brochure-popup-kicker {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 14px;
+}
+
+.brochure-popup-title {
+  font-family: var(--ff-display);
+  font-size: clamp(34px, 5vw, 44px);
+  line-height: 1.02;
+  color: var(--brand-deep);
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.brochure-popup-title em {
+  font-style: italic;
+}
+
+.brochure-popup-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--warm-gray-5);
+  margin-bottom: 22px;
+}
+
+.brochure-popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.brochure-popup-field {
+  margin-bottom: 14px;
+}
+
+.brochure-popup-field.full {
+  grid-column: 1 / -1;
+}
+
+.brochure-popup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+}
+
+.brochure-popup-input {
+  width: 100%;
+  border: 1px solid var(--brand-tint-3);
+  padding: 14px 16px;
+  font: inherit;
+  color: var(--charcoal);
+  background: #fff;
+}
+
+.brochure-popup-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.brochure-popup-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 8px 0 18px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--warm-gray-5);
+}
+
+.brochure-popup-consent input {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.brochure-popup-consent a {
+  color: var(--brand-deep);
+}
+
+.brochure-popup-error {
+  display: none;
+  margin: -6px 0 14px;
+  color: #b43a3a;
+  font-size: 11px;
+}
+
+.brochure-popup-error.is-visible {
+  display: block;
+}
+  .brochure-popup-inner {
+    padding: 28px 20px 22px;
+  }
+
+  .brochure-popup-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+</style>
+<!-- Google Tag Manager -->
+<script>
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+(function (w, d, s, l, i) {
+  function injectGtm() {
+    if (d.getElementById('hunza-gtm-script')) {
+      return;
+    }
+
+    var f = d.getElementsByTagName(s)[0];
+    var j = d.createElement(s);
+    var dl = l !== 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.id = 'hunza-gtm-script';
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  }
+
+  if ('requestIdleCallback' in w) {
+    w.requestIdleCallback(injectGtm, { timeout: 2500 });
+  } else {
+    w.addEventListener('load', injectGtm, { once: true });
+  }
+})(window, document, 'script', 'dataLayer', 'GTM-KW5WQVCL');
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
+</head>
+<body class="">
+<!-- MEGA MENU OVERLAY -->
+<div class="mega-overlay" id="megaOverlay" onclick="closeMenu()"></div>
+
+<!-- MEGA MENU -->
+<div class="mega-menu" id="megaMenu">
+  <button class="mega-close" onclick="closeMenu()">&#x2715;</button>
+  <div>
+    <div class="mega-col-title">Signature Programs</div>
+    <a href="/advanced-longevity-hunza-handoff/" class="mega-link">Advanced Longevity & Vitality</a>
+    <a href="/immunity-support-gut-health/" class="mega-link">Immunity & Gut Health</a>
+    <a href="/de-stress-relaxtion-spa-retreat/" class="mega-link">Destress & Relaxation</a>
+    <a href="/mindfulness-sleep-well/" class="mega-link">Mindfulness & Sleep</a>
+    <a href="/weight-loss-fat-burn/" class="mega-link">Weight Loss & Fat Burn</a>
+    <a href="/detox-cleanse/" class="mega-link">Detox & Cleanse</a>
+    <a href="/design-your-own-program/" class="mega-link">Design Your Own Program</a>
+    <a href="/see-all-programs/" class="mega-link">See All Programs</a>
+  </div>
+  <div>
+    <div class="mega-col-title">The Experience</div>
+    <a href="/spa-wellness/" class="mega-link">Spa &amp; Wellness</a>
+    <a href="/accommodation/" class="mega-link">Accommodation</a>
+    <a href="/dining/" class="mega-link">Dining</a>
+    <a href="/special-offers/" class="mega-link">Special Offers</a>
+    <a href="/pool-fitness/" class="mega-link">Pool &amp; Fitness</a>
+    <a href="/explore-nearby/" class="mega-link">Explore Nearby</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Hunza</div>
+    <a href="/about_us/" class="mega-link">About Hunza</a>
+    <a href="/methodology/" class="mega-link">Methodology</a>
+    <a href="/contact_us/" class="mega-link">Contact Us</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Plan Your Stay</div>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="mega-link">Book Your Stay</a>
+    <a
+      href="#"
+      class="mega-link menu-brochure-trigger"
+      data-brochure-name="Hunza General Brochure"
+      data-brochure-url="https://hunzalongevity.com/hunza-catalog-desktop.pdf"
+    >Download Brochure</a>
+    <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="mega-link">Free Consultation</a>
+    <div style="margin-top:24px;">
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-primary" style="font-size:10px;padding:12px 20px;">Book Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="brochure-popup-overlay" id="brochurePopupOverlay"></div>
+<div
+  class="brochure-popup"
+  id="brochurePopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="brochurePopupTitle"
+  aria-hidden="true"
+>
+  <button type="button" class="brochure-popup-close" id="brochurePopupClose" aria-label="Close brochure form">&times;</button>
+  <div class="brochure-popup-inner">
+    <span class="brochure-popup-kicker">Plan Your Stay</span>
+    <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
+    <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
+    <form id="menuBrochureForm" novalidate>
+      <div class="brochure-popup-grid">
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureFirstName">First Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureFirstName" name="first_name" autocomplete="given-name">
+        </div>
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureLastName">Last Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureLastName" name="last_name" autocomplete="family-name">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochureEmail">Email Address</label>
+          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochurePhone">Telephone Number</label>
+          <input class="brochure-popup-input" type="tel" id="menuBrochurePhone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+      <label class="brochure-popup-consent">
+        <input type="checkbox" id="menuBrochureConsent" name="consent_marketing" required>
+        <span>I agree that Hunza may contact me about this brochure request and related updates. I accept the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/cookie-policy/">Cookie Policy</a>.</span>
+      </label>
+      <div class="brochure-popup-error" id="menuBrochureError">Please complete all fields and accept the consent checkbox.</div>
+      <button type="submit" class="btn-primary" id="menuBrochureSubmit" style="width:100%;">Email Me the Brochure</button>
+    </form>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="/">
+      <img src="data:image/png;base64,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" alt="Hunza" style="height:38px;object-fit:contain;filter:invert(18%) sepia(40%) saturate(1200%) hue-rotate(230deg) brightness(55%) contrast(110%);" />
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+905327333541" class="nav-icon-btn" aria-label="Call us">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.44l.01 1.48Z"/></svg>
+    </a>
+    <a href="https://wa.me/905327333541" class="nav-icon-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="nav-book-btn">Book Your Stay</a>
+  </div>
+</nav>
+
+
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-inner">
+    <span class="hero-tag">Signature Program · 2026</span>
+    <h1 class="hero-headline">Design Your<br><em>Own</em> Program</h1>
+    <p class="hero-sub">Your needs, your rhythm, your goals — composed into a single, bespoke program. This short assessment allows our physician-led team to prepare your Hunza experience before you arrive.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">~4 min</span>
+        <span class="hero-meta-label">Duration</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">8</span>
+        <span class="hero-meta-label">Steps</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-num">100%</span>
+        <span class="hero-meta-label">Personalized</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<section class="form-section" id="assessment">
+  <div class="form-frame">
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <div class="progress-steps" id="progressSteps">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+        <div class="progress-step active" data-step="1"><div class="progress-dot"></div><div class="progress-label">Biometrics</div></div>
+        <div class="progress-step" data-step="2"><div class="progress-dot"></div><div class="progress-label">Stay</div></div>
+        <div class="progress-step" data-step="3"><div class="progress-dot"></div><div class="progress-label">Priorities</div></div>
+        <div class="progress-step" data-step="4"><div class="progress-dot"></div><div class="progress-label">Wellbeing</div></div>
+        <div class="progress-step" data-step="5"><div class="progress-dot"></div><div class="progress-label">Preferences</div></div>
+        <div class="progress-step" data-step="6"><div class="progress-dot"></div><div class="progress-label">Outcome</div></div>
+        <div class="progress-step" data-step="7"><div class="progress-dot"></div><div class="progress-label">Health</div></div>
+        <div class="progress-step" data-step="8"><div class="progress-dot"></div><div class="progress-label">Details</div></div>
+      </div>
+    </div>
+
+    <form id="assessmentForm" novalidate>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 1 — BIOMETRICS                                  -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel active" data-panel="1">
+        <div class="panel-overline">Before Starting</div>
+        <h2 class="panel-title">Let us <em>get to know you</em></h2>
+        <p class="panel-intro">Please provide the following information. These details allow us to prepare your program safely and accurately.</p>
+
+        <div class="field-group">
+          <label class="field-label">Gender</label>
+          <div class="chip-grid-3" data-required="gender">
+            <label class="chip"><input type="radio" name="gender" value="Male"><span>Male</span></label>
+            <label class="chip"><input type="radio" name="gender" value="Female"><span>Female</span></label>
+            <label class="chip"><input type="radio" name="gender" value="Prefer not to share"><span>I'd rather not share</span></label>
+          </div>
+          <div class="field-error" data-error-for="gender">Please make a selection.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="birthdate">Birthdate</label>
+          <input type="date" id="birthdate" name="birthdate" class="text-input" max="2024-01-01" min="1920-01-01">
+          <div class="field-error" data-error-for="birthdate">Please enter your birthdate.</div>
+        </div>
+
+        <div class="input-row">
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">Height</label>
+            <div class="input-row-bw">
+              <div class="unit-toggle" data-unit="height">
+                <button type="button" class="on" data-unit-val="cm">cm</button>
+                <button type="button" data-unit-val="ft">ft</button>
+              </div>
+              <input type="number" id="height" name="height" class="text-input" placeholder="e.g. 175" min="80" max="250">
+            </div>
+            <div class="field-error" data-error-for="height">Please enter your height.</div>
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label class="field-label">Weight</label>
+            <div class="input-row-bw">
+              <div class="unit-toggle" data-unit="weight">
+                <button type="button" class="on" data-unit-val="kg">kg</button>
+                <button type="button" data-unit-val="lbs">lbs</button>
+              </div>
+              <input type="number" id="weight" name="weight" class="text-input" placeholder="e.g. 70" min="30" max="300">
+            </div>
+            <div class="field-error" data-error-for="weight">Please enter your weight.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 2 — STAY DURATION                               -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="2">
+        <div class="panel-overline">Length of Stay</div>
+        <h2 class="panel-title">How many <em>nights</em> can you spare?</h2>
+        <p class="panel-intro">The depth and number of priorities within your program depend on the length of your stay. Drag the slider below to choose your preferred number of nights.</p>
+
+        <div class="field-group">
+          <div class="slider-wrap">
+            <div class="slider-readout">
+              <span class="slider-readout-val" id="stayReadout">7<em>nights</em></span>
+              <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm-gray-4);">Recommended start: 7 nights</span>
+            </div>
+            <input type="range" id="stayNights" name="stayNights" class="slider-input" min="2" max="21" value="7" step="1">
+            <div class="slider-anchors">
+              <span>Short escape</span>
+              <span>Deep transformation</span>
+            </div>
+            <div class="slider-scale">
+              <span>2 nights</span>
+              <span>21 nights</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 3 — HEALTH GOALS (priority — max 3)             -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="3">
+        <div class="panel-overline">Your Priorities</div>
+        <h2 class="panel-title">What do you <em>need most</em> right now?</h2>
+        <p class="panel-intro">Please select up to <strong>3 options</strong> in order of priority (from highest to lowest). They will be numbered in the order you select them.</p>
+
+        <div class="field-group">
+          <div class="chip-grid-3" data-multi-rank="needs" data-max="3">
+            <label class="chip"><input type="checkbox" name="needs" value="Deep rest"><span>Deep rest</span><span class="chip-rank"></span></label>
+            <label class="chip"><input type="checkbox" name="needs" value="Mental stillness"><span>Mental stillness</span><span class="chip-rank"></span></label>
+            <label class="chip"><input type="checkbox" name="needs" value="Digital detox"><span>Digital detox</span><span class="chip-rank"></span></label>
+            <label class="chip"><input type="checkbox" name="needs" value="Better sleep"><span>Better sleep</span><span class="chip-rank"></span></label>
+            <label class="chip"><input type="checkbox" name="needs" value="Emotional balance"><span>Emotional balance</span><span class="chip-rank"></span></label>
+            <label class="chip"><input type="checkbox" name="needs" value="Physical lightness"><span>Physical lightness</span><span class="chip-rank"></span></label>
+            <label class="chip" style="grid-column:span 3;"><input type="checkbox" name="needs" value="Movement and reviving the body"><span>Movement and reviving the body</span><span class="chip-rank"></span></label>
+          </div>
+          <div class="field-error" data-error-for="needs">Please select at least one priority.</div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 4 — CURRENT STATE                               -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="4">
+        <div class="panel-overline">Your Current State</div>
+        <h2 class="panel-title">How are you <em>feeling</em>?</h2>
+        <p class="panel-intro">These questions help us calibrate the intensity and rhythm of your program to suit you.</p>
+
+        <div class="field-group">
+          <label class="field-label">How have you been feeling recently?</label>
+          <div class="chip-grid" data-required="feeling">
+            <label class="chip"><input type="radio" name="feeling" value="Constantly tired"><span>Constantly tired</span></label>
+            <label class="chip"><input type="radio" name="feeling" value="Mentally overloaded"><span>Mentally overloaded</span></label>
+            <label class="chip"><input type="radio" name="feeling" value="Out of balance"><span>Out of balance</span></label>
+            <label class="chip"><input type="radio" name="feeling" value="Anxious"><span>Anxious</span></label>
+            <label class="chip"><input type="radio" name="feeling" value="Unmotivated"><span>Unmotivated</span></label>
+            <label class="chip"><input type="radio" name="feeling" value="Generally well"><span>Generally well</span></label>
+          </div>
+          <div class="field-error" data-error-for="feeling">Please make a selection.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">How would you describe your daily pace?</label>
+          <div class="chip-grid-2" data-required="pace">
+            <label class="chip"><input type="radio" name="pace" value="Very intense"><span>Very intense</span></label>
+            <label class="chip"><input type="radio" name="pace" value="Balanced but tiring"><span>Balanced but tiring</span></label>
+            <label class="chip"><input type="radio" name="pace" value="Mostly calm"><span>Mostly calm</span></label>
+            <label class="chip"><input type="radio" name="pace" value="Variable"><span>Variable</span></label>
+          </div>
+          <div class="field-error" data-error-for="pace">Please make a selection.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">How would you rate your sleep quality?</label>
+          <div class="chip-grid-2" data-required="sleep">
+            <label class="chip"><input type="radio" name="sleep" value="Very good"><span>Very good</span></label>
+            <label class="chip"><input type="radio" name="sleep" value="Good"><span>Good</span></label>
+            <label class="chip"><input type="radio" name="sleep" value="Variable"><span>Variable</span></label>
+            <label class="chip"><input type="radio" name="sleep" value="Insufficient"><span>Insufficient</span></label>
+          </div>
+          <div class="field-error" data-error-for="sleep">Please make a selection.</div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label">What do you feel your body needs most right now?</label>
+          <div class="chip-grid-3" data-required="bodyNeeds">
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To rest"><span>To rest</span></label>
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To slow down"><span>To slow down</span></label>
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To renew"><span>To renew</span></label>
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To cleanse"><span>To cleanse</span></label>
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To strengthen"><span>To strengthen</span></label>
+            <label class="chip"><input type="radio" name="bodyNeeds" value="To rebalance"><span>To rebalance</span></label>
+          </div>
+          <div class="field-error" data-error-for="bodyNeeds">Please make a selection.</div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 5 — PREFERENCES & SYMPTOMS                      -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="5">
+        <div class="panel-overline">Preferences &amp; Body</div>
+        <h2 class="panel-title">What <em>matters</em> to you at Hunza?</h2>
+        <p class="panel-intro">Select all that apply. These cues help us calibrate the atmosphere, settings, and daily rhythm of your experience.</p>
+
+        <div class="field-group">
+          <label class="field-label">Which of these are important to you during your Hunza stay?</label>
+          <div class="chip-grid-3" data-multi="experience">
+            <label class="chip"><input type="checkbox" name="experience" value="Silence"><span>Silence</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Nature"><span>Nature</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Yoga &amp; breath"><span>Yoga &amp; breath</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Meditation"><span>Meditation</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Healthy nutrition"><span>Healthy nutrition</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Movement &amp; walking"><span>Movement &amp; walking</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Slow living"><span>Slow living</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Creativity"><span>Creativity</span></label>
+            <label class="chip"><input type="checkbox" name="experience" value="Social connection"><span>Social connection</span></label>
+            <label class="chip" style="grid-column:span 3;"><input type="checkbox" name="experience" value="Keeping to my own space"><span>Keeping to my own space</span></label>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label">Which of these do you experience most often during the day?</label>
+          <div class="field-help">Select all that apply.</div>
+          <div class="chip-grid-2" data-multi="symptoms">
+            <label class="chip"><input type="checkbox" name="symptoms" value="Mental fatigue"><span>Mental fatigue</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Difficulty focusing"><span>Difficulty focusing</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Low energy"><span>Low energy</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Digestive sensitivity"><span>Digestive sensitivity</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Tension"><span>Tension</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Muscle / body aches"><span>Muscle / body aches</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="Irregular sleep"><span>Irregular sleep</span></label>
+            <label class="chip"><input type="checkbox" name="symptoms" value="None of the above"><span>None of the above</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 6 — ENERGY & OUTCOME                            -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="6">
+        <div class="panel-overline">Energy &amp; Outcome</div>
+        <h2 class="panel-title">How do you wish to <em>leave</em>?</h2>
+        <p class="panel-intro">Rate your current energy level and tell us how you'd like to feel by the end of your program.</p>
+
+        <div class="field-group">
+          <label class="field-label">How would you rate your current energy level?</label>
+          <div class="slider-wrap">
+            <div class="slider-readout">
+              <span class="slider-readout-val" id="energyReadout">5<em>/ 10</em></span>
+            </div>
+            <input type="range" id="energy" name="energy" class="slider-input" min="1" max="10" value="5" step="1">
+            <div class="slider-anchors">
+              <span>Low energy</span>
+              <span>High energy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label">How would you like to feel when leaving Hunza?</label>
+          <div class="field-help">Select all that apply.</div>
+          <div class="chip-grid-3" data-multi="outcome">
+            <label class="chip"><input type="checkbox" name="outcome" value="Lighter"><span>Lighter</span></label>
+            <label class="chip"><input type="checkbox" name="outcome" value="Calmer"><span>Calmer</span></label>
+            <label class="chip"><input type="checkbox" name="outcome" value="More energetic"><span>More energetic</span></label>
+            <label class="chip"><input type="checkbox" name="outcome" value="More balanced"><span>More balanced</span></label>
+            <label class="chip"><input type="checkbox" name="outcome" value="Clearer"><span>Clearer</span></label>
+            <label class="chip"><input type="checkbox" name="outcome" value="Reconnected with myself"><span>Reconnected with myself</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 7 — MEDICAL CONDITIONS                          -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="7">
+        <div class="panel-overline">Medical History</div>
+        <h2 class="panel-title">Anything to <em>be aware</em> of?</h2>
+        <p class="panel-intro">Your information is shared confidentially with our medical team and used to adapt your program safely.</p>
+
+        <div class="field-group">
+          <label class="field-label">Do you have any diagnosed medical conditions?</label>
+          <div class="condition-toggle-row" data-required="hasCondition">
+            <label class="chip"><input type="radio" name="hasCondition" value="No"><span>No</span></label>
+            <label class="chip"><input type="radio" name="hasCondition" value="Yes"><span>Yes</span></label>
+          </div>
+          <div class="field-error" data-error-for="hasCondition">Please make a selection.</div>
+        </div>
+
+        <div class="field-group" id="conditionListGroup" style="display:none;margin-bottom:0;">
+          <label class="field-label">Please specify all that apply</label>
+          <div class="field-help">Select as many as needed.</div>
+          <div class="condition-list show" data-multi="conditions">
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Stroke (with sequelae)"><span>Stroke (with sequelae)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Anorexia — BMI <17.5"><span>Anorexia — BMI &lt;17.5</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Anticoagulated"><span>Anticoagulated</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Arrhythmias"><span>Arrhythmias</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Arthritis"><span>Arthritis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Asthma"><span>Asthma</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Active cancer"><span>Active cancer</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Ischemic heart disease"><span>Ischemic heart disease</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Severe heart disease"><span>Severe heart disease</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Recent surgery"><span>Recent surgery</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Chronic corticosteroids"><span>Chronic corticosteroids</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Dementia"><span>Dementia</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pregnancy (1st trimester)"><span>Pregnancy (1st trimester)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pregnancy (2nd trimester)"><span>Pregnancy (2nd trimester)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pregnancy (3rd trimester)"><span>Pregnancy (3rd trimester)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Autoimmune diseases"><span>Autoimmune diseases</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="IBD: Crohn's, ulcerative colitis, diverticulitis, polyps"><span>IBD: Crohn's, ulcerative colitis, diverticulitis, polyps</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Parkinson's disease"><span>Parkinson's disease</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Epilepsy"><span>Epilepsy</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="COPD"><span>COPD</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Multiple sclerosis"><span>Multiple sclerosis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pulmonary fibrosis"><span>Pulmonary fibrosis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Advanced liver disease"><span>Advanced liver disease</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Vertigo"><span>Vertigo</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Uncontrolled hypertension"><span>Uncontrolled hypertension</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Hyperthyroidism"><span>Hyperthyroidism</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Heart failure"><span>Heart failure</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Kidney failure"><span>Kidney failure</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Low back pain"><span>Low back pain</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pacemaker"><span>Pacemaker</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Migraines"><span>Migraines</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Pneumonia (acute infection)"><span>Pneumonia (acute infection)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Weight >160 kg"><span>Weight &gt;160 kg</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Weight >200 kg (cannot use stretchers/bathtubs)"><span>Weight &gt;200 kg (cannot use stretchers/bathtubs)</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Osteoporosis"><span>Osteoporosis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Metal prosthesis"><span>Metal prosthesis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Bipolar disorder"><span>Bipolar disorder</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Immunosuppressive treatment"><span>Immunosuppressive treatment</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Recent thrombosis"><span>Recent thrombosis</span></label>
+            <label class="chip condition-chip"><input type="checkbox" name="conditions" value="Schizophrenia"><span>Schizophrenia</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- STEP 8 — PERSONAL DETAILS                            -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="8">
+        <div class="panel-overline">Final Step</div>
+        <h2 class="panel-title">How can we <em>reach you</em>?</h2>
+        <p class="panel-intro">You'll receive an email containing your personalized health protocol and a unique <strong>Tailor-Made Program ID</strong>, allowing you to book your experience whenever you're ready.</p>
+
+        <div class="input-row">
+          <div class="field-group">
+            <label class="field-label" for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" class="text-input" placeholder="Enter your name" autocomplete="given-name">
+            <div class="field-error" data-error-for="firstName">Please enter your first name.</div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" class="text-input" placeholder="Enter your last name" autocomplete="family-name">
+            <div class="field-error" data-error-for="lastName">Please enter your last name.</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="phone">Telephone Number</label>
+          <div class="phone-row">
+            <input type="text" id="phoneCode" name="phoneCode" class="text-input" placeholder="+90" value="+90">
+            <input type="tel" id="phone" name="phone" class="text-input" placeholder="555 000 00 00" autocomplete="tel">
+          </div>
+          <div class="field-error" data-error-for="phone">Please enter your phone number.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="text-input" placeholder="your@email.com" autocomplete="email">
+          <div class="field-error" data-error-for="email">Please enter a valid email address.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">First time at Hunza?</label>
+          <div class="chip-grid-2" data-required="firstTime">
+            <label class="chip"><input type="radio" name="firstTime" value="Yes"><span>Yes</span></label>
+            <label class="chip"><input type="radio" name="firstTime" value="No"><span>No</span></label>
+          </div>
+          <div class="field-error" data-error-for="firstTime">Please make a selection.</div>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label">Consents</label>
+          <div class="consent-list">
+            <label class="consent-row" data-consent="consentMedical">
+              <span class="consent-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <input type="checkbox" name="consentMedical">
+              <span class="consent-text">I understand my Tailor-Made program will be reviewed and modified, if necessary, by our medical team. <em>*</em></span>
+            </label>
+            <label class="consent-row" data-consent="consentPrivacy">
+              <span class="consent-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <input type="checkbox" name="consentPrivacy">
+              <span class="consent-text">I accept Hunza's <a href="/contact_us/">Privacy</a> and <a href="/contact_us/">Cookie Policies</a>. <em>*</em></span>
+            </label>
+            <label class="consent-row" data-consent="consentMarketing">
+              <span class="consent-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <input type="checkbox" name="consentMarketing" required>
+              <span class="consent-text">I agree that Hunza may contact me about my personalized program request and related offers or updates. <em>*</em></span>
+            </label>
+            <label class="consent-row" data-consent="consentCommunity">
+              <span class="consent-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <input type="checkbox" name="consentCommunity">
+              <span class="consent-text">I would like to join the Hunza Community and receive exclusive updates.</span>
+            </label>
+          </div>
+          <div class="field-error" data-error-for="consents">Please accept the required consents.</div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- SUCCESS                                              -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="form-panel" data-panel="success">
+        <div class="success-panel">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2 class="success-title">Your program is <em>being prepared</em></h2>
+          <p class="success-sub">You're just about to discover the most advanced, science-backed, hyper-personalized longevity program designed only for you. An email containing your optimized health protocol and unique Tailor-Made Program ID will arrive shortly.</p>
+
+          <div class="success-id">
+            <span class="success-id-label">Tailor-Made Program ID</span>
+            <span id="programId">HZ-TM-—</span>
+          </div>
+
+          <div class="success-actions">
+            <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-primary">Book Your Stay</a>
+            <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="btn-outline">Free Consultation</a>
+          </div>
+
+          <div class="summary-box">
+            <div class="summary-title">Your Response Summary</div>
+            <div id="summaryList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────── -->
+      <!-- ACTIONS                                              -->
+      <!-- ─────────────────────────────────────────────────── -->
+      <div class="panel-actions" id="panelActions">
+        <button type="button" class="btn-link" id="backBtn" style="visibility:hidden;">← Back</button>
+        <span class="panel-step-info"><strong id="stepCurrent">1</strong> / <span id="stepTotal">8</span></span>
+        <div class="panel-buttons">
+          <button type="button" class="btn-primary" id="nextBtn">Continue</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="margin-bottom:20px;">
+        <img src="data:image/png;base64,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" alt="Hunza" style="height:44px;object-fit:contain;display:block;filter:invert(100%) brightness(200%);">
+      </div>
+      <p class="footer-brand-desc">A specialist longevity and medical wellness destination offering fully personalized programs designed to optimize health, extend vitality, and support meaningful, lasting transformation.</p>
+      <div style="margin-top:24px;">
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-outline-white" style="font-size:10px;padding:12px 24px;border-color:rgba(207,197,232,0.4);">Book Your Stay</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Signature Programs</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/advanced-longevity-hunza-handoff/" class="footer-link">Advanced Longevity &amp; Vitality</a>
+        <a href="/immunity-support-gut-health/" class="footer-link">Immunity &amp; Gut Health</a>
+        <a href="/de-stress-relaxtion-spa-retreat/" class="footer-link">Destress &amp; Relaxation</a>
+        <a href="/mindfulness-sleep-well/" class="footer-link">Mindfulness &amp; Sleep</a>
+        <a href="/weight-loss-fat-burn/" class="footer-link">Weight Loss &amp; Fat Burn</a>
+        <a href="/detox-cleanse/" class="footer-link">Detox &amp; Cleanse</a>
+        <a href="/design-your-own-program/" class="footer-link" style="font-style:italic;color:rgba(207,197,232,0.45);">Design Your Own Program</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">The Experience</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/spa-wellness/" class="footer-link">Spa &amp; Wellness</a>
+        <a href="/accommodation/" class="footer-link">Accommodation</a>
+        <a href="/dining/" class="footer-link">Dining</a>
+        <a href="/special-offers/" class="footer-link">Special Offers</a>
+        <a href="/pool-fitness/" class="footer-link">Pool &amp; Fitness</a>
+        <a href="/explore-nearby/" class="footer-link">Explore Nearby</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Hunza</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/about_us/" class="footer-link">About Hunza</a>
+        <a href="/methodology/" class="footer-link">Methodology</a>
+        <a href="/contact_us/" class="footer-link">Contact Us</a>
+        <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="footer-link">Free Consultation</a>
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="footer-link">Book Your Stay</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/hunzalongevity?igsh=NXdoYW41MGJybzU1" target="_blank" rel="noopener" aria-label="Instagram"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61558909949837" target="_blank" rel="noopener" aria-label="Facebook"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Hunza Longevity &amp; Wellness. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-use/">Terms of Use</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function loadFeatureScript(key, src) {
+    window.HunzaFeatureScripts = window.HunzaFeatureScripts || {};
+
+    if (window.HunzaFeatureScripts[key]) {
+      return window.HunzaFeatureScripts[key];
+    }
+
+    window.HunzaFeatureScripts[key] = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Failed to load ${key}`));
+      document.body.appendChild(script);
+    });
+
+    return window.HunzaFeatureScripts[key];
+  }
+
+  function isMobileBrochureViewport() {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  function syncBrochureLinks() {
+    document.querySelectorAll('.brochure-link').forEach((link) => {
+      link.href = isMobileBrochureViewport() ? link.dataset.mobileHref : link.dataset.desktopHref;
+    });
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('megaMenu');
+    const overlay = document.getElementById('megaOverlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('megaMenu').classList.remove('open');
+    document.getElementById('megaOverlay').classList.remove('open');
+  }
+
+  function openBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.add('is-open');
+    overlay.classList.add('is-open');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('menuBrochureFirstName')?.focus();
+  }
+
+  function closeBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  syncBrochureLinks();
+  window.addEventListener('resize', syncBrochureLinks);
+  document.querySelectorAll('.mega-link').forEach(l => l.addEventListener('click', closeMenu));
+  document.querySelectorAll('.menu-brochure-trigger').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      closeMenu();
+      openBrochurePopup();
+    });
+  });
+  document.getElementById('brochurePopupOverlay')?.addEventListener('click', closeBrochurePopup);
+  document.getElementById('brochurePopupClose')?.addEventListener('click', closeBrochurePopup);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeBrochurePopup();
+    }
+  });
+
+  function toggleFaq(element) {
+    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
+    if (!item) {
+      return;
+    }
+
+    const answer = item.querySelector('.faq-a, .faq-answer');
+    const isOpen = item.classList.toggle('open');
+    item.dataset.lastFaqToggleAt = String(Date.now());
+
+    if (answer) {
+      answer.style.display = isOpen ? 'block' : 'none';
+    }
+  }
+
+  window.toggleFaq = toggleFaq;
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('a, button, input, textarea, select')) {
+      return;
+    }
+
+    const trigger = event.target.closest('.faq-question, .faq-item');
+    if (!trigger) {
+      return;
+    }
+
+    const item = trigger.classList.contains('faq-item') ? trigger : trigger.closest('.faq-item');
+    const lastToggleAt = Number(item?.dataset.lastFaqToggleAt || 0);
+
+    if (Date.now() - lastToggleAt < 120) {
+      return;
+    }
+
+    toggleFaq(trigger);
+  });
+
+  function togglePillar(button) {
+    const trigger = button?.closest('.pillar-toggle');
+    const pillar = (trigger || button)?.closest('.pillar-card, .pillar');
+    if (!pillar || !trigger) {
+      return;
+    }
+
+    const hiddenItems = pillar.querySelectorAll('.pillar-items .pillar-more');
+    if (!hiddenItems.length) {
+      return;
+    }
+
+    const isExpanded = trigger.dataset.expanded === 'true';
+
+    hiddenItems.forEach((item) => {
+      item.style.display = isExpanded ? 'none' : 'flex';
+    });
+
+    trigger.dataset.expanded = isExpanded ? 'false' : 'true';
+    trigger.textContent = isExpanded ? '+ Show all services' : '- Show fewer services';
+  }
+
+  window.togglePillar = togglePillar;
+
+  document.querySelectorAll('.pillar-toggle:not([onclick])').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      togglePillar(event.currentTarget);
+    });
+  });
+
+  function syncFooterAccordions() {
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+    document.querySelectorAll('.footer-nav-group').forEach((group) => {
+      const button = group.querySelector('.footer-col-toggle');
+      if (!button) {
+        return;
+      }
+
+      if (!isMobile) {
+        group.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'true');
+      } else if (!group.classList.contains('is-open')) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  document.querySelectorAll('.footer-col-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!window.matchMedia('(max-width: 640px)').matches) {
+        return;
+      }
+
+      const group = button.closest('.footer-nav-group');
+      const isOpen = group?.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  syncFooterAccordions();
+  window.addEventListener('resize', syncFooterAccordions);
+
+  document.querySelectorAll('.cookie-settings-link').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (!window.Cookiebot || typeof window.Cookiebot.renew !== 'function') {
+        return;
+      }
+
+      event.preventDefault();
+      window.Cookiebot.renew();
+    });
+  });
+
+  window.HunzaFormsEndpoints = {
+    contact: '/forms/contact',
+    brochure: '/forms/brochure',
+  };
+
+  window.HunzaFormsPolicies = {
+    privacyUrl: '/privacy-policy/',
+    cookieUrl: '/cookie-policy/',
+  };
+
+  if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
+    loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
+  }
+
+  if (document.querySelector('.form-container button, .form-card button, #assessmentForm, #menuBrochureForm')) {
+    loadFeatureScript('hunza-forms', 'https://hunzalongevity.com/js/hunza-forms.js');
+  }
+</script>
+
+<script>
+  (() => {
+    
+    // ─────────────────────────────────────────────────────────────────
+    // MAKE.COM WEBHOOK — Bypasses Laravel backend for this form only.
+    // Replace the URL below with your real Make.com webhook URL.
+    // ─────────────────────────────────────────────────────────────────
+    const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/REPLACE_WITH_MY_WEBHOOK_URL';
+
+    function generateProgramId() {
+      const now = new Date();
+      const date = now.toISOString().slice(0,10).replace(/-/g,'');
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let s = '';
+      for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random()*chars.length)];
+      return 'HZ-TM-' + date + '-' + s;
+    }
+
+    const form = document.getElementById('assessmentForm');
+    if (!form) {
+      return;
+    }
+
+    const stepTotal = 8;
+    const panels = Array.from(form.querySelectorAll('.form-panel[data-panel]'));
+    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+    const progressFill = document.getElementById('progressFill');
+    const stepCurrent = document.getElementById('stepCurrent');
+    const stepTotalElement = document.getElementById('stepTotal');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const panelActions = document.getElementById('panelActions');
+    const programIdElement = document.getElementById('programId');
+    const summaryList = document.getElementById('summaryList');
+    const stayNights = document.getElementById('stayNights');
+    const stayReadout = document.getElementById('stayReadout');
+    const energy = document.getElementById('energy');
+    const energyReadout = document.getElementById('energyReadout');
+    const conditionListGroup = document.getElementById('conditionListGroup');
+    const birthdateField = document.getElementById('birthdate');
+    let currentStep = 1;
+
+    stepTotalElement.textContent = stepTotal;
+
+    function updateChipState(input) {
+      const chip = input.closest('.chip');
+      if (!chip) {
+        return;
+      }
+
+      if (input.type === 'radio') {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach((peer) => {
+          peer.closest('.chip')?.classList.remove('selected');
+        });
+      }
+
+      chip.classList.toggle('selected', input.checked);
+    }
+
+    function updateConsentState(input) {
+      input.closest('.consent-row')?.classList.toggle('checked', input.checked);
+    }
+
+    function updateRankedGroup(group) {
+      const checkboxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
+      const selected = checkboxes.filter((item) => item.checked);
+      const max = Number(group.dataset.max || selected.length);
+
+      if (selected.length > max) {
+        const latest = selected[selected.length - 1];
+        latest.checked = false;
+      }
+
+      const finalSelected = checkboxes.filter((item) => item.checked);
+      checkboxes.forEach((checkbox) => {
+        checkbox.closest('.chip')?.classList.toggle('selected', checkbox.checked);
+        const rank = checkbox.closest('.chip')?.querySelector('.chip-rank');
+        if (rank) {
+          rank.textContent = checkbox.checked ? String(finalSelected.indexOf(checkbox) + 1) : '';
+        }
+      });
+    }
+
+    function updateConditionVisibility() {
+      const selected = form.querySelector('input[name="hasCondition"]:checked')?.value;
+      conditionListGroup.style.display = selected === 'Yes' ? 'block' : 'none';
+    }
+
+    function updateReadouts() {
+      stayReadout.innerHTML = `${stayNights.value}<em>nights</em>`;
+      energyReadout.innerHTML = `${energy.value}<em>/ 10</em>`;
+    }
+
+    function updateProgress() {
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', String(panel.dataset.panel) === String(currentStep));
+      });
+
+      progressSteps.forEach((step) => {
+        const stepNumber = Number(step.dataset.step);
+        step.classList.toggle('active', stepNumber === currentStep);
+        step.classList.toggle('done', stepNumber < currentStep);
+      });
+
+      const progressPercent = ((currentStep - 1) / (stepTotal - 1)) * 90;
+      progressFill.style.width = `${Math.max(progressPercent, 0)}%`;
+      stepCurrent.textContent = currentStep;
+      backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+      nextBtn.textContent = currentStep === stepTotal ? 'Submit Assessment' : 'Continue';
+    }
+
+    function showError(name, visible) {
+      const element = form.querySelector(`[data-error-for="${name}"]`);
+      if (element) {
+        element.classList.toggle('show', visible);
+      }
+    }
+
+    function applyServerErrors(errors = {}) {
+      const fieldMap = {
+        stay_nights: 'stayNights',
+        body_needs: 'bodyNeeds',
+        has_condition: 'hasCondition',
+        conditions: 'hasCondition',
+        first_name: 'firstName',
+        last_name: 'lastName',
+        phone_code: 'phone',
+        first_time: 'firstTime',
+        consent_medical: 'consents',
+        consent_privacy: 'consents',
+        consent_marketing: 'consents',
+        consent_community: 'consents',
+      };
+
+      Object.keys(errors).forEach((key) => {
+        showError(fieldMap[key] || key, true);
+      });
+    }
+
+    function checkedValues(name) {
+      return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map((input) => input.value);
+    }
+
+    function valueOf(name) {
+      return form.querySelector(`[name="${name}"]`)?.value?.trim() || '';
+    }
+
+    
+
+      if (typeof window.loadFeatureScript === 'function') {
+        await window.loadFeatureScript('hunza-forms', 'https://hunzalongevity.com/js/hunza-forms.js');
+      }
+
+      if (window.HunzaForms?.postJson) {
+        return window.HunzaForms;
+      }
+
+      throw new Error('Form helper could not be loaded.');
+    }
+
+    function validateStep(step) {
+      let isValid = true;
+
+      if (step === 1) {
+        const gender = form.querySelector('input[name="gender"]:checked');
+        const birthdate = valueOf('birthdate');
+        const height = valueOf('height');
+        const weight = valueOf('weight');
+
+        showError('gender', !gender);
+        showError('birthdate', !birthdate);
+        showError('height', !height);
+        showError('weight', !weight);
+
+        isValid = Boolean(gender && birthdate && height && weight);
+      }
+
+      if (step === 3) {
+        const needs = checkedValues('needs');
+        showError('needs', needs.length === 0);
+        isValid = needs.length > 0;
+      }
+
+      if (step === 4) {
+        const requiredFields = ['feeling', 'pace', 'sleep', 'bodyNeeds'];
+        requiredFields.forEach((field) => {
+          const selected = form.querySelector(`input[name="${field}"]:checked`);
+          showError(field, !selected);
+          if (!selected) {
+            isValid = false;
+          }
+        });
+      }
+
+      if (step === 7) {
+        const hasCondition = form.querySelector('input[name="hasCondition"]:checked');
+        const conditions = checkedValues('conditions');
+        showError('hasCondition', !hasCondition);
+        if (!hasCondition) {
+          isValid = false;
+        }
+        if (hasCondition?.value === 'Yes' && conditions.length === 0) {
+          showError('hasCondition', true);
+          isValid = false;
+        }
+      }
+
+      if (step === 8) {
+        const firstName = valueOf('firstName');
+        const lastName = valueOf('lastName');
+        const phone = valueOf('phone');
+        const email = valueOf('email');
+        const firstTime = form.querySelector('input[name="firstTime"]:checked');
+        const consentMedical = form.querySelector('input[name="consentMedical"]')?.checked;
+        const consentPrivacy = form.querySelector('input[name="consentPrivacy"]')?.checked;
+        // consent_marketing is optional
+
+        showError('firstName', !firstName);
+        showError('lastName', !lastName);
+        showError('phone', !phone);
+        showError('email', !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+        showError('firstTime', !firstTime);
+        showError('consents', !consentMedical || !consentPrivacy);
+
+        isValid = Boolean(
+          firstName &&
+          lastName &&
+          phone &&
+          email &&
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+          firstTime &&
+          consentMedical &&
+          consentPrivacy
+        );
+      }
+
+      return isValid;
+    }
+
+    function buildSummary(data) {
+      const summary = [
+        ['Program ID', data.program_id || 'Pending'],
+        ['Name', `${data.first_name} ${data.last_name}`],
+        ['Email', data.email],
+        ['Phone', `${data.phone_code} ${data.phone}`.trim()],
+        ['Stay', `${data.stay_nights} nights`],
+        ['Top priorities', data.needs.join(', ')],
+        ['Current energy', `${data.energy} / 10`],
+      ];
+
+      summaryList.innerHTML = summary
+        .map(([key, value]) => `
+          <div class="summary-row">
+            <div class="summary-key">${key}</div>
+            <div class="summary-val">${value}</div>
+          </div>
+        `)
+        .join('');
+    }
+
+    function collectPayload() {
+      const heightUnit = document.querySelector('.unit-toggle[data-unit="height"] .on')?.dataset.unitVal || 'cm';
+      const weightUnit = document.querySelector('.unit-toggle[data-unit="weight"] .on')?.dataset.unitVal || 'kg';
+
+      return {
+        page_title: document.title,
+        page_path: window.location.pathname,
+        source_url: window.location.href,
+        gender: form.querySelector('input[name="gender"]:checked')?.value || '',
+        birthdate: valueOf('birthdate'),
+        height: Number(valueOf('height')),
+        height_unit: heightUnit,
+        weight: Number(valueOf('weight')),
+        weight_unit: weightUnit,
+        stay_nights: Number(valueOf('stayNights')),
+        needs: checkedValues('needs'),
+        feeling: form.querySelector('input[name="feeling"]:checked')?.value || '',
+        pace: form.querySelector('input[name="pace"]:checked')?.value || '',
+        sleep: form.querySelector('input[name="sleep"]:checked')?.value || '',
+        body_needs: form.querySelector('input[name="bodyNeeds"]:checked')?.value || '',
+        experience: checkedValues('experience'),
+        symptoms: checkedValues('symptoms'),
+        energy: Number(valueOf('energy')),
+        outcome: checkedValues('outcome'),
+        has_condition: form.querySelector('input[name="hasCondition"]:checked')?.value || '',
+        conditions: checkedValues('conditions'),
+        first_name: valueOf('firstName'),
+        last_name: valueOf('lastName'),
+        phone_code: valueOf('phoneCode'),
+        phone: valueOf('phone'),
+        email: valueOf('email'),
+        first_time: form.querySelector('input[name="firstTime"]:checked')?.value || '',
+        consent_medical: Boolean(form.querySelector('input[name="consentMedical"]')?.checked),
+        consent_privacy: Boolean(form.querySelector('input[name="consentPrivacy"]')?.checked),
+        consent_marketing: Boolean(form.querySelector('input[name="consentMarketing"]')?.checked),
+        consent_community: Boolean(form.querySelector('input[name="consentCommunity"]')?.checked),
+      };
+    }
+
+    
+    async function submitAssessment() {
+      const payload = collectPayload();
+      const programId = generateProgramId();
+      const enrichedPayload = {
+        ...payload,
+        program_id: programId,
+        full_phone: (payload.phone_code + ' ' + payload.phone).trim(),
+        submitted_at: new Date().toISOString(),
+        privacy_policy_version: '2026-06-06',
+        user_agent: navigator.userAgent,
+      };
+
+      try {
+        nextBtn.disabled = true;
+        nextBtn.textContent = 'Submitting...';
+
+        const response = await fetch(MAKE_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(enrichedPayload),
+        });
+
+        if (!response.ok) throw new Error('Webhook error ' + response.status);
+
+        programIdElement.textContent = programId;
+        buildSummary(enrichedPayload);
+        currentStep = 'success';
+        panels.forEach(p => p.classList.toggle('active', p.dataset.panel === 'success'));
+        panelActions.style.display = 'none';
+
+      } catch (err) {
+        alert('The assessment could not be submitted right now. Please try again.');
+        console.error('Make.com error:', err);
+      } finally {
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Submit Assessment';
+      }
+    }
+);
+        panelActions.style.display = 'none';
+
+        formsApi.trackSubmission({
+          formType: 'design_program',
+          formName: 'design_your_own_program',
+          email: payload.email,
+          programId: response.program_id,
+          consentMarketing: payload.consent_marketing,
+        });
+
+        await formsApi.showSuccess('Assessment sent', 'Your personalized program request has been submitted successfully.');
+      } catch (error) {
+        if (error.payload?.errors) {
+          applyServerErrors(error.payload.errors);
+        }
+        (window.HunzaForms?.showError || window.alert)(error.payload?.message || 'The assessment could not be submitted right now.');
+      } finally {
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Submit Assessment';
+      }
+    }
+
+    form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        updateChipState(input);
+        if (input.closest('[data-multi-rank]')) {
+          updateRankedGroup(input.closest('[data-multi-rank]'));
+        }
+        if (input.closest('.consent-row')) {
+          updateConsentState(input);
+        }
+        if (input.name === 'hasCondition') {
+          updateConditionVisibility();
+        }
+      });
+
+      updateChipState(input);
+      if (input.closest('.consent-row')) {
+        updateConsentState(input);
+      }
+    });
+
+    form.querySelectorAll('[data-multi-rank]').forEach(updateRankedGroup);
+
+    document.querySelectorAll('.unit-toggle').forEach((toggle) => {
+      toggle.querySelectorAll('button').forEach((button) => {
+        button.addEventListener('click', () => {
+          toggle.querySelectorAll('button').forEach((item) => item.classList.remove('on'));
+          button.classList.add('on');
+        });
+      });
+    });
+
+    stayNights.addEventListener('input', updateReadouts);
+    energy.addEventListener('input', updateReadouts);
+    if (birthdateField) {
+      birthdateField.max = new Date().toISOString().split('T')[0];
+    }
+    updateReadouts();
+    updateConditionVisibility();
+
+    nextBtn.addEventListener('click', async () => {
+      if (currentStep === 'success') {
+        return;
+      }
+
+      if (!validateStep(currentStep)) {
+        return;
+      }
+
+      if (currentStep === stepTotal) {
+        await submitAssessment();
+        return;
+      }
+
+      currentStep += 1;
+      updateProgress();
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (typeof currentStep !== 'number' || currentStep === 1) {
+        return;
+      }
+
+      currentStep -= 1;
+      updateProgress();
+    });
+
+    updateProgress();
+  })();
+</script>
+
+</body>
+</html>
