@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hunza Longevity Resort — Turkey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+</noscript>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    /* ── EXACT PALETTE FROM DINING PAGE (preserved for nav/footer) ── */
+    --brand:#8A73B4;
+    --brand-mid:#6E5A9A;
+    --brand-deep:#3D2B6B;
+    --brand-plum:#241640;
+    --brand-darkest:#160D2E;
+    --brand-tint-1:#F5F2FB;
+    --brand-tint-2:#EAE4F6;
+    --brand-tint-3:#CFC5E8;
+    --brand-tint-4:#A896CC;
+    --ivory:#FAF9F7;
+    --white:#FFFFFF;
+    --warm-gray-3:#C8C2B8;
+    --warm-gray-4:#9A9490;
+    --warm-gray-5:#5A5468;
+    --charcoal:#1E1428;
+    --gold:#C4AA78;
+    /* ── HOMEPAGE-SPECIFIC PURPLE TONES (matching Canva) ── */
+    --hp-deep:#372072;
+    --hp-mid:#5A3F9E;
+    --hp-lavender:#9580CF;
+    --hp-lavender-light:#B5A4DD;
+    --hp-tint:#E8E1F4;
+    --hp-pale:#F4F1FB;
+    --ff-display:'Cormorant Garamond',Georgia,serif;
+    --ff-juana:'Playfair Display','Cormorant Garamond',Georgia,serif;
+    --ff-body:'Jost','Helvetica Neue',sans-serif;
+    --max-w:1280px;
+    --section-pad:120px 48px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--ff-body);background:var(--white);color:var(--charcoal);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img,video{max-width:100%;}
+  section{width:100%;}
+  .sig-header>*,.tailor-grid>*,.booking-grid>*,.method-grid>*,.consult-grid>*,.about-grid>*,.why-grid>*,.acc-grid>*,.spa-grid>*,.pool-grid>*,.dining-grid>*,.nearby-grid>*,.offers-header>*,.programs-grid>*,.team-grid>*,.offers-grid>*,.footer-inner>*{min-width:0;}
+
+  /* ── NAV (from dining file, byte-for-byte) ── */
+  .main-nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--brand-tint-2);
+    height:72px;display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:0 40px;
+  }
+  .nav-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;}
+  .hamburger span{display:block;width:24px;height:1.5px;background:var(--brand-deep);transition:all 0.3s;}
+  .hamburger:hover span{background:var(--brand);}
+  .nav-center{display:flex;justify-content:center;}
+  .nav-logo-img{height:38px;object-fit:contain;filter:invert(1) sepia(1) saturate(2) hue-rotate(230deg) brightness(0.4);}
+  .nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+  .nav-icon-btn{
+    background:none;border:none;cursor:pointer;
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    color:var(--brand-deep);border-radius:50%;transition:background 0.2s;
+    text-decoration:none;
+  }
+  .nav-icon-btn:hover{background:var(--brand-tint-1);}
+  .nav-icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-book-btn{
+    font-family:var(--ff-body);font-size:10px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--white);background:var(--brand-deep);
+    border:none;padding:10px 22px;cursor:pointer;
+    transition:background 0.25s;text-decoration:none;white-space:nowrap;
+    margin-left:8px;
+  }
+  .nav-book-btn:hover{background:var(--brand-mid);}
+
+  /* ── MEGA MENU (from dining file, byte-for-byte) ── */
+  .mega-overlay{
+    position:fixed;top:72px;left:0;right:0;bottom:0;z-index:199;
+    background:rgba(22,13,46,0.6);backdrop-filter:blur(4px);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;
+  }
+  .mega-menu{
+    position:fixed;top:72px;left:0;right:0;z-index:200;
+    background:var(--white);border-bottom:1px solid var(--brand-tint-2);
+    padding:48px 64px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+    transform:translateY(-20px);opacity:0;pointer-events:none;
+    transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:0 32px 64px rgba(36,22,64,0.15);
+  }
+  .mega-menu.open,.mega-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+  .mega-col-title{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--brand);font-weight:400;margin-bottom:20px;
+    padding-bottom:12px;border-bottom:1px solid var(--brand-tint-2);
+  }
+  .mega-link{
+    display:block;font-size:13px;color:var(--warm-gray-5);
+    text-decoration:none;padding:7px 0;
+    transition:color 0.2s;font-weight:300;
+    border-bottom:1px solid transparent;
+  }
+  .mega-link:hover{color:var(--brand-deep);}
+  .mega-link.active{color:var(--brand-deep);font-weight:400;}
+  .mega-close{
+    position:absolute;top:24px;right:32px;
+    background:none;border:none;cursor:pointer;
+    font-size:20px;color:var(--brand-tint-4);
+    font-family:var(--ff-display);font-weight:300;
+  }
+  .mega-close:hover{color:var(--brand-deep);}
+
+  /* ── BUTTONS (from dining file) ── */
+  .btn-primary{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--brand-deep);border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-primary:hover{background:var(--brand-mid);border-color:var(--brand-mid);}
+  .btn-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-deep);background:transparent;border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline:hover{background:var(--brand-deep);color:var(--white);}
+  .btn-outline-white{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,0.5);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.12);border-color:var(--white);}
+
+  /* ── COMMON HOMEPAGE HELPERS ── */
+  .overline{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--hp-deep);font-weight:400;display:block;margin-bottom:20px;}
+  .overline-light{color:var(--white);opacity:0.85;}
+  section{max-width:var(--max-w);margin:0 auto;padding:var(--section-pad);}
+  .h-display{font-family:var(--ff-display);font-size:64px;font-weight:300;line-height:1.05;color:var(--hp-deep);letter-spacing:-0.005em;}
+  .h-display em{font-style:italic;color:var(--hp-lavender);}
+  .h-display-light{color:var(--white);}
+  .h-display-light em{color:var(--hp-lavender-light);}
+  .body-large{font-size:15px;line-height:1.85;color:var(--warm-gray-5);font-weight:300;}
+  .body-large-light{color:rgba(255,255,255,0.82);}
+  .small-cta-link{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);text-decoration:none;border-bottom:1px solid var(--hp-deep);padding-bottom:3px;font-weight:400;display:inline-block;transition:opacity 0.2s;}
+  .small-cta-link:hover{opacity:0.6;}
+  .small-cta-link-light{color:var(--white);border-bottom-color:var(--white);}
+
+  /* ── 1. HERO (full-bleed video) ── */
+  .hero{position:relative;width:100%;height:100vh;min-height:680px;overflow:hidden;}
+  .hero-video-wrap{position:absolute;inset:0;overflow:hidden;z-index:0;}
+  .hero-video{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;aspect-ratio:1912 / 992;}
+  .hero-mobile-image{display:none;width:100%;height:100%;object-fit:cover;object-position:center center;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,18,55,0.30) 0%,rgba(30,18,55,0.38) 50%,rgba(30,18,55,0.50) 100%);z-index:1;}
+  .hero-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;text-align:center;color:var(--white);width:100%;}
+  .hero-logo-img{width:auto;height:200px;max-width:90%;display:block;margin-bottom:24px;}
+  .hero-tagline-wrap{display:flex;align-items:center;gap:24px;margin-top:8px;}
+  .hero-tagline-rule{height:1px;background:rgba(255,255,255,0.7);width:120px;}
+  .hero-tagline{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--white);font-weight:400;}
+  .hero-bottom-words{position:absolute;bottom:64px;left:0;right:0;display:flex;justify-content:space-around;padding:0 80px;z-index:3;color:var(--white);font-size:13px;font-weight:300;letter-spacing:0.04em;}
+  .hero-bottom-words span{font-family:var(--ff-body);}
+
+  /* ── 2. SIGNATURE PROGRAMS ── */
+  .sig-bg{background:var(--white);}
+  .sig-header{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:end;margin-bottom:64px;}
+  .sig-title{font-family:var(--ff-display);font-size:64px;font-weight:300;line-height:1.04;color:var(--hp-deep);}
+  .sig-title em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .sig-sub-block .sig-sub-headline{font-family:var(--ff-display);font-size:22px;font-style:italic;color:var(--hp-deep);font-weight:400;margin-bottom:16px;}
+  .sig-sub-block .sig-sub-text{font-size:14px;line-height:1.85;color:var(--warm-gray-5);font-weight:300;max-width:520px;}
+
+  .programs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 28px;}
+  .pg-card{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;}
+  .pg-img-wrap{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(135deg,var(--hp-mid) 0%,var(--hp-deep) 100%);}
+  .pg-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);}
+  .pg-card:hover .pg-img-wrap img{transform:scale(1.05);}
+  .pg-img-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.42) 100%);pointer-events:none;}
+  .pg-img-title{position:absolute;left:0;right:0;bottom:32px;text-align:center;font-family:var(--ff-display);font-size:24px;font-style:italic;color:var(--white);letter-spacing:0.12em;line-height:1.18;text-transform:uppercase;font-weight:400;padding:0 18px;text-shadow:0 2px 12px rgba(0,0,0,0.4);}
+  .pg-days{margin-top:18px;font-size:11px;letter-spacing:0.32em;color:var(--hp-deep);font-weight:400;text-transform:uppercase;}
+
+  /* ── 3. TAILOR MADE PROGRAM ── */
+  .tailor-bg{background:var(--hp-pale);}
+  .tailor-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .tailor-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;}
+  .tailor-headline{font-family:var(--ff-display);font-size:60px;font-weight:300;line-height:1.05;color:var(--hp-deep);margin-bottom:32px;}
+  .tailor-headline em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .tailor-text{font-size:14px;line-height:1.85;color:var(--warm-gray-5);font-weight:300;margin-bottom:40px;max-width:480px;}
+  .tailor-buttons{display:flex;flex-direction:column;gap:14px;max-width:340px;}
+  .btn-purple{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);background:var(--hp-deep);border:1px solid var(--hp-deep);padding:18px 32px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:block;text-align:center;}
+  .btn-purple:hover{background:var(--hp-mid);border-color:var(--hp-mid);}
+  .btn-purple-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);background:transparent;border:1px solid var(--hp-deep);padding:18px 32px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:block;text-align:center;}
+  .btn-purple-outline:hover{background:var(--hp-deep);color:var(--white);}
+  .tailor-img{width:100%;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(135deg,var(--hp-lavender) 0%,var(--hp-mid) 100%);}
+  .tailor-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ── 4. ONLINE BOOKING BAND ── */
+  .booking-band{background:linear-gradient(135deg,var(--hp-lavender) 0%,var(--hp-mid) 100%);color:var(--white);position:relative;overflow:hidden;}
+  .booking-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 30%,rgba(255,255,255,0.15) 0%,transparent 60%);pointer-events:none;}
+  .booking-band section{position:relative;z-index:1;}
+  .booking-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;}
+  .booking-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--white);opacity:0.9;text-transform:uppercase;margin-bottom:32px;}
+  .booking-headline{font-family:var(--ff-display);font-size:80px;font-weight:300;line-height:1;color:var(--white);}
+  .booking-headline em{font-style:italic;color:rgba(255,255,255,0.9);font-weight:300;}
+  .booking-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:32px;font-size:14px;font-weight:300;}
+  .booking-list li{padding-left:22px;position:relative;line-height:1.6;}
+  .booking-list li::before{content:'\2022';position:absolute;left:0;top:-2px;color:var(--white);font-size:18px;}
+  .booking-extra-text{font-size:14px;line-height:1.8;color:rgba(255,255,255,0.85);font-weight:300;margin-bottom:36px;}
+  .btn-white-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid var(--white);padding:18px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;}
+  .btn-white-outline:hover{background:var(--white);color:var(--hp-deep);}
+
+  /* ── 5. METHODOLOGY (6 overlapping circles) ── */
+  .method-bg{background:linear-gradient(160deg,var(--hp-mid) 0%,var(--hp-lavender) 100%);color:var(--white);position:relative;overflow:hidden;}
+  .method-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(55,32,114,0.3) 0%,transparent 60%);pointer-events:none;}
+  .method-bg section{position:relative;z-index:1;}
+  .method-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:64px;align-items:center;}
+  .method-left .method-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--white);opacity:0.9;text-transform:uppercase;margin-bottom:24px;}
+  .method-left h2{font-family:var(--ff-display);font-size:54px;font-weight:300;line-height:1.05;color:var(--white);margin-bottom:32px;}
+  .method-left h2 em{font-style:italic;color:var(--hp-lavender-light);font-weight:300;}
+  .method-left p{font-size:13.5px;line-height:1.85;color:rgba(255,255,255,0.82);font-weight:300;margin-bottom:18px;}
+  .method-cta-wrap{margin-top:36px;}
+  .method-cta-eyebrow{font-size:10px;letter-spacing:0.28em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:14px;}
+
+  .pillar-circles{position:relative;width:100%;aspect-ratio:1.55/1;max-width:680px;margin:0 auto;}
+  .pillar-circle{position:absolute;width:42%;aspect-ratio:1/1;border:1px solid rgba(255,255,255,0.55);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0.06) 50%,transparent 80%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;backdrop-filter:blur(2px);transition:transform 0.3s;}
+  .pillar-circle:hover{transform:scale(1.04);z-index:5;}
+  .pc-name{font-family:var(--ff-display);font-size:30px;font-weight:300;font-style:italic;color:var(--white);letter-spacing:0.04em;line-height:1;margin-bottom:6px;}
+  .pc-eng{font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:400;line-height:1.5;}
+  /* Top row: left, mid, right */
+  .pc-1{top:0;left:0;}
+  .pc-2{top:0;left:29%;}
+  .pc-3{top:0;left:58%;}
+  /* Bottom row: offset down */
+  .pc-4{top:42%;left:0;}
+  .pc-5{top:42%;left:29%;}
+  .pc-6{top:42%;left:58%;}
+
+  /* ── 6. FREE CONSULTATION ── */
+  .consult-bg{background:var(--white);}
+  .consult-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;}
+  .consult-img{width:100%;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,var(--hp-tint),var(--hp-lavender-light));}
+  .consult-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .consult-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;}
+  .consult-headline{font-family:var(--ff-display);font-size:54px;font-style:italic;font-weight:400;line-height:1.05;color:var(--hp-deep);margin-bottom:24px;}
+  .consult-overline{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);font-weight:500;margin-bottom:14px;line-height:1.6;}
+  .consult-text{font-size:14px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;margin-bottom:24px;max-width:480px;}
+  .consult-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px;}
+  .consult-list li{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--warm-gray-5);font-weight:400;padding-left:16px;position:relative;}
+  .consult-list li::before{content:'\2022';position:absolute;left:0;color:var(--hp-deep);}
+
+  /* ── 7. ABOUT HUNZA ── */
+  .about-bg{background:var(--hp-pale);}
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start;}
+  .about-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;}
+  .about-headline{font-family:var(--ff-display);font-size:80px;font-weight:300;line-height:0.95;color:var(--hp-deep);margin-bottom:40px;}
+  .about-headline em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .about-leaf{display:inline-block;width:64px;height:auto;vertical-align:middle;margin-left:14px;margin-bottom:8px;}
+  .about-sub-title{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);font-weight:500;margin-bottom:20px;}
+  .about-text-block p{font-size:13.5px;line-height:1.85;color:var(--warm-gray-5);font-weight:300;margin-bottom:18px;}
+  .about-cta{margin-top:24px;}
+  .about-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:14px;}
+  .about-mosaic-img{overflow:hidden;background:linear-gradient(135deg,var(--hp-tint),var(--hp-lavender-light));}
+  .about-mosaic-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .about-mosaic-img.tall{grid-row:1/3;aspect-ratio:3/5;}
+  .about-mosaic-img.short{aspect-ratio:4/3;}
+  .about-turks-block{margin-top:32px;}
+  .about-turks-eyebrow{font-size:10px;letter-spacing:0.22em;color:var(--hp-deep);text-transform:uppercase;font-weight:500;margin-bottom:14px;}
+  .about-turks-text{font-size:13px;line-height:1.85;color:var(--warm-gray-5);font-weight:300;}
+
+  /* ── 8. WHY CHOOSE HUNZA ── */
+  .why-bg{background:var(--hp-deep);color:var(--white);position:relative;overflow:hidden;}
+  .why-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(149,128,207,0.2) 0%,transparent 60%);pointer-events:none;}
+  .why-bg section{position:relative;z-index:1;}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  .why-eyebrow-mini{font-size:10px;letter-spacing:0.28em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-bottom:48px;}
+  .why-list{display:flex;flex-direction:column;gap:32px;}
+  .why-item{display:grid;grid-template-columns:48px 1fr;gap:20px;align-items:start;}
+  .why-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:var(--white);opacity:0.9;}
+  .why-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.2;}
+  .why-item-title{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);font-weight:500;margin-bottom:10px;}
+  .why-item-desc{font-size:13px;line-height:1.85;color:rgba(255,255,255,0.7);font-weight:300;}
+  .why-cta{margin-top:48px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.5);padding-bottom:3px;display:inline-block;}
+
+  .why-right-headline{font-family:var(--ff-display);font-size:78px;font-weight:300;line-height:1;color:var(--white);margin-bottom:36px;text-align:right;}
+  .why-right-headline em{font-style:italic;color:var(--hp-lavender-light);font-weight:300;}
+  .why-quote-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);padding:36px;margin-bottom:24px;}
+  .why-quote{font-family:var(--ff-display);font-size:18px;font-style:italic;font-weight:400;color:var(--white);line-height:1.45;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:20px;}
+  .why-quote-attr{font-size:13px;color:rgba(255,255,255,0.78);line-height:1.85;font-weight:300;}
+  .why-services-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);padding:32px 36px;}
+  .why-services-title{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.7);font-weight:400;margin-bottom:18px;}
+  .why-services-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .why-services-grid li{list-style:none;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);font-weight:400;padding-left:14px;position:relative;line-height:1.5;}
+  .why-services-grid li::before{content:'\2022';position:absolute;left:0;color:var(--hp-lavender-light);}
+
+  /* ── 9. ACCOMMODATION (Luxury Private Villas) ── */
+  .acc-bg{background:var(--hp-pale);}
+  .acc-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;}
+  .acc-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;}
+  .acc-headline{font-family:var(--ff-display);font-size:62px;font-weight:300;line-height:1;color:var(--hp-deep);margin-bottom:32px;}
+  .acc-headline em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .acc-text{font-size:13.5px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;margin-bottom:32px;}
+  .acc-features-title{font-family:var(--ff-display);font-size:18px;font-style:italic;color:var(--hp-deep);font-weight:400;margin-bottom:16px;}
+  .acc-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:32px;}
+  .acc-list li{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm-gray-5);font-weight:400;padding-left:14px;position:relative;line-height:1.6;}
+  .acc-list li::before{content:'\2022';position:absolute;left:0;color:var(--hp-deep);}
+  .acc-img{width:100%;aspect-ratio:5/4;overflow:hidden;background:linear-gradient(135deg,var(--hp-lavender),var(--hp-mid));}
+  .acc-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ── 10. SPA & WELLNESS ── */
+  .spa-bg{background:#F0EAF8;color:var(--hp-deep);}
+  .spa-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;}
+  .spa-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;opacity:0.85;}
+  .spa-headline{font-family:var(--ff-display);font-size:60px;font-weight:300;line-height:1;color:var(--hp-deep);margin-bottom:24px;}
+  .spa-headline em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .spa-text{font-size:13.5px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;margin-bottom:24px;}
+  .spa-features-title{font-family:var(--ff-display);font-size:18px;font-style:italic;color:var(--hp-deep);font-weight:400;margin-bottom:14px;}
+  .spa-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:32px;}
+  .spa-list li{font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm-gray-5);font-weight:400;padding-left:14px;position:relative;line-height:1.6;}
+  .spa-list li::before{content:'\2022';position:absolute;left:0;color:var(--hp-deep);}
+  .spa-img{width:100%;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,var(--hp-tint),var(--hp-lavender));}
+  .spa-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ── 11. POOL & FITNESS ── */
+  .pool-bg{background:var(--hp-lavender);color:var(--white);}
+  .pool-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;}
+  .pool-eyebrow{font-size:10px;letter-spacing:0.28em;color:rgba(255,255,255,0.85);text-transform:uppercase;margin-bottom:24px;}
+  .pool-headline{font-family:var(--ff-display);font-size:60px;font-weight:300;line-height:1;color:var(--white);margin-bottom:24px;}
+  .pool-headline em{font-style:italic;color:var(--hp-deep);font-weight:300;}
+  .pool-text{font-size:13.5px;color:rgba(255,255,255,0.92);line-height:1.85;font-weight:300;margin-bottom:24px;}
+  .pool-img{width:100%;aspect-ratio:5/4;overflow:hidden;background:linear-gradient(135deg,var(--hp-tint),var(--hp-lavender));}
+  .pool-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ── 12. DINING ── */
+  .dining-bg{background:var(--hp-deep);color:var(--white);}
+  .dining-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;}
+  .dining-eyebrow{font-size:10px;letter-spacing:0.28em;color:rgba(255,255,255,0.78);text-transform:uppercase;margin-bottom:24px;}
+  .dining-headline{font-family:var(--ff-display);font-size:78px;font-weight:300;font-style:italic;line-height:1;color:var(--white);margin-bottom:24px;}
+  .dining-text{font-size:13.5px;color:rgba(255,255,255,0.85);line-height:1.85;font-weight:300;margin-bottom:24px;max-width:460px;}
+  .dining-features-title{font-family:var(--ff-display);font-size:18px;font-style:italic;color:var(--white);font-weight:400;margin-bottom:14px;}
+  .dining-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:32px;}
+  .dining-list li{font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:400;padding-left:14px;position:relative;line-height:1.6;}
+  .dining-list li::before{content:'\2022';position:absolute;left:0;color:var(--hp-lavender-light);}
+  .dining-img{width:100%;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(135deg,var(--hp-mid),var(--hp-deep));}
+  .dining-img img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ── 13. EXPLORE NEARBY ── */
+  .nearby-bg{background:var(--white);}
+  .nearby-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .nearby-mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:14px;}
+  .nearby-mosaic-img{overflow:hidden;background:linear-gradient(135deg,var(--hp-lavender),var(--hp-mid));}
+  .nearby-mosaic-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .nearby-mosaic-img.r1{aspect-ratio:1/1;}
+  .nearby-mosaic-img.r2{aspect-ratio:1/1;}
+  .nearby-mosaic-img.r3{aspect-ratio:1/1.4;grid-column:1/2;}
+  .nearby-mosaic-img.r4{aspect-ratio:1/1.4;grid-column:2/3;}
+  .nearby-eyebrow{font-size:10px;letter-spacing:0.28em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;}
+  .nearby-headline{font-family:var(--ff-display);font-size:60px;font-weight:300;line-height:1.05;color:var(--hp-deep);margin-bottom:24px;}
+  .nearby-headline em{font-style:italic;color:var(--hp-lavender);font-weight:300;}
+  .nearby-rule{width:48px;height:1px;background:var(--hp-deep);margin-bottom:24px;}
+  .nearby-text{font-size:13.5px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;margin-bottom:18px;}
+  .btn-purple-outline-narrow{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);background:transparent;border:1px solid var(--hp-deep);padding:14px 36px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;margin-top:14px;}
+  .btn-purple-outline-narrow:hover{background:var(--hp-deep);color:var(--white);}
+
+  /* ── 14. SPECIAL OFFERS ── */
+  .offers-bg{background:var(--hp-lavender);color:var(--white);}
+  .offers-header{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:end;margin-bottom:56px;}
+  .offers-eyebrow{font-size:10px;letter-spacing:0.28em;color:rgba(255,255,255,0.85);text-transform:uppercase;margin-bottom:24px;}
+  .offers-headline{font-family:var(--ff-display);font-size:74px;font-weight:300;line-height:1;color:var(--white);}
+  .offers-sub-title{font-family:var(--ff-display);font-size:22px;font-style:italic;color:var(--white);font-weight:400;margin-bottom:14px;}
+  .offers-sub-text{font-size:13.5px;color:rgba(255,255,255,0.88);line-height:1.85;font-weight:300;}
+  .offers-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .offer-card{background:transparent;}
+  .offer-img{width:100%;aspect-ratio:21/8;overflow:hidden;background:rgba(255,255,255,0.1);}
+  .offer-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .offer-body{background:var(--white);padding:32px 36px;}
+  .offer-title{font-family:var(--ff-display);font-size:24px;font-style:italic;color:var(--hp-deep);font-weight:400;margin-bottom:12px;}
+  .offer-text{font-size:13px;color:var(--warm-gray-5);line-height:1.8;font-weight:300;}
+  .offers-cta-row{margin-top:32px;text-align:right;}
+  .offers-check-link{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);text-decoration:none;border-bottom:1px solid var(--white);padding-bottom:3px;}
+
+  /* ── 15. TEAM ── */
+  .team-bg{background:var(--hp-pale);}
+  .team-header{text-align:center;margin-bottom:56px;}
+  .team-title{font-family:var(--ff-display);font-size:48px;font-weight:300;line-height:1.1;color:var(--hp-deep);margin-bottom:18px;}
+  .team-title em{font-style:italic;color:var(--hp-lavender);}
+  .team-sub{font-size:13.5px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;max-width:540px;margin:0 auto;}
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .team-card{background:transparent;}
+  .team-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--hp-lavender-light),var(--hp-mid));margin-bottom:18px;}
+  .team-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(0.05);}
+  .team-role{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--hp-deep);font-weight:400;margin-bottom:6px;}
+  .team-name{font-family:var(--ff-display);font-size:20px;font-weight:400;color:var(--hp-deep);line-height:1.2;}
+
+  /* ── 16. JOURNAL / PRESS ── */
+  .journal-bg{background:var(--white);}
+  .journal-bg section{padding:100px 48px;text-align:center;}
+  .journal-eyebrow{font-size:10px;letter-spacing:0.32em;color:var(--hp-deep);text-transform:uppercase;margin-bottom:24px;font-weight:400;opacity:0.75;}
+  .journal-title{font-family:var(--ff-display);font-size:56px;font-style:italic;color:var(--hp-deep);font-weight:400;line-height:1;margin-bottom:18px;letter-spacing:-0.005em;}
+  .journal-rule{width:40px;height:1px;background:var(--hp-deep);margin:0 auto 56px;opacity:0.4;}
+  .journal-logos{display:grid;grid-template-columns:repeat(2,1fr);gap:0;max-width:880px;margin:0 auto;}
+  .journal-logo-cell{padding:48px 32px;display:flex;align-items:center;justify-content:center;min-height:180px;position:relative;transition:opacity 0.3s;}
+  .journal-logo-cell:first-child::after{content:'';position:absolute;right:0;top:25%;bottom:25%;width:1px;background:var(--hp-tint);}
+  .journal-logo-cell:hover{opacity:0.7;}
+  .jl-life{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:900;font-size:78px;color:#1a1a1a;line-height:0.9;letter-spacing:-0.04em;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .jl-life-tag{font-family:var(--ff-body);font-size:10px;font-weight:700;font-style:normal;letter-spacing:0.28em;color:#1a1a1a;text-transform:uppercase;}
+  .jl-grey{font-family:var(--ff-display);font-weight:400;font-size:64px;color:var(--hp-deep);letter-spacing:0.06em;line-height:1;display:flex;align-items:flex-start;gap:6px;}
+  .jl-grey-mark{font-size:14px;letter-spacing:0.05em;font-weight:400;color:var(--hp-deep);opacity:0.7;font-family:var(--ff-body);text-transform:uppercase;margin-top:6px;}
+
+  /* ── 17. CONTACT US — deep purple gradient (matches "Begin Your Hunza Journey" screenshot) ── */
+  .contact-bg{position:relative;width:100%;background:radial-gradient(ellipse at 70% 40%,#3a2278 0%,#231347 60%,#160C30 100%);color:var(--white);text-align:center;padding:130px 24px;overflow:hidden;}
+  .contact-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 90%,rgba(123,98,184,0.18) 0%,transparent 55%);pointer-events:none;}
+  .contact-content{position:relative;z-index:1;max-width:980px;margin:0 auto;}
+  .contact-eyebrow{font-size:11px;letter-spacing:0.34em;color:var(--hp-lavender-light);text-transform:uppercase;margin-bottom:36px;font-weight:400;}
+  .contact-headline{font-family:var(--ff-display);font-size:84px;font-weight:300;color:var(--white);line-height:1.05;margin-bottom:36px;letter-spacing:-0.005em;}
+  .contact-headline em{font-style:italic;color:var(--hp-lavender-light);font-weight:300;}
+  .contact-sub{font-size:15px;line-height:1.85;color:rgba(232,225,244,0.78);font-weight:300;max-width:600px;margin:0 auto 56px;}
+  .contact-buttons{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  .btn-contact{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.24em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,0.55);padding:20px 44px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;min-width:240px;text-align:center;}
+  .btn-contact:hover{background:rgba(255,255,255,0.08);border-color:var(--white);}
+  .btn-contact-solid{background:var(--white);border-color:var(--white);color:var(--hp-deep);}
+  .btn-contact-solid:hover{background:rgba(255,255,255,0.92);border-color:rgba(255,255,255,0.92);color:var(--hp-deep);}
+
+  /* ── FOOTER (from dining file, byte-for-byte) ── */
+  footer{background:var(--brand-plum);padding:64px 48px;}
+  .footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:48px;border-bottom:1px solid rgba(138,115,180,0.2);}
+  .footer-brand-name{font-family:var(--ff-display);font-size:22px;font-weight:300;letter-spacing:0.2em;color:var(--brand-tint-2);text-transform:uppercase;margin-bottom:0;}
+  .footer-brand-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-tint-3);margin-bottom:20px;}
+  .footer-brand-desc{font-size:12px;color:rgba(207,197,232,0.5);line-height:1.8;font-weight:300;}
+  .footer-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;margin-bottom:20px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:13px;color:rgba(207,197,232,0.55);text-decoration:none;font-weight:300;transition:color 0.2s;}
+  .footer-link:hover{color:var(--brand-tint-3);}
+  .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
+  .footer-legal{display:flex;gap:24px;}
+  .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
+  .footer-legal a:hover{color:rgba(207,197,232,0.7);}
+
+  /* ── RESPONSIVE ── */
+    :root{--section-pad:80px 32px;}
+    .hero-logo-img{height:140px;}
+    .hero-bottom-words{padding:0 24px;font-size:11px;flex-wrap:wrap;gap:12px;justify-content:center;}
+    .sig-header,.tailor-grid,.booking-grid,.method-grid,.consult-grid,.about-grid,.why-grid,.acc-grid,.spa-grid,.pool-grid,.dining-grid,.nearby-grid,.offers-header,.journal-bg section{grid-template-columns:1fr;gap:48px;}
+    .programs-grid{grid-template-columns:repeat(2,1fr);}
+    .pillar-circles{max-width:540px;}
+    .h-display,.sig-title,.tailor-headline,.booking-headline,.about-headline,.acc-headline,.spa-headline,.pool-headline,.dining-headline,.nearby-headline,.offers-headline,.consult-headline,.contact-headline{font-size:48px;}
+    .why-right-headline{text-align:left;font-size:54px;}
+    .team-grid,.offers-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+    .main-nav{padding:0 20px;}
+    .mega-menu{grid-template-columns:1fr 1fr;padding:32px;}
+  }
+    :root{--section-pad:64px 22px;}
+    body{overflow-x:hidden;}
+    .main-nav{height:64px;padding:0 14px;grid-template-columns:auto minmax(0,1fr) auto;}
+    .nav-left{gap:0;}
+    .hamburger{padding:6px;}
+    .hamburger span{width:22px;}
+    .main-nav .nav-center img{height:30px!important;max-width:138px;}
+    .nav-right{gap:4px;}
+    .nav-icon-btn{width:34px;height:34px;}
+    .nav-book-btn{font-size:9px;letter-spacing:0.12em;padding:9px 12px;margin-left:2px;line-height:1.15;text-align:center;}
+    .mega-overlay{top:64px;}
+    .mega-menu{top:64px;bottom:0;grid-template-columns:1fr;gap:26px;padding:30px 24px;overflow-y:auto;transform:translateY(-12px);}
+    .mega-close{top:16px;right:20px;}
+    .mega-col-title{margin-bottom:12px;padding-bottom:10px;}
+    .mega-link{padding:6px 0;}
+    .hero{min-height:560px;height:100svh;}
+    .hero-video{display:none;}
+    .hero-mobile-image{display:block;object-position:62% center;}
+    .hero-logo-img{height:90px;}
+    .hero-tagline-wrap{gap:12px;width:100%;justify-content:center;}
+    .hero-tagline{font-size:9px;letter-spacing:0.22em;white-space:normal;}
+    .hero-tagline-rule{width:40px;flex:0 1 40px;}
+    .hero-bottom-words{display:none;}
+    .sig-header,.tailor-grid,.booking-grid,.method-grid,.consult-grid,.about-grid,.why-grid,.acc-grid,.spa-grid,.pool-grid,.dining-grid,.nearby-grid,.offers-header{gap:36px;}
+    .programs-grid,.team-grid,.offers-grid,.why-services-grid,.journal-logos{grid-template-columns:1fr;}
+    .h-display,.sig-title,.tailor-headline,.booking-headline,.about-headline,.acc-headline,.spa-headline,.pool-headline,.dining-headline,.nearby-headline,.offers-headline,.consult-headline,.contact-headline,.why-right-headline{font-size:38px;}
+    .sig-title,.tailor-headline,.booking-headline,.about-headline,.acc-headline,.spa-headline,.pool-headline,.dining-headline,.nearby-headline,.offers-headline,.consult-headline,.contact-headline,.why-right-headline{overflow-wrap:anywhere;}
+    .pg-img-title{font-size:20px;letter-spacing:0.08em;bottom:24px;}
+    .pg-days{letter-spacing:0.22em;text-align:center;}
+    .tailor-buttons{max-width:none;}
+    .btn-purple,.btn-purple-outline,.btn-white-outline,.btn-purple-outline-narrow,.btn-contact,.btn-primary,.btn-outline,.btn-outline-white{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;}
+    .btn-purple,.btn-purple-outline{padding:16px 22px;}
+    .booking-list,.consult-list,.acc-list,.spa-list,.dining-list{overflow-wrap:anywhere;}
+    .pillar-circles{max-width:420px;}
+    .about-leaf{width:44px;margin-left:8px;}
+    .about-mosaic,.nearby-mosaic{gap:10px;}
+    .why-item{grid-template-columns:38px 1fr;gap:16px;}
+    .why-icon{width:32px;height:32px;}
+    .why-quote-box,.why-services-box,.offer-body{padding:26px 24px;}
+    .journal-bg section{padding:72px 22px;}
+    .journal-logo-cell{min-height:140px;padding:34px 18px;}
+    .journal-logo-cell:first-child::after{display:none;}
+    .jl-life{font-size:50px;}
+    .jl-grey{font-size:42px;flex-wrap:wrap;justify-content:center;text-align:center;}
+    .contact-bg{padding:92px 22px;}
+    .contact-buttons{display:grid;grid-template-columns:1fr;gap:14px;}
+    .btn-contact{width:100%;min-width:0;padding:17px 22px;}
+    footer{padding:54px 24px;}
+    .footer-inner{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
+    .footer-legal{flex-wrap:wrap;justify-content:center;gap:12px 20px;}
+    .pc-name{font-size:22px;}
+    .pc-eng{font-size:8px;letter-spacing:0.18em;}
+  }
+    :root{--section-pad:56px 18px;}
+    .main-nav{padding:0 10px;}
+    .main-nav .nav-center img{height:26px!important;max-width:118px;}
+    .nav-icon-btn{width:30px;height:30px;}
+    .nav-icon-btn svg{width:16px;height:16px;}
+    .nav-book-btn{font-size:8.5px;letter-spacing:0.1em;padding:8px 9px;max-width:112px;white-space:normal;}
+    .hero{min-height:500px;}
+    .hero-mobile-image{object-position:64% center;}
+    .hero-logo-img{height:76px;}
+    .hero-tagline-rule{width:28px;flex-basis:28px;}
+    .h-display,.sig-title,.tailor-headline,.booking-headline,.about-headline,.acc-headline,.spa-headline,.pool-headline,.dining-headline,.nearby-headline,.offers-headline,.consult-headline,.contact-headline,.why-right-headline{font-size:34px;}
+    .about-headline{line-height:1;}
+    .programs-grid{gap:30px;}
+    .pillar-circles{aspect-ratio:1.25/1;max-width:330px;}
+    .pillar-circle{width:46%;}
+    .pc-1{top:0;left:0;}
+    .pc-2{top:0;left:27%;}
+    .pc-3{top:0;left:54%;}
+    .pc-4{top:44%;left:0;}
+    .pc-5{top:44%;left:27%;}
+    .pc-6{top:44%;left:54%;}
+    .pc-name{font-size:18px;}
+    .pc-eng{font-size:7px;letter-spacing:0.12em;}
+    .about-mosaic,.nearby-mosaic{grid-template-columns:1fr;}
+    .about-mosaic-img.tall,.nearby-mosaic-img.r3,.nearby-mosaic-img.r4{grid-column:auto;grid-row:auto;aspect-ratio:4/3;}
+    .nearby-mosaic-img.r1,.nearby-mosaic-img.r2{aspect-ratio:4/3;}
+    .jl-life{font-size:42px;}
+    .jl-grey{font-size:34px;}
+  }
+    .main-nav .nav-center img{max-width:104px;}
+    .nav-book-btn{max-width:108px;}
+    .hero-tagline{font-size:8px;letter-spacing:0.18em;}
+    .h-display,.sig-title,.tailor-headline,.booking-headline,.about-headline,.acc-headline,.spa-headline,.pool-headline,.dining-headline,.nearby-headline,.offers-headline,.consult-headline,.contact-headline,.why-right-headline{font-size:31px;}
+    .pg-img-title{font-size:18px;}
+    .contact-eyebrow,.overline,.tailor-eyebrow,.booking-eyebrow,.method-left .method-eyebrow,.consult-eyebrow,.about-eyebrow,.why-eyebrow-mini,.acc-eyebrow,.spa-eyebrow,.pool-eyebrow,.dining-eyebrow,.nearby-eyebrow,.offers-eyebrow,.journal-eyebrow{letter-spacing:0.2em;}
+  }
+</style>
+
+<style>
+.footer-col-toggle {
+  display: block;
+  width: auto;
+  appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  pointer-events: none;
+}
+
+.footer-col-icon {
+  display: none;
+}
+
+.footer-nav-group .footer-links {
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+}
+  .main-nav {
+    grid-template-columns: auto 1fr auto !important;
+  }
+
+  .main-nav .nav-book-btn {
+    display: none !important;
+  }
+
+  .main-nav .nav-left {
+    justify-self: start;
+  }
+
+  .main-nav .nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center !important;
+    width: max-content;
+    max-width: calc(100% - 120px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .main-nav .nav-center a,
+  .main-nav .nav-center img {
+    pointer-events: auto;
+  }
+
+  .main-nav .nav-right {
+    justify-self: end;
+    margin-left: auto;
+    gap: 6px !important;
+    z-index: 2;
+  }
+
+  .footer-inner {
+    gap: 24px !important;
+  }
+
+  .footer-nav-group {
+    border-top: 1px solid rgba(207,197,232,0.16);
+    padding-top: 6px;
+  }
+
+  .footer-col-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: transparent;
+    border: 0;
+    padding: 12px 0;
+    cursor: pointer;
+    pointer-events: auto;
+    text-align: left;
+  }
+
+  .footer-col-toggle .footer-col-title {
+    margin-bottom: 0 !important;
+  }
+
+  .footer-col-icon {
+    display: inline;
+    color: rgba(207,197,232,0.75);
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .footer-nav-group.is-open .footer-col-icon {
+    transform: rotate(45deg);
+  }
+
+  .footer-nav-group .footer-links {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding-top 0.2s ease;
+    padding-top: 0;
+  }
+
+  .footer-nav-group.is-open .footer-links {
+    max-height: 420px;
+    opacity: 1;
+    padding-top: 4px;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
+  }
+
+  /* Keep the next program card partially visible on mobile so swipe affordance is obvious. */
+  #programsViewport {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  #programsTrack {
+    --prog-card-w: min(calc(84vw - 18px), 320px) !important;
+    gap: 12px !important;
+  }
+
+  .prog-card {
+    width: var(--prog-card-w) !important;
+    padding: 0 !important;
+  }
+
+  .prog-img {
+    height: auto !important;
+    aspect-ratio: 5 / 6 !important;
+  }
+
+  .prog-body {
+    padding-top: 16px !important;
+  }
+
+  .prog-title {
+    font-size: 20px !important;
+  }
+
+  .prog-desc {
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+  }
+
+  #programsDots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    margin-top: 22px !important;
+    padding: 0 20px !important;
+  }
+}
+
+.brochure-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 13, 46, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 320;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.brochure-popup-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brochure-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(92vw, 560px);
+  max-height: min(86vh, 820px);
+  overflow: auto;
+  background: #fff;
+  color: var(--charcoal);
+  z-index: 321;
+  transform: translate(-50%, -50%) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 30px 80px rgba(36, 22, 64, 0.22);
+  border: 1px solid var(--brand-tint-2);
+}
+
+.brochure-popup.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.brochure-popup-inner {
+  padding: 32px 30px 28px;
+}
+
+.brochure-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  color: var(--brand-deep);
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brochure-popup-kicker {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 14px;
+}
+
+.brochure-popup-title {
+  font-family: var(--ff-display);
+  font-size: clamp(34px, 5vw, 44px);
+  line-height: 1.02;
+  color: var(--brand-deep);
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.brochure-popup-title em {
+  font-style: italic;
+}
+
+.brochure-popup-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--warm-gray-5);
+  margin-bottom: 22px;
+}
+
+.brochure-popup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.brochure-popup-field {
+  margin-bottom: 14px;
+}
+
+.brochure-popup-field.full {
+  grid-column: 1 / -1;
+}
+
+.brochure-popup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+}
+
+.brochure-popup-input {
+  width: 100%;
+  border: 1px solid var(--brand-tint-3);
+  padding: 14px 16px;
+  font: inherit;
+  color: var(--charcoal);
+  background: #fff;
+}
+
+.brochure-popup-input:focus {
+  outline: none;
+  border-color: var(--brand);
+}
+
+.brochure-popup-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 8px 0 18px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--warm-gray-5);
+}
+
+.brochure-popup-consent input {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.brochure-popup-consent a {
+  color: var(--brand-deep);
+}
+
+.brochure-popup-error {
+  display: none;
+  margin: -6px 0 14px;
+  color: #b43a3a;
+  font-size: 11px;
+}
+
+.brochure-popup-error.is-visible {
+  display: block;
+}
+  .brochure-popup-inner {
+    padding: 28px 20px 22px;
+  }
+
+  .brochure-popup-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+</style>
+<!-- Google Tag Manager -->
+<script>
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+(function (w, d, s, l, i) {
+  function injectGtm() {
+    if (d.getElementById('hunza-gtm-script')) {
+      return;
+    }
+
+    var f = d.getElementsByTagName(s)[0];
+    var j = d.createElement(s);
+    var dl = l !== 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.id = 'hunza-gtm-script';
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  }
+
+  if ('requestIdleCallback' in w) {
+    w.requestIdleCallback(injectGtm, { timeout: 2500 });
+  } else {
+    w.addEventListener('load', injectGtm, { once: true });
+  }
+})(window, document, 'script', 'dataLayer', 'GTM-KW5WQVCL');
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
+</head>
+<body class="">
+<!-- MEGA MENU OVERLAY -->
+<div class="mega-overlay" id="megaOverlay" onclick="closeMenu()"></div>
+
+<!-- MEGA MENU -->
+<div class="mega-menu" id="megaMenu">
+  <button class="mega-close" onclick="closeMenu()">&#x2715;</button>
+  <div>
+    <div class="mega-col-title">Signature Programs</div>
+    <a href="/advanced-longevity-hunza-handoff/" class="mega-link">Advanced Longevity & Vitality</a>
+    <a href="/immunity-support-gut-health/" class="mega-link">Immunity & Gut Health</a>
+    <a href="/de-stress-relaxtion-spa-retreat/" class="mega-link">Destress & Relaxation</a>
+    <a href="/mindfulness-sleep-well/" class="mega-link">Mindfulness & Sleep</a>
+    <a href="/weight-loss-fat-burn/" class="mega-link">Weight Loss & Fat Burn</a>
+    <a href="/detox-cleanse/" class="mega-link">Detox & Cleanse</a>
+    <a href="/design-your-own-program/" class="mega-link">Design Your Own Program</a>
+    <a href="/see-all-programs/" class="mega-link">See All Programs</a>
+  </div>
+  <div>
+    <div class="mega-col-title">The Experience</div>
+    <a href="/spa-wellness/" class="mega-link">Spa &amp; Wellness</a>
+    <a href="/accommodation/" class="mega-link">Accommodation</a>
+    <a href="/dining/" class="mega-link">Dining</a>
+    <a href="/special-offers/" class="mega-link">Special Offers</a>
+    <a href="/pool-fitness/" class="mega-link">Pool &amp; Fitness</a>
+    <a href="/explore-nearby/" class="mega-link">Explore Nearby</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Hunza</div>
+    <a href="/about_us/" class="mega-link">About Hunza</a>
+    <a href="/methodology/" class="mega-link">Methodology</a>
+    <a href="/contact_us/" class="mega-link">Contact Us</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Plan Your Stay</div>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="mega-link">Book Your Stay</a>
+    <a
+      href="#"
+      class="mega-link menu-brochure-trigger"
+      data-brochure-name="Hunza General Brochure"
+      data-brochure-url="https://hunzalongevity.com/hunza-catalog-desktop.pdf"
+    >Download Brochure</a>
+    <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="mega-link">Free Consultation</a>
+    <div style="margin-top:24px;">
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-primary" style="font-size:10px;padding:12px 20px;">Book Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="brochure-popup-overlay" id="brochurePopupOverlay"></div>
+<div
+  class="brochure-popup"
+  id="brochurePopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="brochurePopupTitle"
+  aria-hidden="true"
+>
+  <button type="button" class="brochure-popup-close" id="brochurePopupClose" aria-label="Close brochure form">&times;</button>
+  <div class="brochure-popup-inner">
+    <span class="brochure-popup-kicker">Plan Your Stay</span>
+    <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
+    <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
+    <form id="menuBrochureForm" novalidate>
+      <div class="brochure-popup-grid">
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureFirstName">First Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureFirstName" name="first_name" autocomplete="given-name">
+        </div>
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureLastName">Last Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureLastName" name="last_name" autocomplete="family-name">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochureEmail">Email Address</label>
+          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochurePhone">Telephone Number</label>
+          <input class="brochure-popup-input" type="tel" id="menuBrochurePhone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+      <label class="brochure-popup-consent">
+        <input type="checkbox" id="menuBrochureConsent" name="consent_marketing" required>
+        <span>I agree that Hunza may contact me about this brochure request and related updates. I accept the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/cookie-policy/">Cookie Policy</a>.</span>
+      </label>
+      <div class="brochure-popup-error" id="menuBrochureError">Please complete all fields and accept the consent checkbox.</div>
+      <button type="submit" class="btn-primary" id="menuBrochureSubmit" style="width:100%;">Email Me the Brochure</button>
+    </form>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="/">
+      <img src="data:image/png;base64,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" alt="Hunza" style="height:38px;object-fit:contain;filter:invert(18%) sepia(40%) saturate(1200%) hue-rotate(230deg) brightness(55%) contrast(110%);" />
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+905327333541" class="nav-icon-btn" aria-label="Call us">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.44l.01 1.48Z"/></svg>
+    </a>
+    <a href="https://wa.me/905327333541" class="nav-icon-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="nav-book-btn">Book Your Stay</a>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 1. HERO — full-bleed video with centered HUNZA mark             -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="hero" style="max-width:none;padding:0;margin:0;">
+  <div class="hero-video-wrap">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" width="1912" height="992" poster="https://hunzalongevity.com/uploads/hunza_homepage_assets/hero_poster.jpg">
+      <source src="https://hunzalongevity.com/uploads/hunza_homepage_assets/hero_video.mp4" type="video/mp4">
+    </video>
+    <img class="hero-mobile-image" src="https://hunzalongevity.com/uploads/hunza_homepage_assets/hero_poster.jpg" alt="Hunza Longevity Resort in Turkey hero view">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <!-- Real Hunza logo (icon + wordmark) in white -->
+    <img class="hero-logo-img" src="https://hunzalongevity.com/uploads/hunza_homepage_assets/hunza_logo_full_white.svg" alt="HUNZA — Longevity Resort in Turkey">
+    <div class="hero-tagline-wrap">
+      <span class="hero-tagline-rule"></span>
+      <span class="hero-tagline">Longevity Resort in Turkey</span>
+      <span class="hero-tagline-rule"></span>
+    </div>
+  </div>
+  <div class="hero-bottom-words">
+    <span>Lifestyle</span>
+    <span>Wellbeing</span>
+    <span>Healthy habits</span>
+    <span>Functional movement</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 2. SIGNATURE PROGRAMS — 6 photo-overlay cards                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="sig-bg">
+  <section>
+    <div class="sig-header">
+      <div>
+        <span class="overline">Explore Programs</span>
+        <h2 class="sig-title">Hunza Signature<br><em>Programs</em></h2>
+      </div>
+      <div class="sig-sub-block">
+        <p class="sig-sub-headline">Multi-Day Wellness Programs for Your Personal Goals.</p>
+        <p class="sig-sub-text">Choose from carefully designed resort programs focused on vitality, immunity, gut health, sleep, relaxation, weight balance, detox, and long-term wellbeing. Each program brings together your stay, meals, treatments, and daily wellness activities.</p>
+      </div>
+    </div>
+
+    <div class="programs-grid">
+      <a href="/advanced-longevity-hunza-handoff/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_longevity.jpg" alt="Advanced Longevity & Vitality">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">Advanced<br>Longevity<br>&amp; Vitality</div>
+        </div>
+        <div class="pg-days">7 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 21 &nbsp;Days</div>
+      </a>
+
+      <a href="/de-stress-relaxtion-spa-retreat/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_destress.jpg" alt="De-Stress & Relaxation Spa Retreat">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">De-Stress &amp;<br>Relaxation<br>Spa Retreat</div>
+        </div>
+        <div class="pg-days">3 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 14 &nbsp;Days</div>
+      </a>
+
+      <a href="/mindfulness-sleep-well/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_sleep.jpg" alt="Mindfulness & Sleep Well">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">Mindfulness<br>&amp; Sleep Well</div>
+        </div>
+        <div class="pg-days">3 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 14 &nbsp;Days</div>
+      </a>
+
+      <a href="/weight-loss-fat-burn/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_weightloss.jpg" alt="Weight Loss & Fat Burn">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">Weight Loss<br>&amp; Fat Burn</div>
+        </div>
+        <div class="pg-days">10 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 21 &nbsp;Days</div>
+      </a>
+
+      <a href="/detox-cleanse/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_detox.jpg" alt="Detox & Cleanse">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">Detox &amp;<br>Cleanse</div>
+        </div>
+        <div class="pg-days">3 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 7 &nbsp;Days</div>
+      </a>
+
+      <a href="/immunity-support-gut-health/" class="pg-card">
+        <div class="pg-img-wrap">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/program_immunity.jpg" alt="Immunity Support & Gut Health">
+          <div class="pg-img-tint"></div>
+          <div class="pg-img-title">Immunity<br>Support<br>&amp; Gut Health</div>
+        </div>
+        <div class="pg-days">3 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 14 &nbsp;Days</div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 3. TAILOR MADE PROGRAM                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="tailor-bg">
+  <section>
+    <div class="tailor-grid">
+      <div>
+        <div class="tailor-eyebrow">Create Your Own Program</div>
+        <h2 class="tailor-headline">Tailor <em>made</em><br>Program</h2>
+        <p class="tailor-text">If you have not found a program that meets your expectations, please note that all of our programs are fully tailored to your individual capabilities. Furthermore, you have the option to develop a bespoke program aligned with your specific goals. We invite you to contact us, and our specialists will design a program from the ground up to suit your needs.</p>
+        <div class="tailor-buttons">
+          <a href="/design-your-own-program/" class="btn-purple">Design Your Own Program</a>
+          <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="btn-purple-outline">Book Free Consultation</a>
+        </div>
+      </div>
+      <div class="tailor-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/tailormade_yoga.jpg" alt="Tailor Made Program">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 4. ONLINE BOOKING BAND (lavender)                               -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="booking-band">
+  <section>
+    <div class="booking-grid">
+      <div>
+        <div class="booking-eyebrow">Book Your Stay</div>
+        <h2 class="booking-headline">Make <em>Online</em><br>Booking<br>today.</h2>
+      </div>
+      <div>
+        <ul class="booking-list">
+          <li>Choose your travel dates</li>
+          <li>View available bungalow rooms</li>
+          <li>Start planning your stay at Hunza</li>
+        </ul>
+        <p class="booking-extra-text">You can book your accommodation first and select the most suitable wellness program for your goals.</p>
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-white-outline">Check Availability</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 5. METHODOLOGY — 6 overlapping circles                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="method-bg">
+  <section>
+    <div class="method-grid">
+      <div class="method-left">
+        <div class="method-eyebrow">Methodology</div>
+        <h2>The Hunza<br><em>Methodology</em></h2>
+        <p>Every stay at Hunza Longevity Resort is shaped around six wellbeing pillars. Together, they create a complete resort experience that supports your body, mind, nutrition, movement, beauty, recovery, and sleep.</p>
+        <p>Our methods are grounded in the expertise of our specialists in medicine, rehabilitation, dietetics, massage therapy, personal training, and longevity science. Results are achieved through an individualized approach to each client, with every program carefully tailored to activate the body's natural regenerative processes, strengthen the body, and calm the mind.</p>
+        <div class="method-cta-wrap">
+          <div class="method-cta-eyebrow">Our Methods</div>
+          <a href="/methodology/" class="btn-white-outline">Read More</a>
+        </div>
+      </div>
+      <div>
+        <div class="pillar-circles">
+          <div class="pillar-circle pc-1">
+            <div class="pc-name">Medivo</div>
+            <div class="pc-eng">Health<br>&amp; Healing</div>
+          </div>
+          <div class="pillar-circle pc-2">
+            <div class="pc-name">Calmio</div>
+            <div class="pc-eng">Mind &amp;<br>Relaxation</div>
+          </div>
+          <div class="pillar-circle pc-3">
+            <div class="pc-name">Nutrivo</div>
+            <div class="pc-eng">Food &amp;<br>Nutrition</div>
+          </div>
+          <div class="pillar-circle pc-4">
+            <div class="pc-name">Movio</div>
+            <div class="pc-eng">Body &amp;<br>Movement</div>
+          </div>
+          <div class="pillar-circle pc-5">
+            <div class="pc-name">Bello</div>
+            <div class="pc-eng">Beauty &amp;<br>Anti-Aging</div>
+          </div>
+          <div class="pillar-circle pc-6">
+            <div class="pc-name">Dormio</div>
+            <div class="pc-eng">Sleep<br>&amp; Rest</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 6. FREE CONSULTATION                                            -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="consult-bg">
+  <section>
+    <div class="consult-grid">
+      <div class="consult-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/consultation.jpg" alt="Free Consultation">
+      </div>
+      <div>
+        <div class="consult-eyebrow">Find the Right Program for You</div>
+        <h2 class="consult-headline">Free Consultation</h2>
+        <p class="consult-overline">Not sure which Hunza<br>program is right for you?</p>
+        <p class="consult-text">Share your goals with our team and receive personal guidance on the best program, duration, and stay structure before you book.</p>
+        <ul class="consult-list">
+          <li>No obligation to book a stay</li>
+          <li>30–40 minute online consultation with our advisor</li>
+          <li>In any preferred format and at a convenient time</li>
+          <li>Personalized approach</li>
+        </ul>
+        <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="btn-purple-outline" style="display:inline-block;">Book Free Consultation</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 7. ABOUT HUNZA                                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="about-bg">
+  <section>
+    <div class="about-grid">
+      <div>
+        <div class="about-eyebrow">Discover Hunza</div>
+        <h2 class="about-headline">About<br><em>Hunza</em>
+          <img class="about-leaf" src="https://hunzalongevity.com/uploads/hunza_homepage_assets/hunza_icon_purple.svg" alt="Hunza icon">
+        </h2>
+        <div class="about-sub-title">A Quiet Longevity Resort in Turkey</div>
+        <div class="about-text-block">
+          <p>Hunza Longevity is located in Kartepe, Turkey, in a calm and naturally rich environment surrounded by forests and open green landscapes, offering a peaceful setting for rest and disconnection.</p>
+          <p>The property is in close proximity to Lake Sapanca, with easy access to nature and open surroundings. The wider area is known for its forests and varied terrain, offering opportunities for outdoor activities such as walking, nature exploration, and seasonal sports, alongside nearby destinations such as Ormanya, Maşukiye, Pembe Kayalar, and Acarlar Longozu.</p>
+          <p>Hunza Longevity combines this natural setting with a structured wellness experience, creating a place where comfort and simplicity support both relaxation and an active connection to the outdoors.</p>
+        </div>
+        <div class="about-cta"><a href="/about_us/" class="small-cta-link">Check more about us &rsaquo;</a></div>
+      </div>
+      <div>
+        <div class="about-mosaic">
+          <div class="about-mosaic-img tall">
+            <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/about_sari.jpg" alt="Hunza Turks heritage">
+          </div>
+          <div class="about-mosaic-img short">
+            <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/about_landscape.jpg" alt="Lake Sapanca landscape">
+          </div>
+          <div class="about-mosaic-img short">
+            <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/about_bungalow.jpg" alt="Hunza bungalow architecture">
+          </div>
+        </div>
+        <div class="about-turks-block">
+          <div class="about-turks-eyebrow">Hunza Turks</div>
+          <p class="about-turks-text">The name Hunza is inspired by the Hunza Turks, a community long associated with a natural, balanced way of living, where health, vitality, and harmony are part of everyday life. This philosophy deeply influenced the vision of Hunza, where nature's offerings are combined with knowledge, experience, and a holistic understanding of well-being.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 8. WHY CHOOSE HUNZA — deep purple #372072                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="why-bg">
+  <section>
+    <div class="why-grid">
+      <div>
+        <div class="why-eyebrow-mini">Why Hunza</div>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-icon">
+              <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="9"/><circle cx="20" cy="20" r="4"/><path d="M20 6 L20 2 M28 12 L34 6"/></svg>
+            </div>
+            <div>
+              <div class="why-item-title">Precision Over Generic</div>
+              <p class="why-item-desc">No two programs at Hunza are identical. Your profile, goals, existing conditions, and personal history determine every element of your experience, from the first assessment to the final consultation.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">
+              <svg viewBox="0 0 40 40"><path d="M20 32 C12 26 6 20 6 14 C6 9 9 6 14 6 C16 6 18 7 20 9 C22 7 24 6 26 6 C31 6 34 9 34 14 C34 20 28 26 20 32 Z"/><path d="M14 14 L17 18 L23 12"/></svg>
+            </div>
+            <div>
+              <div class="why-item-title">Medical &amp; Holistic, Together</div>
+              <p class="why-item-desc">We believe that lasting well-being requires both rigorous medical insight and genuine human care. Our team brings clinical expertise alongside warmth, creating an environment where transformation is not forced but cultivated.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">
+              <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 12 L20 20 L26 24"/></svg>
+            </div>
+            <div>
+              <div class="why-item-title">Results That Last</div>
+              <p class="why-item-desc">The program concludes with a post-stay medical follow-up consultation to ensure that gains are sustained. We consider your time with us the beginning of a longer journey, not a standalone event.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">
+              <svg viewBox="0 0 40 40"><path d="M6 26 L6 16 C6 14 8 12 10 12 L30 12 C32 12 34 14 34 16 L34 26"/><path d="M6 22 L34 22"/><path d="M10 26 L10 30 M30 26 L30 30"/></svg>
+            </div>
+            <div>
+              <div class="why-item-title">A Space Without Compromise</div>
+              <p class="why-item-desc">From sleep-optimized rooms and private verandas to curated nutrition and specialist-led movement, every element of the environment at Hunza has been designed to remove friction from healing.</p>
+            </div>
+          </div>
+        </div>
+        <a href="/methodology/" class="why-cta">Check Our Methods &rsaquo;</a>
+      </div>
+      <div>
+        <h2 class="why-right-headline"><em>Why</em> Choose<br><em>Hunza?</em></h2>
+        <div class="why-quote-box">
+          <div class="why-quote">"Carefully constructed framework for a different quality of life."</div>
+          <p class="why-quote-attr">At Hunza, we have refined the Advanced Longevity &amp; Vitality Program over years of working with executives, professionals, and wellness-conscious individuals who demand more than a standard retreat can offer.</p>
+        </div>
+        <div class="why-services-box">
+          <div class="why-services-title">Complementary Services</div>
+          <ul class="why-services-grid">
+            <li>Tailored meal plan</li>
+            <li>Access to artistic activities</li>
+            <li>Unlimited spa &amp; pool access</li>
+            <li>Curated local experiences</li>
+            <li>Water-based activities</li>
+            <li>24-hour personal guidance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 9. ACCOMMODATION — Luxury Private Villas                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="acc-bg">
+  <section>
+    <div class="acc-grid">
+      <div>
+        <div class="acc-eyebrow">Explore Accommodation</div>
+        <h2 class="acc-headline"><em>Luxury</em><br>Private Villas</h2>
+        <p class="acc-text">Hunza Longevity Resort offers 11 private bungalow rooms designed for comfort, privacy, and quiet restoration. Each room supports the rhythm of your wellness program and gives you space to rest between treatments, meals, and activities.</p>
+        <div class="acc-features-title">Features:</div>
+        <ul class="acc-list">
+          <li>Sleep-optimized room design</li>
+          <li>Soundproof / noise-isolated rooms</li>
+          <li>Smart temperature &amp; climate control for sleep</li>
+          <li>Anti-allergic / hypoallergenic bedding</li>
+          <li>Turn-down service</li>
+          <li>Premium king size bed</li>
+          <li>Natural wool pillows &amp; duvets</li>
+          <li>Private veranda</li>
+          <li>Spacious seating area</li>
+          <li>Room service</li>
+          <li>Tea and coffee corner</li>
+        </ul>
+        <a href="/accommodation/" class="small-cta-link">More about accommodation &rsaquo;</a>
+      </div>
+      <div class="acc-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/accommodation_bungalow.jpg" alt="Hunza Private Bungalow">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 10. SPA & WELLNESS                                              -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="spa-bg">
+  <section>
+    <div class="spa-grid">
+      <div class="spa-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/spa_hammam.jpg" alt="Hunza Hammam Spa">
+      </div>
+      <div>
+        <div class="spa-eyebrow">Explore Spa &amp; Wellness</div>
+        <h2 class="spa-headline"><em>Relax in</em><br>Spa &amp; Wellness</h2>
+        <p class="spa-text">The spa and wellness experience at Hunza is designed to complement your selected program. Treatments support relaxation, recovery, renewal, circulation, skin health, and balance throughout your resort stay.</p>
+        <div class="spa-features-title">Available to our guests:</div>
+        <ul class="spa-list">
+          <li>Sauna</li>
+          <li>Head spa room</li>
+          <li>Massage room</li>
+          <li>Steam room</li>
+          <li>Salt therapy room</li>
+          <li>Relaxation room</li>
+          <li>Ice bath room</li>
+          <li>Swimming pool</li>
+          <li>Hammam (Turkish bath)</li>
+          <li>Beauty room</li>
+        </ul>
+        <a href="/spa-wellness/" class="small-cta-link">More about spa &amp; wellness &rsaquo;</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 11. POOL SPORTS & FITNESS                                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="pool-bg">
+  <section>
+    <div class="pool-grid">
+      <div>
+        <div class="pool-eyebrow">Explore Pool &amp; Fitness</div>
+        <h2 class="pool-headline"><em>Pool Sports</em><br>&amp; Fitness</h2>
+        <p class="pool-text">Hunza combines active wellness with calm restoration. Enjoy fitness, guided movement, poolside relaxation, and recovery-focused spaces designed to support strength, mobility, balance, and daily energy.</p>
+        <div class="spa-features-title">Activities:</div>
+        <ul class="spa-list">
+          <li>Fitness</li>
+          <li>Reformer Pilates</li>
+          <li>Yoga</li>
+          <li>Aqua Gym</li>
+          <li>Fat Burning Trainings</li>
+          <li>Zumba Classes</li>
+          <li>Pound Fit</li>
+          <li>Kangoo Jumps</li>
+          <li>Bungee Fly</li>
+          <li>Aqua Cycling</li>
+          <li>Aqua Jumping</li>
+          <li>Outdoor Vitality Activities</li>
+        </ul>
+        <a href="/pool-fitness/" class="small-cta-link small-cta-link-light">Check more activities &rsaquo;</a>
+      </div>
+      <div class="pool-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/pool_aqua.jpg" alt="Hunza Aqua Fitness">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 12. DINING — deep purple                                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="dining-bg">
+  <section>
+    <div class="dining-grid">
+      <div class="dining-img">
+        <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/dining_dish.jpg" alt="Hunza Dining">
+      </div>
+      <div>
+        <div class="dining-eyebrow">Explore Dining</div>
+        <h2 class="dining-headline">Dining</h2>
+        <p class="dining-text">Dining at Hunza is part of the wellbeing experience. Meals are created to support your selected program, combining nutritional purpose with refined, balanced, and enjoyable cuisine throughout your stay.</p>
+        <div class="dining-features-title">Features:</div>
+        <ul class="dining-list">
+          <li>Organic ingredients</li>
+          <li>Personalized plan</li>
+          <li>Seasonal menu</li>
+          <li>Balanced by a dietitian</li>
+          <li>Gut-friendly</li>
+          <li>Ingredient composition analysis</li>
+          <li>Cooking classes</li>
+          <li>Dietitian support</li>
+          <li>Exquisite taste of dishes</li>
+          <li>Attractive presentation</li>
+        </ul>
+        <a href="/dining/" class="small-cta-link small-cta-link-light">More about our restaurant &rsaquo;</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 13. EXPLORE NEARBY                                              -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="nearby-bg">
+  <section>
+    <div class="nearby-grid">
+      <div class="nearby-mosaic">
+        <div class="nearby-mosaic-img r1">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/about_landscape.jpg" alt="Lake Sapanca view">
+        </div>
+        <div class="nearby-mosaic-img r2">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/nearby_forest.jpg" alt="Forest landscape">
+        </div>
+        <div class="nearby-mosaic-img r3">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/nearby_sea.jpg" alt="Coastal view">
+        </div>
+        <div class="nearby-mosaic-img r4">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/about_bungalow.jpg" alt="Hunza estate exterior">
+        </div>
+      </div>
+      <div>
+        <div class="nearby-eyebrow">Explore Nearby</div>
+        <h2 class="nearby-headline">Nature, culture,<br>and quiet <em>discovery.</em></h2>
+        <div class="nearby-rule"></div>
+        <p class="nearby-text">Beyond the retreat, discover nearby places that enrich the Hunza experience — from natural landscapes and peaceful walking routes to cultural highlights and local moments worth quietly exploring.</p>
+        <p class="nearby-text">Each excursion is curated to complement your program rather than disrupt it — restorative pace, intentional rhythm, and considered transport throughout.</p>
+        <a href="/explore-nearby/" class="btn-purple-outline-narrow">Explore Nearby</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 14. SPECIAL OFFERS                                              -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="offers-bg">
+  <section>
+    <div class="offers-header">
+      <div>
+        <div class="offers-eyebrow">Hunza Special Events</div>
+        <h2 class="offers-headline">Special Offers</h2>
+      </div>
+      <div>
+        <div class="offers-sub-title">Selected Offers for Your Longevity Resort Stay</div>
+        <p class="offers-sub-text">Explore seasonal retreat opportunities, selected wellness packages, and special ways to begin your Hunza Longevity Resort experience.</p>
+      </div>
+    </div>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-img">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/offers_yoga.jpg" alt="Hunza Yoga Spring Camp">
+        </div>
+        <div class="offer-body">
+          <div class="offer-title">Hunza Yoga Spring Camp</div>
+          <p class="offer-text">The Hunza Yoga Spring Camp is a rejuvenating retreat inspired by the ancient wellness traditions of the Hunza Valley, combining yoga, breathwork, and mindful living.</p>
+        </div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-img">
+          <img src="https://hunzalongevity.com/uploads/hunza_homepage_assets/offers_forest.jpg" alt="Healing Forest Ceremony">
+        </div>
+        <div class="offer-body">
+          <div class="offer-title">Healing Forest Ceremony</div>
+          <p class="offer-text">A healing forest ceremony that reconnects you with nature through mindful practices, breathwork, and grounding rituals.</p>
+        </div>
+      </div>
+    </div>
+    <div class="offers-cta-row">
+      <a href="/special-offers/" class="offers-check-link">Check more &nbsp;&rsaquo;</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 15. TEAM                                                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="team-bg">
+  <section>
+    <div class="team-header">
+      <h2 class="team-title">The people behind <em>Hunza.</em></h2>
+      <p class="team-sub">Specialists, practitioners, and hospitality team members who shape each guest experience with care, knowledge, and quiet attention to detail.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=85&fit=crop" alt="Dr. A. Renan" onerror="this.style.display='none'">
+        </div>
+        <div class="team-role">Medical Director</div>
+        <div class="team-name">Dr. A. Renan</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85&fit=crop" alt="L. Aksoy, RD" onerror="this.style.display='none'">
+        </div>
+        <div class="team-role">Head of Nutrition</div>
+        <div class="team-name">L. Aksoy, RD</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=600&q=85&fit=crop" alt="M. Voss" onerror="this.style.display='none'">
+        </div>
+        <div class="team-role">Movement Specialist</div>
+        <div class="team-name">M. Voss</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=85&fit=crop" alt="E. Demir" onerror="this.style.display='none'">
+        </div>
+        <div class="team-role">Guest Experience</div>
+        <div class="team-name">E. Demir</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 16. JOURNAL / PRESS                                             -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="journal-bg">
+  <section>
+    <div class="journal-eyebrow">As featured in</div>
+    <h2 class="journal-title">Journal &amp; Press</h2>
+    <div class="journal-rule"></div>
+    <div class="journal-logos">
+      <div class="journal-logo-cell">
+        <div class="jl-life">
+          <span class="jl-life-tag">Kocaeli</span>
+          <span>life</span>
+        </div>
+      </div>
+      <div class="journal-logo-cell">
+        <div class="jl-grey">GREY<span class="jl-grey-mark">JOURNAL</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- 17. CONTACT US (Begin Your Hunza Journey)                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="contact-bg" id="contact">
+  <div class="contact-content">
+    <div class="contact-eyebrow">Begin Your Hunza Journey</div>
+    <h2 class="contact-headline">Speak with our team,<br>or plan your <em>stay.</em></h2>
+    <p class="contact-sub">Whether you already know your preferred program, or simply need guidance choosing the right path, our team is here to help you plan your Hunza experience — privately, and at your pace.</p>
+    <div class="contact-buttons">
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-contact btn-contact-solid">Book Your Stay</a>
+      <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="btn-contact">Book a Free Consultation</a>
+      <a href="/contact_us/" class="btn-contact">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="margin-bottom:20px;">
+        <img src="data:image/png;base64,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" alt="Hunza" style="height:44px;object-fit:contain;display:block;filter:invert(100%) brightness(200%);">
+      </div>
+      <p class="footer-brand-desc">A specialist longevity and medical wellness destination offering fully personalized programs designed to optimize health, extend vitality, and support meaningful, lasting transformation.</p>
+      <div style="margin-top:24px;">
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-outline-white" style="font-size:10px;padding:12px 24px;border-color:rgba(207,197,232,0.4);">Book Your Stay</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Signature Programs</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/advanced-longevity-hunza-handoff/" class="footer-link">Advanced Longevity &amp; Vitality</a>
+        <a href="/immunity-support-gut-health/" class="footer-link">Immunity &amp; Gut Health</a>
+        <a href="/de-stress-relaxtion-spa-retreat/" class="footer-link">Destress &amp; Relaxation</a>
+        <a href="/mindfulness-sleep-well/" class="footer-link">Mindfulness &amp; Sleep</a>
+        <a href="/weight-loss-fat-burn/" class="footer-link">Weight Loss &amp; Fat Burn</a>
+        <a href="/detox-cleanse/" class="footer-link">Detox &amp; Cleanse</a>
+        <a href="/design-your-own-program/" class="footer-link" style="font-style:italic;color:rgba(207,197,232,0.45);">Design Your Own Program</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">The Experience</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/spa-wellness/" class="footer-link">Spa &amp; Wellness</a>
+        <a href="/accommodation/" class="footer-link">Accommodation</a>
+        <a href="/dining/" class="footer-link">Dining</a>
+        <a href="/special-offers/" class="footer-link">Special Offers</a>
+        <a href="/pool-fitness/" class="footer-link">Pool &amp; Fitness</a>
+        <a href="/explore-nearby/" class="footer-link">Explore Nearby</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Hunza</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/about_us/" class="footer-link">About Hunza</a>
+        <a href="/methodology/" class="footer-link">Methodology</a>
+        <a href="/contact_us/" class="footer-link">Contact Us</a>
+        <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="footer-link">Free Consultation</a>
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="footer-link">Book Your Stay</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/hunzalongevity?igsh=NXdoYW41MGJybzU1" target="_blank" rel="noopener" aria-label="Instagram"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61558909949837" target="_blank" rel="noopener" aria-label="Facebook"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Hunza Longevity &amp; Wellness. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-use/">Terms of Use</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function loadFeatureScript(key, src) {
+    window.HunzaFeatureScripts = window.HunzaFeatureScripts || {};
+
+    if (window.HunzaFeatureScripts[key]) {
+      return window.HunzaFeatureScripts[key];
+    }
+
+    window.HunzaFeatureScripts[key] = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Failed to load ${key}`));
+      document.body.appendChild(script);
+    });
+
+    return window.HunzaFeatureScripts[key];
+  }
+
+  function isMobileBrochureViewport() {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  function syncBrochureLinks() {
+    document.querySelectorAll('.brochure-link').forEach((link) => {
+      link.href = isMobileBrochureViewport() ? link.dataset.mobileHref : link.dataset.desktopHref;
+    });
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('megaMenu');
+    const overlay = document.getElementById('megaOverlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('megaMenu').classList.remove('open');
+    document.getElementById('megaOverlay').classList.remove('open');
+  }
+
+  function openBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.add('is-open');
+    overlay.classList.add('is-open');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('menuBrochureFirstName')?.focus();
+  }
+
+  function closeBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  syncBrochureLinks();
+  window.addEventListener('resize', syncBrochureLinks);
+  document.querySelectorAll('.mega-link').forEach(l => l.addEventListener('click', closeMenu));
+  document.querySelectorAll('.menu-brochure-trigger').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      closeMenu();
+      openBrochurePopup();
+    });
+  });
+  document.getElementById('brochurePopupOverlay')?.addEventListener('click', closeBrochurePopup);
+  document.getElementById('brochurePopupClose')?.addEventListener('click', closeBrochurePopup);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeBrochurePopup();
+    }
+  });
+
+  function toggleFaq(element) {
+    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
+    if (!item) {
+      return;
+    }
+
+    const answer = item.querySelector('.faq-a, .faq-answer');
+    const isOpen = item.classList.toggle('open');
+    item.dataset.lastFaqToggleAt = String(Date.now());
+
+    if (answer) {
+      answer.style.display = isOpen ? 'block' : 'none';
+    }
+  }
+
+  window.toggleFaq = toggleFaq;
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('a, button, input, textarea, select')) {
+      return;
+    }
+
+    const trigger = event.target.closest('.faq-question, .faq-item');
+    if (!trigger) {
+      return;
+    }
+
+    const item = trigger.classList.contains('faq-item') ? trigger : trigger.closest('.faq-item');
+    const lastToggleAt = Number(item?.dataset.lastFaqToggleAt || 0);
+
+    if (Date.now() - lastToggleAt < 120) {
+      return;
+    }
+
+    toggleFaq(trigger);
+  });
+
+  function togglePillar(button) {
+    const trigger = button?.closest('.pillar-toggle');
+    const pillar = (trigger || button)?.closest('.pillar-card, .pillar');
+    if (!pillar || !trigger) {
+      return;
+    }
+
+    const hiddenItems = pillar.querySelectorAll('.pillar-items .pillar-more');
+    if (!hiddenItems.length) {
+      return;
+    }
+
+    const isExpanded = trigger.dataset.expanded === 'true';
+
+    hiddenItems.forEach((item) => {
+      item.style.display = isExpanded ? 'none' : 'flex';
+    });
+
+    trigger.dataset.expanded = isExpanded ? 'false' : 'true';
+    trigger.textContent = isExpanded ? '+ Show all services' : '- Show fewer services';
+  }
+
+  window.togglePillar = togglePillar;
+
+  document.querySelectorAll('.pillar-toggle:not([onclick])').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      togglePillar(event.currentTarget);
+    });
+  });
+
+  function syncFooterAccordions() {
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+    document.querySelectorAll('.footer-nav-group').forEach((group) => {
+      const button = group.querySelector('.footer-col-toggle');
+      if (!button) {
+        return;
+      }
+
+      if (!isMobile) {
+        group.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'true');
+      } else if (!group.classList.contains('is-open')) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  document.querySelectorAll('.footer-col-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!window.matchMedia('(max-width: 640px)').matches) {
+        return;
+      }
+
+      const group = button.closest('.footer-nav-group');
+      const isOpen = group?.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  syncFooterAccordions();
+  window.addEventListener('resize', syncFooterAccordions);
+
+  document.querySelectorAll('.cookie-settings-link').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (!window.Cookiebot || typeof window.Cookiebot.renew !== 'function') {
+        return;
+      }
+
+      event.preventDefault();
+      window.Cookiebot.renew();
+    });
+  });
+
+  window.HunzaFormsEndpoints = {
+    contact: '/forms/contact',
+    brochure: '/forms/brochure',
+  };
+
+  window.HunzaFormsPolicies = {
+    privacyUrl: '/privacy-policy/',
+    cookieUrl: '/cookie-policy/',
+  };
+
+  if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
+    loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
+  }
+
+  if (document.querySelector('.form-container button, .form-card button, #assessmentForm, #menuBrochureForm')) {
+    loadFeatureScript('hunza-forms', 'https://hunzalongevity.com/js/hunza-forms.js');
+  }
+</script>
+
+</body>
+</html>
