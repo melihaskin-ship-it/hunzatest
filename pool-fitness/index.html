@@ -2047,7 +2047,6 @@
     if (!viewport) return true;
     var vRect = viewport.getBoundingClientRect();
     var cRect = card.getBoundingClientRect();
-    // Card is fully visible if both edges are within viewport bounds (with small tolerance)
     return cRect.left >= vRect.left - 2 && cRect.right <= vRect.right + 2;
   }
 
@@ -2057,20 +2056,14 @@
   function onMove(x, y) {
     if (Math.abs(x - startX) > 6 || Math.abs(y - startY) > 6) moved = true;
   }
-  function onEnd(target) {
-    if (moved) return; // was a drag — let slider handle it
+  function onEnd(target, event) {
+    if (moved) return;
     var card = target.closest ? target.closest('.prog-card') : null;
     if (!card) return;
-    // If card is only partially visible, slide it into view instead of navigating
     if (!isFullyVisible(card)) {
-      // Move exactly 1 card forward — find current index and go to next
-      if (typeof goToSlide === 'function') {
-        var cards = Array.from(track.querySelectorAll('.prog-card'));
-        var idx = cards.indexOf(card);
-        goToSlide(idx);
-      } else if (typeof slidePrograms === 'function') {
-        slidePrograms(1);
-      }
+      // Prevent slider's own cardClick from also firing (causes double jump)
+      if (event) { event.stopImmediatePropagation(); event.preventDefault(); }
+      if (typeof slidePrograms === 'function') slidePrograms(1);
       return;
     }
     var href = card.getAttribute('data-href');
@@ -2085,7 +2078,7 @@
     onMove(e.touches[0].clientX, e.touches[0].clientY);
   }, { passive: true });
   track.addEventListener('touchend', function(e) {
-    onEnd(e.target);
+    onEnd(e.target, e);
   });
 
   // Mouse
@@ -2096,7 +2089,7 @@
     if (e.buttons) onMove(e.clientX, e.clientY);
   });
   track.addEventListener('mouseup', function(e) {
-    onEnd(e.target);
+    onEnd(e.target, e);
   });
 })();
 </script>
