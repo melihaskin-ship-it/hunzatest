@@ -1296,50 +1296,136 @@
 
 <!-- LIST OF TREATMENTS (dark espresso bg) -->
 <div class="treatments-section">
-  <div class="treatments-inner treatments-grid-pdf">
+  <!-- New CSS for redesigned treatments -->
+  <style>
+  .treatments-section {
+    background: var(--s-mushroom-light);
+    padding: 96px 48px;
+  }
+  .treatments-section-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+  .treatments-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+  .treatments-overline-new {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--s-brown);
+    display: block;
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+  .treatments-headline-new {
+    font-family: var(--ff-display);
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.05;
+    margin: 0;
+  }
+  .treatments-headline-new em {
+    font-style: italic;
+    color: var(--s-taupe-mid, #C4AA78);
+  }
+  .treatments-count {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--s-taupe-mid, #C4AA78);
+    flex-shrink: 0;
+    padding-bottom: 8px;
+  }
+  .treatments-grid-new {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(207,197,176,0.2);
+  }
+  .treatment-item-new {
+    padding: 20px 24px 20px 0;
+    border-bottom: 1px solid rgba(207,197,176,0.12);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(250,245,235,0.82);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+  .treatment-item-new::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--s-brown, #8A7560);
+    flex-shrink: 0;
+  }
+  .treatment-item-new:hover {
+    color: var(--white);
+  }
+  @media(max-width:900px) {
+    .treatments-grid-new { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width:640px) {
+    .treatments-section { padding: 64px 22px; }
+    .treatments-grid-new { grid-template-columns: 1fr; }
+    .treatments-top { margin-bottom: 40px; }
+    .treatments-count { display: none; }
+  }
+  </style>
 
-    <div class="treatments-left-col">
-      <span class="treatments-overline">Wellness Consultacy</span>
-      <h2 class="treatments-headline">List of <em>treatments</em></h2>
-      <div class="treatments-list-vert">
-        <div class="treatment-item">Shiatsu Head Massage</div>
-        <div class="treatment-item">Localized Massage</div>
-        <div class="treatment-item">Hot Stone Massage</div>
-        <div class="treatment-item">Hunza Nature Touch</div>
-        <div class="treatment-item">Foot Massage</div>
-        <div class="treatment-item">Head &amp; Neck Massage</div>
-        <div class="treatment-item">Muscle &amp; Tension Release Massage</div>
-        <div class="treatment-item">Neuro-Fascia Release</div>
-        <div class="treatment-item">Personal Bathing Experience</div>
-        <div class="treatment-item">Reflexology</div>
-        <div class="treatment-item">Scalp &amp; Back Massage</div>
-        <div class="treatment-item">Thai Foot Massage</div>
-        <div class="treatment-item">Thai Massage</div>
-        <div class="treatment-item">Therapeutic Massage</div>
-        <div class="treatment-item">Watsu Signature Treatment</div>
+  <div class="treatments-section-inner">
+    <div class="treatments-top">
+      <div>
+        <span class="treatments-overline-new">Wellness Consultancy</span>
+        <h2 class="treatments-headline-new">List of <em>treatments</em></h2>
       </div>
+      <div class="treatments-count">30 treatments available</div>
     </div>
 
-    <div class="treatments-right-col" style="padding-top:140px;">
-      <div class="treatments-list-vert">
-        <div class="treatment-item">Chakra Balancing Treatment</div>
-        <div class="treatment-item">Private Meditation Session</div>
-        <div class="treatment-item">Psychosomatic Awareness Therapy</div>
-        <div class="treatment-item">Reiki</div>
-        <div class="treatment-item">Sound Healing Meditation</div>
-        <div class="treatment-item">Private Body and Mind Discipline Sessions with a Holistic Expert</div>
-        <div class="treatment-item">Underwater Therapy Sessions</div>
-        <div class="treatment-item">Hydroenergetic Healing Treatment Detox</div>
-        <div class="treatment-item">Hydrotherapy Circuit</div>
-        <div class="treatment-item">Hammam Ritual</div>
-        <div class="treatment-item">Cold Immersion Ice Bath Therapy</div>
-        <div class="treatment-item">Deep Tissue Massage</div>
-        <div class="treatment-item">Relaxing Aroma Massage</div>
-        <div class="treatment-item">Balinese Massage</div>
-        <div class="treatment-item">Swedish Massage</div>
-      </div>
+    <div class="treatments-grid-new">
+      <div class="treatment-item-new">Shiatsu Head Massage</div>
+      <div class="treatment-item-new">Localized Massage</div>
+      <div class="treatment-item-new">Hot Stone Massage</div>
+      <div class="treatment-item-new">Hunza Nature Touch</div>
+      <div class="treatment-item-new">Foot Massage</div>
+      <div class="treatment-item-new">Head &amp; Neck Massage</div>
+      <div class="treatment-item-new">Muscle &amp; Tension Release Massage</div>
+      <div class="treatment-item-new">Neuro-Fascia Release</div>
+      <div class="treatment-item-new">Personal Bathing Experience</div>
+      <div class="treatment-item-new">Reflexology</div>
+      <div class="treatment-item-new">Scalp &amp; Back Massage</div>
+      <div class="treatment-item-new">Thai Foot Massage</div>
+      <div class="treatment-item-new">Thai Massage</div>
+      <div class="treatment-item-new">Therapeutic Massage</div>
+      <div class="treatment-item-new">Watsu Signature Treatment</div>
+      <div class="treatment-item-new">Chakra Balancing Treatment</div>
+      <div class="treatment-item-new">Private Meditation Session</div>
+      <div class="treatment-item-new">Psychosomatic Awareness Therapy</div>
+      <div class="treatment-item-new">Reiki</div>
+      <div class="treatment-item-new">Sound Healing Meditation</div>
+      <div class="treatment-item-new">Private Body &amp; Mind Discipline Sessions</div>
+      <div class="treatment-item-new">Underwater Therapy Sessions</div>
+      <div class="treatment-item-new">Hydroenergetic Healing Treatment Detox</div>
+      <div class="treatment-item-new">Hydrotherapy Circuit</div>
+      <div class="treatment-item-new">Hammam Ritual</div>
+      <div class="treatment-item-new">Cold Immersion Ice Bath Therapy</div>
+      <div class="treatment-item-new">Deep Tissue Massage</div>
+      <div class="treatment-item-new">Relaxing Aroma Massage</div>
+      <div class="treatment-item-new">Balinese Massage</div>
+      <div class="treatment-item-new">Swedish Massage</div>
     </div>
-
   </div>
 </div>
 
