@@ -480,6 +480,22 @@
   .prog-desc { font-size:13px; color:var(--warm-gray-5); line-height:1.75; font-weight:300; margin-bottom:16px; }
   .prog-link { font-family:var(--ff-body); font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--brand-deep); border-bottom:1px solid var(--brand-tint-3); padding-bottom:2px; text-decoration:none; display:inline-block; }
   .prog-link:hover { border-color:var(--brand); color:var(--brand); }
+
+  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  @media(max-width:768px) {
+    #programsViewport {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #programsTrack {
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 8px !important;
+    }
+  }
 </style>
 
 
