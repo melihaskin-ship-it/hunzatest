@@ -1924,5 +1924,36 @@
 
 })();
 </script>
+
+<script>
+// Fix: prevent vertical page scroll when swiping slider horizontally
+(function() {
+  function patchSliderTouch(viewport) {
+    if (!viewport || viewport._touchPatched) return;
+    viewport._touchPatched = true;
+    var startX = 0, startY = 0;
+    viewport.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    viewport.addEventListener('touchmove', function(e) {
+      var dx = Math.abs(e.touches[0].clientX - startX);
+      var dy = Math.abs(e.touches[0].clientY - startY);
+      if (dx > dy) e.preventDefault();
+    }, { passive: false });
+  }
+  // Patch immediately if viewport exists, otherwise wait for slider to init
+  function tryPatch() {
+    var vp = document.getElementById('programsViewport');
+    if (vp) { patchSliderTouch(vp); return; }
+    setTimeout(tryPatch, 100);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryPatch);
+  } else {
+    tryPatch();
+  }
+})();
+</script>
 </body>
 </html>
