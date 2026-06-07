@@ -656,6 +656,22 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
   #programsViewport {
     touch-action: pan-y pinch-zoom;
   }
+
+  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  @media(max-width:768px) {
+    #programsViewport {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #programsTrack {
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 8px !important;
+    }
+  }
 </style>
 
 <style>
