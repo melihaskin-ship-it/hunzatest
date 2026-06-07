@@ -637,6 +637,18 @@
   #programsViewport{padding-left:48px;}
   #programsTrack{transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);}
 
+
+  /* ── Mobile: activity-grid 1 column (Body Tone Support etc) ── */
+  @media(max-width:768px) {
+    .activity-grid,
+    .activity-grid.cols-3,
+    .activity-grid.cols-2 {
+      grid-template-columns: 1fr !important;
+    }
+    .activity-section {
+      padding: 60px 20px !important;
+    }
+  }
 </style>
 
 
