@@ -1299,7 +1299,7 @@
   <div id="programsViewport" style="cursor:grab;user-select:none;">
     <div id="programsTrack" style="display:flex;gap:0;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);will-change:transform;">
 
-      <div class="prog-card" data-idx="0" style="flex-shrink:0;cursor:pointer;" onclick="if(!this._wasDragged)window.location='/advanced-longevity-hunza-handoff/'" data-href="/advanced-longevity-hunza-handoff/">
+      <div class="prog-card" data-idx="0" style="flex-shrink:0;cursor:pointer;" data-href="/advanced-longevity-hunza-handoff/">
         <div class="prog-img" style="background:#2D1F55;">
           <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - hero longevity.png" alt="Advanced Longevity" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(22,13,46,0.65) 100%);pointer-events:none;z-index:1;"></div>
@@ -1957,33 +1957,48 @@
 </script>
 
 <script>
-// Distinguish drag from tap on prog-cards
+// Prog-card navigation: tap navigates, drag slides
 (function() {
   var track = document.getElementById('programsTrack');
   if (!track) return;
-  var startX = 0, dragging = false;
+
+  var startX = 0, startY = 0, moved = false;
+
+  function onStart(x, y) {
+    startX = x; startY = y; moved = false;
+  }
+  function onMove(x, y) {
+    if (Math.abs(x - startX) > 6 || Math.abs(y - startY) > 6) moved = true;
+  }
+  function onEnd(target) {
+    if (moved) return; // was a drag — let slider handle it
+    // Find the prog-card that was tapped
+    var card = target.closest ? target.closest('.prog-card') : null;
+    if (!card) return;
+    var href = card.getAttribute('data-href');
+    if (href) window.location.href = href;
+  }
+
+  // Touch
   track.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-    dragging = false;
-    // Clear drag flag on all cards
-    track.querySelectorAll('.prog-card').forEach(function(c) { c._wasDragged = false; });
+    onStart(e.touches[0].clientX, e.touches[0].clientY);
   }, { passive: true });
   track.addEventListener('touchmove', function(e) {
-    if (Math.abs(e.touches[0].clientX - startX) > 8) {
-      dragging = true;
-      track.querySelectorAll('.prog-card').forEach(function(c) { c._wasDragged = true; });
-    }
+    onMove(e.touches[0].clientX, e.touches[0].clientY);
   }, { passive: true });
-  // Mouse drag guard
+  track.addEventListener('touchend', function(e) {
+    onEnd(e.target);
+  });
+
+  // Mouse
   track.addEventListener('mousedown', function(e) {
-    startX = e.clientX; dragging = false;
-    track.querySelectorAll('.prog-card').forEach(function(c) { c._wasDragged = false; });
+    onStart(e.clientX, e.clientY);
   });
   track.addEventListener('mousemove', function(e) {
-    if (e.buttons && Math.abs(e.clientX - startX) > 8) {
-      dragging = true;
-      track.querySelectorAll('.prog-card').forEach(function(c) { c._wasDragged = true; });
-    }
+    if (e.buttons) onMove(e.clientX, e.clientY);
+  });
+  track.addEventListener('mouseup', function(e) {
+    onEnd(e.target);
   });
 })();
 </script>
