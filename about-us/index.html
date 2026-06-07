@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Hunza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@300;400&display=swap">
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    /* ── Page palette: TERRACOTTA + WARM EARTH (About Hunza) ─────────── */
+    /* Inspired by ancient earth tones, the warmth of Hunza Valley clay,
+       and the grounded, rooted feel of a brand origin story. Pairs warmly
+       with the global purple nav/footer for an ancient-luxury aesthetic. */
+    --brand:#A85A3B;
+    --brand-mid:#8B4729;
+    --brand-deep:#5E2E1B;
+    --brand-plum:#3A1C10;
+    --brand-darkest:#1F0E08;
+    --brand-tint-1:#FBF5F0;
+    --brand-tint-2:#F0E2D6;
+    --brand-tint-3:#D9B69D;
+    --brand-tint-4:#B58869;
+
+    /* Global brand (purple) — used for nav, menu, footer across all landing pages */
+    --navbrand:#8A73B4;
+    --navbrand-mid:#6E5A9A;
+    --navbrand-deep:#3D2B6B;
+    --navbrand-plum:#241640;
+    --navbrand-darkest:#160D2E;
+    --navbrand-tint-1:#F5F2FB;
+    --navbrand-tint-2:#EAE4F6;
+    --navbrand-tint-3:#CFC5E8;
+    --navbrand-tint-4:#A896CC;
+
+    --ivory:#FAF7F4;
+    --white:#FFFFFF;
+    --warm-gray-3:#C8BEB8;
+    --warm-gray-4:#968882;
+    --warm-gray-5:#5F4F4B;
+    --charcoal:#241917;
+    --gold:#B89775;
+    --ff-display:'Cormorant Garamond',Georgia,serif;
+    --ff-juana:'Playfair Display','Cormorant Garamond',Georgia,serif;
+    --ff-body:'Jost','Helvetica Neue',sans-serif;
+    --max-w:1280px;
+    --section-pad:120px 48px;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--ff-body);background:var(--white);color:var(--charcoal);line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img,svg{max-width:100%;}
+  section{width:100%;}
+  .about-hero-content>*,.trust-strip-inner>*,.intro-inner>*,.acc-teaser-grid>*,.acc-teaser-features>*,.origin-grid>*,.origin-stat-row>*,.philosophy-grid>*,.place-grid>*,.place-features>*,.founder-grid>*,.pillars-grid>*,.sustain-grid>*,.signature-header>*,.contact-banner-inner>*,.contact-banner-buttons>*,.consultation-grid>*,.form-row-2>*,.footer-inner>*{min-width:0;}
+
+  /* ── NAV ── */
+  .main-nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--navbrand-tint-2);
+    height:72px;display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:0 40px;
+  }
+  .nav-left{display:flex;align-items:center;gap:20px;}
+  .hamburger{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;}
+  .hamburger span{display:block;width:24px;height:1.5px;background:var(--navbrand-deep);transition:all 0.3s;}
+  .hamburger:hover span{background:var(--navbrand);}
+  .nav-center{display:flex;justify-content:center;}
+  .nav-logo-img{height:38px;object-fit:contain;filter:invert(18%) sepia(40%) saturate(1200%) hue-rotate(230deg) brightness(55%) contrast(110%);}
+  .nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+  .nav-icon-btn{
+    background:none;border:none;cursor:pointer;
+    width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+    color:var(--navbrand-deep);border-radius:50%;transition:background 0.2s;
+    text-decoration:none;
+  }
+  .nav-icon-btn:hover{background:var(--navbrand-tint-1);}
+  .nav-icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-book-btn{
+    font-family:var(--ff-body);font-size:10px;font-weight:400;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--white);background:var(--navbrand-deep);
+    border:none;padding:10px 22px;cursor:pointer;
+    transition:background 0.25s;text-decoration:none;white-space:nowrap;
+    margin-left:8px;
+  }
+  .nav-book-btn:hover{background:var(--navbrand-mid);}
+
+  /* ── MEGA MENU ── */
+  .mega-overlay{
+    position:fixed;top:72px;left:0;right:0;bottom:0;z-index:199;
+    background:rgba(22,13,46,0.6);backdrop-filter:blur(4px);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;
+  }
+  .mega-menu{
+    position:fixed;top:72px;left:0;right:0;z-index:200;
+    background:var(--white);border-bottom:1px solid var(--navbrand-tint-2);
+    padding:48px 64px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+    transform:translateY(-20px);opacity:0;pointer-events:none;
+    transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow:0 32px 64px rgba(36,22,64,0.15);
+  }
+  .mega-menu.open,.mega-overlay.open{opacity:1;pointer-events:all;transform:translateY(0);}
+  .mega-col-title{
+    font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--navbrand);font-weight:400;margin-bottom:20px;
+    padding-bottom:12px;border-bottom:1px solid var(--navbrand-tint-2);
+  }
+  .mega-link{
+    display:block;font-size:13px;color:var(--warm-gray-5);
+    text-decoration:none;padding:7px 0;
+    transition:color 0.2s;font-weight:300;
+    border-bottom:1px solid transparent;
+  }
+  .mega-link:hover{color:var(--navbrand-deep);}
+  .mega-link.active{color:var(--navbrand-deep);font-weight:400;}
+  .mega-close{
+    position:absolute;top:24px;right:32px;
+    background:none;border:none;cursor:pointer;
+    font-size:20px;color:var(--navbrand-tint-4);
+    font-family:var(--ff-display);font-weight:300;
+  }
+  .mega-close:hover{color:var(--navbrand-deep);}
+
+  /* ── BUTTONS ── */
+  .btn-primary{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--brand-deep);border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-primary:hover{background:var(--brand-mid);border-color:var(--brand-mid);}
+  .btn-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-deep);background:transparent;border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline:hover{background:var(--brand-deep);color:var(--white);}
+  .btn-outline-white{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid rgba(255,255,255,0.5);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-outline-white:hover{background:rgba(255,255,255,0.12);border-color:var(--white);}
+  .btn-gold{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--brand-deep);border:1px solid var(--brand-deep);padding:17px 40px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-gold:hover{background:var(--brand-mid);border-color:var(--brand-mid);}
+
+  /* ── OVERLINE ── */
+  .overline{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--brand);font-weight:400;display:block;margin-bottom:20px;}
+
+  /* ── HERO (full-bleed centered, like dining/spa template) ── */
+  .about-hero{
+    position:relative;width:100%;height:100vh;min-height:680px;
+    margin-top:72px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .about-hero-bg{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:saturate(0.85) brightness(0.92) contrast(0.98);
+  }
+  .about-hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(31,14,8,0.35) 0%,rgba(31,14,8,0.15) 40%,rgba(31,14,8,0.55) 100%);
+  }
+  .about-hero-content{
+    position:relative;z-index:2;text-align:center;
+    max-width:780px;padding:0 32px;
+  }
+  .about-hero-overline-wrap{
+    display:flex;align-items:center;justify-content:center;
+    gap:24px;margin-bottom:32px;
+  }
+  .about-hero-overline-wrap::before,.about-hero-overline-wrap::after{
+    content:'';display:block;width:48px;height:1px;background:rgba(251,245,240,0.55);
+  }
+  .about-hero-overline-text{
+    font-size:11px;letter-spacing:0.32em;text-transform:uppercase;
+    color:rgba(251,245,240,0.85);font-weight:400;font-family:var(--ff-body);
+  }
+  .about-hero-headline{
+    font-family:var(--ff-display);font-size:104px;font-weight:300;
+    color:var(--white);line-height:0.95;letter-spacing:-0.015em;
+    margin-bottom:32px;
+  }
+  .about-hero-headline em{font-style:italic;color:var(--brand-tint-3);font-weight:300;}
+  .about-hero-sub{
+    font-family:var(--ff-display);font-size:22px;font-weight:300;font-style:italic;
+    color:rgba(251,245,240,0.88);line-height:1.5;max-width:620px;margin:0 auto;
+  }
+  @media (max-width:900px){
+    .about-hero-headline{font-size:64px;}
+    .about-hero-sub{font-size:18px;}
+  }
+
+  /* ── TRUST STRIP ── */
+  .trust-strip{padding:80px 48px;background:var(--white);border-bottom:1px solid var(--brand-tint-2);}
+  .trust-strip-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  .trust-item{padding:0 36px;border-right:1px solid var(--brand-tint-2);display:flex;align-items:flex-start;gap:18px;}
+  .trust-item:first-child{padding-left:0;}
+  .trust-item:last-child{border-right:none;padding-right:0;}
+  .trust-icon{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--brand);}
+  .trust-icon svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;}
+  .trust-text-wrap{display:flex;flex-direction:column;gap:8px;}
+  .trust-title{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--brand-deep);font-weight:500;}
+  .trust-desc{font-size:13px;color:var(--warm-gray-5);line-height:1.6;font-weight:300;}
+
+  /* ── SECTION HELPERS ── */
+  section.about-section{max-width:var(--max-w);margin:0 auto;padding:120px 48px;}
+  .h-display{font-family:var(--ff-display);font-size:60px;font-weight:300;color:var(--brand-plum);line-height:1.05;letter-spacing:-0.01em;}
+  .h-display em{font-style:italic;color:var(--brand);}
+  .h-section{font-family:var(--ff-display);font-size:48px;font-weight:300;color:var(--brand-plum);line-height:1.1;letter-spacing:-0.01em;}
+  .h-section em{font-style:italic;color:var(--brand);}
+  .body-large{font-size:16px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;}
+  .body-text{font-size:14px;color:var(--warm-gray-5);line-height:1.8;font-weight:300;}
+
+  /* ── INTRO SECTION (Boutique Longevity Retreat) ── */
+  .intro-bg{background:var(--white);}
+  .intro-inner{max-width:920px;margin:0 auto;text-align:center;}
+  .intro-overline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--brand);font-weight:400;display:block;margin-bottom:24px;}
+  .intro-headline{font-family:var(--ff-display);font-size:54px;font-weight:300;color:var(--brand-plum);line-height:1.12;letter-spacing:-0.01em;margin-bottom:36px;}
+  .intro-headline em{font-style:italic;color:var(--brand);}
+  .intro-divider{width:48px;height:1px;background:var(--brand-tint-3);margin:0 auto 36px;}
+  .intro-body{font-size:16px;color:var(--warm-gray-5);line-height:1.9;font-weight:300;text-align:left;}
+  .intro-body p{margin-bottom:20px;}
+  .intro-body p:last-child{margin-bottom:0;}
+  .intro-body em{font-style:italic;color:var(--brand-mid);font-weight:400;}
+
+  /* ── ACCOMMODATION TEASER ── */
+  .acc-teaser-bg{background:var(--brand-plum);color:var(--brand-tint-1);position:relative;overflow:hidden;}
+  .acc-teaser-bg::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 50%,rgba(168,90,59,0.16) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .acc-teaser-grid{display:grid;grid-template-columns:6fr 6fr;gap:80px;align-items:center;position:relative;z-index:1;}
+  .acc-teaser-img{width:100%;height:520px;object-fit:cover;display:block;filter:saturate(0.92) brightness(0.96);}
+  .acc-teaser-overline{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;display:block;margin-bottom:18px;}
+  .acc-teaser-headline{font-family:var(--ff-display);font-size:48px;font-weight:300;color:var(--brand-tint-1);line-height:1.1;letter-spacing:-0.01em;margin-bottom:28px;}
+  .acc-teaser-headline em{font-style:italic;color:var(--brand-tint-3);}
+  .acc-teaser-text{font-size:15px;color:rgba(240,226,214,0.82);line-height:1.85;font-weight:300;margin-bottom:18px;}
+  .acc-teaser-features{display:grid;grid-template-columns:1fr 1fr;gap:18px 32px;margin-top:32px;margin-bottom:36px;}
+  .acc-teaser-feature{display:flex;align-items:center;gap:14px;font-size:13px;color:rgba(240,226,214,0.78);font-weight:300;}
+  .acc-teaser-feature::before{content:'';display:block;width:18px;height:1px;background:var(--brand-tint-3);flex-shrink:0;}
+  .btn-acc-link{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-tint-1);background:transparent;border:1px solid rgba(240,226,214,0.5);padding:16px 32px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-acc-link:hover{background:rgba(240,226,214,0.1);border-color:var(--brand-tint-1);}
+
+  /* ── ORIGIN STORY (The Hunza Turks) ── */
+  .origin-bg{background:var(--brand-tint-1);}
+  .origin-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center;}
+  .origin-img-wrap{position:relative;}
+  .origin-img{width:100%;height:620px;object-fit:cover;display:block;filter:saturate(0.9) brightness(0.98);}
+  .origin-img-cap{
+    position:absolute;bottom:24px;left:24px;right:24px;
+    font-family:var(--ff-display);font-style:italic;font-size:14px;
+    color:rgba(251,245,240,0.95);letter-spacing:0.04em;
+    text-shadow:0 2px 12px rgba(31,14,8,0.6);
+  }
+  .origin-content{padding:0 0 0 0;}
+  .origin-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border-top:1px solid var(--brand-tint-2);border-bottom:1px solid var(--brand-tint-2);padding:32px 0;}
+  .origin-stat{padding:0 24px;border-right:1px solid var(--brand-tint-2);}
+  .origin-stat:first-child{padding-left:0;}
+  .origin-stat:last-child{border-right:none;padding-right:0;}
+  .origin-stat-num{font-family:var(--ff-juana);font-size:46px;font-weight:300;color:var(--brand-deep);line-height:1;margin-bottom:6px;}
+  .origin-stat-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-mid);font-weight:400;}
+
+  /* ── PHILOSOPHY (Longevity vs Wellness) ── */
+  .philosophy-bg{background:var(--brand-plum);color:var(--brand-tint-1);position:relative;overflow:hidden;}
+  .philosophy-bg::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 30% 50%,rgba(168,90,59,0.18) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .philosophy-inner{position:relative;z-index:1;}
+  .philosophy-header{text-align:center;max-width:720px;margin:0 auto 80px;}
+  .philosophy-overline{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;display:block;margin-bottom:20px;}
+  .philosophy-headline{font-family:var(--ff-display);font-size:56px;font-weight:300;color:var(--brand-tint-1);line-height:1.05;letter-spacing:-0.01em;}
+  .philosophy-headline em{font-style:italic;color:var(--brand-tint-3);}
+  .philosophy-quote{
+    font-family:var(--ff-display);font-style:italic;font-size:32px;font-weight:300;
+    color:var(--brand-tint-1);line-height:1.4;text-align:center;
+    max-width:880px;margin:0 auto;
+    padding:0 24px;
+  }
+  .philosophy-quote::before,.philosophy-quote::after{
+    content:'"';color:var(--brand-tint-4);font-size:48px;line-height:0;
+    vertical-align:-0.18em;margin:0 6px;
+  }
+  .philosophy-quote-attr{
+    text-align:center;margin-top:32px;
+    font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--brand-tint-3);font-weight:400;
+  }
+  .philosophy-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:60px;align-items:start;margin-top:80px;}
+  .philosophy-divider{background:var(--brand-tint-4);opacity:0.3;width:1px;height:100%;min-height:240px;}
+  .philosophy-col-label{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;margin-bottom:18px;}
+  .philosophy-col-title{font-family:var(--ff-display);font-size:34px;font-weight:300;color:var(--brand-tint-1);line-height:1.15;margin-bottom:24px;}
+  .philosophy-col-title em{font-style:italic;color:var(--brand-tint-3);}
+  .philosophy-col-text{font-size:14px;color:rgba(240,226,214,0.78);line-height:1.85;font-weight:300;}
+
+  /* ── THE PLACE (Kartepe location) ── */
+  .place-bg{background:var(--brand-tint-1);}
+  .place-grid{display:grid;grid-template-columns:7fr 5fr;gap:80px;align-items:center;}
+  .place-img-wrap{position:relative;}
+  .place-img{width:100%;height:560px;object-fit:cover;display:block;filter:saturate(0.92) brightness(1.02);}
+  .place-img-cap{
+    position:absolute;bottom:20px;left:20px;
+    background:rgba(31,14,8,0.78);color:rgba(251,245,240,0.92);
+    padding:10px 18px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    font-weight:400;
+  }
+  .place-features{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px;}
+  .place-feature{border-top:1px solid var(--brand-tint-2);padding-top:20px;}
+  .place-feature-num{font-family:var(--ff-juana);font-size:32px;font-weight:300;color:var(--brand-deep);line-height:1;margin-bottom:6px;}
+  .place-feature-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-mid);font-weight:400;margin-bottom:10px;}
+  .place-feature-desc{font-size:13px;color:var(--warm-gray-5);line-height:1.7;font-weight:300;}
+
+  /* ── FOUNDER VISION ── */
+  .founder-bg{background:var(--brand-tint-1);}
+  .founder-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center;}
+  .founder-portrait-wrap{position:relative;}
+  .founder-portrait{width:100%;height:620px;object-fit:cover;object-position:center 30%;display:block;filter:saturate(0.95) brightness(1.0);}
+  .founder-portrait-cap{
+    position:absolute;bottom:24px;left:24px;right:24px;
+    font-family:var(--ff-display);font-style:italic;font-size:14px;
+    color:rgba(251,245,240,0.95);letter-spacing:0.04em;
+    text-shadow:0 2px 12px rgba(31,14,8,0.6);
+  }
+  .founder-content{padding:0;}
+  .founder-quote-mark{font-family:var(--ff-display);font-size:96px;line-height:0.4;color:var(--brand-tint-3);display:block;margin-bottom:8px;}
+  .founder-quote{
+    font-family:var(--ff-display);font-style:italic;font-size:30px;font-weight:300;
+    color:var(--brand-plum);line-height:1.4;letter-spacing:-0.005em;
+    margin-bottom:32px;
+  }
+  .founder-quote em{font-style:italic;color:var(--brand);}
+  .founder-bio{font-size:14px;color:var(--warm-gray-5);line-height:1.85;font-weight:300;margin-bottom:14px;}
+  .founder-attr-block{margin-top:32px;padding-top:24px;border-top:1px solid var(--brand-tint-2);}
+  .founder-name{font-family:var(--ff-body);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brand-deep);font-weight:500;display:block;margin-bottom:6px;}
+  .founder-role{font-size:12px;color:var(--warm-gray-4);font-weight:300;letter-spacing:0.05em;font-style:italic;}
+
+  /* ── SIX PILLARS OVERVIEW ── */
+  .pillars-bg{background:var(--brand-tint-1);}
+  .pillars-header{text-align:center;max-width:680px;margin:0 auto 64px;}
+  .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--brand-tint-2);border:1px solid var(--brand-tint-2);}
+  .pillar-card{background:var(--white);padding:44px 32px;display:flex;flex-direction:column;gap:14px;transition:background 0.25s;}
+  .pillar-card:hover{background:var(--ivory);}
+  .pillar-code{font-family:var(--ff-juana);font-size:28px;font-weight:400;color:var(--brand);line-height:1;font-style:italic;}
+  .pillar-name{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brand-deep);font-weight:500;}
+  .pillar-desc{font-size:13px;color:var(--warm-gray-5);line-height:1.75;font-weight:300;}
+
+  /* ── SUSTAINABILITY ── */
+  .sustain-bg{background:var(--white);}
+  .sustain-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center;}
+  .sustain-img{width:100%;height:520px;object-fit:cover;display:block;filter:saturate(0.92) brightness(1.0);}
+  .sustain-list{margin-top:32px;display:flex;flex-direction:column;gap:24px;}
+  .sustain-item{display:flex;gap:18px;align-items:flex-start;}
+  .sustain-item-num{
+    flex-shrink:0;font-family:var(--ff-juana);font-size:14px;font-style:italic;
+    color:var(--brand);font-weight:400;letter-spacing:0.04em;padding-top:3px;width:28px;
+  }
+  .sustain-item-content{border-top:1px solid var(--brand-tint-2);padding-top:14px;flex:1;}
+  .sustain-item-title{font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-deep);font-weight:500;margin-bottom:6px;}
+  .sustain-item-desc{font-size:13px;color:var(--warm-gray-5);line-height:1.7;font-weight:300;}
+
+  /* ── SIGNATURE PROGRAMS SLIDER (exact dining-page match) ── */
+  .signature-bg{background:var(--brand-tint-1);padding:120px 0 100px;overflow:hidden;}
+  .signature-header-wrap{max-width:var(--max-w);margin:0 auto;padding:0 48px 40px;}
+  .signature-header{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:0;flex-wrap:wrap;}
+  .signature-overline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--brand);font-weight:400;display:block;margin-bottom:14px;}
+  .signature-headline{font-family:var(--ff-display);font-size:56px;font-weight:300;color:var(--brand-plum);line-height:1.1;font-style:italic;letter-spacing:-0.01em;margin:0;}
+  .signature-headline em{font-style:italic;color:var(--brand);}
+
+  /* Programs slider card width — set dynamically by JS */
+  #programsTrack{--prog-card-w:32%;}
+  #programsViewport{padding-left:48px;}
+  .prog-card{flex-shrink:0;box-sizing:border-box;cursor:pointer;width:var(--prog-card-w);padding:0 18px;}
+  .prog-img{height:210px;overflow:hidden;position:relative;}
+  .prog-img img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);}
+  .prog-img:hover img{transform:scale(1.05);}
+  .prog-body{padding:22px 0 0 0;transition:opacity 0.45s ease;}
+  .prog-tag{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brand);margin-bottom:7px;}
+  .prog-title{font-family:var(--ff-display);font-size:22px;font-weight:400;color:var(--brand-plum);margin-bottom:10px;line-height:1.2;}
+  .prog-desc{font-size:13px;color:var(--warm-gray-5);line-height:1.75;font-weight:300;margin-bottom:16px;}
+  .prog-link{font-family:var(--ff-body);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand-deep);border-bottom:1px solid var(--brand-tint-3);padding-bottom:2px;text-decoration:none;display:inline-block;}
+  .prog-link:hover{border-color:var(--brand);color:var(--brand);}
+  .prog-dot{display:inline-block;cursor:pointer;transition:all 0.3s;}
+
+  /* ── CONTACT BANNER (same pattern as dining/spa pages) ── */
+  .contact-banner{
+    background:linear-gradient(135deg,var(--brand-deep) 0%,var(--brand-plum) 100%);
+    padding:96px 48px;color:var(--brand-tint-1);position:relative;overflow:hidden;
+  }
+  .contact-banner::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 70% 30%,rgba(217,182,157,0.12) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .contact-banner-inner{max-width:var(--max-w);margin:0 auto;position:relative;z-index:1;text-align:center;}
+  .contact-banner-overline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--brand-tint-3);font-weight:400;display:block;margin-bottom:20px;}
+  .contact-banner-headline{font-family:var(--ff-display);font-size:54px;font-weight:300;color:var(--brand-tint-1);line-height:1.1;letter-spacing:-0.01em;margin-bottom:24px;}
+  .contact-banner-headline em{font-style:italic;color:var(--brand-tint-3);}
+  .contact-banner-sub{font-size:15px;color:rgba(240,226,214,0.78);line-height:1.8;max-width:620px;margin:0 auto 48px;font-weight:300;}
+  .contact-banner-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .btn-banner-solid{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-deep);background:var(--brand-tint-1);border:1px solid var(--brand-tint-1);padding:17px 36px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-banner-solid:hover{background:var(--white);border-color:var(--white);}
+  .btn-banner-outline{font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--brand-tint-1);background:transparent;border:1px solid rgba(240,226,214,0.5);padding:17px 36px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;white-space:nowrap;}
+  .btn-banner-outline:hover{background:rgba(240,226,214,0.1);border-color:var(--brand-tint-1);}
+
+  /* ── CONTACT FORM SECTION (exact same as other landing pages) ── */
+  .consultation-bg{background:var(--white);}
+  .consultation-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:stretch;}
+  .consult-left-sticky{position:sticky;top:96px;display:flex;flex-direction:column;}
+  .consult-sub{font-size:14px;color:var(--warm-gray-5);line-height:1.8;margin:24px 0 32px;font-weight:300;}
+  .consult-promises{display:flex;flex-direction:column;gap:14px;}
+  .consult-promise{font-size:13px;color:var(--warm-gray-5);font-weight:300;display:flex;align-items:center;gap:12px;}
+  .consult-promise::before{content:'';display:block;width:18px;height:1px;background:var(--brand);flex-shrink:0;}
+  .form-container{background:var(--brand-tint-1);padding:56px;border:1px solid var(--brand-tint-2);}
+  .form-section-title{font-family:var(--ff-display);font-size:28px;font-weight:300;color:var(--brand-deep);margin-bottom:32px;line-height:1.3;}
+  .form-input-light{width:100%;background:var(--white);border:1px solid var(--brand-tint-2);padding:14px 16px;font-family:var(--ff-body);font-size:14px;color:var(--charcoal);outline:none;margin-bottom:16px;transition:border-color 0.2s;font-weight:300;}
+  .form-input-light::placeholder{color:var(--warm-gray-3);}
+  .form-input-light:focus{border-color:var(--brand);}
+  .form-label-light{display:block;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray-5);font-weight:400;margin-bottom:8px;}
+  .form-privacy-light{font-size:11px;color:var(--warm-gray-4);line-height:1.6;margin-top:14px;font-weight:300;}
+  .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  textarea.form-input-light{resize:vertical;min-height:120px;}
+
+  /* ── FOOTER (exact same as dining/other landing pages) ── */
+  footer{background:var(--navbrand-plum);padding:64px 48px;}
+  .footer-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:48px;border-bottom:1px solid rgba(138,115,180,0.2);}
+  .footer-brand-name{font-family:var(--ff-display);font-size:22px;font-weight:300;letter-spacing:0.2em;color:var(--navbrand-tint-2);text-transform:uppercase;margin-bottom:0;}
+  .footer-brand-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--navbrand-tint-3);margin-bottom:20px;}
+  .footer-brand-desc{font-size:12px;color:rgba(207,197,232,0.5);line-height:1.8;font-weight:300;}
+  .footer-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--navbrand-tint-3);font-weight:400;margin-bottom:20px;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:13px;color:rgba(207,197,232,0.55);text-decoration:none;font-weight:300;transition:color 0.2s;}
+  .footer-link:hover{color:var(--navbrand-tint-3);}
+  .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
+  .footer-legal{display:flex;gap:24px;}
+  .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
+  .footer-legal a:hover{color:rgba(207,197,232,0.7);}
+
+  /* ── FADE IN SECTIONS ── */
+  .fade-in-section{opacity:1;}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:980px){
+    .origin-grid,.place-grid,.sustain-grid,.consultation-grid,.acc-teaser-grid,.founder-grid{grid-template-columns:1fr;gap:48px;}
+    .pillars-grid{grid-template-columns:repeat(2,1fr);}
+    .philosophy-grid{grid-template-columns:1fr;}
+    .philosophy-divider{display:none;}
+    .trust-strip-inner{grid-template-columns:1fr 1fr;gap:40px 0;}
+    .trust-item:nth-child(2){border-right:none;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+    section.about-section{padding:80px 24px;}
+    .h-display{font-size:42px;}
+    .h-section{font-size:36px;}
+    .intro-headline{font-size:38px;}
+    .acc-teaser-headline{font-size:36px;}
+    .philosophy-headline{font-size:38px;}
+    .philosophy-quote{font-size:24px;}
+    .founder-quote{font-size:24px;}
+    .contact-banner-headline{font-size:38px;}
+    .signature-headline{font-size:38px;}
+    #programsViewport{padding-left:24px;}
+  }
+  @media (max-width:600px){
+    :root{--section-pad:64px 22px;}
+    body{overflow-x:hidden;}
+    .main-nav{height:64px;padding:0 14px;grid-template-columns:auto minmax(0,1fr) auto;}
+    .nav-left{gap:0;}
+    .hamburger{padding:6px;}
+    .hamburger span{width:22px;}
+    .nav-center{min-width:0;}
+    .nav-logo-img{height:30px;max-width:138px;}
+    .nav-right{gap:4px;}
+    .nav-icon-btn{width:34px;height:34px;}
+    .nav-book-btn{font-size:9px;letter-spacing:0.12em;padding:9px 12px;margin-left:2px;line-height:1.15;text-align:center;}
+    .mega-overlay{top:64px;}
+    .mega-menu{top:64px;bottom:0;grid-template-columns:1fr;gap:26px;padding:30px 24px;overflow-y:auto;transform:translateY(-12px);}
+    .mega-close{top:16px;right:20px;}
+    .mega-col-title{margin-bottom:12px;padding-bottom:10px;}
+    .mega-link{padding:6px 0;}
+
+    .btn-primary,.btn-outline,.btn-outline-white,.btn-gold,.btn-acc-link,.btn-banner-solid,.btn-banner-outline,.nav-book-btn{
+      max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35;text-align:center;
+    }
+    .about-hero{margin-top:64px;height:68vh;min-height:430px;}
+    .about-hero-content{padding:0 22px;}
+    .about-hero-headline{font-size:46px;overflow-wrap:anywhere;}
+    .about-hero-sub{font-size:17px;}
+    .about-hero-overline-wrap{gap:14px;margin-bottom:24px;}
+    .about-hero-overline-wrap::before,.about-hero-overline-wrap::after{width:28px;}
+    .about-hero-overline-text,.intro-overline,.acc-teaser-overline,.philosophy-overline,.philosophy-col-label,.place-feature-label,.founder-name,.pillar-name,.sustain-item-title,.signature-overline,.contact-banner-overline,.form-label-light,.footer-col-title{letter-spacing:0.18em;}
+
+    .trust-strip{padding:48px 22px;}
+    .trust-strip-inner{grid-template-columns:1fr;gap:24px;}
+    .trust-item{padding:0 0 22px 0;border-right:none;border-bottom:1px solid var(--brand-tint-2);}
+    .trust-item:last-child{padding-bottom:0;border-bottom:none;}
+
+    section.about-section,section.about-section[style]{padding:64px 22px!important;}
+    .h-display,.intro-headline{font-size:36px;overflow-wrap:anywhere;}
+    .h-section,.acc-teaser-headline,.philosophy-headline,.contact-banner-headline,.signature-headline{font-size:34px;overflow-wrap:anywhere;}
+    .body-large,.body-text,.intro-body{text-align:left;font-size:14.5px;}
+
+    .acc-teaser-img,.origin-img,.place-img,.founder-portrait,.sustain-img{height:320px;}
+    .acc-teaser-features{grid-template-columns:1fr;gap:14px;}
+    .origin-stat-row{grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--brand-tint-2);}
+    .origin-stat{border-right:none;border-bottom:1px solid var(--brand-tint-2);padding:18px 0;}
+    .origin-stat:last-child{border-bottom:none;}
+
+    .philosophy-header{margin-bottom:42px;}
+    .philosophy-quote{font-size:22px;padding:0;}
+    .philosophy-grid{gap:34px;margin-top:46px;}
+    .place-features{grid-template-columns:1fr;gap:20px;}
+    .founder-quote-mark{font-size:72px;}
+    .founder-quote{font-size:22px;}
+    .pillars-grid{grid-template-columns:1fr;}
+    .pillar-card{padding:34px 24px;}
+    .sustain-item{gap:14px;}
+
+    .signature-bg{padding:64px 0;}
+    .signature-header-wrap{padding:0 22px 32px;}
+    .signature-header{display:block;}
+    #programsViewport{padding-left:22px;overflow:hidden;}
+    #programsTrack{--prog-card-w:82vw;}
+    .prog-card{padding:0 12px;}
+    .prog-img{height:190px;}
+    .prog-title{font-size:21px;}
+    #programsDots{padding:0 22px!important;}
+
+    .contact-banner{padding:72px 22px;}
+    .contact-banner-buttons{display:grid;grid-template-columns:1fr;gap:12px;}
+    .contact-banner-sub{font-size:14px;margin-bottom:34px;}
+
+    .form-container{padding:34px 24px;}
+    .pillars-grid{grid-template-columns:1fr;}
+    .place-features,.form-row-2,.acc-teaser-features{grid-template-columns:1fr;}
+    .form-input-light{min-width:0;}
+    .consult-left-sticky{position:static;}
+
+    footer{padding:54px 24px;}
+    .footer-inner{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
+    .footer-legal{flex-wrap:wrap;justify-content:center;gap:12px 20px;}
+  }
+
+  @media(max-width:420px){
+    :root{--section-pad:56px 18px;}
+    .main-nav{padding:0 10px;}
+    .nav-logo-img{height:26px;max-width:118px;}
+    .nav-icon-btn{width:30px;height:30px;}
+    .nav-icon-btn svg{width:16px;height:16px;}
+    .nav-book-btn{font-size:8.5px;letter-spacing:0.1em;padding:8px 9px;max-width:112px;}
+    .about-hero{min-height:390px;}
+    .about-hero-headline{font-size:39px;}
+    .about-hero-sub{font-size:16px;}
+    .trust-strip{padding-left:18px;padding-right:18px;}
+    section.about-section,section.about-section[style]{padding:56px 18px!important;}
+    .h-display,.intro-headline{font-size:32px;}
+    .h-section,.acc-teaser-headline,.philosophy-headline,.contact-banner-headline,.signature-headline{font-size:30px;}
+    .acc-teaser-img,.origin-img,.place-img,.founder-portrait,.sustain-img{height:280px;}
+    #programsTrack{--prog-card-w:88vw;}
+    .prog-card{padding:0 10px;}
+    .form-container{padding:30px 20px;}
+  }
+
+  @media(max-width:360px){
+    .nav-logo-img{max-width:104px;}
+    .nav-book-btn{max-width:108px;}
+    .about-hero-headline{font-size:35px;}
+    .h-display,.intro-headline{font-size:29px;}
+    .h-section,.acc-teaser-headline,.philosophy-headline,.contact-banner-headline,.signature-headline{font-size:27px;}
+    .about-hero-overline-text,.intro-overline,.acc-teaser-overline,.philosophy-overline,.philosophy-col-label,.place-feature-label,.founder-name,.pillar-name,.sustain-item-title,.signature-overline,.contact-banner-overline,.form-label-light,.footer-col-title{letter-spacing:0.15em;}
+  }
+
+  /* ── Mobile: slider card width — flush left, clear peek on right ── */
+  @media(max-width:768px) {
+    #programsTrack {
+      --prog-card-w: 78vw !important;
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 10px 0 0 !important;
+    }
+    .prog-card:first-child {
+      padding-left: 0 !important;
+    }
+  }
+</style>
+
+
+<style>
+/* ── Desktop: footer columns always visible, toggle disabled ── */
+.footer-col-toggle {
+  display: block;
+  width: auto;
+  appearance: none;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: default;
+  pointer-events: none;
+}
+.footer-col-icon { display: none; }
+.footer-nav-group .footer-links { max-height: none; overflow: visible; opacity: 1; }
+
+/* ── Mobile overrides ── */
+@media(max-width:768px) {
+  .main-nav { grid-template-columns: auto 1fr auto !important; }
+  .main-nav .nav-book-btn { display: none !important; }
+  .main-nav .nav-left { justify-self: start; }
+  .main-nav .nav-center {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    justify-content: center !important; width: max-content;
+    max-width: calc(100% - 120px); z-index: 1; pointer-events: none;
+  }
+  .main-nav .nav-center a, .main-nav .nav-center img { pointer-events: auto; }
+  .main-nav .nav-right { justify-self: end; margin-left: auto; gap: 6px !important; z-index: 2; }
+  .footer-inner { gap: 24px !important; }
+  .footer-nav-group { border-top: 1px solid rgba(207,197,232,0.16); padding-top: 6px; }
+  .footer-col-toggle {
+    width: 100%; display: flex; align-items: center;
+    justify-content: space-between; gap: 16px;
+    background: transparent; border: 0; padding: 12px 0;
+    cursor: pointer; pointer-events: auto; text-align: left;
+  }
+  .footer-col-toggle .footer-col-title { margin-bottom: 0 !important; }
+  .footer-col-icon {
+    display: inline; color: rgba(207,197,232,0.75);
+    font-size: 18px; line-height: 1; flex-shrink: 0; transition: transform 0.2s ease;
+  }
+  .footer-nav-group.is-open .footer-col-icon { transform: rotate(45deg); }
+  .footer-nav-group .footer-links {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.2s ease, padding-top 0.2s ease;
+    padding-top: 0;
+  }
+  .footer-nav-group.is-open .footer-links { max-height: 420px; opacity: 1; padding-top: 4px; }
+  .footer-social { display: flex; justify-content: center; gap: 20px; margin-bottom: 16px; }
+  .footer-bottom { display: flex !important; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  .footer-legal { justify-content: center; }
+  #programsViewport {
+    width: 100% !important; max-width: 100% !important;
+    margin-left: 0 !important; padding-left: 20px !important;
+    padding-right: 0 !important; overflow: hidden; touch-action: pan-y pinch-zoom;
+  }
+  #programsTrack { --prog-card-w: min(calc(84vw - 18px), 320px) !important; gap: 12px !important; }
+  .prog-card { width: var(--prog-card-w) !important; padding: 0 !important; }
+  .prog-img { height: auto !important; aspect-ratio: 5 / 6 !important; }
+  .prog-body { padding-top: 16px !important; }
+  .prog-title { font-size: 20px !important; }
+  .prog-desc { line-height: 1.6 !important; margin-bottom: 12px !important; }
+  #programsDots {
+    display: flex !important; align-items: center; justify-content: center;
+    gap: 8px !important; margin-top: 22px !important; padding: 0 20px !important;
+  }
+}
+
+/* ── Brochure popup ── */
+.brochure-popup-overlay {
+  position: fixed; inset: 0; background: rgba(22, 13, 46, 0.6);
+  backdrop-filter: blur(6px); z-index: 320; opacity: 0;
+  pointer-events: none; transition: opacity 0.25s ease;
+}
+.brochure-popup-overlay.is-open { opacity: 1; pointer-events: auto; }
+.brochure-popup {
+  position: fixed; top: 50%; left: 50%;
+  width: min(92vw, 560px); max-height: min(86vh, 820px);
+  overflow: auto; background: #fff; color: var(--charcoal);
+  z-index: 321; transform: translate(-50%, -50%) scale(0.98);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 30px 80px rgba(36, 22, 64, 0.22);
+  border: 1px solid var(--brand-tint-2);
+}
+.brochure-popup.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+.brochure-popup-inner { padding: 32px 30px 28px; }
+.brochure-popup-close {
+  position: absolute; top: 12px; right: 14px;
+  border: 0; background: transparent; color: var(--brand-deep);
+  cursor: pointer; font-size: 24px; line-height: 1;
+}
+.brochure-popup-kicker {
+  display: inline-block; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--brand); margin-bottom: 14px;
+}
+.brochure-popup-title {
+  font-family: var(--ff-display); font-size: clamp(34px, 5vw, 44px);
+  line-height: 1.02; color: var(--brand-deep); font-weight: 300; margin-bottom: 12px;
+}
+.brochure-popup-title em { font-style: italic; }
+.brochure-popup-text { font-size: 14px; line-height: 1.8; color: var(--warm-gray-5); margin-bottom: 22px; }
+.brochure-popup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.brochure-popup-field { margin-bottom: 14px; }
+.brochure-popup-field.full { grid-column: 1 / -1; }
+.brochure-popup-label {
+  display: block; margin-bottom: 8px; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--brand-deep);
+}
+.brochure-popup-input {
+  width: 100%; border: 1px solid var(--brand-tint-3);
+  padding: 14px 16px; font: inherit; color: var(--charcoal); background: #fff;
+}
+.brochure-popup-input:focus { outline: none; border-color: var(--brand); }
+.brochure-popup-consent {
+  display: flex; gap: 10px; align-items: flex-start;
+  margin: 8px 0 18px; font-size: 12px; line-height: 1.7; color: var(--warm-gray-5);
+}
+.brochure-popup-consent input { margin-top: 4px; flex-shrink: 0; }
+.brochure-popup-consent a { color: var(--brand-deep); }
+.brochure-popup-error { display: none; margin: -6px 0 14px; color: #b43a3a; font-size: 11px; }
+.brochure-popup-error.is-visible { display: block; }
+@media(max-width:640px) {
+  .brochure-popup-inner { padding: 28px 20px 22px; }
+  .brochure-popup-grid { grid-template-columns: 1fr; gap: 0; }
+}
+</style>
+</head>
+<body>
+<!-- MEGA MENU OVERLAY -->
+<div class="mega-overlay" id="megaOverlay" onclick="closeMenu()"></div>
+
+<!-- MEGA MENU -->
+<div class="mega-menu" id="megaMenu">
+  <button class="mega-close" onclick="closeMenu()">&#x2715;</button>
+  <div>
+    <div class="mega-col-title">Signature Programs</div>
+    <a href="/advanced-longevity-hunza-handoff/" class="mega-link">Advanced Longevity & Vitality</a>
+    <a href="/immunity-support-gut-health/" class="mega-link">Immunity & Gut Health</a>
+    <a href="/de-stress-relaxtion-spa-retreat/" class="mega-link">Destress & Relaxation</a>
+    <a href="/mindfulness-sleep-well/" class="mega-link">Mindfulness & Sleep</a>
+    <a href="/weight-loss-fat-burn/" class="mega-link">Weight Loss & Fat Burn</a>
+    <a href="/detox-cleanse/" class="mega-link">Detox & Cleanse</a>
+    <a href="/design-your-own-program/" class="mega-link">Design Your Own Program</a>
+    <a href="/see-all-programs/" class="mega-link">See All Programs</a>
+  </div>
+  <div>
+    <div class="mega-col-title">The Experience</div>
+    <a href="/spa-wellness/" class="mega-link">Spa &amp; Wellness</a>
+    <a href="/accommodation/" class="mega-link">Accommodation</a>
+    <a href="/dining/" class="mega-link">Dining</a>
+    <a href="/special-offers/" class="mega-link">Special Offers</a>
+    <a href="/pool-fitness/" class="mega-link">Pool &amp; Fitness</a>
+    <a href="/explore-nearby/" class="mega-link">Explore Nearby</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Hunza</div>
+    <a href="/about_us/" class="mega-link">About Hunza</a>
+    <a href="/methodology/" class="mega-link">Methodology</a>
+    <a href="/contact_us/" class="mega-link">Contact Us</a>
+  </div>
+  <div>
+    <div class="mega-col-title">Plan Your Stay</div>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="mega-link">Book Your Stay</a>
+    <a
+      href="#"
+      class="mega-link menu-brochure-trigger"
+      data-brochure-name="Hunza General Brochure"
+      data-brochure-url="https://hunzalongevity.com/hunza-catalog-desktop.pdf"
+    >Download Brochure</a>
+    <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="mega-link">Free Consultation</a>
+    <div style="margin-top:24px;">
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-primary" style="font-size:10px;padding:12px 20px;">Book Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="brochure-popup-overlay" id="brochurePopupOverlay"></div>
+<div
+  class="brochure-popup"
+  id="brochurePopup"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="brochurePopupTitle"
+  aria-hidden="true"
+>
+  <button type="button" class="brochure-popup-close" id="brochurePopupClose" aria-label="Close brochure form">&times;</button>
+  <div class="brochure-popup-inner">
+    <span class="brochure-popup-kicker">Plan Your Stay</span>
+    <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
+    <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
+    <form id="menuBrochureForm" novalidate>
+      <div class="brochure-popup-grid">
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureFirstName">First Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureFirstName" name="first_name" autocomplete="given-name">
+        </div>
+        <div class="brochure-popup-field">
+          <label class="brochure-popup-label" for="menuBrochureLastName">Last Name</label>
+          <input class="brochure-popup-input" type="text" id="menuBrochureLastName" name="last_name" autocomplete="family-name">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochureEmail">Email Address</label>
+          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email">
+        </div>
+        <div class="brochure-popup-field full">
+          <label class="brochure-popup-label" for="menuBrochurePhone">Telephone Number</label>
+          <input class="brochure-popup-input" type="tel" id="menuBrochurePhone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+      <label class="brochure-popup-consent">
+        <input type="checkbox" id="menuBrochureConsent" name="consent_marketing" required>
+        <span>I agree that Hunza may contact me about this brochure request and related updates. I accept the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/cookie-policy/">Cookie Policy</a>.</span>
+      </label>
+      <div class="brochure-popup-error" id="menuBrochureError">Please complete all fields and accept the consent checkbox.</div>
+      <button type="submit" class="btn-primary" id="menuBrochureSubmit" style="width:100%;">Email Me the Brochure</button>
+    </form>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-center">
+    <a href="/">
+      <img src="data:image/png;base64,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" alt="Hunza" style="height:38px;object-fit:contain;filter:invert(18%) sepia(40%) saturate(1200%) hue-rotate(230deg) brightness(55%) contrast(110%);" />
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+905327333541" class="nav-icon-btn" aria-label="Call us">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.44l.01 1.48Z"/></svg>
+    </a>
+    <a href="https://wa.me/905327333541" class="nav-icon-btn" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </a>
+    <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="nav-book-btn">Book Your Stay</a>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<div class="about-hero">
+  <img src="https://hunzalongevity.com/uploads/about/0 - hero About Hunza.png" alt="Kartepe mountains and forests" class="about-hero-bg" onerror="this.style.display='none'">
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <div class="about-hero-overline-wrap">
+      <span class="about-hero-overline-text">The Hunza Story</span>
+    </div>
+    <h1 class="about-hero-headline">About <em>Hunza</em></h1>
+    <p class="about-hero-sub">A boutique longevity retreat in the heart of Kartepe — a space to step away from the noise of daily life and return to a more balanced rhythm.</p>
+  </div>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M14 20l4 4 8-9"/></svg>
+      </div>
+      <div class="trust-text-wrap">
+        <div class="trust-title">First in Türkiye</div>
+        <div class="trust-desc">The country's first dedicated longevity-focused wellness center.</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 40 40"><path d="M20 6c-3 6-9 9-9 16a9 9 0 0 0 18 0c0-7-6-10-9-16z"/><path d="M20 22v6"/></svg>
+      </div>
+      <div class="trust-text-wrap">
+        <div class="trust-title">Hunza Turks Inspired</div>
+        <div class="trust-desc">Drawn from the wisdom of a community known for long, healthy lives.</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 40 40"><path d="M6 30V18l14-10 14 10v12"/><path d="M6 30h28"/><path d="M16 30v-8h8v8"/></svg>
+      </div>
+      <div class="trust-text-wrap">
+        <div class="trust-title">12 Private Bungalows</div>
+        <div class="trust-desc">Intimate accommodation in harmony with the surrounding nature.</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 6v28M6 20h28M10 10l20 20M30 10L10 30"/></svg>
+      </div>
+      <div class="trust-text-wrap">
+        <div class="trust-title">Six-Pillar Methodology</div>
+        <div class="trust-desc">A holistic framework integrating body, mind, beauty, and rest.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO: BOUTIQUE LONGEVITY RETREAT -->
+<div class="intro-bg fade-in-section">
+  <section class="about-section" style="padding:120px 48px 100px;">
+    <div class="intro-inner">
+      <span class="intro-overline">What is Hunza</span>
+      <h2 class="intro-headline">A boutique longevity retreat<br>in the heart of <em>Kartepe.</em></h2>
+      <div class="intro-divider"></div>
+      <div class="intro-body">
+        <p>Hunza Longevity is a boutique wellness retreat created for those who want to step away from the noise of daily life and return to a more balanced rhythm.</p>
+        <p>Set within the green landscape of Kartepe, Kocaeli, Hunza brings together <em>nature, nutrition, movement, rest, and mindful renewal</em> in an intimate setting designed around personal wellbeing. More than a place to stay, Hunza is a space to reset — physically, mentally, and emotionally.</p>
+        <p>Here, longevity is not treated as a trend. It is approached as a way of <em>living better</em>: with more awareness, more balance, and more connection to the body's natural needs.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ORIGIN STORY: THE HUNZA TURKS -->
+<div class="origin-bg fade-in-section">
+  <section class="about-section">
+    <div class="origin-grid">
+      <div class="origin-img-wrap">
+        <img src="https://hunzalongevity.com/uploads/about/1 - About Hunza.png" alt="Mountain valley landscape" class="origin-img" onerror="this.style.background='linear-gradient(135deg,#6D624E 0%,#3B3327 100%)'">
+        <div class="origin-img-cap">A way of living shaped by nature, simplicity, and time</div>
+      </div>
+      <div class="origin-content">
+        <span class="overline">The Origin of the Name</span>
+        <h2 class="h-display">Inspired by<br>the <em>Hunza Turks.</em></h2>
+        <p class="body-large" style="margin-top:32px;">The name Hunza is drawn from the Hunza Turks, a community whose long lifespans, vitality into older age, and balanced way of life have inspired researchers and wellness practitioners for generations.</p>
+        <p class="body-text" style="margin-top:20px;">Their daily life is built on simple, enduring principles — natural seasonal nutrition, regular physical activity in the open air, mindful rest, fasting practices, and a close connection to the rhythms of nature. These are not quick fixes, but habits cultivated over a lifetime.</p>
+        <p class="body-text" style="margin-top:20px;">It is from this enduring philosophy that Hunza Longevity draws its name and its purpose — to translate the timeless principles of long, conscious living into a refined, modern setting in the heart of Kartepe.</p>
+        <div class="origin-stat-row">
+          <div class="origin-stat">
+            <div class="origin-stat-num">100+</div>
+            <div class="origin-stat-label">Years Of Inspiration</div>
+          </div>
+          <div class="origin-stat">
+            <div class="origin-stat-num">6</div>
+            <div class="origin-stat-label">Pillars Of Longevity Living</div>
+          </div>
+          <div class="origin-stat">
+            <div class="origin-stat-num">1</div>
+            <div class="origin-stat-label">Rhythm — Yours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- PHILOSOPHY: LONGEVITY VS WELLNESS -->
+<div class="philosophy-bg fade-in-section">
+  <section class="about-section philosophy-inner">
+    <div class="philosophy-header">
+      <span class="philosophy-overline">Our Philosophy</span>
+      <h2 class="philosophy-headline">Not just longer.<br><em>Better.</em></h2>
+    </div>
+    <p class="philosophy-quote">Longevity is not simply about living longer. It is about living long, well, and consciously — keeping the body capable, the mind clear, and the spirit awake into the very last years of life.</p>
+    <div class="philosophy-quote-attr">— The Hunza Approach</div>
+
+    <div class="philosophy-grid">
+      <div>
+        <div class="philosophy-col-label">A Wellness Stay</div>
+        <h3 class="philosophy-col-title">A welcome <em>pause.</em></h3>
+        <p class="philosophy-col-text">A traditional wellness stay offers a moment to step away — a massage, a quiet meal, a weekend to breathe. The relief is genuine, and often deeply needed.</p>
+        <p class="philosophy-col-text" style="margin-top:18px;">It is a brief reset that helps the body and mind catch up before returning to the rhythm of everyday life.</p>
+      </div>
+      <div class="philosophy-divider"></div>
+      <div>
+        <div class="philosophy-col-label">The Hunza Way</div>
+        <h3 class="philosophy-col-title">A way of <em>living.</em></h3>
+        <p class="philosophy-col-text">Longevity living is the next step. It is a complete framework — nutrition, movement, sleep, beauty, mind, and recovery — woven together as a way of life rather than a single visit.</p>
+        <p class="philosophy-col-text" style="margin-top:18px;">It is integrative, gently structured, and designed to leave you with practices that quietly continue once you return home.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- THE PLACE: KARTEPE -->
+<div class="place-bg fade-in-section">
+  <section class="about-section">
+    <div class="place-grid">
+      <div class="place-img-wrap">
+        <img src="https://hunzalongevity.com/uploads/about/2 - about Hunza.png" alt="Kartepe lake and mountains" class="place-img" onerror="this.style.background='linear-gradient(135deg,#73826E 0%,#384338 100%)'">
+        <div class="place-img-cap">Kartepe · Kocaeli</div>
+      </div>
+      <div>
+        <span class="overline">The Place</span>
+        <h2 class="h-section">A natural pause<br>in the heart of<br><em>Kartepe.</em></h2>
+        <p class="body-large" style="margin-top:32px;">Set within the green folds of the Kartepe Mountains in Kocaeli, Hunza occupies a rare pocket of stillness — a place where the air is clean, the forests are dense, and the lakes hold the light of every season.</p>
+        <p class="body-text" style="margin-top:20px;">Equally distant from Istanbul, Bursa, and Ankara, the location is at once retreat and gateway: deep enough into nature to truly disconnect, yet close enough to reach in just over an hour. Step through the door and you arrive in another rhythm entirely.</p>
+        <div class="place-features">
+          <div class="place-feature">
+            <div class="place-feature-num">1h</div>
+            <div class="place-feature-label">From Istanbul</div>
+            <div class="place-feature-desc">Equally close to Bursa and Ankara, yet a world apart.</div>
+          </div>
+          <div class="place-feature">
+            <div class="place-feature-num">4</div>
+            <div class="place-feature-label">Distinct Seasons</div>
+            <div class="place-feature-desc">Every visit shaped by the changing landscape of Kartepe.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOUNDER -->
+<div class="founder-bg fade-in-section">
+  <section class="about-section">
+    <div class="founder-grid">
+      <div class="founder-portrait-wrap">
+        <img src="https://hunzalongevity.com/uploads/about/3 - About Hunza.png" alt="Tuğba Ciğerdelen, Founder of Hunza Longevity" class="founder-portrait">
+        <div class="founder-portrait-cap">Tuğba Ciğerdelen · Founder of Hunza Longevity</div>
+      </div>
+      <div class="founder-content">
+        <span class="overline">The Founder</span>
+        <h2 class="h-section" style="margin-bottom:32px;">Nine years of <em>learning,</em><br>one clear philosophy.</h2>
+        <p class="founder-bio">I was born in İzmir in 1974 and spent nearly eighteen years working in communications and journalism. For many years, my life moved at the rhythm of deadlines, cities and constant change. When I settled in Kartepe with my family, life closer to nature slowly began to change how I looked at health, balance and time.</p>
+        <p class="founder-bio">Hunza did not begin as a large retreat. It began in a small apartment, as a women-focused healthy living space built around movement, nutrition and personal guidance. At first, it was simple: pilates, dietitian support and carefully designed programs. But over time, I realized that people were not only looking for exercise or diet plans. They were looking for a more complete way to feel well.</p>
+        <p class="founder-bio">That realization became the beginning of a nine-year journey. Together with dietitian and long-time collaborator Türkan Dayıoğlu, I studied, trained, travelled and experienced different wellness and longevity practices. We visited centers, stayed in camps, observed many approaches and asked one question again and again: what truly helps a person feel renewed — physically, mentally and emotionally?</p>
+        <p class="founder-bio" style="font-style:italic;color:var(--brand-deep);">Hunza Longevity is the result of that long preparation.</p>
+        <p class="founder-bio">Opened in Kartepe in October 2025, Hunza is a boutique retreat surrounded by nature, inspired by the long-life philosophy associated with the Hunza people. But for me, longevity is not only about adding years to life. It is about adding awareness, balance and quality to the years we already have.</p>
+        <span class="founder-quote-mark">"</span>
+        <p class="founder-quote">My aim is not simply to offer a longer life. It is to offer a more <em>conscious</em> one — a way of living with awareness, discipline and respect for the body's natural rhythm.</p>
+        <div class="founder-attr-block">
+          <span class="founder-name">Tuğba Ciğerdelen</span>
+          <span class="founder-role">Founder · Hunza Longevity</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SIX PILLARS OVERVIEW -->
+<div class="pillars-bg fade-in-section">
+  <section class="about-section">
+    <div class="pillars-header">
+      <span class="overline">The Methodology</span>
+      <h2 class="h-section">Six pillars,<br>one <em>complete</em> approach.</h2>
+      <p class="body-text" style="margin-top:24px;">Every Hunza program is built on the same foundational architecture — six interconnected pillars, each tailored to the individual, that together form a complete framework for long, healthy living.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <span class="pillar-code">Medivo</span>
+        <div class="pillar-name">Health &amp; Healing</div>
+        <p class="pillar-desc">Medical insight integrated with holistic care — assessments, expert consultations, and personalized guidance from physicians, dietitians, and physiotherapists.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-code">Calmio</span>
+        <div class="pillar-name">Mind &amp; Relaxation</div>
+        <p class="pillar-desc">Mental balance and deep relaxation through meditation, breathwork, hydrotherapy, and heat-based rituals such as sauna and hammam.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-code">Nutrivo</span>
+        <div class="pillar-name">Food &amp; Nutrition</div>
+        <p class="pillar-desc">Personalized meal plans built around fresh, organic, seasonal ingredients — nourishment as ritual, designed to support energy and longevity.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-code">Movio</span>
+        <div class="pillar-name">Body &amp; Movement</div>
+        <p class="pillar-desc">Pilates, yoga, functional training, swimming, and outdoor practice — movement adapted to your body, guided by personal trainers throughout your stay.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-code">Bello</span>
+        <div class="pillar-name">Beauty &amp; Anti-Aging</div>
+        <p class="pillar-desc">Facial treatments, body care, manicure, and personal grooming — looking as good as you feel, with attention to skin health and natural regeneration.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-code">Dormio</span>
+        <div class="pillar-name">Sleep &amp; Rest</div>
+        <p class="pillar-desc">Sleep-optimized rooms, premium bedding, and protocols designed for the conditions of true restorative sleep — the foundation of every other pillar.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ACCOMMODATION TEASER -->
+<div class="acc-teaser-bg fade-in-section">
+  <section class="about-section">
+    <div class="acc-teaser-grid">
+      <div>
+        <span class="acc-teaser-overline">Where You Stay</span>
+        <h2 class="acc-teaser-headline">Twelve private bungalows,<br>each <em>your own.</em></h2>
+        <p class="acc-teaser-text">Hunza is intentionally small. Twelve private bungalows, set within the green of Kartepe, each shaped for comfort, quiet, and a sense of being entirely your own.</p>
+        <p class="acc-teaser-text">Built with natural, regional materials and held in harmony with the surrounding landscape, the bungalows give every guest the privacy of a retreat and the warmth of a home — with their own garden, their own rhythm, their own pace of day.</p>
+        <div class="acc-teaser-features">
+          <div class="acc-teaser-feature">12 private bungalows</div>
+          <div class="acc-teaser-feature">60 m² of personal space</div>
+          <div class="acc-teaser-feature">Sleep-optimized design</div>
+          <div class="acc-teaser-feature">Private garden access</div>
+          <div class="acc-teaser-feature">Natural local materials</div>
+          <div class="acc-teaser-feature">Wellness amenities in room</div>
+        </div>
+        <a href="/accommodation/" class="btn-acc-link">Explore Accommodation</a>
+      </div>
+      <div>
+        <img src="https://hunzalongevity.com/uploads/about/4 - about hunza.png" alt="Hunza private bungalow" class="acc-teaser-img" onerror="this.style.background='linear-gradient(135deg,#7A705B 0%,#453D31 100%)'">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SUSTAINABILITY & PRINCIPLES -->
+<div class="sustain-bg fade-in-section">
+  <section class="about-section">
+    <div class="sustain-grid">
+      <div>
+        <img src="https://hunzalongevity.com/uploads/about/5 - about hunza.png" alt="Organic produce and natural ingredients" class="sustain-img" onerror="this.style.background='linear-gradient(135deg,#8A7B65 0%,#4C4034 100%)'">
+      </div>
+      <div>
+        <span class="overline">What We Stand For</span>
+        <h2 class="h-section">Quietly committed<br>to <em>natural living.</em></h2>
+        <p class="body-large" style="margin-top:32px;">Hunza is built on principles that go beyond the experience itself. The way we source, the way we build, and the way we work with our region all reflect a single belief — that a longer, healthier life depends on a healthier planet to live it on.</p>
+        <div class="sustain-list">
+          <div class="sustain-item">
+            <div class="sustain-item-num">i.</div>
+            <div class="sustain-item-content">
+              <div class="sustain-item-title">Organic &amp; Local</div>
+              <div class="sustain-item-desc">Ingredients drawn from our own kitchen garden and from trusted local producers, free of chemical fertilizers and harmful pesticides.</div>
+            </div>
+          </div>
+          <div class="sustain-item">
+            <div class="sustain-item-num">ii.</div>
+            <div class="sustain-item-content">
+              <div class="sustain-item-title">Reduced Plastic Footprint</div>
+              <div class="sustain-item-desc">A conscious commitment across the property to minimize single-use plastic and choose reusable, natural alternatives wherever possible.</div>
+            </div>
+          </div>
+          <div class="sustain-item">
+            <div class="sustain-item-num">iii.</div>
+            <div class="sustain-item-content">
+              <div class="sustain-item-title">Architecture in Harmony</div>
+              <div class="sustain-item-desc">Twelve private bungalows built with natural, regional materials, designed so that comfort and the surrounding landscape are never in conflict.</div>
+            </div>
+          </div>
+          <div class="sustain-item">
+            <div class="sustain-item-num">iv.</div>
+            <div class="sustain-item-content">
+              <div class="sustain-item-title">Rooted in Kartepe</div>
+              <div class="sustain-item-desc">Our team is recruited and trained from the Kartepe and İzmit area, and we partner with local artisans, producers, and the regional municipality.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- SIGNATURE PROGRAMS SLIDER (exact dining layout, brand-tinted) -->
+<div class="signature-bg fade-in-section">
+
+  <!-- Header: aligned with page content -->
+  <div class="signature-header-wrap">
+    <div class="signature-header">
+      <div>
+        <span class="signature-overline">Hunza Signature Programs</span>
+        <h2 class="signature-headline">Six paths to <em>longevity living.</em></h2>
+      </div>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
+          style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
+          onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
+        <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
+          style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
+          onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track: starts flush at left viewport edge -->
+  <div id="programsViewport" style="cursor:grab;user-select:none;">
+    <div id="programsTrack" style="display:flex;gap:0;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);will-change:transform;">
+
+      <!-- Card 1: Immunity & Gut Health -->
+      <div class="prog-card" data-idx="0" style="flex-shrink:0;cursor:pointer;" data-href="/immunity-support-gut-health/">
+        <div class="prog-img" style="background:#3E2D2C;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - hero Immunity.png" alt="Immunity" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Immunity &amp; Gut Health</h3>
+          <p class="prog-desc">Strengthen your immune system and restore digestive balance through targeted nutrition, therapies, and expert-led protocols.</p>
+          <a href="/immunity-support-gut-health/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Weight Loss & Fat Burn -->
+      <div class="prog-card" data-idx="1" style="flex-shrink:0;cursor:pointer;" data-href="/weight-loss-fat-burn/">
+        <div class="prog-img" style="background:#3F2A24;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - Hero Weight Loss.png" alt="Weight Loss" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Weight Loss &amp; Fat Burn</h3>
+          <p class="prog-desc">A medically-guided body composition program combining metabolic therapies, personalized nutrition, and structured movement.</p>
+          <a href="/weight-loss-fat-burn/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Detox & Cleanse -->
+      <div class="prog-card" data-idx="2" style="flex-shrink:0;cursor:pointer;" data-href="/detox-cleanse/">
+        <div class="prog-img" style="background:#3F4A3E;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - Hero Detox.png" alt="Detox" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Detox &amp; Cleanse</h3>
+          <p class="prog-desc">A comprehensive cellular purification program to eliminate toxins, reset metabolism, and restore your body's natural vitality.</p>
+          <a href="/detox-cleanse/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 4: Advanced Longevity -->
+      <div class="prog-card" data-idx="3" style="flex-shrink:0;cursor:pointer;" data-href="/advanced-longevity-hunza-handoff/">
+        <div class="prog-img" style="background:#3D2B6B;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - hero longevity.png" alt="Advanced Longevity" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Advanced Longevity &amp; Vitality</h3>
+          <p class="prog-desc">A comprehensive, physician-guided program for individuals 35+ seeking measurable vitality, energy optimization, and sustainable well-being.</p>
+          <a href="/advanced-longevity-hunza-handoff/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 5: Destress & Relaxation -->
+      <div class="prog-card" data-idx="4" style="flex-shrink:0;cursor:pointer;" data-href="/de-stress-relaxtion-spa-retreat/">
+        <div class="prog-img" style="background:#4A3734;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - hero destress.png" alt="Destress" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Destress &amp; Relaxation</h3>
+          <p class="prog-desc">A deeply restorative retreat designed to quiet the mind, release tension, and renew your capacity for calm and presence.</p>
+          <a href="/de-stress-relaxtion-spa-retreat/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 6: Mindfulness & Sleep -->
+      <div class="prog-card" data-idx="5" style="flex-shrink:0;cursor:pointer;" data-href="/mindfulness-sleep-well/">
+        <div class="prog-img" style="background:#2E2640;">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Kopia 01 - Hero Mindfulness.png" alt="Mindfulness" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(31,14,8,0.55) 100%);pointer-events:none;z-index:1;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:2;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Signature Program</div>
+          <h3 class="prog-title">Mindfulness &amp; Sleep</h3>
+          <p class="prog-desc">Recalibrate your nervous system and rebuild the foundations of deep, restorative sleep through evidence-based mindfulness practices.</p>
+          <a href="/mindfulness-sleep-well/" class="prog-link">See Details &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Card 7: Bespoke -->
+      <div class="prog-card" data-idx="6" style="flex-shrink:0;cursor:pointer;" data-href="#consultation">
+        <div class="prog-img" style="background:linear-gradient(135deg,#A85A3B 0%,#3A1C10 100%);">
+          <img src="https://hunzalongevity.com/uploads/slider-you/Tailor made program.png" alt="Design Your Own" style="width:100%;height:100%;object-fit:cover;opacity:0.4;display:block;pointer-events:none;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;">
+            <svg width="54" height="54" viewBox="0 0 54 54" fill="none"><circle cx="27" cy="27" r="25" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/><line x1="27" y1="13" x2="27" y2="41" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round"/><line x1="13" y1="27" x2="41" y2="27" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(31,14,8,0.25);z-index:2;pointer-events:none;"></div>
+          <div class="prog-fade" style="position:absolute;inset:0;background:rgba(255,255,255,0.58);transition:opacity 0.45s ease;z-index:3;pointer-events:none;opacity:0;"></div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-tag">Bespoke</div>
+          <h3 class="prog-title">Design Your Own Program</h3>
+          <p class="prog-desc">Work directly with our specialists to build a fully bespoke wellness program around your unique health goals, timeline, and lifestyle.</p>
+          <a href="#consultation" class="prog-link">Speak to a Specialist &rsaquo;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div id="programsDots" style="display:flex;gap:8px;margin-top:32px;padding:0 48px;">
+    <span class="prog-dot active" onclick="goToSlide(0)" style="width:24px;height:2px;background:var(--brand);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
+    <span class="prog-dot" onclick="goToSlide(1)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
+    <span class="prog-dot" onclick="goToSlide(2)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
+    <span class="prog-dot" onclick="goToSlide(3)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
+    <span class="prog-dot" onclick="goToSlide(4)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
+  </div>
+</div>
+
+<!-- CONTACT BANNER (same pattern as other landing pages) -->
+<div class="contact-banner fade-in-section">
+  <div class="contact-banner-inner">
+    <span class="contact-banner-overline">Begin Your Journey</span>
+    <h2 class="contact-banner-headline">Step into a different<br>quality of <em>life.</em></h2>
+    <p class="contact-banner-sub">Whether you are taking the first steps toward longevity living or returning for another chapter, we invite you to begin in the way that feels right — with a complimentary consultation, a brochure to read at your own pace, or a stay reserved.</p>
+    <div class="contact-banner-buttons">
+      <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="btn-banner-solid">Book a Free Consultation</a>
+      <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-banner-outline">Book Your Stay</a>
+      <a href="#consultation" class="btn-banner-outline">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT FORM (exact same as other landing pages — generic 5-field) -->
+<div id="consultation" class="consultation-bg fade-in-section">
+  <section class="about-section">
+    <div class="consultation-grid">
+      <div>
+        <div class="consult-left-sticky">
+          <span class="overline">Get in Touch</span>
+          <h2 class="h-display">We would love to<br>hear from <em>you.</em></h2>
+          <p class="consult-sub">Have a question about a program, want to learn more about our approach, or ready to take the next step? Send us a message and a member of our team will get back to you personally within 24 hours.</p>
+          <div class="consult-promises">
+            <div class="consult-promise">Responded to within 24 hours</div>
+            <div class="consult-promise">Your information is fully confidential</div>
+            <div class="consult-promise">No obligation whatsoever</div>
+            <div class="consult-promise">Personal reply from our specialist team</div>
+          </div>
+          <div style="flex:1;min-height:180px;margin-top:32px;overflow:hidden;">
+            <img
+              src="https://hunzalongevity.com/uploads/about/6 - contact form.png"
+              alt="Hunza business card"
+              style="width:100%;height:100%;object-fit:cover;display:block;"
+              onerror="this.style.background='linear-gradient(135deg,#7A705B 0%,#453D31 100%)'"
+            >
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-container">
+          <h3 class="form-section-title">Send Us a Message</h3>
+          <div class="form-row-2">
+            <div>
+              <label class="form-label-light">First Name</label>
+              <input type="text" class="form-input-light" placeholder="First name">
+            </div>
+            <div>
+              <label class="form-label-light">Last Name</label>
+              <input type="text" class="form-input-light" placeholder="Last name">
+            </div>
+          </div>
+          <label class="form-label-light">Email Address</label>
+          <input type="email" class="form-input-light" placeholder="Your email address">
+          <label class="form-label-light">Phone Number</label>
+          <input type="tel" class="form-input-light" placeholder="+1 000 000 0000">
+          <label class="form-label-light">Your Message</label>
+          <textarea class="form-input-light" placeholder="Tell us about your wellness goals, questions, or anything else we should know to assist you best."></textarea>
+          <button class="btn-primary" style="width:100%;text-align:center;padding:20px;font-size:12px;">Send Your Message</button>
+          <p class="form-privacy-light">All information provided is held in strict confidence. We do not share personal data with third parties. You may withdraw consent at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="margin-bottom:20px;">
+        <img src="data:image/png;base64,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" alt="Hunza" style="height:44px;object-fit:contain;display:block;filter:invert(100%) brightness(200%);">
+      </div>
+      <p class="footer-brand-desc">A specialist longevity and medical wellness destination offering fully personalized programs designed to optimize health, extend vitality, and support meaningful, lasting transformation.</p>
+      <div style="margin-top:24px;">
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="btn-outline-white" style="font-size:10px;padding:12px 24px;border-color:rgba(207,197,232,0.4);">Book Your Stay</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Signature Programs</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/advanced-longevity-hunza-handoff/" class="footer-link">Advanced Longevity &amp; Vitality</a>
+        <a href="/immunity-support-gut-health/" class="footer-link">Immunity &amp; Gut Health</a>
+        <a href="/de-stress-relaxtion-spa-retreat/" class="footer-link">Destress &amp; Relaxation</a>
+        <a href="/mindfulness-sleep-well/" class="footer-link">Mindfulness &amp; Sleep</a>
+        <a href="/weight-loss-fat-burn/" class="footer-link">Weight Loss &amp; Fat Burn</a>
+        <a href="/detox-cleanse/" class="footer-link">Detox &amp; Cleanse</a>
+        <a href="/design-your-own-program/" class="footer-link" style="font-style:italic;color:rgba(207,197,232,0.45);">Design Your Own Program</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">The Experience</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/spa-wellness/" class="footer-link">Spa &amp; Wellness</a>
+        <a href="/accommodation/" class="footer-link">Accommodation</a>
+        <a href="/dining/" class="footer-link">Dining</a>
+        <a href="/special-offers/" class="footer-link">Special Offers</a>
+        <a href="/pool-fitness/" class="footer-link">Pool &amp; Fitness</a>
+        <a href="/explore-nearby/" class="footer-link">Explore Nearby</a>
+      </div>
+    </div>
+    <div class="footer-nav-group">
+      <button type="button" class="footer-col-toggle" aria-expanded="false">
+        <div class="footer-col-title">Hunza</div>
+        <span class="footer-col-icon" aria-hidden="true">+</span>
+      </button>
+      <div class="footer-links">
+        <a href="/about_us/" class="footer-link">About Hunza</a>
+        <a href="/methodology/" class="footer-link">Methodology</a>
+        <a href="/contact_us/" class="footer-link">Contact Us</a>
+        <a href="https://cal.eu/hunzalongevity/free-consultation" target="_blank" class="footer-link">Free Consultation</a>
+        <a href="https://hunzalongevity.rezervasyonal.com/" target="_blank" rel="noopener" class="footer-link">Book Your Stay</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/hunzalongevity?igsh=NXdoYW41MGJybzU1" target="_blank" rel="noopener" aria-label="Instagram"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61558909949837" target="_blank" rel="noopener" aria-label="Facebook"
+        style="color:rgba(207,197,232,0.65);transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(207,197,232,1)'"
+        onmouseout="this.style.color='rgba(207,197,232,0.65)'">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+    <span class="footer-copyright">&copy; 2026 Hunza Longevity &amp; Wellness. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-use/">Terms of Use</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+<script>
+  function loadFeatureScript(key, src) {
+    window.HunzaFeatureScripts = window.HunzaFeatureScripts || {};
+
+    if (window.HunzaFeatureScripts[key]) {
+      return window.HunzaFeatureScripts[key];
+    }
+
+    window.HunzaFeatureScripts[key] = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => reject(new Error(`Failed to load ${key}`));
+      document.body.appendChild(script);
+    });
+
+    return window.HunzaFeatureScripts[key];
+  }
+
+  function isMobileBrochureViewport() {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
+
+  function syncBrochureLinks() {
+    document.querySelectorAll('.brochure-link').forEach((link) => {
+      link.href = isMobileBrochureViewport() ? link.dataset.mobileHref : link.dataset.desktopHref;
+    });
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById('megaMenu');
+    const overlay = document.getElementById('megaOverlay');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('megaMenu').classList.remove('open');
+    document.getElementById('megaOverlay').classList.remove('open');
+  }
+
+  function openBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.add('is-open');
+    overlay.classList.add('is-open');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('menuBrochureFirstName')?.focus();
+  }
+
+  function closeBrochurePopup() {
+    const popup = document.getElementById('brochurePopup');
+    const overlay = document.getElementById('brochurePopupOverlay');
+    if (!popup || !overlay) {
+      return;
+    }
+
+    popup.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  syncBrochureLinks();
+  window.addEventListener('resize', syncBrochureLinks);
+  document.querySelectorAll('.mega-link').forEach(l => l.addEventListener('click', closeMenu));
+  document.querySelectorAll('.menu-brochure-trigger').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      closeMenu();
+      openBrochurePopup();
+    });
+  });
+  document.getElementById('brochurePopupOverlay')?.addEventListener('click', closeBrochurePopup);
+  document.getElementById('brochurePopupClose')?.addEventListener('click', closeBrochurePopup);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeBrochurePopup();
+    }
+  });
+
+  function toggleFaq(element) {
+    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
+    if (!item) {
+      return;
+    }
+
+    const answer = item.querySelector('.faq-a, .faq-answer');
+    const isOpen = item.classList.toggle('open');
+    item.dataset.lastFaqToggleAt = String(Date.now());
+
+    if (answer) {
+      answer.style.display = isOpen ? 'block' : 'none';
+    }
+  }
+
+  window.toggleFaq = toggleFaq;
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('a, button, input, textarea, select')) {
+      return;
+    }
+
+    const trigger = event.target.closest('.faq-question, .faq-item');
+    if (!trigger) {
+      return;
+    }
+
+    const item = trigger.classList.contains('faq-item') ? trigger : trigger.closest('.faq-item');
+    const lastToggleAt = Number(item?.dataset.lastFaqToggleAt || 0);
+
+    if (Date.now() - lastToggleAt < 120) {
+      return;
+    }
+
+    toggleFaq(trigger);
+  });
+
+  function togglePillar(button) {
+    const trigger = button?.closest('.pillar-toggle');
+    const pillar = (trigger || button)?.closest('.pillar-card, .pillar');
+    if (!pillar || !trigger) {
+      return;
+    }
+
+    const hiddenItems = pillar.querySelectorAll('.pillar-items .pillar-more');
+    if (!hiddenItems.length) {
+      return;
+    }
+
+    const isExpanded = trigger.dataset.expanded === 'true';
+
+    hiddenItems.forEach((item) => {
+      item.style.display = isExpanded ? 'none' : 'flex';
+    });
+
+    trigger.dataset.expanded = isExpanded ? 'false' : 'true';
+    trigger.textContent = isExpanded ? '+ Show all services' : '- Show fewer services';
+  }
+
+  window.togglePillar = togglePillar;
+
+  document.querySelectorAll('.pillar-toggle:not([onclick])').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      togglePillar(event.currentTarget);
+    });
+  });
+
+  function syncFooterAccordions() {
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+    document.querySelectorAll('.footer-nav-group').forEach((group) => {
+      const button = group.querySelector('.footer-col-toggle');
+      if (!button) {
+        return;
+      }
+
+      if (!isMobile) {
+        group.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'true');
+      } else if (!group.classList.contains('is-open')) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  document.querySelectorAll('.footer-col-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!window.matchMedia('(max-width: 640px)').matches) {
+        return;
+      }
+
+      const group = button.closest('.footer-nav-group');
+      const isOpen = group?.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  syncFooterAccordions();
+  window.addEventListener('resize', syncFooterAccordions);
+
+  document.querySelectorAll('.cookie-settings-link').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (!window.Cookiebot || typeof window.Cookiebot.renew !== 'function') {
+        return;
+      }
+
+      event.preventDefault();
+      window.Cookiebot.renew();
+    });
+  });
+
+  if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
+    loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
+  }
+
+  // ── Nav popup: Hunza General Brochure → Make.com webhook ─────────────────
+  (function() {
+    const WEBHOOK  = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
+    const form     = document.getElementById('menuBrochureForm');
+    const submitBtn = document.getElementById('menuBrochureSubmit');
+    const errorEl  = document.getElementById('menuBrochureError');
+    if (!form || !submitBtn) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const inputs    = form.querySelectorAll('input[type="text"]');
+      const firstName = inputs[0]?.value?.trim() || '';
+      const lastName  = inputs[1]?.value?.trim() || '';
+      const email     = form.querySelector('input[type="email"]')?.value?.trim();
+      const phone     = form.querySelector('input[type="tel"]')?.value?.trim() || '';
+      const consent   = form.querySelector('input[name="consent_marketing"]')?.checked;
+
+      if (!email || !consent) {
+        if (errorEl) { errorEl.textContent = 'Please fill in your email and accept the consent.'; errorEl.classList.add('is-visible'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.remove('is-visible');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brochure_name:     'Hunza General Brochure',
+            first_name:        firstName,
+            last_name:         lastName,
+            email:             email,
+            phone:             phone,
+            consent_marketing: true,
+            submitted_at:      new Date().toISOString(),
+            page_url:          window.location.href,
+            user_agent:        navigator.userAgent,
+          }),
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        submitBtn.textContent = '✓ Sent! Check your inbox.';
+        form.reset();
+      } catch(err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Email Me the Brochure';
+        if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.add('is-visible'); }
+        console.error(err);
+      }
+    });
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
+</script>
+<script>
+// ── Nav popup general brochure ────────────────────────────────────────────
+(function() {
+  const WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
+  const navForm = document.getElementById('menuBrochureForm');
+  const navBtn = document.getElementById('menuBrochureSubmit');
+  const navErr = document.getElementById('menuBrochureError');
+  if (!navForm || !navBtn) return;
+  navForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const inputs = navForm.querySelectorAll('input[type="text"]');
+    const firstName = inputs[0]?.value?.trim()||'';
+    const lastName = inputs[1]?.value?.trim()||'';
+    const email = navForm.querySelector('input[type="email"]')?.value?.trim();
+    const phone = navForm.querySelector('input[type="tel"]')?.value?.trim()||'';
+    const consent = navForm.querySelector('input[name="consent_marketing"]')?.checked;
+    if (!email || !consent) { if(navErr){navErr.textContent='Please fill in your email and accept the consent.';navErr.classList.add('is-visible');} return; }
+    if(navErr) navErr.classList.remove('is-visible');
+    navBtn.disabled=true; navBtn.textContent='Sending...';
+    try {
+      const r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ brochure_name:'Hunza General Brochure', first_name:firstName,
+          last_name:lastName, email:email, phone:phone, consent_marketing:true,
+          submitted_at:new Date().toISOString(), page_url:window.location.href,
+          user_agent:navigator.userAgent }) });
+      if (!r.ok) throw new Error('HTTP '+r.status);
+      navBtn.textContent='✓ Sent! Check your inbox.'; navForm.reset();
+    } catch(e) { navBtn.disabled=false; navBtn.textContent='Email Me the Brochure';
+      if(navErr){navErr.textContent='Something went wrong.';navErr.classList.add('is-visible');} }
+  });
+})();
+</script>
+<script>
+(()=>{
+
+})();
+</script>
+
+<script>
+// Fix: prevent vertical page scroll when swiping slider horizontally
+(function() {
+  function patchSliderTouch(viewport) {
+    if (!viewport || viewport._touchPatched) return;
+    viewport._touchPatched = true;
+    var startX = 0, startY = 0;
+    viewport.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    viewport.addEventListener('touchmove', function(e) {
+      var dx = Math.abs(e.touches[0].clientX - startX);
+      var dy = Math.abs(e.touches[0].clientY - startY);
+      if (dx > dy) e.preventDefault();
+    }, { passive: false });
+  }
+  // Patch immediately if viewport exists, otherwise wait for slider to init
+  function tryPatch() {
+    var vp = document.getElementById('programsViewport');
+    if (vp) { patchSliderTouch(vp); return; }
+    setTimeout(tryPatch, 100);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryPatch);
+  } else {
+    tryPatch();
+  }
+})();
+</script>
+
+<script>
+// Prog-card navigation: tap navigates, drag slides, partial card slides into view
+(function() {
+  var track = document.getElementById('programsTrack');
+  var viewport = document.getElementById('programsViewport');
+  if (!track) return;
+
+  var startX = 0, startY = 0, moved = false;
+
+  function isFullyVisible(card) {
+    if (!viewport) return true;
+    var vRect = viewport.getBoundingClientRect();
+    var cRect = card.getBoundingClientRect();
+    return cRect.left >= vRect.left - 2 && cRect.right <= vRect.right + 2;
+  }
+
+  function onStart(x, y) {
+    startX = x; startY = y; moved = false;
+  }
+  function onMove(x, y) {
+    if (Math.abs(x - startX) > 6 || Math.abs(y - startY) > 6) moved = true;
+  }
+  function onEnd(target, event) {
+    if (moved) return;
+    var card = target.closest ? target.closest('.prog-card') : null;
+    if (!card) return;
+    if (!isFullyVisible(card)) {
+      // Prevent slider's own cardClick from also firing (causes double jump)
+      if (event) { event.stopImmediatePropagation(); event.preventDefault(); }
+      if (typeof slidePrograms === 'function') slidePrograms(1);
+      return;
+    }
+    var href = card.getAttribute('data-href');
+    if (href) window.location.href = href;
+  }
+
+  // Touch
+  track.addEventListener('touchstart', function(e) {
+    onStart(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  track.addEventListener('touchmove', function(e) {
+    onMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    onEnd(e.target, e);
+  });
+
+  // Mouse
+  track.addEventListener('mousedown', function(e) {
+    onStart(e.clientX, e.clientY);
+  });
+  track.addEventListener('mousemove', function(e) {
+    if (e.buttons) onMove(e.clientX, e.clientY);
+  });
+  track.addEventListener('mouseup', function(e) {
+    onEnd(e.target, e);
+  });
+})();
+</script>
+</body>
+</html>
