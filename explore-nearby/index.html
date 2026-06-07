@@ -1762,12 +1762,21 @@
 </script>
 
 <script>
-// Prog-card navigation: tap navigates, drag slides
+// Prog-card navigation: tap navigates, drag slides, partial card slides into view
 (function() {
   var track = document.getElementById('programsTrack');
+  var viewport = document.getElementById('programsViewport');
   if (!track) return;
 
   var startX = 0, startY = 0, moved = false;
+
+  function isFullyVisible(card) {
+    if (!viewport) return true;
+    var vRect = viewport.getBoundingClientRect();
+    var cRect = card.getBoundingClientRect();
+    // Card is fully visible if both edges are within viewport bounds (with small tolerance)
+    return cRect.left >= vRect.left - 2 && cRect.right <= vRect.right + 2;
+  }
 
   function onStart(x, y) {
     startX = x; startY = y; moved = false;
@@ -1777,9 +1786,13 @@
   }
   function onEnd(target) {
     if (moved) return; // was a drag — let slider handle it
-    // Find the prog-card that was tapped
     var card = target.closest ? target.closest('.prog-card') : null;
     if (!card) return;
+    // If card is only partially visible, slide it into view instead of navigating
+    if (!isFullyVisible(card)) {
+      if (typeof slidePrograms === 'function') slidePrograms(1);
+      return;
+    }
     var href = card.getAttribute('data-href');
     if (href) window.location.href = href;
   }
