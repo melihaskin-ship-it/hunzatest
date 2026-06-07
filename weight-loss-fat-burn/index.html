@@ -557,6 +557,22 @@
     .hero-program-tag,.overline,.booking-banner-overline,.pillar-code,.program-image-label,.form-label,.form-label-light,.footer-col-title{letter-spacing:0.18em;}
     .method-stats-grid{grid-template-columns:1fr;}
   }
+
+  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  @media(max-width:768px) {
+    #programsViewport {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #programsTrack {
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 8px !important;
+    }
+  }
 </style>
 
 
