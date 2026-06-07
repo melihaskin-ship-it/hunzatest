@@ -494,6 +494,23 @@
     .h-display{font-size:32px;}
     .nearby-trust-title,.overline,.place-meta,.place-feature,.place-stat-label,.season-months,.loc-info-label,.form-label-light,.footer-col-title{letter-spacing:0.15em;}
   }
+
+  /* ── Mobile: always show image before text, regardless of reverse class ── */
+  @media(max-width:768px) {
+    .place-row,
+    .place-row.reverse {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .place-row .place-image,
+    .place-row.reverse .place-image {
+      order: 1 !important;
+    }
+    .place-row .place-content,
+    .place-row.reverse .place-content {
+      order: 2 !important;
+    }
+  }
 </style>
 
 
