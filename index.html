@@ -651,6 +651,11 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     }
 
   }
+
+  /* Prevent vertical scroll while swiping program slider */
+  #programsViewport {
+    touch-action: pan-y pinch-zoom;
+  }
 </style>
 
 <style>
