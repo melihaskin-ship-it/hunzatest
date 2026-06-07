@@ -913,6 +913,16 @@
   @media(max-width:768px) {
     .consult-promises { margin-bottom: 32px; }
   }
+
+  /* ── Mobile: dining contact image — show heads not waist ── */
+  @media(max-width:768px) {
+    .dining-page .consult-left-img img {
+      object-position: center 15% !important;
+    }
+    .consult-left-img img {
+      object-position: center 15% !important;
+    }
+  }
 </style>
 
 
@@ -971,7 +981,7 @@
   .footer-legal { justify-content: center; }
   #programsViewport {
     width: 100% !important; max-width: 100% !important;
-    margin-left: 0 !important; padding-left: 20px !important;
+    margin-left: 0 !important; padding-left: 0 !important;
     padding-right: 0 !important; overflow: hidden; touch-action: pan-y pinch-zoom;
   }
   #programsTrack { --prog-card-w: min(calc(84vw - 18px), 320px) !important; gap: 12px !important; }
