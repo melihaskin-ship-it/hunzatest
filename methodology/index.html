@@ -494,6 +494,12 @@
       padding-left: 0 !important;
     }
   }
+
+  /* Signature header styles */
+  .signature-overline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--brand);font-weight:400;display:block;margin-bottom:14px;}
+  .signature-headline{font-family:var(--ff-display);font-size:clamp(36px,4vw,52px);font-weight:300;color:var(--brand-plum);line-height:1.1;letter-spacing:-0.01em;margin:0;}
+  .signature-headline em{font-style:italic;color:var(--brand-mid);}
+  .signature-header{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap;}
 </style>
 
 
@@ -1451,14 +1457,7 @@
       <span class="prog-dot" onclick="goToSlide(3)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(4)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
     </div>
-    <div style="display:flex;gap:8px;flex-shrink:0;">
-      <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
-        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
-        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
-      <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
-        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
-        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
-    </div>
+
   </div>
 
 </div>
