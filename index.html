@@ -565,6 +565,33 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     .pg-img-title{font-size:18px;}
     .contact-eyebrow,.overline,.tailor-eyebrow,.booking-eyebrow,.method-left .method-eyebrow,.consult-eyebrow,.about-eyebrow,.why-eyebrow-mini,.acc-eyebrow,.spa-eyebrow,.pool-eyebrow,.dining-eyebrow,.nearby-eyebrow,.offers-eyebrow,.journal-eyebrow{letter-spacing:0.2em;}
   }
+
+  /* ── MOBILE HERO: 50vh so programs section is visible on landing ── */
+  @media(max-width:768px) {
+    .hero {
+      height: 50vh !important;
+      min-height: 300px !important;
+    }
+    .hero-video-wrap video {
+      display: none !important;
+    }
+    .hero-mobile-image {
+      display: block !important;
+      object-position: center 20% !important;
+    }
+    .hero-content {
+      top: 50% !important;
+    }
+    .hero-logo-img {
+      height: 80px !important;
+    }
+    .hero-tagline-wrap {
+      display: none !important;
+    }
+    .hero-bottom-words {
+      display: none !important;
+    }
+  }
 </style>
 
 <style>
@@ -749,7 +776,7 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     <video class="hero-video" autoplay muted loop playsinline preload="metadata" width="1912" height="992" poster="/public/uploads/hunza_homepage_assets/hero_poster.jpg">
       <source src="/public/uploads/hunza_homepage_assets/hero_video.mp4" type="video/mp4">
     </video>
-    <img class="hero-mobile-image" src="/public/uploads/hunza_homepage_assets/hero_poster.jpg" alt="Hunza Longevity Resort in Turkey hero view">
+    <img class="hero-mobile-image" src="/public/uploads/hunza_homepage_assets/hero_mobile.jpg" alt="Hunza Longevity Resort in Turkey hero view">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-content">
