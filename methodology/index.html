@@ -1324,6 +1324,16 @@
     <h2 style="font-family:var(--ff-display);font-size:48px;font-weight:300;color:var(--brand-plum);font-style:italic;line-height:1.15;letter-spacing:-0.005em;margin:0;">Personalised pathways to renewal,<br>shaped around <em style="color:var(--brand);">your</em> needs.</h2>
   </div>
 
+  <!-- Controls: arrows above slider -->
+  <div style="max-width:var(--max-w);margin:0 auto;padding:0 48px 32px;display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
+      style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
+      onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
+    <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
+      style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
+      onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
+  </div>
+
   <!-- Track: starts flush at left viewport edge, no padding -->
   <div id="programsViewport" style="cursor:grab;user-select:none;">
     <div id="programsTrack" style="display:flex;gap:0;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);will-change:transform;">
@@ -1432,22 +1442,14 @@
     </div>
   </div>
 
-  <!-- Controls: arrows + dots -->
-  <div style="max-width:var(--max-w);margin:0 auto;padding:40px 48px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+  <!-- Dots below slider -->
+  <div style="max-width:var(--max-w);margin:0 auto;padding:32px 48px 0;display:flex;align-items:center;gap:8px;">
     <div id="programsDots" style="display:flex;gap:8px;">
       <span class="prog-dot active" onclick="goToSlide(0)" style="width:24px;height:2px;background:var(--brand);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(1)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(2)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(3)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(4)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
-    </div>
-    <div style="display:flex;gap:8px;flex-shrink:0;">
-      <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
-        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
-        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
-      <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
-        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
-        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
     </div>
   </div>
 
