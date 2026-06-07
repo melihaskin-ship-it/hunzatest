@@ -453,7 +453,7 @@
   }
   .beauty-inner{
     max-width:var(--max-w);margin:0 auto;
-    display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;align-items:start;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;align-items:center;
   }
   .beauty-left{}
   .beauty-overline{
@@ -468,16 +468,23 @@
     font-size:13px;color:var(--s-brown);line-height:1.85;font-weight:300;
     margin-bottom:18px;
   }
-  .beauty-stations{display:flex;flex-direction:column;gap:24px;}
+  .beauty-stations{
+    display:flex;flex-direction:column;gap:0;
+    border-top:1px solid var(--s-cream-2);
+  }
   .beauty-station{
-    display:flex;gap:14px;align-items:flex-start;
+    display:flex;flex-direction:column;gap:6px;
+    padding:22px 0;
+    border-bottom:1px solid var(--s-cream-2);
   }
-  .beauty-station-marker{
-    width:5px;height:5px;border-radius:50%;background:var(--s-brown);
-    margin-top:8px;flex-shrink:0;
-  }
+  .beauty-station-marker{display:none;}
   .beauty-station-text{
     font-size:13px;color:var(--s-brown);line-height:1.7;font-weight:300;
+  }
+  .beauty-station-text strong{
+    display:block;
+    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--s-taupe-deep);font-weight:500;margin-bottom:4px;font-style:normal;
   }
   .beauty-station-text strong{
     font-style:italic;font-weight:400;color:var(--s-charcoal);font-family:var(--ff-display);
@@ -791,7 +798,17 @@
   .treatments-hd { margin-bottom: 32px; padding-bottom: 28px; }
   .treatments-count { display: none; }
 }
-</style>
+
+  @media(max-width:900px) {
+    .beauty-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .beauty-image { grid-column: 1 / -1; max-height: 420px; overflow: hidden; }
+    .beauty-image img { width: 100%; height: 100%; object-fit: cover; }
+  }
+  @media(max-width:640px) {
+    .beauty-inner { grid-template-columns: 1fr; gap: 40px; }
+    .beauty-section { padding: 64px 22px; }
+    .beauty-headline { font-size: 48px; }
+  }</style>
 
 
 <style>
@@ -1466,20 +1483,16 @@
 
     <div class="beauty-stations">
       <div class="beauty-station">
-        <div class="beauty-station-marker"></div>
-        <div class="beauty-station-text"><strong>Pedicure station</strong> &ndash; dedicated space for professional foot care treatments, including nail care and skin smoothing</div>
+        <div class="beauty-station-text"><strong>Pedicure station</strong>Dedicated space for professional foot care treatments, including nail care and skin smoothing</div>
       </div>
       <div class="beauty-station">
-        <div class="beauty-station-marker"></div>
-        <div class="beauty-station-text"><strong>Manicure station</strong> &ndash; area for hand and nail care, offering shaping, polishing, and nail treatments</div>
+        <div class="beauty-station-text"><strong>Manicure station</strong>Area for hand and nail care, offering shaping, polishing, and nail treatments</div>
       </div>
       <div class="beauty-station">
-        <div class="beauty-station-marker"></div>
-        <div class="beauty-station-text"><strong>Hairdressing station</strong> &ndash; fully equipped workstation for hair cutting, styling, and hair care services</div>
+        <div class="beauty-station-text"><strong>Hairdressing station</strong>Fully equipped workstation for hair cutting, styling, and hair care services</div>
       </div>
       <div class="beauty-station">
-        <div class="beauty-station-marker"></div>
-        <div class="beauty-station-text"><strong>Facial therapy station</strong> &ndash; dedicated space for advanced facial treatments supporting skin health, hydration, and rejuvenation</div>
+        <div class="beauty-station-text"><strong>Facial therapy station</strong>Dedicated space for advanced facial treatments supporting skin health, hydration, and rejuvenation</div>
       </div>
     </div>
 
