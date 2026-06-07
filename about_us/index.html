@@ -563,6 +563,22 @@
     .h-section,.acc-teaser-headline,.philosophy-headline,.contact-banner-headline,.signature-headline{font-size:27px;}
     .about-hero-overline-text,.intro-overline,.acc-teaser-overline,.philosophy-overline,.philosophy-col-label,.place-feature-label,.founder-name,.pillar-name,.sustain-item-title,.signature-overline,.contact-banner-overline,.form-label-light,.footer-col-title{letter-spacing:0.15em;}
   }
+
+  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  @media(max-width:768px) {
+    #programsViewport {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #programsTrack {
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 8px !important;
+    }
+  }
 </style>
 
 
