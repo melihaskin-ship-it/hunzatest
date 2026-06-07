@@ -1296,148 +1296,299 @@
 
 <!-- LIST OF TREATMENTS (dark espresso bg) -->
 <div class="treatments-section">
-  <!-- New CSS for redesigned treatments -->
-  <style>
-  .treatments-section {
-    background: var(--s-mushroom-light);
-    padding: 96px 48px;
-  }
-  .treatments-section-inner {
-    max-width: var(--max-w);
-    margin: 0 auto;
-  }
-  .treatments-top {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 32px;
-    margin-bottom: 64px;
-    flex-wrap: wrap;
-  }
-  .treatments-overline-new {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--s-brown);
-    display: block;
-    margin-bottom: 14px;
-    font-weight: 400;
-  }
-  .treatments-headline-new {
-    font-family: var(--ff-display);
-    font-size: clamp(40px, 5vw, 60px);
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.05;
-    margin: 0;
-  }
-  .treatments-headline-new em {
-    font-style: italic;
-    color: var(--s-taupe-mid, #C4AA78);
-  }
-  .treatments-count {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--s-taupe-mid, #C4AA78);
-    flex-shrink: 0;
-    padding-bottom: 8px;
-  }
-  .treatments-grid-new {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid rgba(207,197,176,0.2);
-  }
-  .treatment-item-new {
-    padding: 20px 24px 20px 0;
-    border-bottom: 1px solid rgba(207,197,176,0.12);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    color: rgba(250,245,235,0.82);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 400;
-    line-height: 1.5;
-    transition: color 0.2s;
-  }
-  .treatment-item-new::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--s-brown, #8A7560);
-    flex-shrink: 0;
-  }
-  .treatment-item-new:hover {
-    color: var(--white);
-  }
-  @media(max-width:900px) {
-    .treatments-grid-new { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media(max-width:640px) {
-    .treatments-section { padding: 64px 22px; }
-    .treatments-grid-new { grid-template-columns: 1fr; }
-    .treatments-top { margin-bottom: 40px; }
-    .treatments-count { display: none; }
-  }
-  </style>
+<style>
+/* ── TREATMENTS SECTION ─────────────────────────────────────────── */
+.treatments-section {
+  background: var(--s-cream);
+  padding: 96px 48px;
+}
+.treatments-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.treatments-hd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--s-cream-2);
+  padding-bottom: 40px;
+}
+.treatments-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--s-brown-mid);
+  display: block;
+  margin-bottom: 12px;
+}
+.treatments-title {
+  font-family: var(--ff-display);
+  font-size: clamp(40px, 4.5vw, 58px);
+  font-weight: 300;
+  color: var(--s-taupe-deep);
+  line-height: 1.05;
+  margin: 0;
+}
+.treatments-title em {
+  font-style: italic;
+  color: var(--s-brown-mid);
+}
+.treatments-total {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--s-brown-mid);
+  padding-bottom: 6px;
+}
 
-  <div class="treatments-section-inner">
-    <div class="treatments-top">
+/* Desktop: 3-col list with ruled rows */
+.treatments-list-desktop {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.treatments-list-desktop .tx {
+  padding: 18px 32px 18px 0;
+  border-bottom: 1px solid var(--s-cream-2);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--s-taupe-deep);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.5;
+}
+.treatments-list-desktop .tx::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--s-mushroom);
+  flex-shrink: 0;
+}
+
+/* Mobile: accordion — hidden by default */
+.treatments-accordion {
+  display: none;
+}
+.tx-acc-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--s-cream-2);
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--ff-body, inherit);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--s-taupe-deep);
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+.tx-acc-btn:last-of-type { border-bottom: 1px solid var(--s-cream-2); }
+.tx-acc-icon {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--s-cream-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--s-brown-mid);
+  transition: transform 0.25s ease;
+  line-height: 1;
+}
+.tx-acc-btn.open .tx-acc-icon {
+  transform: rotate(45deg);
+}
+.tx-acc-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.tx-acc-panel.open {
+  max-height: 600px;
+}
+.tx-acc-inner {
+  padding: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tx-acc-item {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s-brown);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.5;
+}
+.tx-acc-item::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--s-mushroom);
+  flex-shrink: 0;
+}
+
+@media(max-width: 900px) {
+  .treatments-list-desktop { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width: 640px) {
+  .treatments-section { padding: 64px 22px; }
+  .treatments-list-desktop { display: none; }
+  .treatments-accordion { display: block; }
+  .treatments-hd { margin-bottom: 32px; padding-bottom: 28px; }
+}
+</style>
+
+  <div class="treatments-wrap">
+
+    <div class="treatments-hd">
       <div>
-        <span class="treatments-overline-new">Wellness Consultancy</span>
-        <h2 class="treatments-headline-new">List of <em>treatments</em></h2>
+        <span class="treatments-kicker">Wellness Consultancy</span>
+        <h2 class="treatments-title">List of <em>treatments</em></h2>
       </div>
-      <div class="treatments-count">30 treatments available</div>
+      <div class="treatments-total">30 treatments</div>
     </div>
 
-    <div class="treatments-grid-new">
-      <div class="treatment-item-new">Shiatsu Head Massage</div>
-      <div class="treatment-item-new">Localized Massage</div>
-      <div class="treatment-item-new">Hot Stone Massage</div>
-      <div class="treatment-item-new">Hunza Nature Touch</div>
-      <div class="treatment-item-new">Foot Massage</div>
-      <div class="treatment-item-new">Head &amp; Neck Massage</div>
-      <div class="treatment-item-new">Muscle &amp; Tension Release Massage</div>
-      <div class="treatment-item-new">Neuro-Fascia Release</div>
-      <div class="treatment-item-new">Personal Bathing Experience</div>
-      <div class="treatment-item-new">Reflexology</div>
-      <div class="treatment-item-new">Scalp &amp; Back Massage</div>
-      <div class="treatment-item-new">Thai Foot Massage</div>
-      <div class="treatment-item-new">Thai Massage</div>
-      <div class="treatment-item-new">Therapeutic Massage</div>
-      <div class="treatment-item-new">Watsu Signature Treatment</div>
-      <div class="treatment-item-new">Chakra Balancing Treatment</div>
-      <div class="treatment-item-new">Private Meditation Session</div>
-      <div class="treatment-item-new">Psychosomatic Awareness Therapy</div>
-      <div class="treatment-item-new">Reiki</div>
-      <div class="treatment-item-new">Sound Healing Meditation</div>
-      <div class="treatment-item-new">Private Body &amp; Mind Discipline Sessions</div>
-      <div class="treatment-item-new">Underwater Therapy Sessions</div>
-      <div class="treatment-item-new">Hydroenergetic Healing Treatment Detox</div>
-      <div class="treatment-item-new">Hydrotherapy Circuit</div>
-      <div class="treatment-item-new">Hammam Ritual</div>
-      <div class="treatment-item-new">Cold Immersion Ice Bath Therapy</div>
-      <div class="treatment-item-new">Deep Tissue Massage</div>
-      <div class="treatment-item-new">Relaxing Aroma Massage</div>
-      <div class="treatment-item-new">Balinese Massage</div>
-      <div class="treatment-item-new">Swedish Massage</div>
+    <!-- Desktop: full 3-col list -->
+    <div class="treatments-list-desktop">
+      <div class="tx">Shiatsu Head Massage</div>
+      <div class="tx">Localized Massage</div>
+      <div class="tx">Hot Stone Massage</div>
+      <div class="tx">Hunza Nature Touch</div>
+      <div class="tx">Foot Massage</div>
+      <div class="tx">Head &amp; Neck Massage</div>
+      <div class="tx">Muscle &amp; Tension Release Massage</div>
+      <div class="tx">Neuro-Fascia Release</div>
+      <div class="tx">Personal Bathing Experience</div>
+      <div class="tx">Reflexology</div>
+      <div class="tx">Scalp &amp; Back Massage</div>
+      <div class="tx">Thai Foot Massage</div>
+      <div class="tx">Thai Massage</div>
+      <div class="tx">Therapeutic Massage</div>
+      <div class="tx">Watsu Signature Treatment</div>
+      <div class="tx">Chakra Balancing Treatment</div>
+      <div class="tx">Private Meditation Session</div>
+      <div class="tx">Psychosomatic Awareness Therapy</div>
+      <div class="tx">Reiki</div>
+      <div class="tx">Sound Healing Meditation</div>
+      <div class="tx">Private Body &amp; Mind Discipline Sessions</div>
+      <div class="tx">Underwater Therapy Sessions</div>
+      <div class="tx">Hydroenergetic Healing Treatment Detox</div>
+      <div class="tx">Hydrotherapy Circuit</div>
+      <div class="tx">Hammam Ritual</div>
+      <div class="tx">Cold Immersion Ice Bath Therapy</div>
+      <div class="tx">Deep Tissue Massage</div>
+      <div class="tx">Relaxing Aroma Massage</div>
+      <div class="tx">Balinese Massage</div>
+      <div class="tx">Swedish Massage</div>
     </div>
-  </div>
+
+    <!-- Mobile: accordion grouped by category -->
+    <div class="treatments-accordion">
+
+      <button class="tx-acc-btn" onclick="txToggle(this)">
+        <span>Massage Therapies</span>
+        <span class="tx-acc-icon">+</span>
+      </button>
+      <div class="tx-acc-panel">
+        <div class="tx-acc-inner">
+          <div class="tx-acc-item">Shiatsu Head Massage</div>
+          <div class="tx-acc-item">Localized Massage</div>
+          <div class="tx-acc-item">Hot Stone Massage</div>
+          <div class="tx-acc-item">Hunza Nature Touch</div>
+          <div class="tx-acc-item">Foot Massage</div>
+          <div class="tx-acc-item">Head &amp; Neck Massage</div>
+          <div class="tx-acc-item">Muscle &amp; Tension Release Massage</div>
+          <div class="tx-acc-item">Neuro-Fascia Release</div>
+          <div class="tx-acc-item">Reflexology</div>
+          <div class="tx-acc-item">Scalp &amp; Back Massage</div>
+          <div class="tx-acc-item">Thai Foot Massage</div>
+          <div class="tx-acc-item">Thai Massage</div>
+          <div class="tx-acc-item">Therapeutic Massage</div>
+          <div class="tx-acc-item">Deep Tissue Massage</div>
+          <div class="tx-acc-item">Relaxing Aroma Massage</div>
+          <div class="tx-acc-item">Balinese Massage</div>
+          <div class="tx-acc-item">Swedish Massage</div>
+        </div>
+      </div>
+
+      <button class="tx-acc-btn" onclick="txToggle(this)">
+        <span>Mind &amp; Holistic</span>
+        <span class="tx-acc-icon">+</span>
+      </button>
+      <div class="tx-acc-panel">
+        <div class="tx-acc-inner">
+          <div class="tx-acc-item">Chakra Balancing Treatment</div>
+          <div class="tx-acc-item">Private Meditation Session</div>
+          <div class="tx-acc-item">Psychosomatic Awareness Therapy</div>
+          <div class="tx-acc-item">Reiki</div>
+          <div class="tx-acc-item">Sound Healing Meditation</div>
+          <div class="tx-acc-item">Private Body &amp; Mind Discipline Sessions</div>
+        </div>
+      </div>
+
+      <button class="tx-acc-btn" onclick="txToggle(this)">
+        <span>Water &amp; Bathing</span>
+        <span class="tx-acc-icon">+</span>
+      </button>
+      <div class="tx-acc-panel">
+        <div class="tx-acc-inner">
+          <div class="tx-acc-item">Personal Bathing Experience</div>
+          <div class="tx-acc-item">Underwater Therapy Sessions</div>
+          <div class="tx-acc-item">Hydrotherapy Circuit</div>
+          <div class="tx-acc-item">Hammam Ritual</div>
+          <div class="tx-acc-item">Cold Immersion Ice Bath Therapy</div>
+          <div class="tx-acc-item">Watsu Signature Treatment</div>
+        </div>
+      </div>
+
+      <button class="tx-acc-btn" onclick="txToggle(this)">
+        <span>Detox &amp; Healing</span>
+        <span class="tx-acc-icon">+</span>
+      </button>
+      <div class="tx-acc-panel">
+        <div class="tx-acc-inner">
+          <div class="tx-acc-item">Hydroenergetic Healing Treatment Detox</div>
+        </div>
+      </div>
+
+    </div><!-- end accordion -->
+
+  </div><!-- end wrap -->
+
+  <script>
+  function txToggle(btn) {
+    var panel = btn.nextElementSibling;
+    var isOpen = btn.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.tx-acc-btn').forEach(function(b) {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      btn.classList.add('open');
+      panel.classList.add('open');
+    }
+  }
+  </script>
+
 </div>
-
-<!-- BEAUTY ROOM -->
-<div class="beauty-section">
-  <div class="beauty-inner">
-    <div class="beauty-left">
-      <span class="beauty-overline">For Your Beauty</span>
-      <h2 class="beauty-headline">Beauty<br>Room</h2>
-      <p class="beauty-text">In Hunza we feature a dedicated Beauty Room, offering a curated range of professional beauty treatments for our guests. The service menu includes advanced hair care, revitalizing facial masks, customized facial treatments, as well as expert manicure and pedicure services.</p>
-      <p class="beauty-text">All treatments are performed by qualified professionals using high-quality products and techniques tailored to individual needs. The Beauty Room is designed to provide a refined and comfortable environment, complementing the overall spa and wellness experience with comprehensive beauty care.</p>
-    </div>
 
     <div class="beauty-stations">
       <div class="beauty-station">
