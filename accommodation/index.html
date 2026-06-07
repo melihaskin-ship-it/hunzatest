@@ -1641,9 +1641,10 @@
       goTo(state.index + direction);
     }
 
-    function onPointerDown(clientX) {
+    function onPointerDown(clientX, clientY) {
       state.dragging = true;
       state.startX = clientX;
+      state.startY = clientY || 0;
       state.deltaX = 0;
       viewport.style.cursor = 'grabbing';
       track.style.transition = 'none';
@@ -3356,7 +3357,7 @@
       goTo(state.index + direction);
     }
 
-    function onPointerDown(clientX) {
+    function onPointerDown(clientX, clientY) {
       state.dragging = true;
       state.startX = clientX;
       state.deltaX = 0;
