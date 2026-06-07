@@ -1318,21 +1318,7 @@
 <!-- SIGNATURE PROGRAMS SLIDER (dining template structure) -->
 <div style="background:var(--white);padding:96px 0 80px;overflow:hidden;">
 
-  <!-- Centered header: overline + italic display headline -->
-  <div style="max-width:var(--max-w);margin:0 auto;padding:0 48px 56px;text-align:center;">
-    <span class="overline" style="display:inline-block;margin-bottom:14px;">Hunza Signature Programs</span>
-    <h2 style="font-family:var(--ff-display);font-size:48px;font-weight:300;color:var(--brand-plum);font-style:italic;line-height:1.15;letter-spacing:-0.005em;margin:0;">Personalised pathways to renewal,<br>shaped around <em style="color:var(--brand);">your</em> needs.</h2>
-  </div>
 
-  <!-- Controls: arrows above slider -->
-  <div style="max-width:var(--max-w);margin:0 auto;padding:0 48px 32px;display:flex;align-items:center;justify-content:flex-end;gap:8px;">
-    <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
-      style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
-      onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
-    <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
-      style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
-      onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
-  </div>
 
   <!-- Track: starts flush at left viewport edge, no padding -->
   <div id="programsViewport" style="cursor:grab;user-select:none;">
@@ -1451,7 +1437,14 @@
       <span class="prog-dot" onclick="goToSlide(3)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
       <span class="prog-dot" onclick="goToSlide(4)" style="width:8px;height:2px;background:var(--brand-tint-3);display:inline-block;cursor:pointer;transition:all 0.3s;"></span>
     </div>
-
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
+        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
+        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
+      <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
+        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
+        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
+    </div>
   </div>
 
 </div>
