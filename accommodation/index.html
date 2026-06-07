@@ -528,19 +528,17 @@
     .highlights-eyebrow,.accom-hero-overline,.overline,.villa-subhead,.facility-name,.amenities-header-eyebrow,.highlight-sub,.form-label-light,.footer-col-title{letter-spacing:0.15em;}
   }
 
-  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  /* ── Mobile: slider card width — flush left, clear peek on right ── */
   @media(max-width:768px) {
-    #programsViewport {
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
-    }
     #programsTrack {
+      --prog-card-w: 78vw !important;
       padding-left: 0 !important;
     }
     .prog-card {
-      padding: 0 8px !important;
+      padding: 0 10px 0 0 !important;
+    }
+    .prog-card:first-child {
+      padding-left: 0 !important;
     }
   }
 </style>
@@ -601,9 +599,8 @@
   .footer-legal { justify-content: center; }
   #programsViewport {
     width: 100% !important; max-width: 100% !important;
-    margin-left: 0 !important; padding-left: 20px !important;
-    padding-right: 20px !important; overflow: hidden; touch-action: pan-y pinch-zoom;
-    box-sizing: border-box !important;
+    margin-left: 0 !important; padding-left: 0 !important;
+    padding-right: 0 !important; overflow: hidden; touch-action: pan-y pinch-zoom;
   }
   #programsTrack { --prog-card-w: min(calc(84vw - 18px), 320px) !important; gap: 12px !important; }
   .prog-card { width: var(--prog-card-w) !important; padding: 0 !important; }
