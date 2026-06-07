@@ -1318,9 +1318,23 @@
 <!-- SIGNATURE PROGRAMS SLIDER (dining template structure) -->
 <div style="background:var(--white);padding:96px 0 80px;overflow:hidden;">
 
+  <!-- signature-header: title left, arrows right -->
+  <div class="signature-header" style="max-width:var(--max-w);margin:0 auto;padding:0 48px 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:48px;flex-wrap:wrap;">
+    <div>
+      <span class="signature-overline">Hunza Signature Programs</span>
+      <h2 class="signature-headline">Personalised pathways to <em>renewal.</em></h2>
+    </div>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <button onclick="slidePrograms(-1)" id="progPrev" aria-label="Previous"
+        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0.35;"
+        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8249;</button>
+      <button onclick="slidePrograms(1)" id="progNext" aria-label="Next"
+        style="width:44px;height:44px;border:1px solid var(--brand-tint-2);background:var(--white);cursor:pointer;color:var(--brand-deep);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
+        onmouseover="this.style.background='var(--brand-tint-1)'" onmouseout="this.style.background='var(--white)'">&#8250;</button>
+    </div>
+  </div>
 
-
-  <!-- Track: starts flush at left viewport edge, no padding -->
+  <!-- Track -->
   <div id="programsViewport" style="cursor:grab;user-select:none;">
     <div id="programsTrack" style="display:flex;gap:0;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);will-change:transform;">
 
