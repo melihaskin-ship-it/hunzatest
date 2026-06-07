@@ -1979,7 +1979,14 @@
     if (!card) return;
     // If card is only partially visible, slide it into view instead of navigating
     if (!isFullyVisible(card)) {
-      if (typeof slidePrograms === 'function') slidePrograms(1);
+      // Move exactly 1 card forward — find current index and go to next
+      if (typeof goToSlide === 'function') {
+        var cards = Array.from(track.querySelectorAll('.prog-card'));
+        var idx = cards.indexOf(card);
+        goToSlide(idx);
+      } else if (typeof slidePrograms === 'function') {
+        slidePrograms(1);
+      }
       return;
     }
     var href = card.getAttribute('data-href');
