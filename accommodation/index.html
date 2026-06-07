@@ -527,6 +527,22 @@
     .method-large-text{font-size:26px;}
     .highlights-eyebrow,.accom-hero-overline,.overline,.villa-subhead,.facility-name,.amenities-header-eyebrow,.highlight-sub,.form-label-light,.footer-col-title{letter-spacing:0.15em;}
   }
+
+  /* ── Mobile: fix slider cards not being cut from left/right ── */
+  @media(max-width:768px) {
+    #programsViewport {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    #programsTrack {
+      padding-left: 0 !important;
+    }
+    .prog-card {
+      padding: 0 8px !important;
+    }
+  }
 </style>
 
 
