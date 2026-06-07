@@ -566,31 +566,90 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     .contact-eyebrow,.overline,.tailor-eyebrow,.booking-eyebrow,.method-left .method-eyebrow,.consult-eyebrow,.about-eyebrow,.why-eyebrow-mini,.acc-eyebrow,.spa-eyebrow,.pool-eyebrow,.dining-eyebrow,.nearby-eyebrow,.offers-eyebrow,.journal-eyebrow{letter-spacing:0.2em;}
   }
 
-  /* ── MOBILE HERO: 50vh so programs section is visible on landing ── */
+  /* ═══════════════════════════════════════════════════
+     MOBILE HERO — no image, clean brand block
+     Desktop completely untouched.
+  ═══════════════════════════════════════════════════ */
   @media(max-width:768px) {
+
+    /* Hide the entire video/image layer on mobile */
+    .hero .hero-video-wrap {
+      display: none !important;
+    }
+
+    /* Reset hero to auto height — content drives it */
     .hero {
-      height: 50vh !important;
-      min-height: 300px !important;
+      height: auto !important;
+      min-height: 0 !important;
+      position: relative !important;
+      background: linear-gradient(160deg, var(--brand-plum) 0%, var(--hp-deep) 50%, var(--brand-darkest) 100%) !important;
+      padding: 80px 28px 48px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      overflow: hidden !important;
     }
-    .hero-video-wrap video {
-      display: none !important;
+
+    /* Subtle decorative circle in background */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(138,115,180,0.18) 0%, transparent 70%);
+      top: -60px;
+      right: -80px;
+      pointer-events: none;
     }
-    .hero-mobile-image {
-      display: block !important;
-      object-position: center 20% !important;
-    }
+
+    /* Hero content: stacked vertically, centered */
     .hero-content {
-      top: 50% !important;
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 16px !important;
+      z-index: 2 !important;
     }
+
     .hero-logo-img {
-      height: 80px !important;
+      height: 72px !important;
+      width: auto !important;
+      margin-bottom: 4px !important;
     }
+
     .hero-tagline-wrap {
-      display: none !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      opacity: 0.75 !important;
     }
+
+    .hero-tagline {
+      font-size: 10px !important;
+      letter-spacing: 0.22em !important;
+    }
+
+    .hero-tagline-rule {
+      width: 24px !important;
+    }
+
+    /* Hide bottom words on mobile */
     .hero-bottom-words {
       display: none !important;
     }
+
+    /* Overlay not needed without image */
+    .hero-overlay {
+      display: none !important;
+    }
+
   }
 </style>
 
