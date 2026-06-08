@@ -1379,383 +1379,348 @@
   </div>
 </footer>
 <script>
-/* ── Utility ── */
-function toggleMenu() {
-  document.getElementById('megaMenu').classList.toggle('open');
-  document.getElementById('megaOverlay').classList.toggle('open');
+/* ── Menu / Nav ── */
+function toggleMenu(){document.getElementById('megaMenu').classList.toggle('open');document.getElementById('megaOverlay').classList.toggle('open');}
+function closeMenu(){document.getElementById('megaMenu').classList.remove('open');document.getElementById('megaOverlay').classList.remove('open');}
+function openBrochurePopup(){
+  var p=document.getElementById('brochurePopup'),o=document.getElementById('brochurePopupOverlay');
+  if(!p||!o)return;
+  p.classList.add('is-open');o.classList.add('is-open');p.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  var f=document.getElementById('menuBrochureFirstName');if(f)f.focus();
 }
-function closeMenu() {
-  document.getElementById('megaMenu').classList.remove('open');
-  document.getElementById('megaOverlay').classList.remove('open');
+function closeBrochurePopup(){
+  var p=document.getElementById('brochurePopup'),o=document.getElementById('brochurePopupOverlay');
+  if(!p||!o)return;
+  p.classList.remove('is-open');o.classList.remove('is-open');p.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
 }
-function openBrochurePopup() {
-  var popup = document.getElementById('brochurePopup');
-  var overlay = document.getElementById('brochurePopupOverlay');
-  if (!popup || !overlay) return;
-  popup.classList.add('is-open'); overlay.classList.add('is-open');
-  popup.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('menuBrochureFirstName') && document.getElementById('menuBrochureFirstName').focus();
-}
-function closeBrochurePopup() {
-  var popup = document.getElementById('brochurePopup');
-  var overlay = document.getElementById('brochurePopupOverlay');
-  if (!popup || !overlay) return;
-  popup.classList.remove('is-open'); overlay.classList.remove('is-open');
-  popup.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-document.querySelectorAll('.mega-link').forEach(function(l){ l.addEventListener('click', closeMenu); });
-document.querySelectorAll('.menu-brochure-trigger').forEach(function(link){
-  link.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); openBrochurePopup(); });
+document.querySelectorAll('.mega-link').forEach(function(l){l.addEventListener('click',closeMenu);});
+document.querySelectorAll('.menu-brochure-trigger').forEach(function(l){
+  l.addEventListener('click',function(e){e.preventDefault();closeMenu();openBrochurePopup();});
 });
-document.getElementById('brochurePopupOverlay') && document.getElementById('brochurePopupOverlay').addEventListener('click', closeBrochurePopup);
-document.getElementById('brochurePopupClose') && document.getElementById('brochurePopupClose').addEventListener('click', closeBrochurePopup);
-document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeBrochurePopup(); });
+var bpo=document.getElementById('brochurePopupOverlay');if(bpo)bpo.addEventListener('click',closeBrochurePopup);
+var bpc=document.getElementById('brochurePopupClose');if(bpc)bpc.addEventListener('click',closeBrochurePopup);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBrochurePopup();});
 
-/* ── Footer accordion (mobile) ── */
-function syncFooterAccordions() {
-  var isMobile = window.matchMedia('(max-width:640px)').matches;
-  document.querySelectorAll('.footer-nav-group').forEach(function(group){
-    var button = group.querySelector('.footer-col-toggle');
-    if (!button) return;
-    if (!isMobile) { group.classList.remove('is-open'); button.setAttribute('aria-expanded','true'); }
-    else if (!group.classList.contains('is-open')) { button.setAttribute('aria-expanded','false'); }
+/* ── Footer accordion ── */
+function syncFooterAccordions(){
+  var mob=window.matchMedia('(max-width:640px)').matches;
+  document.querySelectorAll('.footer-nav-group').forEach(function(g){
+    var b=g.querySelector('.footer-col-toggle');if(!b)return;
+    if(!mob){g.classList.remove('is-open');b.setAttribute('aria-expanded','true');}
+    else if(!g.classList.contains('is-open')){b.setAttribute('aria-expanded','false');}
   });
 }
-document.querySelectorAll('.footer-col-toggle').forEach(function(button){
-  button.addEventListener('click', function(){
-    if (!window.matchMedia('(max-width:640px)').matches) return;
-    var group = button.closest('.footer-nav-group');
-    var isOpen = group && group.classList.toggle('is-open');
-    button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+document.querySelectorAll('.footer-col-toggle').forEach(function(b){
+  b.addEventListener('click',function(){
+    if(!window.matchMedia('(max-width:640px)').matches)return;
+    var g=b.closest('.footer-nav-group');
+    var open=g&&g.classList.toggle('is-open');
+    b.setAttribute('aria-expanded',open?'true':'false');
   });
 });
 syncFooterAccordions();
-window.addEventListener('resize', syncFooterAccordions);
+window.addEventListener('resize',syncFooterAccordions);
 
-/* ── Brochure popup form → Make.com ── */
+/* ── Brochure popup → Make.com ── */
 (function(){
-  var WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
-  var form = document.getElementById('menuBrochureForm');
-  var submitBtn = document.getElementById('menuBrochureSubmit');
-  var errorEl = document.getElementById('menuBrochureError');
-  if (!form || !submitBtn) return;
-  form.addEventListener('submit', async function(e){
+  var HOOK='https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
+  var f=document.getElementById('menuBrochureForm');
+  var btn=document.getElementById('menuBrochureSubmit');
+  var err=document.getElementById('menuBrochureError');
+  if(!f||!btn)return;
+  f.addEventListener('submit',async function(e){
     e.preventDefault();
-    var inputs = form.querySelectorAll('input[type="text"]');
-    var firstName = (inputs[0] && inputs[0].value.trim()) || '';
-    var lastName = (inputs[1] && inputs[1].value.trim()) || '';
-    var emailEl = form.querySelector('input[type="email"]');
-    var email = emailEl ? emailEl.value.trim() : '';
-    var phoneEl = form.querySelector('input[type="tel"]');
-    var phone = phoneEl ? phoneEl.value.trim() : '';
-    var consent = form.querySelector('input[name="consent_marketing"]') && form.querySelector('input[name="consent_marketing"]').checked;
-    if (!email || !consent) {
-      if (errorEl) { errorEl.textContent = 'Please fill in your email and accept the consent.'; errorEl.classList.add('is-visible'); } return;
-    }
-    if (errorEl) errorEl.classList.remove('is-visible');
-    submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
-    try {
-      var r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ brochure_name:'Hunza General Brochure', first_name:firstName,
-          last_name:lastName, email:email, phone:phone, consent_marketing:true,
-          submitted_at:new Date().toISOString(), page_url:window.location.href, user_agent:navigator.userAgent }) });
-      if (!r.ok) throw new Error('HTTP '+r.status);
-      submitBtn.textContent = '✓ Sent! Check your inbox.'; form.reset();
-    } catch(err) {
-      submitBtn.disabled = false; submitBtn.textContent = 'Email Me the Brochure';
-      if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.add('is-visible'); }
+    var ins=f.querySelectorAll('input[type="text"]');
+    var fn=(ins[0]&&ins[0].value.trim())||'';
+    var ln=(ins[1]&&ins[1].value.trim())||'';
+    var em=(f.querySelector('input[type="email"]')||{value:''}).value.trim();
+    var ph=(f.querySelector('input[type="tel"]')||{value:''}).value.trim();
+    var ok=f.querySelector('input[name="consent_marketing"]')&&f.querySelector('input[name="consent_marketing"]').checked;
+    if(!em||!ok){if(err){err.textContent='Please fill in your email and accept the consent.';err.classList.add('is-visible');}return;}
+    if(err)err.classList.remove('is-visible');
+    btn.disabled=true;btn.textContent='Sending...';
+    try{
+      var r=await fetch(HOOK,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({brochure_name:'Hunza General Brochure',first_name:fn,last_name:ln,
+          email:em,phone:ph,consent_marketing:true,submitted_at:new Date().toISOString(),
+          page_url:window.location.href,user_agent:navigator.userAgent})});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      btn.textContent='✓ Sent! Check your inbox.';f.reset();
+    }catch(ex){btn.disabled=false;btn.textContent='Email Me the Brochure';
+      if(err){err.textContent='Something went wrong. Please try again.';err.classList.add('is-visible');}
     }
   });
 })();
 
 /* ── Assessment Form ── */
 (function(){
-  var MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/onssh2k4vk28r4dbwkcud98lmgxwwo1v';
-  var STEP_TOTAL = 8;
+  var WEBHOOK='https://hook.eu1.make.com/onssh2k4vk28r4dbwkcud98lmgxwwo1v';
+  var TOTAL=8;
 
-  function generateProgramId() {
-    var date = new Date().toISOString().slice(0,10).replace(/-/g,'');
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var s = '';
-    for (var i = 0; i < 6; i++) s += chars[Math.floor(Math.random()*chars.length)];
-    return 'HZ-TM-'+date+'-'+s;
+  function genId(){
+    var d=new Date().toISOString().slice(0,10).replace(/-/g,'');
+    var c='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',s='';
+    for(var i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];
+    return 'HZ-TM-'+d+'-'+s;
   }
 
-  var form = document.getElementById('assessmentForm');
-  if (!form) return;
+  var form=document.getElementById('assessmentForm');
+  if(!form)return;
 
-  var panels = Array.from(form.querySelectorAll('.form-panel[data-panel]'));
-  var progressSteps = Array.from(document.querySelectorAll('.progress-step'));
-  var progressFill = document.getElementById('progressFill');
-  var stepCurrentEl = document.getElementById('stepCurrent');
-  var stepTotalEl = document.getElementById('stepTotal');
-  var nextBtn = document.getElementById('nextBtn');
-  var backBtn = document.getElementById('backBtn');
-  var panelActions = document.getElementById('panelActions');
-  var programIdEl = document.getElementById('programId');
-  var summaryList = document.getElementById('summaryList');
-  var stayNights = document.getElementById('stayNights');
-  var stayReadout = document.getElementById('stayReadout');
-  var energyInput = document.getElementById('energy');
-  var energyReadout = document.getElementById('energyReadout');
-  var conditionListGroup = document.getElementById('conditionListGroup');
-  var birthdateField = document.getElementById('birthdate');
-  var currentStep = 1;
+  var panels=Array.from(form.querySelectorAll('.form-panel[data-panel]'));
+  var pSteps=Array.from(document.querySelectorAll('.progress-step'));
+  var pFill=document.getElementById('progressFill');
+  var sCurr=document.getElementById('stepCurrent');
+  var sTotal=document.getElementById('stepTotal');
+  var nextBtn=document.getElementById('nextBtn');
+  var backBtn=document.getElementById('backBtn');
+  var pActions=document.getElementById('panelActions');
+  var pidEl=document.getElementById('programId');
+  var sumList=document.getElementById('summaryList');
+  var stayRange=document.getElementById('stayNights');
+  var stayOut=document.getElementById('stayReadout');
+  var enRange=document.getElementById('energy');
+  var enOut=document.getElementById('energyReadout');
+  var condGroup=document.getElementById('conditionListGroup');
+  var bdField=document.getElementById('birthdate');
+  var step=1;
 
-  if (stepTotalEl) stepTotalEl.textContent = STEP_TOTAL;
+  if(sTotal)sTotal.textContent=TOTAL;
+  if(bdField)bdField.max=new Date().toISOString().split('T')[0];
 
-  /* Fix date picker max to today */
-  if (birthdateField) birthdateField.max = new Date().toISOString().split('T')[0];
-
-  function updateReadouts() {
-    if (stayReadout && stayNights) stayReadout.innerHTML = stayNights.value + '<em>nights</em>';
-    if (energyReadout && energyInput) energyReadout.innerHTML = energyInput.value + '<em>/ 10</em>';
+  /* Readouts */
+  function updateReadouts(){
+    if(stayOut&&stayRange)stayOut.innerHTML=stayRange.value+'<em>nights</em>';
+    if(enOut&&enRange)enOut.innerHTML=enRange.value+'<em>/ 10</em>';
   }
 
-  function updateChipState(input) {
-    var chip = input.closest('.chip');
-    if (!chip) return;
-    if (input.type === 'radio') {
-      form.querySelectorAll('input[name="'+input.name+'"]').forEach(function(peer){
-        var c = peer.closest('.chip');
-        if (c) c.classList.remove('selected');
+  /* Update a single chip's selected class based on its input state */
+  function syncChip(input){
+    var chip=input.closest('.chip');
+    if(!chip)return;
+    if(input.type==='radio'){
+      /* clear all siblings */
+      form.querySelectorAll('input[name="'+input.name+'"]').forEach(function(p){
+        var c=p.closest('.chip');if(c)c.classList.remove('selected');
       });
     }
-    chip.classList.toggle('selected', input.checked);
+    chip.classList.toggle('selected',input.checked);
   }
 
-  function updateConsentState(input) {
-    var row = input.closest('.consent-row');
-    if (row) row.classList.toggle('checked', input.checked);
-  }
-
-  function updateRankedGroup(group) {
-    var checkboxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
-    var max = Number(group.dataset.max) || 999;
-    var selected = checkboxes.filter(function(cb){ return cb.checked; });
-    if (selected.length > max) {
-      selected[selected.length-1].checked = false;
-      selected = checkboxes.filter(function(cb){ return cb.checked; });
-    }
-    checkboxes.forEach(function(cb){
-      var chip = cb.closest('.chip');
-      if (chip) chip.classList.toggle('selected', cb.checked);
-      var rank = chip && chip.querySelector('.chip-rank');
-      if (rank) rank.textContent = cb.checked ? String(selected.indexOf(cb)+1) : '';
+  /* Ranked multi-select */
+  function syncRanked(group){
+    var cbs=Array.from(group.querySelectorAll('input[type="checkbox"]'));
+    var max=Number(group.dataset.max)||999;
+    var sel=cbs.filter(function(c){return c.checked;});
+    if(sel.length>max){sel[sel.length-1].checked=false;sel=cbs.filter(function(c){return c.checked;});}
+    cbs.forEach(function(cb){
+      var chip=cb.closest('.chip');
+      if(chip)chip.classList.toggle('selected',cb.checked);
+      var rank=chip&&chip.querySelector('.chip-rank');
+      if(rank)rank.textContent=cb.checked?String(sel.indexOf(cb)+1):'';
     });
   }
 
-  function updateConditionVisibility() {
-    var sel = form.querySelector('input[name="hasCondition"]:checked');
-    if (conditionListGroup) conditionListGroup.style.display = (sel && sel.value === 'Yes') ? 'block' : 'none';
+  /* Consent rows */
+  function syncConsent(input){
+    var row=input.closest('.consent-row');
+    if(row)row.classList.toggle('checked',input.checked);
   }
 
-  function showError(name, visible) {
-    var el = form.querySelector('[data-error-for="'+name+'"]');
-    if (el) el.classList.toggle('show', visible);
+  /* Condition visibility */
+  function syncConditions(){
+    var sel=form.querySelector('input[name="hasCondition"]:checked');
+    if(condGroup)condGroup.style.display=(sel&&sel.value==='Yes')?'block':'none';
   }
 
-  function checkedValues(name) {
-    return Array.from(form.querySelectorAll('input[name="'+name+'"]:checked')).map(function(i){ return i.value; });
-  }
-  function valueOf(name) {
-    var el = form.querySelector('[name="'+name+'"]');
-    return el ? el.value.trim() : '';
+  /* Error display */
+  function setErr(name,show){
+    var el=form.querySelector('[data-error-for="'+name+'"]');
+    if(el)el.classList.toggle('show',show);
   }
 
-  function validateStep(step) {
-    var valid = true;
-    if (step === 1) {
-      var gender = form.querySelector('input[name="gender"]:checked');
-      var bd = valueOf('birthdate'), h = valueOf('height'), w = valueOf('weight');
-      showError('gender', !gender); showError('birthdate', !bd);
-      showError('height', !h); showError('weight', !w);
-      valid = !!(gender && bd && h && w);
+  /* Value helpers */
+  function checked(name){
+    return Array.from(form.querySelectorAll('input[name="'+name+'"]:checked')).map(function(i){return i.value;});
+  }
+  function val(name){
+    var el=form.querySelector('[name="'+name+'"]');
+    return el?el.value.trim():'';
+  }
+
+  /* Validation */
+  function validate(s){
+    var ok=true;
+    if(s===1){
+      var g=form.querySelector('input[name="gender"]:checked');
+      var bd=val('birthdate'),h=val('height'),w=val('weight');
+      setErr('gender',!g);setErr('birthdate',!bd);setErr('height',!h);setErr('weight',!w);
+      ok=!!(g&&bd&&h&&w);
     }
-    if (step === 3) {
-      var needs = checkedValues('needs');
-      showError('needs', needs.length === 0);
-      valid = needs.length > 0;
-    }
-    if (step === 4) {
+    if(s===3){var n=checked('needs');setErr('needs',n.length===0);ok=n.length>0;}
+    if(s===4){
       ['feeling','pace','sleep','bodyNeeds'].forEach(function(f){
-        var sel = form.querySelector('input[name="'+f+'"]:checked');
-        showError(f, !sel); if (!sel) valid = false;
+        var x=form.querySelector('input[name="'+f+'"]:checked');
+        setErr(f,!x);if(!x)ok=false;
       });
     }
-    if (step === 7) {
-      var hasCond = form.querySelector('input[name="hasCondition"]:checked');
-      showError('hasCondition', !hasCond);
-      if (!hasCond) valid = false;
-      else if (hasCond.value === 'Yes' && checkedValues('conditions').length === 0) {
-        showError('hasCondition', true); valid = false;
-      }
+    if(s===7){
+      var hc=form.querySelector('input[name="hasCondition"]:checked');
+      setErr('hasCondition',!hc);if(!hc)ok=false;
+      else if(hc.value==='Yes'&&checked('conditions').length===0){setErr('hasCondition',true);ok=false;}
     }
-    if (step === 8) {
-      var fn = valueOf('firstName'), ln = valueOf('lastName');
-      var ph = valueOf('phone'), em = valueOf('email');
-      var ft = form.querySelector('input[name="firstTime"]:checked');
-      var cMed = form.querySelector('input[name="consentMedical"]') && form.querySelector('input[name="consentMedical"]').checked;
-      var cPriv = form.querySelector('input[name="consentPrivacy"]') && form.querySelector('input[name="consentPrivacy"]').checked;
-      var emailOk = em && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
-      showError('firstName',!fn); showError('lastName',!ln);
-      showError('phone',!ph); showError('email',!emailOk);
-      showError('firstTime',!ft); showError('consents',!cMed||!cPriv);
-      valid = !!(fn && ln && ph && emailOk && ft && cMed && cPriv);
+    if(s===8){
+      var fn=val('firstName'),ln=val('lastName'),ph=val('phone'),em=val('email');
+      var ft=form.querySelector('input[name="firstTime"]:checked');
+      var cm=!!(form.querySelector('input[name="consentMedical"]')&&form.querySelector('input[name="consentMedical"]').checked);
+      var cp=!!(form.querySelector('input[name="consentPrivacy"]')&&form.querySelector('input[name="consentPrivacy"]').checked);
+      var eok=em&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+      setErr('firstName',!fn);setErr('lastName',!ln);setErr('phone',!ph);
+      setErr('email',!eok);setErr('firstTime',!ft);setErr('consents',!cm||!cp);
+      ok=!!(fn&&ln&&ph&&eok&&ft&&cm&&cp);
     }
-    return valid;
+    return ok;
   }
 
-  function updateProgress() {
-    panels.forEach(function(p){
-      p.classList.toggle('active', String(p.dataset.panel) === String(currentStep));
-    });
-    progressSteps.forEach(function(s){
-      var n = Number(s.dataset.step);
-      s.classList.toggle('active', n === currentStep);
-      s.classList.toggle('done', n < currentStep);
-    });
-    var pct = ((currentStep-1)/(STEP_TOTAL-1))*90;
-    if (progressFill) progressFill.style.width = Math.max(pct,0)+'%';
-    if (stepCurrentEl) stepCurrentEl.textContent = currentStep;
-    if (backBtn) backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-    if (nextBtn) nextBtn.textContent = currentStep === STEP_TOTAL ? 'Submit Assessment' : 'Continue';
+  /* Progress update */
+  function updateProgress(){
+    panels.forEach(function(p){p.classList.toggle('active',String(p.dataset.panel)===String(step));});
+    pSteps.forEach(function(s){var n=Number(s.dataset.step);s.classList.toggle('active',n===step);s.classList.toggle('done',n<step);});
+    var pct=((step-1)/(TOTAL-1))*90;
+    if(pFill)pFill.style.width=Math.max(pct,0)+'%';
+    if(sCurr)sCurr.textContent=step;
+    if(backBtn)backBtn.style.visibility=step===1?'hidden':'visible';
+    if(nextBtn)nextBtn.textContent=step===TOTAL?'Submit Assessment':'Continue';
   }
 
-  function buildSummary(data) {
-    var rows = [
-      ['Program ID', data.program_id||'Pending'],
-      ['Name', data.first_name+' '+data.last_name],
-      ['Email', data.email],
-      ['Phone', (data.phone_code+' '+data.phone).trim()],
-      ['Stay', data.stay_nights+' nights'],
-      ['Top priorities', data.needs.join(', ')],
-      ['Current energy', data.energy+' / 10'],
+  /* Scroll so the form frame top is just below the nav */
+  function scrollToForm(){
+    var frame=document.querySelector('.form-frame');
+    if(!frame)return;
+    var top=frame.getBoundingClientRect().top+window.pageYOffset-88;
+    window.scrollTo({top:Math.max(top,0),behavior:'smooth'});
+  }
+
+  /* Summary */
+  function buildSummary(data){
+    var rows=[
+      ['Program ID',data.program_id||'Pending'],
+      ['Name',data.first_name+' '+data.last_name],
+      ['Email',data.email],
+      ['Phone',(data.phone_code+' '+data.phone).trim()],
+      ['Stay',data.stay_nights+' nights'],
+      ['Top priorities',data.needs.join(', ')],
+      ['Current energy',data.energy+' / 10'],
     ];
-    if (summaryList) summaryList.innerHTML = rows.map(function(r){
+    if(sumList)sumList.innerHTML=rows.map(function(r){
       return '<div class="summary-row"><div class="summary-key">'+r[0]+'</div><div class="summary-val">'+r[1]+'</div></div>';
     }).join('');
   }
 
-  function collectPayload() {
-    var hUnit = (document.querySelector('.unit-toggle[data-unit="height"] .on')||{}).dataset&&document.querySelector('.unit-toggle[data-unit="height"] .on').dataset.unitVal || 'cm';
-    var wUnit = (document.querySelector('.unit-toggle[data-unit="weight"] .on')||{}).dataset&&document.querySelector('.unit-toggle[data-unit="weight"] .on').dataset.unitVal || 'kg';
-    return {
-      page_title: document.title, page_path: window.location.pathname, source_url: window.location.href,
-      gender: (form.querySelector('input[name="gender"]:checked')||{}).value||'',
-      birthdate: valueOf('birthdate'),
-      height: Number(valueOf('height')), height_unit: hUnit,
-      weight: Number(valueOf('weight')), weight_unit: wUnit,
-      stay_nights: Number(valueOf('stayNights')),
-      needs: checkedValues('needs'),
-      feeling: (form.querySelector('input[name="feeling"]:checked')||{}).value||'',
-      pace: (form.querySelector('input[name="pace"]:checked')||{}).value||'',
-      sleep: (form.querySelector('input[name="sleep"]:checked')||{}).value||'',
-      body_needs: (form.querySelector('input[name="bodyNeeds"]:checked')||{}).value||'',
-      experience: checkedValues('experience'), symptoms: checkedValues('symptoms'),
-      energy: Number(valueOf('energy')), outcome: checkedValues('outcome'),
-      has_condition: (form.querySelector('input[name="hasCondition"]:checked')||{}).value||'',
-      conditions: checkedValues('conditions'),
-      first_name: valueOf('firstName'), last_name: valueOf('lastName'),
-      phone_code: valueOf('phoneCode'), phone: valueOf('phone'), email: valueOf('email'),
-      first_time: (form.querySelector('input[name="firstTime"]:checked')||{}).value||'',
-      consent_medical: !!(form.querySelector('input[name="consentMedical"]')&&form.querySelector('input[name="consentMedical"]').checked),
-      consent_privacy: !!(form.querySelector('input[name="consentPrivacy"]')&&form.querySelector('input[name="consentPrivacy"]').checked),
-      consent_marketing: !!(form.querySelector('input[name="consentMarketing"]')&&form.querySelector('input[name="consentMarketing"]').checked),
-      consent_community: !!(form.querySelector('input[name="consentCommunity"]')&&form.querySelector('input[name="consentCommunity"]').checked),
+  /* Payload */
+  function payload(){
+    var hu=(document.querySelector('.unit-toggle[data-unit="height"] .on')||{dataset:{unitVal:'cm'}}).dataset.unitVal;
+    var wu=(document.querySelector('.unit-toggle[data-unit="weight"] .on')||{dataset:{unitVal:'kg'}}).dataset.unitVal;
+    return{
+      page_title:document.title,page_path:window.location.pathname,source_url:window.location.href,
+      gender:(form.querySelector('input[name="gender"]:checked')||{value:''}).value,
+      birthdate:val('birthdate'),
+      height:Number(val('height')),height_unit:hu,
+      weight:Number(val('weight')),weight_unit:wu,
+      stay_nights:Number(val('stayNights')),
+      needs:checked('needs'),
+      feeling:(form.querySelector('input[name="feeling"]:checked')||{value:''}).value,
+      pace:(form.querySelector('input[name="pace"]:checked')||{value:''}).value,
+      sleep:(form.querySelector('input[name="sleep"]:checked')||{value:''}).value,
+      body_needs:(form.querySelector('input[name="bodyNeeds"]:checked')||{value:''}).value,
+      experience:checked('experience'),symptoms:checked('symptoms'),
+      energy:Number(val('energy')),outcome:checked('outcome'),
+      has_condition:(form.querySelector('input[name="hasCondition"]:checked')||{value:''}).value,
+      conditions:checked('conditions'),
+      first_name:val('firstName'),last_name:val('lastName'),
+      phone_code:val('phoneCode'),phone:val('phone'),email:val('email'),
+      first_time:(form.querySelector('input[name="firstTime"]:checked')||{value:''}).value,
+      consent_medical:!!(form.querySelector('input[name="consentMedical"]')&&form.querySelector('input[name="consentMedical"]').checked),
+      consent_privacy:!!(form.querySelector('input[name="consentPrivacy"]')&&form.querySelector('input[name="consentPrivacy"]').checked),
+      consent_marketing:!!(form.querySelector('input[name="consentMarketing"]')&&form.querySelector('input[name="consentMarketing"]').checked),
+      consent_community:!!(form.querySelector('input[name="consentCommunity"]')&&form.querySelector('input[name="consentCommunity"]').checked),
     };
   }
 
-  async function submitAssessment() {
-    var payload = collectPayload();
-    var programId = generateProgramId();
-    var enriched = Object.assign({}, payload, {
-      program_id: programId,
-      full_phone: (payload.phone_code+' '+payload.phone).trim(),
-      submitted_at: new Date().toISOString(),
-      privacy_policy_version: '2026-06-06',
-      user_agent: navigator.userAgent
-    });
-    try {
-      if (nextBtn) { nextBtn.disabled = true; nextBtn.textContent = 'Submitting...'; }
-      var r = await fetch(MAKE_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(enriched) });
-      if (!r.ok) throw new Error('HTTP '+r.status);
-      if (programIdEl) programIdEl.textContent = programId;
-      buildSummary(enriched);
-      currentStep = 'success';
-      panels.forEach(function(p){ p.classList.toggle('active', p.dataset.panel==='success'); });
-      if (panelActions) panelActions.style.display = 'none';
-    } catch(err) {
-      alert('The assessment could not be submitted right now. Please try again.');
-      console.error('Make.com error:', err);
-    } finally {
-      if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Submit Assessment'; }
+  /* Submit */
+  async function submit(){
+    var data=payload();
+    var pid=genId();
+    var body=Object.assign({},data,{program_id:pid,full_phone:(data.phone_code+' '+data.phone).trim(),
+      submitted_at:new Date().toISOString(),privacy_policy_version:'2026-06-06',user_agent:navigator.userAgent});
+    try{
+      if(nextBtn){nextBtn.disabled=true;nextBtn.textContent='Submitting...';}
+      var r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      if(pidEl)pidEl.textContent=pid;
+      buildSummary(body);
+      step='success';
+      panels.forEach(function(p){p.classList.toggle('active',p.dataset.panel==='success');});
+      if(pActions)pActions.style.display='none';
+      scrollToForm();
+    }catch(e){
+      alert('Could not submit. Please try again.');console.error(e);
+    }finally{
+      if(nextBtn){nextBtn.disabled=false;nextBtn.textContent='Submit Assessment';}
     }
   }
 
-  /* ── Wire up all inputs ── */
-  form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(input){
-    /* initialise state on page load */
-    updateChipState(input);
-    if (input.closest('.consent-row')) updateConsentState(input);
+  /* ── Wire inputs ──
+     KEY FIX: chips are <label> elements. Clicking a label natively triggers
+     the input change. We only listen on 'change' — no manual click handler on
+     the label, which was double-toggling and undoing the selection.
+  */
+  form.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(function(inp){
+    syncChip(inp); /* set initial visual state */
+    if(inp.closest('.consent-row'))syncConsent(inp);
 
-    input.addEventListener('change', function(){
-      updateChipState(input);
-      var rankedGroup = input.closest('[data-multi-rank]');
-      if (rankedGroup) updateRankedGroup(rankedGroup);
-      if (input.closest('.consent-row')) updateConsentState(input);
-      if (input.name === 'hasCondition') updateConditionVisibility();
+    inp.addEventListener('change',function(){
+      syncChip(inp);
+      var rg=inp.closest('[data-multi-rank]');
+      if(rg)syncRanked(rg);
+      if(inp.closest('.consent-row'))syncConsent(inp);
+      if(inp.name==='hasCondition')syncConditions();
     });
   });
 
-  /* Make entire chip label clickable properly */
-  form.querySelectorAll('.chip').forEach(function(chip){
-    chip.addEventListener('click', function(e){
-      /* Only trigger if click wasn't directly on the hidden input */
-      var inp = chip.querySelector('input');
-      if (!inp || e.target === inp) return;
-      if (inp.type === 'radio') {
-        inp.checked = true;
-      } else {
-        inp.checked = !inp.checked;
-      }
-      inp.dispatchEvent(new Event('change', {bubbles:true}));
-    });
-  });
-
-  form.querySelectorAll('[data-multi-rank]').forEach(updateRankedGroup);
+  form.querySelectorAll('[data-multi-rank]').forEach(syncRanked);
 
   /* Unit toggles */
-  document.querySelectorAll('.unit-toggle').forEach(function(toggle){
-    toggle.querySelectorAll('button').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        toggle.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+  document.querySelectorAll('.unit-toggle').forEach(function(tog){
+    tog.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        tog.querySelectorAll('button').forEach(function(b){b.classList.remove('on');});
         btn.classList.add('on');
       });
     });
   });
 
-  if (stayNights) stayNights.addEventListener('input', updateReadouts);
-  if (energyInput) energyInput.addEventListener('input', updateReadouts);
+  if(stayRange)stayRange.addEventListener('input',updateReadouts);
+  if(enRange)enRange.addEventListener('input',updateReadouts);
   updateReadouts();
-  updateConditionVisibility();
+  syncConditions();
 
-  nextBtn && nextBtn.addEventListener('click', async function(){
-    if (currentStep === 'success') return;
-    if (!validateStep(currentStep)) return;
-    if (currentStep === STEP_TOTAL) { await submitAssessment(); return; }
-    currentStep += 1;
+  if(nextBtn)nextBtn.addEventListener('click',async function(){
+    if(step==='success')return;
+    if(!validate(step))return;
+    if(step===TOTAL){await submit();return;}
+    step+=1;
     updateProgress();
-    window.scrollTo({top: document.getElementById('assessment').offsetTop - 80, behavior:'smooth'});
+    scrollToForm();
   });
 
-  backBtn && backBtn.addEventListener('click', function(){
-    if (typeof currentStep !== 'number' || currentStep === 1) return;
-    currentStep -= 1;
+  if(backBtn)backBtn.addEventListener('click',function(){
+    if(typeof step!=='number'||step===1)return;
+    step-=1;
     updateProgress();
-    window.scrollTo({top: document.getElementById('assessment').offsetTop - 80, behavior:'smooth'});
+    scrollToForm();
   });
 
   updateProgress();
