@@ -768,7 +768,7 @@
     <span class="brochure-popup-kicker">Plan Your Stay</span>
     <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
     <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
-    <form id="menuBrochureForm" novalidate>
+    <form id="menuBrochureForm" novalidate onsubmit="return false;">
       <div class="brochure-popup-grid">
         <div class="brochure-popup-field">
           <label class="brochure-popup-label" for="menuBrochureFirstName">First Name <em style="color:#B43A3A;">*</em></label>
@@ -780,7 +780,7 @@
         </div>
         <div class="brochure-popup-field full">
           <label class="brochure-popup-label" for="menuBrochureEmail">Email Address <em style="color:#B43A3A;">*</em></label>
-          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email" required>
+          <input class="brochure-popup-input" type="text" id="menuBrochureEmail" name="email" autocomplete="email" placeholder="your@email.com">
         </div>
         <div class="brochure-popup-field full">
           <label class="brochure-popup-label">Phone Number <em style="color:#B43A3A;">*</em></label>
