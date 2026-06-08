@@ -1872,7 +1872,7 @@
       const inputs    = form.querySelectorAll('input[type="text"]');
       const firstName = inputs[0]?.value?.trim() || '';
       const lastName  = inputs[1]?.value?.trim() || '';
-      const email     = form.querySelector('input[type="email"]')?.value?.trim();
+      const email     = form.querySelector('input[name="email"]')?.value?.trim();
       const phone     = form.querySelector('input[type="tel"]')?.value?.trim() || '';
       const consent   = form.querySelector('input[name="consent_marketing"]')?.checked;
 
@@ -1926,7 +1926,7 @@
     const inputs = navForm.querySelectorAll('input[type="text"]');
     const firstName = inputs[0]?.value?.trim()||'';
     const lastName = inputs[1]?.value?.trim()||'';
-    const email = navForm.querySelector('input[type="email"]')?.value?.trim();
+    const email = navForm.querySelector('input[name="email"]')?.value?.trim();
     const phone = navForm.querySelector('input[type="tel"]')?.value?.trim()||'';
     const consent = navForm.querySelector('input[name="consent_marketing"]')?.checked;
     if (!email || !consent) { if(navErr){navErr.textContent='Please fill in your email and accept the consent.';navErr.classList.add('is-visible');} return; }
