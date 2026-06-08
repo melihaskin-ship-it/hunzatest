@@ -805,7 +805,7 @@
         </div>
         <div class="brochure-popup-field full">
           <label class="brochure-popup-label">Phone Number <em style="color:#B43A3A;">*</em></label>
-          <div class="phone-field-wrap">
+          <div class="phone-field-wrap" style="position:relative;">
             <div class="phone-field-inner">
               <button type="button" class="phone-dial-btn" aria-label="Select country code">
                 <span class="dial-flag">🇹🇷</span>
@@ -814,6 +814,10 @@
               </button>
               <input class="phone-number-input" type="tel" id="menuBrochurePhone" name="phone" placeholder="5XX XXX XX XX" autocomplete="tel">
               <input type="hidden" class="hidden-dial-code" name="phone_code" value="+90">
+            </div>
+            <div class="phone-dropdown">
+              <input class="phone-search" type="text" placeholder="Search country...">
+              <div class="phone-list"></div>
             </div>
             <div class="phone-dropdown">
               <input class="phone-search" type="text" placeholder="Search country...">
