@@ -632,6 +632,46 @@
   .brochure-popup-inner { padding: 28px 20px 22px; }
   .brochure-popup-grid { grid-template-columns: 1fr; gap: 0; }
 }
+
+  .form-consent-block {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .form-consent-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--warm-gray-5, #5A5468);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .form-consent-row input[type="checkbox"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--brand-deep, #3D2B6B);
+    cursor: pointer;
+  }
+  .form-consent-row em {
+    color: #B43A3A;
+    font-style: normal;
+  }
+  .form-consent-note {
+    font-size: 11px;
+    color: var(--warm-gray-4, #9A9490);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .form-consent-note a {
+    color: var(--brand-deep, #3D2B6B);
+    text-decoration: underline;
+  }
+
 </style>
 </head>
 <body>
@@ -718,7 +758,11 @@
       </div>
       <label class="brochure-popup-consent">
         <input type="checkbox" id="menuBrochureConsent" name="consent_marketing" required>
-        <span>I agree that Hunza may contact me about this brochure request and related updates. I accept the <a href="/privacy-policy/">Privacy Policy</a> and <a href="/cookie-policy/">Cookie Policy</a>.</span>
+        <span>I would like to receive updates about my brochure request and other relevant communications from Hunza. <em style="color:var(--error);font-style:normal;">*</em></span>
+      </label>
+      <label class="brochure-popup-consent">
+        <input type="checkbox" id="menuBrochurePrivacy" name="consent_privacy" required>
+        <span>I confirm I have read and accept the <a href="/privacy-policy/">Privacy Policy</a>. <em style="color:var(--error);font-style:normal;">*</em></span>
       </label>
       <div class="brochure-popup-error" id="menuBrochureError">Please complete all fields and accept the consent checkbox.</div>
       <button type="submit" class="btn-primary" id="menuBrochureSubmit" style="width:100%;">Email Me the Brochure</button>
@@ -1291,8 +1335,18 @@
           <input type="tel" class="form-input-light" placeholder="+1 000 000 0000">
           <label class="form-label-light">Your Message</label>
           <textarea class="form-input-light" placeholder="Tell us about your health goals, questions, or anything else we should know to assist you best."></textarea>
+          <div class="form-consent-block">
+            <label class="form-consent-row">
+              <input type="checkbox" name="consent_processing" required>
+              <span>By sending this message, I consent to Hunza storing and processing my information to respond to my enquiry. <em>*</em></span>
+            </label>
+            <label class="form-consent-row">
+              <input type="checkbox" name="consent_marketing">
+              <span>I would like to join the Hunza community and receive communications about health, longevity and exclusive offers.</span>
+            </label>
+            <p class="form-consent-note">We are committed to sending you only useful and relevant information. Read our <a href="/privacy-policy/">Privacy Policy</a>.</p>
+          </div>
           <button class="btn-primary" style="width:100%;text-align:center;padding:20px;font-size:12px;">Send Your Message</button>
-          <p class="form-privacy-light">All information provided is held in strict confidence. We do not share personal data with third parties. You may withdraw consent at any time.</p>
         </div>
       </div>
     </div>
