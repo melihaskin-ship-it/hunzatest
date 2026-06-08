@@ -1643,7 +1643,17 @@
           <label class="form-label-light">Email Address</label>
           <input type="text" class="form-input-light" placeholder="Your email address" autocomplete="email">
           <label class="form-label-light">Phone Number</label>
-          <input type="tel" class="form-input-light" placeholder="+1 000 000 0000">
+          <div class="phone-field-wrap" style="margin-bottom:16px;">
+            <div style="display:flex;height:50px;border:1px solid var(--brand-tint-2);background:#fff;">
+              <button type="button" class="phone-dial-btn" aria-label="Select country code" style="display:flex;align-items:center;gap:5px;padding:0 12px;background:#fff;border:none;border-right:1px solid var(--brand-tint-2);cursor:pointer;white-space:nowrap;min-width:90px;font-family:inherit;font-size:13px;color:var(--charcoal);flex-shrink:0;">
+                <span class="dial-flag">🇹🇷</span>
+                <span class="dial-code">+90</span>
+                <span class="dial-arrow" style="font-size:8px;color:#9A9490;">▼</span>
+              </button>
+              <input class="phone-number-input" type="tel" placeholder="5XX XXX XX XX" name="phone" style="flex:1;border:none;outline:none;padding:0 12px;font-size:14px;font-family:inherit;font-weight:300;color:var(--charcoal);background:transparent;min-width:0;">
+              <input type="hidden" class="hidden-dial-code" name="phone_code" value="+90">
+            </div>
+          </div>
           <label class="form-label-light">Your Message</label>
           <textarea class="form-input-light" placeholder="Tell us a little about what you're looking for"></textarea>
           <div class="form-consent-block">
