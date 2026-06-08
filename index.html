@@ -579,19 +579,7 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     }
 
     /* Reset hero to auto height — content drives it */
-    .hero {
-      height: auto !important;
-      min-height: 0 !important;
-      position: relative !important;
-      background: linear-gradient(160deg, var(--brand-plum) 0%, var(--hp-deep) 50%, var(--brand-darkest) 100%) !important;
-      padding: 80px 28px 48px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      overflow: hidden !important;
-    }
+    .hero { display: none !important; }
 
     /* Subtle decorative circle in background */
     .hero::before {
@@ -730,16 +718,7 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
 .brochure-popup-error.is-visible { display: block; }
 @media(max-width:640px) { .brochure-popup-inner { padding: 28px 20px 22px; } .brochure-popup-grid { grid-template-columns: 1fr; gap: 0; } }
 
-  /* ── Mobile: hide video hero, add top padding so content starts below nav ── */
-  @media(max-width:768px){
-    .hero { display: none !important; }
-    .hero-mobile-cta {
-      display: flex !important;
-      margin-top: 64px;
-    }
-  }
-
-  /* Mobile CTA strip — hidden on desktop */
+  /* ── MOBILE CTA STRIP ── */
   .hero-mobile-cta {
     display: none;
     flex-direction: column;
@@ -748,18 +727,24 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     background: linear-gradient(160deg, #241640 0%, #3D2B6B 100%);
     padding: 52px 28px 44px;
     gap: 18px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .hero { display: none !important; }
+    .hero-mobile-cta { display: flex !important; }
   }
   .hero-mobile-cta-tag {
     font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-    color: rgba(207,197,232,0.6); font-family: var(--ff-body); font-weight: 400;
+    color: rgba(207,197,232,0.65); font-family: var(--ff-body); font-weight: 400;
   }
   .hero-mobile-cta-headline {
     font-family: var(--ff-display); font-size: 42px; font-weight: 300;
-    color: #fff; line-height: 1.08; letter-spacing: -0.01em; margin: 0;
+    color: #ffffff; line-height: 1.08; letter-spacing: -0.01em; margin: 0;
   }
   .hero-mobile-cta-headline em { font-style: italic; color: #CFC5E8; }
   .hero-mobile-cta-sub {
-    font-size: 14px; color: rgba(207,197,232,0.72);
+    font-size: 14px; color: rgba(207,197,232,0.75);
     line-height: 1.75; max-width: 290px; font-weight: 300; margin: 0;
   }
   .hero-mobile-cta-btns {
@@ -770,16 +755,11 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     display: block; width: 100%; text-align: center;
     font-family: var(--ff-body); font-size: 11px; font-weight: 500;
     letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 17px 20px; text-decoration: none; transition: all 0.25s;
+    padding: 17px 20px; text-decoration: none;
     box-sizing: border-box;
   }
-  .hero-mobile-cta-btns .mcta-primary {
-    background: #ffffff; color: #241640;
-  }
-  .hero-mobile-cta-btns .mcta-secondary {
-    background: transparent; color: #ffffff;
-    border: 1px solid rgba(207,197,232,0.5);
-  }
+  .mcta-primary { background: #ffffff; color: #241640; }
+  .mcta-secondary { background: transparent; color: #ffffff; border: 1px solid rgba(207,197,232,0.5); }
 
 </style>
 </head>
