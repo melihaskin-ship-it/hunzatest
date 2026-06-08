@@ -823,7 +823,7 @@
     <span class="brochure-popup-kicker">Plan Your Stay</span>
     <h2 class="brochure-popup-title" id="brochurePopupTitle">Receive the full <em>Hunza brochure</em></h2>
     <p class="brochure-popup-text">Share your details and we will send the general Hunza catalog directly to your inbox.</p>
-    <form id="menuBrochureForm" novalidate>
+    <form id="menuBrochureForm" novalidate onsubmit="return false;">
       <div class="brochure-popup-grid">
         <div class="brochure-popup-field">
           <label class="brochure-popup-label" for="menuBrochureFirstName">First Name <em style="color:#B43A3A;">*</em></label>
@@ -835,7 +835,7 @@
         </div>
         <div class="brochure-popup-field full">
           <label class="brochure-popup-label" for="menuBrochureEmail">Email Address <em style="color:#B43A3A;">*</em></label>
-          <input class="brochure-popup-input" type="email" id="menuBrochureEmail" name="email" autocomplete="email" required>
+          <input class="brochure-popup-input" type="text" id="menuBrochureEmail" name="email" autocomplete="email" placeholder="your@email.com">
         </div>
         <div class="brochure-popup-field full">
           <label class="brochure-popup-label">Phone Number <em style="color:#B43A3A;">*</em></label>
@@ -1381,10 +1381,10 @@
               <div class="phone-list"></div>
             </div>
           </div>
-          <label class="form-privacy" style="display:flex;gap:10px;align-items:flex-start;margin:20px 0 10px;">
-            <input type="checkbox" name="consent_marketing" data-brochure-consent style="margin-top:4px;flex-shrink:0;">
-            <span>I want to receive updates about my request and other relevant communications from Hunza. <em style="color:#B43A3A;font-style:normal;">*</em></span>
-          </label>
+          <div style="display:flex;gap:12px;align-items:center;margin:20px 0 10px;padding:14px 16px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);">
+            <input type="checkbox" name="consent_marketing" data-brochure-consent style="flex-shrink:0;width:16px;height:16px;accent-color:#8A73B4;cursor:pointer;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;font-weight:300;">I want to receive updates about my request and other relevant communications from Hunza. <em style="color:#B43A3A;font-style:normal;">*</em></span>
+          </div>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 8px;">Learn how we handle your data in our <a href="/privacy-policy/" style="color:rgba(255,255,255,0.8);text-decoration:underline;">Privacy Policy</a>.</p>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 18px;">By sending this request, you're consenting to Hunza storing and processing your information.</p>
           <button class="btn-gold" style="width:100%;text-align:center;padding:18px;" onclick="return hunzaBrochureSubmit(this)">Send Me the Program Brochure</button>
