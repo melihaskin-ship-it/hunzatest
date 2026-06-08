@@ -1362,25 +1362,25 @@
           <label class="form-label" style="margin-top:14px;display:block;">Email Address <em style="color:#B43A3A;">*</em></label>
           <input type="text" class="form-input" placeholder="Your email address" name="email" autocomplete="email">
           <label class="form-label" style="margin-top:14px;display:block;">Phone Number <em style="color:#B43A3A;">*</em></label>
-          <div class="phone-field-wrap phone-field-dark">
-            <div class="phone-field-inner">
-              <button type="button" class="phone-dial-btn" aria-label="Select country code">
+          <div class="phone-field-wrap phone-field-dark" style="position:relative;">
+            <div style="display:flex;height:50px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);">
+              <button type="button" class="phone-dial-btn" aria-label="Select country code" style="display:flex;align-items:center;gap:6px;padding:0 12px;background:transparent;border:none;border-right:1px solid rgba(255,255,255,0.2);cursor:pointer;white-space:nowrap;min-width:90px;font-family:inherit;font-size:13px;color:#fff;flex-shrink:0;">
                 <span class="dial-flag">🇹🇷</span>
                 <span class="dial-code">+90</span>
-                <span class="dial-arrow">▼</span>
+                <span class="dial-arrow" style="font-size:8px;color:rgba(255,255,255,0.5);">▼</span>
               </button>
-              <input class="phone-number-input" type="tel" placeholder="5XX XXX XX XX" name="phone" style="border:none;outline:none;padding:0 12px;height:50px;font-size:14px;font-family:inherit;font-weight:300;background:transparent;color:#fff;width:100%;">
+              <input class="phone-number-input" type="tel" placeholder="5XX XXX XX XX" name="phone" style="flex:1;border:none;outline:none;padding:0 12px;font-size:14px;font-family:inherit;font-weight:300;background:transparent;color:#fff;min-width:0;">
               <input type="hidden" class="hidden-dial-code" name="phone_code" value="+90">
             </div>
-            <div class="phone-dropdown">
-              <input class="phone-search" type="text" placeholder="Search country...">
-              <div class="phone-list"></div>
+            <div class="phone-dropdown" style="position:absolute;top:100%;left:0;right:0;z-index:9999;background:#fff;border:1px solid #CFC5E8;box-shadow:0 8px 32px rgba(36,22,64,0.15);max-height:240px;overflow:hidden;display:none;flex-direction:column;margin-top:2px;">
+              <input class="phone-search" type="text" placeholder="Search country..." style="padding:9px 12px;border:none;border-bottom:1px solid #EAE4F6;font-family:inherit;font-size:13px;outline:none;flex-shrink:0;width:100%;box-sizing:border-box;">
+              <div class="phone-list" style="overflow-y:auto;flex:1;"></div>
             </div>
           </div>
-          <div style="display:flex;gap:12px;align-items:center;margin:20px 0 10px;padding:14px 16px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);">
-            <input type="checkbox" name="consent_marketing" data-brochure-consent style="flex-shrink:0;width:16px;height:16px;accent-color:#8A73B4;cursor:pointer;">
-            <span style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;font-weight:300;">I want to receive updates about my request and other relevant communications from Hunza. <em style="color:#B43A3A;font-style:normal;">*</em></span>
-          </div>
+          <label style="display:flex;gap:12px;align-items:flex-start;margin:16px 0 10px;cursor:pointer;">
+            <input type="checkbox" name="consent_marketing" data-brochure-consent style="flex-shrink:0;width:16px;height:16px;margin-top:2px;accent-color:#8A73B4;cursor:pointer;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;font-weight:300;">I want to receive updates about my request and other relevant communications from Hunza. <em style="color:#B43A3A;font-style:normal;">*</em></span>
+          </label>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 8px;">Learn how we handle your data in our <a href="/privacy-policy/" style="color:rgba(255,255,255,0.8);text-decoration:underline;">Privacy Policy</a>.</p>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 18px;">By sending this request, you're consenting to Hunza storing and processing your information.</p>
           <button class="btn-gold" style="width:100%;text-align:center;padding:18px;" onclick="return hunzaBrochureSubmit(this)">Send Me the Program Brochure</button>
@@ -1553,7 +1553,7 @@
             </div>
           </div>
           <label class="form-label-light">Email Address</label>
-          <input type="email" class="form-input-light" placeholder="Your email address">
+          <input type="text" class="form-input-light" placeholder="Your email address" autocomplete="email">
           <label class="form-label-light">Phone Number</label>
           <input type="tel" class="form-input-light" placeholder="+1 000 000 0000">
           <label class="form-label-light">Country of Residence</label>
