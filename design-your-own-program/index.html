@@ -455,7 +455,15 @@
   .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
   .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
   .footer-legal{display:flex;gap:24px;}
-  input[type="date"].text-input{width:100%;box-sizing:border-box;}
+  input[type="date"].text-input{
+    width:100%;box-sizing:border-box;
+    -webkit-appearance:none;appearance:none;
+    height:auto;min-height:0;
+    padding:14px 16px;
+    font-family:var(--ff-body);font-size:14px;font-weight:300;
+    color:var(--charcoal);line-height:1.5;
+  }
+  input[type="date"].text-input::-webkit-date-and-time-value{text-align:left;}
 
   .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
   .footer-legal a:hover{color:rgba(207,197,232,0.7);}
