@@ -131,7 +131,7 @@
   /* ── HERO ── */
   .programs-hero{
     padding-top:72px;
-    min-height:88vh;
+    min-height:100vh;max-height:100vh;
     display:grid;
     grid-template-columns:1fr 1fr;
     position:relative;
@@ -139,11 +139,11 @@
   }
   .programs-hero-left{
     background:var(--brand-tint-1);
-    padding:96px 64px 80px;
+    padding:80px 64px 64px;
     display:flex;flex-direction:column;justify-content:center;
     position:relative;
   }
-  .programs-hero-right{position:relative;overflow:hidden;background:var(--brand-plum);}
+  .programs-hero-right{position:relative;overflow:hidden;background:var(--brand-plum);max-height:100vh;}
   .programs-hero-photo{width:100%;height:100%;object-fit:cover;display:block;opacity:0.95;}
   .programs-hero-overlay{
     position:absolute;inset:0;
