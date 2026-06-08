@@ -746,11 +746,11 @@
   .phone-field-wrap{position:relative;}
   .phone-field-inner{display:flex;border:1px solid var(--brand-tint-3);background:#fff;}
   .phone-field-inner:focus-within{border-color:var(--brand);}
-  .phone-dial-btn{display:flex;align-items:center;gap:5px;padding:0 10px;background:#fff;border:none;border-right:1px solid var(--brand-tint-3);cursor:pointer;white-space:nowrap;min-width:86px;font-family:inherit;font-size:13px;color:var(--charcoal);flex-shrink:0;}
+  .phone-dial-btn{display:flex;align-items:center;gap:5px;padding:0 12px;background:#fff;border:none;border-right:1px solid var(--brand-tint-3);cursor:pointer;white-space:nowrap;min-width:86px;font-family:inherit;font-size:13px;color:var(--charcoal);flex-shrink:0;align-self:stretch;}
   .phone-dial-btn .dial-flag{font-size:15px;line-height:1;}
   .phone-dial-btn .dial-code{font-size:13px;font-weight:400;}
   .phone-dial-btn .dial-arrow{font-size:8px;color:var(--warm-gray-4);margin-left:1px;}
-  .phone-number-input{flex:1;border:none;outline:none;padding:14px 12px;font-family:inherit;font-size:14px;font-weight:300;color:var(--charcoal);background:transparent;min-width:0;}
+  .phone-number-input{flex:1;border:none;outline:none;padding:12px 12px;font-family:inherit;font-size:14px;font-weight:300;color:var(--charcoal);background:transparent;min-width:0;line-height:1.4;}
   .phone-dropdown{position:absolute;top:100%;left:0;right:0;z-index:9999;background:#fff;border:1px solid var(--brand-tint-3);box-shadow:0 8px 32px rgba(36,22,64,0.15);max-height:240px;overflow:hidden;display:none;flex-direction:column;margin-top:2px;}
   .phone-dropdown.open{display:flex;}
   .phone-search{padding:9px 12px;border:none;border-bottom:1px solid var(--brand-tint-2);font-family:inherit;font-size:13px;outline:none;flex-shrink:0;width:100%;box-sizing:border-box;}
@@ -1357,15 +1357,15 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0;">
             <div>
               <label class="form-label">First Name <em style="color:#B43A3A;">*</em></label>
-              <input type="text" class="form-input" placeholder="First name" name="first_name" required>
+              <input type="text" class="form-input" placeholder="First name" name="first_name">
             </div>
             <div>
               <label class="form-label">Last Name <em style="color:#B43A3A;">*</em></label>
-              <input type="text" class="form-input" placeholder="Last name" name="last_name" required>
+              <input type="text" class="form-input" placeholder="Last name" name="last_name">
             </div>
           </div>
           <label class="form-label" style="margin-top:14px;display:block;">Email Address <em style="color:#B43A3A;">*</em></label>
-          <input type="email" class="form-input" placeholder="Your email address" name="email" required>
+          <input type="email" class="form-input" placeholder="Your email address" name="email">
           <label class="form-label" style="margin-top:14px;display:block;">Phone Number <em style="color:#B43A3A;">*</em></label>
           <div class="phone-field-wrap phone-field-dark">
             <div class="phone-field-inner">
@@ -1374,7 +1374,7 @@
                 <span class="dial-code">+90</span>
                 <span class="dial-arrow">▼</span>
               </button>
-              <input class="phone-number-input form-input" type="tel" placeholder="5XX XXX XX XX" name="phone" required style="border:none;padding:14px 12px;">
+              <input class="phone-number-input form-input" type="tel" placeholder="5XX XXX XX XX" name="phone" style="border:none;padding:12px 12px;">
               <input type="hidden" class="hidden-dial-code" name="phone_code" value="+90">
             </div>
             <div class="phone-dropdown">
@@ -1382,13 +1382,13 @@
               <div class="phone-list"></div>
             </div>
           </div>
-          <label class="form-privacy" style="display:flex;gap:10px;align-items:flex-start;margin:0 0 10px;">
+          <label class="form-privacy" style="display:flex;gap:10px;align-items:flex-start;margin:20px 0 10px;">
             <input type="checkbox" name="consent_marketing" data-brochure-consent required style="margin-top:4px;flex-shrink:0;">
             <span>I want to receive updates about my request and other relevant communications from Hunza. <em style="color:#B43A3A;font-style:normal;">*</em></span>
           </label>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 8px;">Learn how we handle your data in our <a href="/privacy-policy/" style="color:rgba(255,255,255,0.8);text-decoration:underline;">Privacy Policy</a>.</p>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0 0 18px;">By sending this request, you're consenting to Hunza storing and processing your information.</p>
-          <button class="btn-gold" style="width:100%;text-align:center;padding:18px;">Send Me the Program Brochure</button>
+          <button class="btn-gold" style="width:100%;text-align:center;padding:18px;" onclick="return hunzaBrochureSubmit(this)">Send Me the Program Brochure</button>
         </div>
       </div>
     </div>
