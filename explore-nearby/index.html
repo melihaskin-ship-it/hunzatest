@@ -1824,19 +1824,22 @@
   if (!navForm || !navBtn) return;
   navForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const inputs = navForm.querySelectorAll('input[type="text"]');
-    const firstName = inputs[0]?.value?.trim()||'';
-    const lastName = inputs[1]?.value?.trim()||'';
-    const email = navForm.querySelector('input[name="email"]')?.value?.trim();
-    const phone = navForm.querySelector('input[type="tel"]')?.value?.trim()||'';
+    const firstName = navForm.querySelector('input[name="first_name"]')?.value?.trim()||'';
+    const lastName = navForm.querySelector('input[name="last_name"]')?.value?.trim()||'';
+    const email = navForm.querySelector('input[name="email"]')?.value?.trim()||'';
+    const phoneCode = navForm.querySelector('input[name="phone_code"]')?.value||'';
+    const phone = navForm.querySelector('input[name="phone"]')?.value?.trim()||'';
     const consent = navForm.querySelector('input[name="consent_marketing"]')?.checked;
-    if (!email || !consent) { if(navErr){navErr.textContent='Please fill in your email and accept the consent.';navErr.classList.add('is-visible');} return; }
+    if (!firstName||!lastName||!email||!phone||!consent) {
+      if(navErr){navErr.textContent='Please complete all required fields and accept the consent.';navErr.classList.add('is-visible');} return;
+    }
     if(navErr) navErr.classList.remove('is-visible');
     navBtn.disabled=true; navBtn.textContent='Sending...';
     try {
       const r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ brochure_name:'Hunza General Brochure', first_name:firstName,
-          last_name:lastName, email:email, phone:phone, consent_marketing:true,
+          last_name:lastName, email:email, phone_code:phoneCode, phone:phone,
+          full_phone:(phoneCode+' '+phone).trim(), consent_marketing:true,
           submitted_at:new Date().toISOString(), page_url:window.location.href,
           user_agent:navigator.userAgent }) });
       if (!r.ok) throw new Error('HTTP '+r.status);
