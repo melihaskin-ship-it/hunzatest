@@ -1911,246 +1911,175 @@
 <script>
 (function(){
   var COUNTRIES=[
-    {c:"AF",f:"🇦🇫",n:"Afghanistan",d:"+93"},
-    {c:"AL",f:"🇦🇱",n:"Albania",d:"+355"},
-    {c:"DZ",f:"🇩🇿",n:"Algeria",d:"+213"},
-    {c:"AD",f:"🇦🇩",n:"Andorra",d:"+376"},
-    {c:"AO",f:"🇦🇴",n:"Angola",d:"+244"},
-    {c:"AR",f:"🇦🇷",n:"Argentina",d:"+54"},
-    {c:"AM",f:"🇦🇲",n:"Armenia",d:"+374"},
-    {c:"AU",f:"🇦🇺",n:"Australia",d:"+61"},
-    {c:"AT",f:"🇦🇹",n:"Austria",d:"+43"},
-    {c:"AZ",f:"🇦🇿",n:"Azerbaijan",d:"+994"},
-    {c:"BH",f:"🇧🇭",n:"Bahrain",d:"+973"},
-    {c:"BD",f:"🇧🇩",n:"Bangladesh",d:"+880"},
-    {c:"BE",f:"🇧🇪",n:"Belgium",d:"+32"},
-    {c:"BZ",f:"🇧🇿",n:"Belize",d:"+501"},
-    {c:"BJ",f:"🇧🇯",n:"Benin",d:"+229"},
-    {c:"BT",f:"🇧🇹",n:"Bhutan",d:"+975"},
-    {c:"BO",f:"🇧🇴",n:"Bolivia",d:"+591"},
-    {c:"BA",f:"🇧🇦",n:"Bosnia",d:"+387"},
-    {c:"BW",f:"🇧🇼",n:"Botswana",d:"+267"},
-    {c:"BR",f:"🇧🇷",n:"Brazil",d:"+55"},
-    {c:"BN",f:"🇧🇳",n:"Brunei",d:"+673"},
-    {c:"BG",f:"🇧🇬",n:"Bulgaria",d:"+359"},
-    {c:"BF",f:"🇧🇫",n:"Burkina Faso",d:"+226"},
-    {c:"BI",f:"🇧🇮",n:"Burundi",d:"+257"},
-    {c:"KH",f:"🇰🇭",n:"Cambodia",d:"+855"},
-    {c:"CM",f:"🇨🇲",n:"Cameroon",d:"+237"},
-    {c:"CA",f:"🇨🇦",n:"Canada",d:"+1"},
-    {c:"CV",f:"🇨🇻",n:"Cape Verde",d:"+238"},
-    {c:"CL",f:"🇨🇱",n:"Chile",d:"+56"},
-    {c:"CN",f:"🇨🇳",n:"China",d:"+86"},
-    {c:"CO",f:"🇨🇴",n:"Colombia",d:"+57"},
-    {c:"KM",f:"🇰🇲",n:"Comoros",d:"+269"},
-    {c:"CD",f:"🇨🇩",n:"Congo (DRC)",d:"+243"},
-    {c:"CG",f:"🇨🇬",n:"Congo (Rep)",d:"+242"},
-    {c:"CR",f:"🇨🇷",n:"Costa Rica",d:"+506"},
-    {c:"HR",f:"🇭🇷",n:"Croatia",d:"+385"},
-    {c:"CU",f:"🇨🇺",n:"Cuba",d:"+53"},
-    {c:"CY",f:"🇨🇾",n:"Cyprus",d:"+357"},
-    {c:"CZ",f:"🇨🇿",n:"Czech Republic",d:"+420"},
-    {c:"DK",f:"🇩🇰",n:"Denmark",d:"+45"},
-    {c:"DJ",f:"🇩🇯",n:"Djibouti",d:"+253"},
-    {c:"DO",f:"🇩🇴",n:"Dominican Rep",d:"+1-809"},
-    {c:"EC",f:"🇪🇨",n:"Ecuador",d:"+593"},
-    {c:"EG",f:"🇪🇬",n:"Egypt",d:"+20"},
-    {c:"SV",f:"🇸🇻",n:"El Salvador",d:"+503"},
-    {c:"GQ",f:"🇬🇶",n:"Equatorial Guinea",d:"+240"},
-    {c:"ER",f:"🇪🇷",n:"Eritrea",d:"+291"},
-    {c:"EE",f:"🇪🇪",n:"Estonia",d:"+372"},
-    {c:"ET",f:"🇪🇹",n:"Ethiopia",d:"+251"},
-    {c:"FJ",f:"🇫🇯",n:"Fiji",d:"+679"},
-    {c:"FI",f:"🇫🇮",n:"Finland",d:"+358"},
-    {c:"FR",f:"🇫🇷",n:"France",d:"+33"},
-    {c:"GA",f:"🇬🇦",n:"Gabon",d:"+241"},
-    {c:"GM",f:"🇬🇲",n:"Gambia",d:"+220"},
-    {c:"GE",f:"🇬🇪",n:"Georgia",d:"+995"},
-    {c:"DE",f:"🇩🇪",n:"Germany",d:"+49"},
-    {c:"GH",f:"🇬🇭",n:"Ghana",d:"+233"},
-    {c:"GR",f:"🇬🇷",n:"Greece",d:"+30"},
-    {c:"GT",f:"🇬🇹",n:"Guatemala",d:"+502"},
-    {c:"GN",f:"🇬🇳",n:"Guinea",d:"+224"},
-    {c:"GW",f:"🇬🇼",n:"Guinea-Bissau",d:"+245"},
-    {c:"GY",f:"🇬🇾",n:"Guyana",d:"+592"},
-    {c:"HT",f:"🇭🇹",n:"Haiti",d:"+509"},
-    {c:"HN",f:"🇭🇳",n:"Honduras",d:"+504"},
-    {c:"HK",f:"🇭🇰",n:"Hong Kong",d:"+852"},
-    {c:"HU",f:"🇭🇺",n:"Hungary",d:"+36"},
-    {c:"IS",f:"🇮🇸",n:"Iceland",d:"+354"},
-    {c:"IN",f:"🇮🇳",n:"India",d:"+91"},
-    {c:"ID",f:"🇮🇩",n:"Indonesia",d:"+62"},
-    {c:"IR",f:"🇮🇷",n:"Iran",d:"+98"},
-    {c:"IQ",f:"🇮🇶",n:"Iraq",d:"+964"},
-    {c:"IE",f:"🇮🇪",n:"Ireland",d:"+353"},
-    {c:"IL",f:"🇮🇱",n:"Israel",d:"+972"},
-    {c:"IT",f:"🇮🇹",n:"Italy",d:"+39"},
-    {c:"JM",f:"🇯🇲",n:"Jamaica",d:"+1-876"},
-    {c:"JP",f:"🇯🇵",n:"Japan",d:"+81"},
-    {c:"JO",f:"🇯🇴",n:"Jordan",d:"+962"},
-    {c:"KZ",f:"🇰🇿",n:"Kazakhstan",d:"+7"},
-    {c:"KE",f:"🇰🇪",n:"Kenya",d:"+254"},
-    {c:"KW",f:"🇰🇼",n:"Kuwait",d:"+965"},
-    {c:"KG",f:"🇰🇬",n:"Kyrgyzstan",d:"+996"},
-    {c:"LA",f:"🇱🇦",n:"Laos",d:"+856"},
-    {c:"LV",f:"🇱🇻",n:"Latvia",d:"+371"},
-    {c:"LB",f:"🇱🇧",n:"Lebanon",d:"+961"},
-    {c:"LS",f:"🇱🇸",n:"Lesotho",d:"+266"},
-    {c:"LR",f:"🇱🇷",n:"Liberia",d:"+231"},
-    {c:"LY",f:"🇱🇾",n:"Libya",d:"+218"},
-    {c:"LI",f:"🇱🇮",n:"Liechtenstein",d:"+423"},
-    {c:"LT",f:"🇱🇹",n:"Lithuania",d:"+370"},
-    {c:"LU",f:"🇱🇺",n:"Luxembourg",d:"+352"},
-    {c:"MG",f:"🇲🇬",n:"Madagascar",d:"+261"},
-    {c:"MW",f:"🇲🇼",n:"Malawi",d:"+265"},
-    {c:"MY",f:"🇲🇾",n:"Malaysia",d:"+60"},
-    {c:"MV",f:"🇲🇻",n:"Maldives",d:"+960"},
-    {c:"ML",f:"🇲🇱",n:"Mali",d:"+223"},
-    {c:"MT",f:"🇲🇹",n:"Malta",d:"+356"},
-    {c:"MR",f:"🇲🇷",n:"Mauritania",d:"+222"},
-    {c:"MU",f:"🇲🇺",n:"Mauritius",d:"+230"},
-    {c:"MX",f:"🇲🇽",n:"Mexico",d:"+52"},
-    {c:"MD",f:"🇲🇩",n:"Moldova",d:"+373"},
-    {c:"MC",f:"🇲🇨",n:"Monaco",d:"+377"},
-    {c:"MN",f:"🇲🇳",n:"Mongolia",d:"+976"},
-    {c:"ME",f:"🇲🇪",n:"Montenegro",d:"+382"},
-    {c:"MA",f:"🇲🇦",n:"Morocco",d:"+212"},
-    {c:"MZ",f:"🇲🇿",n:"Mozambique",d:"+258"},
-    {c:"MM",f:"🇲🇲",n:"Myanmar",d:"+95"},
-    {c:"NA",f:"🇳🇦",n:"Namibia",d:"+264"},
-    {c:"NP",f:"🇳🇵",n:"Nepal",d:"+977"},
-    {c:"NL",f:"🇳🇱",n:"Netherlands",d:"+31"},
-    {c:"NZ",f:"🇳🇿",n:"New Zealand",d:"+64"},
-    {c:"NI",f:"🇳🇮",n:"Nicaragua",d:"+505"},
-    {c:"NE",f:"🇳🇪",n:"Niger",d:"+227"},
-    {c:"NG",f:"🇳🇬",n:"Nigeria",d:"+234"},
-    {c:"MK",f:"🇲🇰",n:"North Macedonia",d:"+389"},
-    {c:"NO",f:"🇳🇴",n:"Norway",d:"+47"},
-    {c:"OM",f:"🇴🇲",n:"Oman",d:"+968"},
-    {c:"PK",f:"🇵🇰",n:"Pakistan",d:"+92"},
-    {c:"PA",f:"🇵🇦",n:"Panama",d:"+507"},
-    {c:"PG",f:"🇵🇬",n:"Papua New Guinea",d:"+675"},
-    {c:"PY",f:"🇵🇾",n:"Paraguay",d:"+595"},
-    {c:"PE",f:"🇵🇪",n:"Peru",d:"+51"},
-    {c:"PH",f:"🇵🇭",n:"Philippines",d:"+63"},
-    {c:"PL",f:"🇵🇱",n:"Poland",d:"+48"},
-    {c:"PT",f:"🇵🇹",n:"Portugal",d:"+351"},
-    {c:"QA",f:"🇶🇦",n:"Qatar",d:"+974"},
-    {c:"RO",f:"🇷🇴",n:"Romania",d:"+40"},
-    {c:"RU",f:"🇷🇺",n:"Russia",d:"+7"},
-    {c:"RW",f:"🇷🇼",n:"Rwanda",d:"+250"},
-    {c:"SA",f:"🇸🇦",n:"Saudi Arabia",d:"+966"},
-    {c:"SN",f:"🇸🇳",n:"Senegal",d:"+221"},
-    {c:"RS",f:"🇷🇸",n:"Serbia",d:"+381"},
-    {c:"SL",f:"🇸🇱",n:"Sierra Leone",d:"+232"},
-    {c:"SG",f:"🇸🇬",n:"Singapore",d:"+65"},
-    {c:"SK",f:"🇸🇰",n:"Slovakia",d:"+421"},
-    {c:"SI",f:"🇸🇮",n:"Slovenia",d:"+386"},
-    {c:"SO",f:"🇸🇴",n:"Somalia",d:"+252"},
-    {c:"ZA",f:"🇿🇦",n:"South Africa",d:"+27"},
-    {c:"SS",f:"🇸🇸",n:"South Sudan",d:"+211"},
-    {c:"ES",f:"🇪🇸",n:"Spain",d:"+34"},
-    {c:"LK",f:"🇱🇰",n:"Sri Lanka",d:"+94"},
-    {c:"SD",f:"🇸🇩",n:"Sudan",d:"+249"},
-    {c:"SE",f:"🇸🇪",n:"Sweden",d:"+46"},
-    {c:"CH",f:"🇨🇭",n:"Switzerland",d:"+41"},
-    {c:"SY",f:"🇸🇾",n:"Syria",d:"+963"},
-    {c:"TW",f:"🇹🇼",n:"Taiwan",d:"+886"},
-    {c:"TJ",f:"🇹🇯",n:"Tajikistan",d:"+992"},
-    {c:"TZ",f:"🇹🇿",n:"Tanzania",d:"+255"},
-    {c:"TH",f:"🇹🇭",n:"Thailand",d:"+66"},
-    {c:"TG",f:"🇹🇬",n:"Togo",d:"+228"},
-    {c:"TT",f:"🇹🇹",n:"Trinidad & Tobago",d:"+1-868"},
-    {c:"TN",f:"🇹🇳",n:"Tunisia",d:"+216"},
-    {c:"TR",f:"🇹🇷",n:"Turkey",d:"+90"},
-    {c:"TM",f:"🇹🇲",n:"Turkmenistan",d:"+993"},
-    {c:"UG",f:"🇺🇬",n:"Uganda",d:"+256"},
-    {c:"UA",f:"🇺🇦",n:"Ukraine",d:"+380"},
+    {c:"AF",f:"🇦🇫",n:"Afghanistan",d:"+93"},{c:"AL",f:"🇦🇱",n:"Albania",d:"+355"},
+    {c:"DZ",f:"🇩🇿",n:"Algeria",d:"+213"},{c:"AD",f:"🇦🇩",n:"Andorra",d:"+376"},
+    {c:"AO",f:"🇦🇴",n:"Angola",d:"+244"},{c:"AR",f:"🇦🇷",n:"Argentina",d:"+54"},
+    {c:"AM",f:"🇦🇲",n:"Armenia",d:"+374"},{c:"AU",f:"🇦🇺",n:"Australia",d:"+61"},
+    {c:"AT",f:"🇦🇹",n:"Austria",d:"+43"},{c:"AZ",f:"🇦🇿",n:"Azerbaijan",d:"+994"},
+    {c:"BH",f:"🇧🇭",n:"Bahrain",d:"+973"},{c:"BD",f:"🇧🇩",n:"Bangladesh",d:"+880"},
+    {c:"BE",f:"🇧🇪",n:"Belgium",d:"+32"},{c:"BR",f:"🇧🇷",n:"Brazil",d:"+55"},
+    {c:"BG",f:"🇧🇬",n:"Bulgaria",d:"+359"},{c:"KH",f:"🇰🇭",n:"Cambodia",d:"+855"},
+    {c:"CA",f:"🇨🇦",n:"Canada",d:"+1"},{c:"CL",f:"🇨🇱",n:"Chile",d:"+56"},
+    {c:"CN",f:"🇨🇳",n:"China",d:"+86"},{c:"CO",f:"🇨🇴",n:"Colombia",d:"+57"},
+    {c:"HR",f:"🇭🇷",n:"Croatia",d:"+385"},{c:"CY",f:"🇨🇾",n:"Cyprus",d:"+357"},
+    {c:"CZ",f:"🇨🇿",n:"Czech Republic",d:"+420"},{c:"DK",f:"🇩🇰",n:"Denmark",d:"+45"},
+    {c:"EG",f:"🇪🇬",n:"Egypt",d:"+20"},{c:"EE",f:"🇪🇪",n:"Estonia",d:"+372"},
+    {c:"FI",f:"🇫🇮",n:"Finland",d:"+358"},{c:"FR",f:"🇫🇷",n:"France",d:"+33"},
+    {c:"GE",f:"🇬🇪",n:"Georgia",d:"+995"},{c:"DE",f:"🇩🇪",n:"Germany",d:"+49"},
+    {c:"GH",f:"🇬🇭",n:"Ghana",d:"+233"},{c:"GR",f:"🇬🇷",n:"Greece",d:"+30"},
+    {c:"HK",f:"🇭🇰",n:"Hong Kong",d:"+852"},{c:"HU",f:"🇭🇺",n:"Hungary",d:"+36"},
+    {c:"IS",f:"🇮🇸",n:"Iceland",d:"+354"},{c:"IN",f:"🇮🇳",n:"India",d:"+91"},
+    {c:"ID",f:"🇮🇩",n:"Indonesia",d:"+62"},{c:"IR",f:"🇮🇷",n:"Iran",d:"+98"},
+    {c:"IQ",f:"🇮🇶",n:"Iraq",d:"+964"},{c:"IE",f:"🇮🇪",n:"Ireland",d:"+353"},
+    {c:"IL",f:"🇮🇱",n:"Israel",d:"+972"},{c:"IT",f:"🇮🇹",n:"Italy",d:"+39"},
+    {c:"JP",f:"🇯🇵",n:"Japan",d:"+81"},{c:"JO",f:"🇯🇴",n:"Jordan",d:"+962"},
+    {c:"KZ",f:"🇰🇿",n:"Kazakhstan",d:"+7"},{c:"KE",f:"🇰🇪",n:"Kenya",d:"+254"},
+    {c:"KW",f:"🇰🇼",n:"Kuwait",d:"+965"},{c:"LV",f:"🇱🇻",n:"Latvia",d:"+371"},
+    {c:"LB",f:"🇱🇧",n:"Lebanon",d:"+961"},{c:"LT",f:"🇱🇹",n:"Lithuania",d:"+370"},
+    {c:"LU",f:"🇱🇺",n:"Luxembourg",d:"+352"},{c:"MY",f:"🇲🇾",n:"Malaysia",d:"+60"},
+    {c:"MT",f:"🇲🇹",n:"Malta",d:"+356"},{c:"MX",f:"🇲🇽",n:"Mexico",d:"+52"},
+    {c:"MD",f:"🇲🇩",n:"Moldova",d:"+373"},{c:"MC",f:"🇲🇨",n:"Monaco",d:"+377"},
+    {c:"MA",f:"🇲🇦",n:"Morocco",d:"+212"},{c:"NP",f:"🇳🇵",n:"Nepal",d:"+977"},
+    {c:"NL",f:"🇳🇱",n:"Netherlands",d:"+31"},{c:"NZ",f:"🇳🇿",n:"New Zealand",d:"+64"},
+    {c:"NG",f:"🇳🇬",n:"Nigeria",d:"+234"},{c:"NO",f:"🇳🇴",n:"Norway",d:"+47"},
+    {c:"OM",f:"🇴🇲",n:"Oman",d:"+968"},{c:"PK",f:"🇵🇰",n:"Pakistan",d:"+92"},
+    {c:"PA",f:"🇵🇦",n:"Panama",d:"+507"},{c:"PE",f:"🇵🇪",n:"Peru",d:"+51"},
+    {c:"PH",f:"🇵🇭",n:"Philippines",d:"+63"},{c:"PL",f:"🇵🇱",n:"Poland",d:"+48"},
+    {c:"PT",f:"🇵🇹",n:"Portugal",d:"+351"},{c:"QA",f:"🇶🇦",n:"Qatar",d:"+974"},
+    {c:"RO",f:"🇷🇴",n:"Romania",d:"+40"},{c:"RU",f:"🇷🇺",n:"Russia",d:"+7"},
+    {c:"SA",f:"🇸🇦",n:"Saudi Arabia",d:"+966"},{c:"SN",f:"🇸🇳",n:"Senegal",d:"+221"},
+    {c:"RS",f:"🇷🇸",n:"Serbia",d:"+381"},{c:"SG",f:"🇸🇬",n:"Singapore",d:"+65"},
+    {c:"SK",f:"🇸🇰",n:"Slovakia",d:"+421"},{c:"SI",f:"🇸🇮",n:"Slovenia",d:"+386"},
+    {c:"ZA",f:"🇿🇦",n:"South Africa",d:"+27"},{c:"ES",f:"🇪🇸",n:"Spain",d:"+34"},
+    {c:"LK",f:"🇱🇰",n:"Sri Lanka",d:"+94"},{c:"SE",f:"🇸🇪",n:"Sweden",d:"+46"},
+    {c:"CH",f:"🇨🇭",n:"Switzerland",d:"+41"},{c:"TW",f:"🇹🇼",n:"Taiwan",d:"+886"},
+    {c:"TH",f:"🇹🇭",n:"Thailand",d:"+66"},{c:"TN",f:"🇹🇳",n:"Tunisia",d:"+216"},
+    {c:"TR",f:"🇹🇷",n:"Turkey",d:"+90"},{c:"UA",f:"🇺🇦",n:"Ukraine",d:"+380"},
     {c:"AE",f:"🇦🇪",n:"United Arab Emirates",d:"+971"},
     {c:"GB",f:"🇬🇧",n:"United Kingdom",d:"+44"},
     {c:"US",f:"🇺🇸",n:"United States",d:"+1"},
-    {c:"UY",f:"🇺🇾",n:"Uruguay",d:"+598"},
-    {c:"UZ",f:"🇺🇿",n:"Uzbekistan",d:"+998"},
-    {c:"VE",f:"🇻🇪",n:"Venezuela",d:"+58"},
-    {c:"VN",f:"🇻🇳",n:"Vietnam",d:"+84"},
-    {c:"YE",f:"🇾🇪",n:"Yemen",d:"+967"},
-    {c:"ZM",f:"🇿🇲",n:"Zambia",d:"+260"},
-    {c:"ZW",f:"🇿🇼",n:"Zimbabwe",d:"+263"},
+    {c:"UZ",f:"🇺🇿",n:"Uzbekistan",d:"+998"},{c:"VE",f:"🇻🇪",n:"Venezuela",d:"+58"},
+    {c:"VN",f:"🇻🇳",n:"Vietnam",d:"+84"},{c:"YE",f:"🇾🇪",n:"Yemen",d:"+967"},
+    {c:"ZM",f:"🇿🇲",n:"Zambia",d:"+260"},{c:"ZW",f:"🇿🇼",n:"Zimbabwe",d:"+263"},
   ];
 
-  function initPhoneField(wrap) {
-    if (!wrap || wrap.dataset.phoneInit) return;
-    wrap.dataset.phoneInit = '1';
+  function buildDropdown(wrap) {
+    // Create dropdown element fresh each time
+    var existing = wrap.querySelector('.phone-dropdown');
+    if (existing) existing.parentNode.removeChild(existing);
 
-    var btn = wrap.querySelector('.phone-dial-btn');
+    var dd = document.createElement('div');
+    dd.style.cssText = 'position:absolute;top:100%;left:0;right:0;z-index:99999;background:#fff;border:1px solid #CFC5E8;box-shadow:0 8px 32px rgba(36,22,64,0.18);max-height:260px;overflow:hidden;display:flex;flex-direction:column;margin-top:2px;';
+
+    var search = document.createElement('input');
+    search.type = 'text';
+    search.placeholder = 'Search country or code...';
+    search.style.cssText = 'padding:10px 14px;border:none;border-bottom:1px solid #EAE4F6;font-size:13px;outline:none;width:100%;box-sizing:border-box;font-family:inherit;';
+
+    var list = document.createElement('div');
+    list.style.cssText = 'overflow-y:auto;flex:1;';
+
+    dd.appendChild(search);
+    dd.appendChild(list);
+    wrap.appendChild(dd);
+
+    return {dd:dd, search:search, list:list};
+  }
+
+  function initPhoneWrap(wrap) {
+    if (!wrap || wrap._phoneInited) return;
+    wrap._phoneInited = true;
+    wrap.style.position = 'relative';
+
+    var dialBtn = wrap.querySelector('.phone-dial-btn');
     var flagEl = wrap.querySelector('.dial-flag');
     var codeEl = wrap.querySelector('.dial-code');
     var numberInput = wrap.querySelector('.phone-number-input');
-    var dropdown = wrap.querySelector('.phone-dropdown');
-    var searchInput = wrap.querySelector('.phone-search');
-    var list = wrap.querySelector('.phone-list');
     var hiddenCode = wrap.querySelector('.hidden-dial-code');
-    if (!btn || !dropdown || !list) return;
+    if (!dialBtn) return;
 
-    var selected = COUNTRIES.find(function(c){ return c.c === 'TR'; }) || COUNTRIES[0];
+    var ddOpen = false;
+    var ddEls = null;
 
-    function renderList(filter) {
+    function renderList(filter, list) {
       var filtered = filter
         ? COUNTRIES.filter(function(c){
             var q = filter.toLowerCase();
-            return c.n.toLowerCase().indexOf(q) > -1 || c.d.indexOf(q) > -1;
+            return c.n.toLowerCase().indexOf(q)>-1 || c.d.indexOf(q)>-1;
           })
         : COUNTRIES;
       list.innerHTML = filtered.map(function(c){
-        return '<div class="phone-option" data-code="'+c.c+'" data-dial="'+c.d+'">'
-          +'<span class="opt-flag">'+c.f+'</span>'
-          +'<span class="opt-name">'+c.n+'</span>'
-          +'<span class="opt-code">'+c.d+'</span>'
+        return '<div style="display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;font-size:13px;font-family:inherit;" data-code="'+c.c+'" data-dial="'+c.d+'">'
+          +'<span>'+c.f+'</span>'
+          +'<span style="flex:1;color:#1E1428;font-weight:300;">'+c.n+'</span>'
+          +'<span style="color:#9A9490;font-size:12px;">'+c.d+'</span>'
           +'</div>';
       }).join('');
-      list.querySelectorAll('.phone-option').forEach(function(opt){
+      list.querySelectorAll('[data-dial]').forEach(function(opt){
         opt.addEventListener('mousedown', function(e){
           e.preventDefault();
-          var code = opt.dataset.code;
-          var dial = opt.dataset.dial;
-          selected = COUNTRIES.find(function(c){ return c.c === code; });
-          if (flagEl) flagEl.textContent = selected.f;
-          if (codeEl) codeEl.textContent = selected.d;
-          if (hiddenCode) hiddenCode.value = selected.d;
-          closeDropdown();
+          var country = COUNTRIES.find(function(c){return c.c===opt.dataset.code;});
+          if (!country) return;
+          if (flagEl) flagEl.textContent = country.f;
+          if (codeEl) codeEl.textContent = country.d;
+          if (hiddenCode) hiddenCode.value = country.d;
+          closeDD();
           if (numberInput) numberInput.focus();
+        });
+        opt.addEventListener('mouseover', function(){
+          opt.style.background='#F5F2FB';
+        });
+        opt.addEventListener('mouseout', function(){
+          opt.style.background='';
         });
       });
     }
 
-    function openDropdown() {
-      dropdown.classList.add('open');
-      if (searchInput) { searchInput.value = ''; searchInput.focus(); }
-      renderList('');
+    function openDD() {
+      if (!ddEls) ddEls = buildDropdown(wrap);
+      ddEls.dd.style.display = 'flex';
+      ddEls.search.value = '';
+      renderList('', ddEls.list);
+      setTimeout(function(){ ddEls.search.focus(); }, 50);
+      ddOpen = true;
     }
-    function closeDropdown() { dropdown.classList.remove('open'); }
 
-    btn.addEventListener('click', function(e){
+    function closeDD() {
+      if (ddEls) ddEls.dd.style.display = 'none';
+      ddOpen = false;
+    }
+
+    dialBtn.addEventListener('click', function(e){
       e.stopPropagation();
-      dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
-    });
-    if (searchInput) {
-      searchInput.addEventListener('input', function(){ renderList(searchInput.value); });
-    }
-    document.addEventListener('click', function(e){
-      if (!wrap.contains(e.target)) closeDropdown();
+      e.preventDefault();
+      ddOpen ? closeDD() : openDD();
     });
 
-    // Set initial Turkey
-    if (flagEl) flagEl.textContent = selected.f;
-    if (codeEl) codeEl.textContent = selected.d;
-    if (hiddenCode) hiddenCode.value = selected.d;
-    renderList('');
+    document.addEventListener('click', function(e){
+      if (ddOpen && !wrap.contains(e.target)) closeDD();
+    });
+
+    // Search
+    wrap.addEventListener('input', function(e){
+      if (ddEls && e.target === ddEls.search) {
+        renderList(ddEls.search.value, ddEls.list);
+      }
+    });
   }
 
-  // Init all phone fields on page
-  document.querySelectorAll('.phone-field-wrap').forEach(initPhoneField);
-  window.initPhoneField = initPhoneField;
+  // Init on DOMContentLoaded
+  function initAll() {
+    document.querySelectorAll('.phone-field-wrap').forEach(initPhoneWrap);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+
+  // Also init when popup opens (for menu brochure popup)
+  window.initPhoneFields = initAll;
 })();
 </script>
 
