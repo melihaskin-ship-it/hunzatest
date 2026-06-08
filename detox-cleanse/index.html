@@ -2009,16 +2009,18 @@
         const firstName = card.querySelector('input[name="first_name"]')?.value?.trim() || '';
         const lastName = card.querySelector('input[name="last_name"]')?.value?.trim() || '';
         const email = card.querySelector('input[name="email"]')?.value?.trim() || '';
-        const phone = card.querySelector('input[name="phone"]')?.value?.trim() || '';
         const phoneCode = card.querySelector('input[name="phone_code"]')?.value || '';
+        const phone = card.querySelector('input[name="phone"]')?.value?.trim() || '';
         if (!firstName || !lastName || !email || !phone) { alert('Please complete all required fields.'); return; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
         if (!consent?.checked) { alert('Please accept the consent checkbox.'); return; }
         btn.disabled = true; btn.textContent = 'Sending...';
         try {
           const r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ brochure_name:BROCHURE_NAME, first_name:firstName, email:email,
-              country:country, consent_marketing:true, submitted_at:new Date().toISOString(),
+            body: JSON.stringify({ brochure_name:BROCHURE_NAME, first_name:firstName,
+              last_name:lastName, email:email, phone_code:phoneCode, phone:phone,
+              full_phone:(phoneCode+' '+phone).trim(), consent_marketing:true,
+              submitted_at:new Date().toISOString(),
               page_url:window.location.href, user_agent:navigator.userAgent }) });
           if (!r.ok) throw new Error('HTTP '+r.status);
           btn.textContent = '✓ Sent! Check your inbox.';
