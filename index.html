@@ -761,6 +761,35 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
   .mcta-primary { background: #ffffff; color: #241640; }
   .mcta-secondary { background: transparent; color: #ffffff; border: 1px solid rgba(207,197,232,0.5); }
 
+
+  .hero-main-headline {
+    font-family: var(--ff-display);
+    font-size: 52px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 16px 0 14px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  }
+  .hero-main-headline em {
+    font-style: italic;
+    color: rgba(207,197,232,0.9);
+  }
+  .hero-main-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.3);
+  }
+  @media(max-width:768px){
+    .hero-main-headline { font-size: 34px; }
+    .hero-main-sub { font-size: 13px; }
+  }
+
 </style>
 </head>
 <body>
@@ -900,13 +929,9 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-content">
-    <!-- Real Hunza logo (icon + wordmark) in white -->
     <img loading="lazy" class="hero-logo-img" src="/public/uploads/hunza_homepage_assets/hunza_logo_full_white.svg" alt="HUNZA — Longevity Resort in Turkey">
-    <div class="hero-tagline-wrap">
-      <span class="hero-tagline-rule"></span>
-      <span class="hero-tagline">Longevity Resort in Turkey</span>
-      <span class="hero-tagline-rule"></span>
-    </div>
+    <h1 class="hero-main-headline">Turkey's most intimate<br><em>longevity retreat.</em></h1>
+    <p class="hero-main-sub">A boutique longevity resort where every program, every meal,<br>and every day is shaped entirely around you.</p>
   </div>
   <div class="hero-bottom-words">
     <span>Lifestyle</span>
