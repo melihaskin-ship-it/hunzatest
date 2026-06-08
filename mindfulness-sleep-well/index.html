@@ -1983,14 +1983,16 @@
   const card = document.querySelector('.form-card');
   if (card) {
     const btn = card.querySelector('button');
-    const inputs = card.querySelectorAll('input[type="text"]');
     const consent = card.querySelector('input[type="checkbox"]');
-    if (btn && inputs.length >= 2) {
+    if (btn) {
       btn.addEventListener('click', async () => {
-        const firstName = inputs[0]?.value?.trim();
-        const email = inputs[1]?.value?.trim();
-        const country = inputs[2]?.value?.trim() || '';
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email.'); return; }
+        const firstName = card.querySelector('input[name="first_name"]')?.value?.trim() || '';
+        const lastName = card.querySelector('input[name="last_name"]')?.value?.trim() || '';
+        const email = card.querySelector('input[name="email"]')?.value?.trim() || '';
+        const phone = card.querySelector('input[name="phone"]')?.value?.trim() || '';
+        const phoneCode = card.querySelector('input[name="phone_code"]')?.value || '';
+        if (!firstName || !lastName || !email || !phone) { alert('Please complete all required fields.'); return; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
         if (!consent?.checked) { alert('Please accept the consent checkbox.'); return; }
         btn.disabled = true; btn.textContent = 'Sending...';
         try {
