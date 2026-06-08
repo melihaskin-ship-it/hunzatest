@@ -455,6 +455,8 @@
   .footer-bottom{max-width:var(--max-w);margin:0 auto;padding-top:32px;display:flex;justify-content:space-between;align-items:center;}
   .footer-copyright{font-size:11px;color:rgba(207,197,232,0.3);letter-spacing:0.08em;font-weight:300;}
   .footer-legal{display:flex;gap:24px;}
+  input[type="date"].text-input{width:100%;box-sizing:border-box;}
+
   .footer-legal a{font-size:11px;color:rgba(207,197,232,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
   .footer-legal a:hover{color:rgba(207,197,232,0.7);}
 
@@ -1377,669 +1379,386 @@
   </div>
 </footer>
 <script>
-  function loadFeatureScript(key, src) {
-    window.HunzaFeatureScripts = window.HunzaFeatureScripts || {};
+/* ── Utility ── */
+function toggleMenu() {
+  document.getElementById('megaMenu').classList.toggle('open');
+  document.getElementById('megaOverlay').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('megaMenu').classList.remove('open');
+  document.getElementById('megaOverlay').classList.remove('open');
+}
+function openBrochurePopup() {
+  var popup = document.getElementById('brochurePopup');
+  var overlay = document.getElementById('brochurePopupOverlay');
+  if (!popup || !overlay) return;
+  popup.classList.add('is-open'); overlay.classList.add('is-open');
+  popup.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('menuBrochureFirstName') && document.getElementById('menuBrochureFirstName').focus();
+}
+function closeBrochurePopup() {
+  var popup = document.getElementById('brochurePopup');
+  var overlay = document.getElementById('brochurePopupOverlay');
+  if (!popup || !overlay) return;
+  popup.classList.remove('is-open'); overlay.classList.remove('is-open');
+  popup.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mega-link').forEach(function(l){ l.addEventListener('click', closeMenu); });
+document.querySelectorAll('.menu-brochure-trigger').forEach(function(link){
+  link.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); openBrochurePopup(); });
+});
+document.getElementById('brochurePopupOverlay') && document.getElementById('brochurePopupOverlay').addEventListener('click', closeBrochurePopup);
+document.getElementById('brochurePopupClose') && document.getElementById('brochurePopupClose').addEventListener('click', closeBrochurePopup);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeBrochurePopup(); });
 
-    if (window.HunzaFeatureScripts[key]) {
-      return window.HunzaFeatureScripts[key];
-    }
-
-    window.HunzaFeatureScripts[key] = new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.defer = true;
-      script.onload = resolve;
-      script.onerror = () => reject(new Error(`Failed to load ${key}`));
-      document.body.appendChild(script);
-    });
-
-    return window.HunzaFeatureScripts[key];
-  }
-
-  function isMobileBrochureViewport() {
-    return window.matchMedia('(max-width: 767px)').matches;
-  }
-
-  function syncBrochureLinks() {
-    document.querySelectorAll('.brochure-link').forEach((link) => {
-      link.href = isMobileBrochureViewport() ? link.dataset.mobileHref : link.dataset.desktopHref;
-    });
-  }
-
-  function toggleMenu() {
-    const menu = document.getElementById('megaMenu');
-    const overlay = document.getElementById('megaOverlay');
-    menu.classList.toggle('open');
-    overlay.classList.toggle('open');
-  }
-  function closeMenu() {
-    document.getElementById('megaMenu').classList.remove('open');
-    document.getElementById('megaOverlay').classList.remove('open');
-  }
-
-  function openBrochurePopup() {
-    const popup = document.getElementById('brochurePopup');
-    const overlay = document.getElementById('brochurePopupOverlay');
-    if (!popup || !overlay) {
-      return;
-    }
-
-    popup.classList.add('is-open');
-    overlay.classList.add('is-open');
-    popup.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('menuBrochureFirstName')?.focus();
-  }
-
-  function closeBrochurePopup() {
-    const popup = document.getElementById('brochurePopup');
-    const overlay = document.getElementById('brochurePopupOverlay');
-    if (!popup || !overlay) {
-      return;
-    }
-
-    popup.classList.remove('is-open');
-    overlay.classList.remove('is-open');
-    popup.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  syncBrochureLinks();
-  window.addEventListener('resize', syncBrochureLinks);
-  document.querySelectorAll('.mega-link').forEach(l => l.addEventListener('click', closeMenu));
-  document.querySelectorAll('.menu-brochure-trigger').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      closeMenu();
-      openBrochurePopup();
-    });
+/* ── Footer accordion (mobile) ── */
+function syncFooterAccordions() {
+  var isMobile = window.matchMedia('(max-width:640px)').matches;
+  document.querySelectorAll('.footer-nav-group').forEach(function(group){
+    var button = group.querySelector('.footer-col-toggle');
+    if (!button) return;
+    if (!isMobile) { group.classList.remove('is-open'); button.setAttribute('aria-expanded','true'); }
+    else if (!group.classList.contains('is-open')) { button.setAttribute('aria-expanded','false'); }
   });
-  document.getElementById('brochurePopupOverlay')?.addEventListener('click', closeBrochurePopup);
-  document.getElementById('brochurePopupClose')?.addEventListener('click', closeBrochurePopup);
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeBrochurePopup();
-    }
+}
+document.querySelectorAll('.footer-col-toggle').forEach(function(button){
+  button.addEventListener('click', function(){
+    if (!window.matchMedia('(max-width:640px)').matches) return;
+    var group = button.closest('.footer-nav-group');
+    var isOpen = group && group.classList.toggle('is-open');
+    button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
+});
+syncFooterAccordions();
+window.addEventListener('resize', syncFooterAccordions);
 
-  function toggleFaq(element) {
-    const item = element.classList.contains('faq-item') ? element : element.closest('.faq-item');
-    if (!item) {
-      return;
-    }
-
-    const answer = item.querySelector('.faq-a, .faq-answer');
-    const isOpen = item.classList.toggle('open');
-    item.dataset.lastFaqToggleAt = String(Date.now());
-
-    if (answer) {
-      answer.style.display = isOpen ? 'block' : 'none';
-    }
-  }
-
-  window.toggleFaq = toggleFaq;
-
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('a, button, input, textarea, select')) {
-      return;
-    }
-
-    const trigger = event.target.closest('.faq-question, .faq-item');
-    if (!trigger) {
-      return;
-    }
-
-    const item = trigger.classList.contains('faq-item') ? trigger : trigger.closest('.faq-item');
-    const lastToggleAt = Number(item?.dataset.lastFaqToggleAt || 0);
-
-    if (Date.now() - lastToggleAt < 120) {
-      return;
-    }
-
-    toggleFaq(trigger);
-  });
-
-  function togglePillar(button) {
-    const trigger = button?.closest('.pillar-toggle');
-    const pillar = (trigger || button)?.closest('.pillar-card, .pillar');
-    if (!pillar || !trigger) {
-      return;
-    }
-
-    const hiddenItems = pillar.querySelectorAll('.pillar-items .pillar-more');
-    if (!hiddenItems.length) {
-      return;
-    }
-
-    const isExpanded = trigger.dataset.expanded === 'true';
-
-    hiddenItems.forEach((item) => {
-      item.style.display = isExpanded ? 'none' : 'flex';
-    });
-
-    trigger.dataset.expanded = isExpanded ? 'false' : 'true';
-    trigger.textContent = isExpanded ? '+ Show all services' : '- Show fewer services';
-  }
-
-  window.togglePillar = togglePillar;
-
-  document.querySelectorAll('.pillar-toggle:not([onclick])').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      togglePillar(event.currentTarget);
-    });
-  });
-
-  function syncFooterAccordions() {
-    const isMobile = window.matchMedia('(max-width: 640px)').matches;
-
-    document.querySelectorAll('.footer-nav-group').forEach((group) => {
-      const button = group.querySelector('.footer-col-toggle');
-      if (!button) {
-        return;
-      }
-
-      if (!isMobile) {
-        group.classList.remove('is-open');
-        button.setAttribute('aria-expanded', 'true');
-      } else if (!group.classList.contains('is-open')) {
-        button.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  document.querySelectorAll('.footer-col-toggle').forEach((button) => {
-    button.addEventListener('click', () => {
-      if (!window.matchMedia('(max-width: 640px)').matches) {
-        return;
-      }
-
-      const group = button.closest('.footer-nav-group');
-      const isOpen = group?.classList.toggle('is-open');
-      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-  });
-
-  syncFooterAccordions();
-  window.addEventListener('resize', syncFooterAccordions);
-
-  document.querySelectorAll('.cookie-settings-link').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      if (!window.Cookiebot || typeof window.Cookiebot.renew !== 'function') {
-        return;
-      }
-
-      event.preventDefault();
-      window.Cookiebot.renew();
-    });
-  });
-
-  if (document.getElementById('programsViewport') && document.getElementById('programsTrack')) {
-    loadFeatureScript('hunza-slider', 'https://hunzalongevity.com/js/hunza-slider.js');
-  }
-
-  // ── Nav popup: Hunza General Brochure → Make.com webhook ─────────────────
-  (function() {
-    const WEBHOOK  = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
-    const form     = document.getElementById('menuBrochureForm');
-    const submitBtn = document.getElementById('menuBrochureSubmit');
-    const errorEl  = document.getElementById('menuBrochureError');
-    if (!form || !submitBtn) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const inputs    = form.querySelectorAll('input[type="text"]');
-      const firstName = inputs[0]?.value?.trim() || '';
-      const lastName  = inputs[1]?.value?.trim() || '';
-      const email     = form.querySelector('input[type="email"]')?.value?.trim();
-      const phone     = form.querySelector('input[type="tel"]')?.value?.trim() || '';
-      const consent   = form.querySelector('input[name="consent_marketing"]')?.checked;
-
-      if (!email || !consent) {
-        if (errorEl) { errorEl.textContent = 'Please fill in your email and accept the consent.'; errorEl.classList.add('is-visible'); }
-        return;
-      }
-      if (errorEl) errorEl.classList.remove('is-visible');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      try {
-        const response = await fetch(WEBHOOK, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            brochure_name:     'Hunza General Brochure',
-            first_name:        firstName,
-            last_name:         lastName,
-            email:             email,
-            phone:             phone,
-            consent_marketing: true,
-            submitted_at:      new Date().toISOString(),
-            page_url:          window.location.href,
-            user_agent:        navigator.userAgent,
-          }),
-        });
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        submitBtn.textContent = '✓ Sent! Check your inbox.';
-        form.reset();
-      } catch(err) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Email Me the Brochure';
-        if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.add('is-visible'); }
-        console.error(err);
-      }
-    });
-  })();
-  // ─────────────────────────────────────────────────────────────────────────
-</script>
-<script>
-// ── Nav popup general brochure ────────────────────────────────────────────
-(function() {
-  const WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
-  const navForm = document.getElementById('menuBrochureForm');
-  const navBtn = document.getElementById('menuBrochureSubmit');
-  const navErr = document.getElementById('menuBrochureError');
-  if (!navForm || !navBtn) return;
-  navForm.addEventListener('submit', async (e) => {
+/* ── Brochure popup form → Make.com ── */
+(function(){
+  var WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
+  var form = document.getElementById('menuBrochureForm');
+  var submitBtn = document.getElementById('menuBrochureSubmit');
+  var errorEl = document.getElementById('menuBrochureError');
+  if (!form || !submitBtn) return;
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
-    const inputs = navForm.querySelectorAll('input[type="text"]');
-    const firstName = inputs[0]?.value?.trim()||'';
-    const lastName = inputs[1]?.value?.trim()||'';
-    const email = navForm.querySelector('input[type="email"]')?.value?.trim();
-    const phone = navForm.querySelector('input[type="tel"]')?.value?.trim()||'';
-    const consent = navForm.querySelector('input[name="consent_marketing"]')?.checked;
-    if (!email || !consent) { if(navErr){navErr.textContent='Please fill in your email and accept the consent.';navErr.classList.add('is-visible');} return; }
-    if(navErr) navErr.classList.remove('is-visible');
-    navBtn.disabled=true; navBtn.textContent='Sending...';
+    var inputs = form.querySelectorAll('input[type="text"]');
+    var firstName = (inputs[0] && inputs[0].value.trim()) || '';
+    var lastName = (inputs[1] && inputs[1].value.trim()) || '';
+    var emailEl = form.querySelector('input[type="email"]');
+    var email = emailEl ? emailEl.value.trim() : '';
+    var phoneEl = form.querySelector('input[type="tel"]');
+    var phone = phoneEl ? phoneEl.value.trim() : '';
+    var consent = form.querySelector('input[name="consent_marketing"]') && form.querySelector('input[name="consent_marketing"]').checked;
+    if (!email || !consent) {
+      if (errorEl) { errorEl.textContent = 'Please fill in your email and accept the consent.'; errorEl.classList.add('is-visible'); } return;
+    }
+    if (errorEl) errorEl.classList.remove('is-visible');
+    submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
     try {
-      const r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
+      var r = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ brochure_name:'Hunza General Brochure', first_name:firstName,
           last_name:lastName, email:email, phone:phone, consent_marketing:true,
-          submitted_at:new Date().toISOString(), page_url:window.location.href,
-          user_agent:navigator.userAgent }) });
+          submitted_at:new Date().toISOString(), page_url:window.location.href, user_agent:navigator.userAgent }) });
       if (!r.ok) throw new Error('HTTP '+r.status);
-      navBtn.textContent='✓ Sent! Check your inbox.'; navForm.reset();
-    } catch(e) { navBtn.disabled=false; navBtn.textContent='Email Me the Brochure';
-      if(navErr){navErr.textContent='Something went wrong.';navErr.classList.add('is-visible');} }
+      submitBtn.textContent = '✓ Sent! Check your inbox.'; form.reset();
+    } catch(err) {
+      submitBtn.disabled = false; submitBtn.textContent = 'Email Me the Brochure';
+      if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.add('is-visible'); }
+    }
   });
 })();
-</script>
-<script>
-(()=>{
 
-<script>
-  (() => {
-    
-    const MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/onssh2k4vk28r4dbwkcud98lmgxwwo1v';
-    function generateProgramId() {
-      const date = new Date().toISOString().slice(0,10).replace(/-/g,'');
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let s=''; for(let i=0;i<6;i++) s+=chars[Math.floor(Math.random()*chars.length)];
-      return 'HZ-TM-'+date+'-'+s;
-    }
-    const form = document.getElementById('assessmentForm');
-    if (!form) {
-      return;
-    }
+/* ── Assessment Form ── */
+(function(){
+  var MAKE_WEBHOOK_URL = 'https://hook.eu1.make.com/onssh2k4vk28r4dbwkcud98lmgxwwo1v';
+  var STEP_TOTAL = 8;
 
-    const stepTotal = 8;
-    const panels = Array.from(form.querySelectorAll('.form-panel[data-panel]'));
-    const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
-    const progressFill = document.getElementById('progressFill');
-    const stepCurrent = document.getElementById('stepCurrent');
-    const stepTotalElement = document.getElementById('stepTotal');
-    const nextBtn = document.getElementById('nextBtn');
-    const backBtn = document.getElementById('backBtn');
-    const panelActions = document.getElementById('panelActions');
-    const programIdElement = document.getElementById('programId');
-    const summaryList = document.getElementById('summaryList');
-    const stayNights = document.getElementById('stayNights');
-    const stayReadout = document.getElementById('stayReadout');
-    const energy = document.getElementById('energy');
-    const energyReadout = document.getElementById('energyReadout');
-    const conditionListGroup = document.getElementById('conditionListGroup');
-    const birthdateField = document.getElementById('birthdate');
-    let currentStep = 1;
+  function generateProgramId() {
+    var date = new Date().toISOString().slice(0,10).replace(/-/g,'');
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var s = '';
+    for (var i = 0; i < 6; i++) s += chars[Math.floor(Math.random()*chars.length)];
+    return 'HZ-TM-'+date+'-'+s;
+  }
 
-    stepTotalElement.textContent = stepTotal;
+  var form = document.getElementById('assessmentForm');
+  if (!form) return;
 
-    function updateChipState(input) {
-      const chip = input.closest('.chip');
-      if (!chip) {
-        return;
-      }
+  var panels = Array.from(form.querySelectorAll('.form-panel[data-panel]'));
+  var progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+  var progressFill = document.getElementById('progressFill');
+  var stepCurrentEl = document.getElementById('stepCurrent');
+  var stepTotalEl = document.getElementById('stepTotal');
+  var nextBtn = document.getElementById('nextBtn');
+  var backBtn = document.getElementById('backBtn');
+  var panelActions = document.getElementById('panelActions');
+  var programIdEl = document.getElementById('programId');
+  var summaryList = document.getElementById('summaryList');
+  var stayNights = document.getElementById('stayNights');
+  var stayReadout = document.getElementById('stayReadout');
+  var energyInput = document.getElementById('energy');
+  var energyReadout = document.getElementById('energyReadout');
+  var conditionListGroup = document.getElementById('conditionListGroup');
+  var birthdateField = document.getElementById('birthdate');
+  var currentStep = 1;
 
-      if (input.type === 'radio') {
-        document.querySelectorAll(`input[name="${input.name}"]`).forEach((peer) => {
-          peer.closest('.chip')?.classList.remove('selected');
-        });
-      }
+  if (stepTotalEl) stepTotalEl.textContent = STEP_TOTAL;
 
-      chip.classList.toggle('selected', input.checked);
-    }
+  /* Fix date picker max to today */
+  if (birthdateField) birthdateField.max = new Date().toISOString().split('T')[0];
 
-    function updateConsentState(input) {
-      input.closest('.consent-row')?.classList.toggle('checked', input.checked);
-    }
+  function updateReadouts() {
+    if (stayReadout && stayNights) stayReadout.innerHTML = stayNights.value + '<em>nights</em>';
+    if (energyReadout && energyInput) energyReadout.innerHTML = energyInput.value + '<em>/ 10</em>';
+  }
 
-    function updateRankedGroup(group) {
-      const checkboxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
-      const selected = checkboxes.filter((item) => item.checked);
-      const max = Number(group.dataset.max || selected.length);
-
-      if (selected.length > max) {
-        const latest = selected[selected.length - 1];
-        latest.checked = false;
-      }
-
-      const finalSelected = checkboxes.filter((item) => item.checked);
-      checkboxes.forEach((checkbox) => {
-        checkbox.closest('.chip')?.classList.toggle('selected', checkbox.checked);
-        const rank = checkbox.closest('.chip')?.querySelector('.chip-rank');
-        if (rank) {
-          rank.textContent = checkbox.checked ? String(finalSelected.indexOf(checkbox) + 1) : '';
-        }
+  function updateChipState(input) {
+    var chip = input.closest('.chip');
+    if (!chip) return;
+    if (input.type === 'radio') {
+      form.querySelectorAll('input[name="'+input.name+'"]').forEach(function(peer){
+        var c = peer.closest('.chip');
+        if (c) c.classList.remove('selected');
       });
     }
+    chip.classList.toggle('selected', input.checked);
+  }
 
-    function updateConditionVisibility() {
-      const selected = form.querySelector('input[name="hasCondition"]:checked')?.value;
-      conditionListGroup.style.display = selected === 'Yes' ? 'block' : 'none';
+  function updateConsentState(input) {
+    var row = input.closest('.consent-row');
+    if (row) row.classList.toggle('checked', input.checked);
+  }
+
+  function updateRankedGroup(group) {
+    var checkboxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
+    var max = Number(group.dataset.max) || 999;
+    var selected = checkboxes.filter(function(cb){ return cb.checked; });
+    if (selected.length > max) {
+      selected[selected.length-1].checked = false;
+      selected = checkboxes.filter(function(cb){ return cb.checked; });
     }
+    checkboxes.forEach(function(cb){
+      var chip = cb.closest('.chip');
+      if (chip) chip.classList.toggle('selected', cb.checked);
+      var rank = chip && chip.querySelector('.chip-rank');
+      if (rank) rank.textContent = cb.checked ? String(selected.indexOf(cb)+1) : '';
+    });
+  }
 
-    function updateReadouts() {
-      stayReadout.innerHTML = `${stayNights.value}<em>nights</em>`;
-      energyReadout.innerHTML = `${energy.value}<em>/ 10</em>`;
+  function updateConditionVisibility() {
+    var sel = form.querySelector('input[name="hasCondition"]:checked');
+    if (conditionListGroup) conditionListGroup.style.display = (sel && sel.value === 'Yes') ? 'block' : 'none';
+  }
+
+  function showError(name, visible) {
+    var el = form.querySelector('[data-error-for="'+name+'"]');
+    if (el) el.classList.toggle('show', visible);
+  }
+
+  function checkedValues(name) {
+    return Array.from(form.querySelectorAll('input[name="'+name+'"]:checked')).map(function(i){ return i.value; });
+  }
+  function valueOf(name) {
+    var el = form.querySelector('[name="'+name+'"]');
+    return el ? el.value.trim() : '';
+  }
+
+  function validateStep(step) {
+    var valid = true;
+    if (step === 1) {
+      var gender = form.querySelector('input[name="gender"]:checked');
+      var bd = valueOf('birthdate'), h = valueOf('height'), w = valueOf('weight');
+      showError('gender', !gender); showError('birthdate', !bd);
+      showError('height', !h); showError('weight', !w);
+      valid = !!(gender && bd && h && w);
     }
-
-    function updateProgress() {
-      panels.forEach((panel) => {
-        panel.classList.toggle('active', String(panel.dataset.panel) === String(currentStep));
+    if (step === 3) {
+      var needs = checkedValues('needs');
+      showError('needs', needs.length === 0);
+      valid = needs.length > 0;
+    }
+    if (step === 4) {
+      ['feeling','pace','sleep','bodyNeeds'].forEach(function(f){
+        var sel = form.querySelector('input[name="'+f+'"]:checked');
+        showError(f, !sel); if (!sel) valid = false;
       });
-
-      progressSteps.forEach((step) => {
-        const stepNumber = Number(step.dataset.step);
-        step.classList.toggle('active', stepNumber === currentStep);
-        step.classList.toggle('done', stepNumber < currentStep);
-      });
-
-      const progressPercent = ((currentStep - 1) / (stepTotal - 1)) * 90;
-      progressFill.style.width = `${Math.max(progressPercent, 0)}%`;
-      stepCurrent.textContent = currentStep;
-      backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-      nextBtn.textContent = currentStep === stepTotal ? 'Submit Assessment' : 'Continue';
     }
-
-    function showError(name, visible) {
-      const element = form.querySelector(`[data-error-for="${name}"]`);
-      if (element) {
-        element.classList.toggle('show', visible);
+    if (step === 7) {
+      var hasCond = form.querySelector('input[name="hasCondition"]:checked');
+      showError('hasCondition', !hasCond);
+      if (!hasCond) valid = false;
+      else if (hasCond.value === 'Yes' && checkedValues('conditions').length === 0) {
+        showError('hasCondition', true); valid = false;
       }
     }
-
-    function applyServerErrors(errors = {}) {
-      const fieldMap = {
-        stay_nights: 'stayNights',
-        body_needs: 'bodyNeeds',
-        has_condition: 'hasCondition',
-        conditions: 'hasCondition',
-        first_name: 'firstName',
-        last_name: 'lastName',
-        phone_code: 'phone',
-        first_time: 'firstTime',
-        consent_medical: 'consents',
-        consent_privacy: 'consents',
-        consent_marketing: 'consents',
-        consent_community: 'consents',
-      };
-
-      Object.keys(errors).forEach((key) => {
-        showError(fieldMap[key] || key, true);
-      });
+    if (step === 8) {
+      var fn = valueOf('firstName'), ln = valueOf('lastName');
+      var ph = valueOf('phone'), em = valueOf('email');
+      var ft = form.querySelector('input[name="firstTime"]:checked');
+      var cMed = form.querySelector('input[name="consentMedical"]') && form.querySelector('input[name="consentMedical"]').checked;
+      var cPriv = form.querySelector('input[name="consentPrivacy"]') && form.querySelector('input[name="consentPrivacy"]').checked;
+      var emailOk = em && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+      showError('firstName',!fn); showError('lastName',!ln);
+      showError('phone',!ph); showError('email',!emailOk);
+      showError('firstTime',!ft); showError('consents',!cMed||!cPriv);
+      valid = !!(fn && ln && ph && emailOk && ft && cMed && cPriv);
     }
+    return valid;
+  }
 
-    function checkedValues(name) {
-      return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map((input) => input.value);
+  function updateProgress() {
+    panels.forEach(function(p){
+      p.classList.toggle('active', String(p.dataset.panel) === String(currentStep));
+    });
+    progressSteps.forEach(function(s){
+      var n = Number(s.dataset.step);
+      s.classList.toggle('active', n === currentStep);
+      s.classList.toggle('done', n < currentStep);
+    });
+    var pct = ((currentStep-1)/(STEP_TOTAL-1))*90;
+    if (progressFill) progressFill.style.width = Math.max(pct,0)+'%';
+    if (stepCurrentEl) stepCurrentEl.textContent = currentStep;
+    if (backBtn) backBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+    if (nextBtn) nextBtn.textContent = currentStep === STEP_TOTAL ? 'Submit Assessment' : 'Continue';
+  }
+
+  function buildSummary(data) {
+    var rows = [
+      ['Program ID', data.program_id||'Pending'],
+      ['Name', data.first_name+' '+data.last_name],
+      ['Email', data.email],
+      ['Phone', (data.phone_code+' '+data.phone).trim()],
+      ['Stay', data.stay_nights+' nights'],
+      ['Top priorities', data.needs.join(', ')],
+      ['Current energy', data.energy+' / 10'],
+    ];
+    if (summaryList) summaryList.innerHTML = rows.map(function(r){
+      return '<div class="summary-row"><div class="summary-key">'+r[0]+'</div><div class="summary-val">'+r[1]+'</div></div>';
+    }).join('');
+  }
+
+  function collectPayload() {
+    var hUnit = (document.querySelector('.unit-toggle[data-unit="height"] .on')||{}).dataset&&document.querySelector('.unit-toggle[data-unit="height"] .on').dataset.unitVal || 'cm';
+    var wUnit = (document.querySelector('.unit-toggle[data-unit="weight"] .on')||{}).dataset&&document.querySelector('.unit-toggle[data-unit="weight"] .on').dataset.unitVal || 'kg';
+    return {
+      page_title: document.title, page_path: window.location.pathname, source_url: window.location.href,
+      gender: (form.querySelector('input[name="gender"]:checked')||{}).value||'',
+      birthdate: valueOf('birthdate'),
+      height: Number(valueOf('height')), height_unit: hUnit,
+      weight: Number(valueOf('weight')), weight_unit: wUnit,
+      stay_nights: Number(valueOf('stayNights')),
+      needs: checkedValues('needs'),
+      feeling: (form.querySelector('input[name="feeling"]:checked')||{}).value||'',
+      pace: (form.querySelector('input[name="pace"]:checked')||{}).value||'',
+      sleep: (form.querySelector('input[name="sleep"]:checked')||{}).value||'',
+      body_needs: (form.querySelector('input[name="bodyNeeds"]:checked')||{}).value||'',
+      experience: checkedValues('experience'), symptoms: checkedValues('symptoms'),
+      energy: Number(valueOf('energy')), outcome: checkedValues('outcome'),
+      has_condition: (form.querySelector('input[name="hasCondition"]:checked')||{}).value||'',
+      conditions: checkedValues('conditions'),
+      first_name: valueOf('firstName'), last_name: valueOf('lastName'),
+      phone_code: valueOf('phoneCode'), phone: valueOf('phone'), email: valueOf('email'),
+      first_time: (form.querySelector('input[name="firstTime"]:checked')||{}).value||'',
+      consent_medical: !!(form.querySelector('input[name="consentMedical"]')&&form.querySelector('input[name="consentMedical"]').checked),
+      consent_privacy: !!(form.querySelector('input[name="consentPrivacy"]')&&form.querySelector('input[name="consentPrivacy"]').checked),
+      consent_marketing: !!(form.querySelector('input[name="consentMarketing"]')&&form.querySelector('input[name="consentMarketing"]').checked),
+      consent_community: !!(form.querySelector('input[name="consentCommunity"]')&&form.querySelector('input[name="consentCommunity"]').checked),
+    };
+  }
+
+  async function submitAssessment() {
+    var payload = collectPayload();
+    var programId = generateProgramId();
+    var enriched = Object.assign({}, payload, {
+      program_id: programId,
+      full_phone: (payload.phone_code+' '+payload.phone).trim(),
+      submitted_at: new Date().toISOString(),
+      privacy_policy_version: '2026-06-06',
+      user_agent: navigator.userAgent
+    });
+    try {
+      if (nextBtn) { nextBtn.disabled = true; nextBtn.textContent = 'Submitting...'; }
+      var r = await fetch(MAKE_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(enriched) });
+      if (!r.ok) throw new Error('HTTP '+r.status);
+      if (programIdEl) programIdEl.textContent = programId;
+      buildSummary(enriched);
+      currentStep = 'success';
+      panels.forEach(function(p){ p.classList.toggle('active', p.dataset.panel==='success'); });
+      if (panelActions) panelActions.style.display = 'none';
+    } catch(err) {
+      alert('The assessment could not be submitted right now. Please try again.');
+      console.error('Make.com error:', err);
+    } finally {
+      if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Submit Assessment'; }
     }
+  }
 
-    function valueOf(name) {
-      return form.querySelector(`[name="${name}"]`)?.value?.trim() || '';
-    }
+  /* ── Wire up all inputs ── */
+  form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(input){
+    /* initialise state on page load */
+    updateChipState(input);
+    if (input.closest('.consent-row')) updateConsentState(input);
 
-    
-    function validateStep(step) {
-      let isValid = true;
-
-      if (step === 1) {
-        const gender = form.querySelector('input[name="gender"]:checked');
-        const birthdate = valueOf('birthdate');
-        const height = valueOf('height');
-        const weight = valueOf('weight');
-
-        showError('gender', !gender);
-        showError('birthdate', !birthdate);
-        showError('height', !height);
-        showError('weight', !weight);
-
-        isValid = Boolean(gender && birthdate && height && weight);
-      }
-
-      if (step === 3) {
-        const needs = checkedValues('needs');
-        showError('needs', needs.length === 0);
-        isValid = needs.length > 0;
-      }
-
-      if (step === 4) {
-        const requiredFields = ['feeling', 'pace', 'sleep', 'bodyNeeds'];
-        requiredFields.forEach((field) => {
-          const selected = form.querySelector(`input[name="${field}"]:checked`);
-          showError(field, !selected);
-          if (!selected) {
-            isValid = false;
-          }
-        });
-      }
-
-      if (step === 7) {
-        const hasCondition = form.querySelector('input[name="hasCondition"]:checked');
-        const conditions = checkedValues('conditions');
-        showError('hasCondition', !hasCondition);
-        if (!hasCondition) {
-          isValid = false;
-        }
-        if (hasCondition?.value === 'Yes' && conditions.length === 0) {
-          showError('hasCondition', true);
-          isValid = false;
-        }
-      }
-
-      if (step === 8) {
-        const firstName = valueOf('firstName');
-        const lastName = valueOf('lastName');
-        const phone = valueOf('phone');
-        const email = valueOf('email');
-        const firstTime = form.querySelector('input[name="firstTime"]:checked');
-        const consentMedical = form.querySelector('input[name="consentMedical"]')?.checked;
-        const consentPrivacy = form.querySelector('input[name="consentPrivacy"]')?.checked;
-        // consent_marketing optional
-
-        showError('firstName', !firstName);
-        showError('lastName', !lastName);
-        showError('phone', !phone);
-        showError('email', !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
-        showError('firstTime', !firstTime);
-        showError('consents', !consentMedical || !consentPrivacy);
-
-        isValid = Boolean(
-          firstName &&
-          lastName &&
-          phone &&
-          email &&
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
-          firstTime &&
-          consentMedical &&
-          consentPrivacy
-        );
-      }
-
-      return isValid;
-    }
-
-    function buildSummary(data) {
-      const summary = [
-        ['Program ID', data.program_id || 'Pending'],
-        ['Name', `${data.first_name} ${data.last_name}`],
-        ['Email', data.email],
-        ['Phone', `${data.phone_code} ${data.phone}`.trim()],
-        ['Stay', `${data.stay_nights} nights`],
-        ['Top priorities', data.needs.join(', ')],
-        ['Current energy', `${data.energy} / 10`],
-      ];
-
-      summaryList.innerHTML = summary
-        .map(([key, value]) => `
-          <div class="summary-row">
-            <div class="summary-key">${key}</div>
-            <div class="summary-val">${value}</div>
-          </div>
-        `)
-        .join('');
-    }
-
-    function collectPayload() {
-      const heightUnit = document.querySelector('.unit-toggle[data-unit="height"] .on')?.dataset.unitVal || 'cm';
-      const weightUnit = document.querySelector('.unit-toggle[data-unit="weight"] .on')?.dataset.unitVal || 'kg';
-
-      return {
-        page_title: document.title,
-        page_path: window.location.pathname,
-        source_url: window.location.href,
-        gender: form.querySelector('input[name="gender"]:checked')?.value || '',
-        birthdate: valueOf('birthdate'),
-        height: Number(valueOf('height')),
-        height_unit: heightUnit,
-        weight: Number(valueOf('weight')),
-        weight_unit: weightUnit,
-        stay_nights: Number(valueOf('stayNights')),
-        needs: checkedValues('needs'),
-        feeling: form.querySelector('input[name="feeling"]:checked')?.value || '',
-        pace: form.querySelector('input[name="pace"]:checked')?.value || '',
-        sleep: form.querySelector('input[name="sleep"]:checked')?.value || '',
-        body_needs: form.querySelector('input[name="bodyNeeds"]:checked')?.value || '',
-        experience: checkedValues('experience'),
-        symptoms: checkedValues('symptoms'),
-        energy: Number(valueOf('energy')),
-        outcome: checkedValues('outcome'),
-        has_condition: form.querySelector('input[name="hasCondition"]:checked')?.value || '',
-        conditions: checkedValues('conditions'),
-        first_name: valueOf('firstName'),
-        last_name: valueOf('lastName'),
-        phone_code: valueOf('phoneCode'),
-        phone: valueOf('phone'),
-        email: valueOf('email'),
-        first_time: form.querySelector('input[name="firstTime"]:checked')?.value || '',
-        consent_medical: Boolean(form.querySelector('input[name="consentMedical"]')?.checked),
-        consent_privacy: Boolean(form.querySelector('input[name="consentPrivacy"]')?.checked),
-        consent_marketing: Boolean(form.querySelector('input[name="consentMarketing"]')?.checked),
-        consent_community: Boolean(form.querySelector('input[name="consentCommunity"]')?.checked),
-      };
-    }
-
-    
-    form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach((input) => {
-      input.addEventListener('change', () => {
-        updateChipState(input);
-        if (input.closest('[data-multi-rank]')) {
-          updateRankedGroup(input.closest('[data-multi-rank]'));
-        }
-        if (input.closest('.consent-row')) {
-          updateConsentState(input);
-        }
-        if (input.name === 'hasCondition') {
-          updateConditionVisibility();
-        }
-      });
-
+    input.addEventListener('change', function(){
       updateChipState(input);
-      if (input.closest('.consent-row')) {
-        updateConsentState(input);
-      }
+      var rankedGroup = input.closest('[data-multi-rank]');
+      if (rankedGroup) updateRankedGroup(rankedGroup);
+      if (input.closest('.consent-row')) updateConsentState(input);
+      if (input.name === 'hasCondition') updateConditionVisibility();
     });
+  });
 
-    form.querySelectorAll('[data-multi-rank]').forEach(updateRankedGroup);
+  /* Make entire chip label clickable properly */
+  form.querySelectorAll('.chip').forEach(function(chip){
+    chip.addEventListener('click', function(e){
+      /* Only trigger if click wasn't directly on the hidden input */
+      var inp = chip.querySelector('input');
+      if (!inp || e.target === inp) return;
+      if (inp.type === 'radio') {
+        inp.checked = true;
+      } else {
+        inp.checked = !inp.checked;
+      }
+      inp.dispatchEvent(new Event('change', {bubbles:true}));
+    });
+  });
 
-    document.querySelectorAll('.unit-toggle').forEach((toggle) => {
-      toggle.querySelectorAll('button').forEach((button) => {
-        button.addEventListener('click', () => {
-          toggle.querySelectorAll('button').forEach((item) => item.classList.remove('on'));
-          button.classList.add('on');
-        });
+  form.querySelectorAll('[data-multi-rank]').forEach(updateRankedGroup);
+
+  /* Unit toggles */
+  document.querySelectorAll('.unit-toggle').forEach(function(toggle){
+    toggle.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        toggle.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
       });
     });
+  });
 
-    stayNights.addEventListener('input', updateReadouts);
-    energy.addEventListener('input', updateReadouts);
-    if (birthdateField) {
-      birthdateField.max = new Date().toISOString().split('T')[0];
-    }
-    updateReadouts();
-    updateConditionVisibility();
+  if (stayNights) stayNights.addEventListener('input', updateReadouts);
+  if (energyInput) energyInput.addEventListener('input', updateReadouts);
+  updateReadouts();
+  updateConditionVisibility();
 
-    nextBtn.addEventListener('click', async () => {
-      if (currentStep === 'success') {
-        return;
-      }
-
-      if (!validateStep(currentStep)) {
-        return;
-      }
-
-      if (currentStep === stepTotal) {
-        await submitAssessment();
-        return;
-      }
-
-      currentStep += 1;
-      updateProgress();
-    });
-
-    backBtn.addEventListener('click', () => {
-      if (typeof currentStep !== 'number' || currentStep === 1) {
-        return;
-      }
-
-      currentStep -= 1;
-      updateProgress();
-    });
-
+  nextBtn && nextBtn.addEventListener('click', async function(){
+    if (currentStep === 'success') return;
+    if (!validateStep(currentStep)) return;
+    if (currentStep === STEP_TOTAL) { await submitAssessment(); return; }
+    currentStep += 1;
     updateProgress();
-  })();
-</script>
+    window.scrollTo({top: document.getElementById('assessment').offsetTop - 80, behavior:'smooth'});
+  });
 
+  backBtn && backBtn.addEventListener('click', function(){
+    if (typeof currentStep !== 'number' || currentStep === 1) return;
+    currentStep -= 1;
+    updateProgress();
+    window.scrollTo({top: document.getElementById('assessment').offsetTop - 80, behavior:'smooth'});
+  });
 
-    async function submitAssessment() {
-      const payload = collectPayload();
-      const programId = generateProgramId();
-      const enrichedPayload = { ...payload, program_id:programId,
-        full_phone:(payload.phone_code+' '+payload.phone).trim(),
-        submitted_at:new Date().toISOString(), privacy_policy_version:'2026-06-06',
-        user_agent:navigator.userAgent };
-      try {
-        nextBtn.disabled=true; nextBtn.textContent='Submitting...';
-        const response = await fetch(MAKE_WEBHOOK_URL, { method:'POST',
-          headers:{'Content-Type':'application/json'}, body:JSON.stringify(enrichedPayload) });
-        if (!response.ok) throw new Error('HTTP '+response.status);
-        programIdElement.textContent=programId;
-        buildSummary(enrichedPayload);
-        currentStep='success';
-        panels.forEach(p=>p.classList.toggle('active',p.dataset.panel==='success'));
-        panelActions.style.display='none';
-      } catch(err) {
-        alert('The assessment could not be submitted right now. Please try again.');
-        console.error('Make.com error:',err);
-      } finally { nextBtn.disabled=false; nextBtn.textContent='Submit Assessment'; }
-    }
+  updateProgress();
 })();
 </script>
 </body>
