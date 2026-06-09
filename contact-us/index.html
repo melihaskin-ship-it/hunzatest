@@ -938,15 +938,15 @@
           <div class="form-row-2">
             <div>
               <label class="form-label-light">First Name</label>
-              <input type="text" class="form-input-light" placeholder="First name">
+              <input type="text" class="form-input-light" placeholder="First name" name="consult_first_name">
             </div>
             <div>
               <label class="form-label-light">Last Name</label>
-              <input type="text" class="form-input-light" placeholder="Last name">
+              <input type="text" class="form-input-light" placeholder="Last name" name="consult_last_name">
             </div>
           </div>
           <label class="form-label-light">Email Address</label>
-          <input type="text" class="form-input-light" placeholder="Your email address" autocomplete="email">
+          <input type="text" class="form-input-light" placeholder="Your email address" autocomplete="email" name="consult_email">
           <label class="form-label-light">Phone Number</label>
           <div class="phone-field-wrap" style="margin-bottom:16px;">
             <div style="display:flex;height:50px;border:1px solid var(--brand-tint-2);background:#fff;">
@@ -1727,9 +1727,9 @@
     var success = container.querySelector('#consultSuccess');
     if (!btn) return;
     btn.addEventListener('click', async function(){
-      var fn = container.querySelector('input[placeholder="First name"]')?.value?.trim()||'';
-      var ln = container.querySelector('input[placeholder="Last name"]')?.value?.trim()||'';
-      var em = container.querySelector('input[placeholder*="email"]')?.value?.trim()||'';
+      var fn = container.querySelector('input[name="consult_first_name"]')?.value?.trim()||'';
+      var ln = container.querySelector('input[name="consult_last_name"]')?.value?.trim()||'';
+      var em = container.querySelector('input[name="consult_email"]')?.value?.trim()||'';
       var phoneCode = container.querySelector('input[name="phone_code"]')?.value||'';
       var ph = container.querySelector('input[name="phone"]')?.value?.trim()||'';
       var message = container.querySelector('textarea')?.value?.trim()||'';
