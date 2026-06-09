@@ -1251,7 +1251,14 @@
             </label>
             <p class="form-consent-note">We are committed to sending you only useful and relevant information.</p>
           </div>
-          <button class="btn-primary" style="width:100%;text-align:center;padding:20px;font-size:12px;">Send Your Message</button>
+          <button class="btn-primary" style="width:100%;text-align:center;padding:20px;font-size:12px;" id="consultSubmitBtn">Send Your Message</button>
+          <div id="consultSuccess" style="display:none;text-align:center;padding:40px 24px;border:1px solid var(--brand-tint-2);background:var(--brand-tint-1);margin-top:16px;">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--brand-tint-2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="var(--brand-deep)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 style="font-family:var(--ff-display);font-size:26px;font-weight:300;color:var(--brand-deep);margin-bottom:10px;line-height:1.2;">Message <em style="font-style:italic;">received.</em></h3>
+            <p style="font-size:13px;color:var(--warm-gray-5);line-height:1.8;font-weight:300;">A member of our team will be in touch personally within 24 hours.<br>We look forward to speaking with you.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2895,5 +2902,58 @@
 })();
 </script>
 
+<script>
+(function(){
+  var WEBHOOK = 'https://hook.eu1.make.com/qm2fexsk87wfqfbk1vmuj76ucoq4brvp';
+  document.querySelectorAll('.form-container').forEach(function(container){
+    var btn = container.querySelector('#consultSubmitBtn');
+    var success = container.querySelector('#consultSuccess');
+    if (!btn) return;
+    btn.addEventListener('click', async function(){
+      var fn = container.querySelector('input[placeholder="First name"]')?.value?.trim()||'';
+      var ln = container.querySelector('input[placeholder="Last name"]')?.value?.trim()||'';
+      var em = container.querySelector('input[placeholder*="email"]')?.value?.trim()||'';
+      var phoneCode = container.querySelector('input[name="phone_code"]')?.value||'';
+      var ph = container.querySelector('input[name="phone"]')?.value?.trim()||'';
+      var message = container.querySelector('textarea')?.value?.trim()||'';
+      var privacyConsent = container.querySelector('input[name="consent_privacy"]')?.checked||false;
+      var marketingConsent = container.querySelector('input[name="consent_marketing"]')?.checked||false;
+
+      if (!fn||!ln||!em||!ph||!privacyConsent){
+        alert('Please complete all required fields and accept the Privacy Policy.');return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){
+        alert('Please enter a valid email address.');return;
+      }
+
+      btn.disabled=true; btn.textContent='Sending...';
+      try {
+        var r = await fetch(WEBHOOK, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            first_name: fn, last_name: ln,
+            email: em, phone_code: phoneCode,
+            phone: ph, full_phone: (phoneCode+' '+ph).trim(),
+            message: message,
+            consent_privacy: privacyConsent,
+            consent_marketing: marketingConsent,
+            submitted_at: new Date().toISOString(),
+            page_url: window.location.href,
+            user_agent: navigator.userAgent
+          })
+        });
+        if (!r.ok) throw new Error('HTTP '+r.status);
+        btn.style.display='none';
+        if (success) success.style.display='block';
+      } catch(e) {
+        btn.disabled=false; btn.textContent='Send Your Message';
+        alert('Something went wrong. Please try again.');
+        console.error(e);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
