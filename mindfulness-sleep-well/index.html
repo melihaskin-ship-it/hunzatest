@@ -2045,7 +2045,7 @@
       const firstName = inputs[0]?.value?.trim()||'';
       const lastName = inputs[1]?.value?.trim()||'';
       const email = navForm.querySelector('input[name="email"]')?.value?.trim();
-      const phone = navForm.querySelector('input[type="tel"]')?.value?.trim()||'';
+      const phone = navForm.querySelector('input[name="phone"]')?.value?.trim()||'';
       const consent = navForm.querySelector('input[name="consent_marketing"]')?.checked;
       if (!email || !consent) { if(navErr){navErr.textContent='Please fill in your email and accept the consent.';navErr.classList.add('is-visible');} return; }
       if(navErr) navErr.classList.remove('is-visible');
