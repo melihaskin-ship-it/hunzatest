@@ -1845,6 +1845,16 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
 (function() {
   const WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
   const navForm = document.getElementById('menuBrochureForm');
+  if(navForm){
+    var _navStarted=false;
+    navForm.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('focus',function(){
+        if(_navStarted)return;_navStarted=true;
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({'event':'form_start','form_name':'brochure_menu'});
+      },{once:false});
+    });
+  }
   const navBtn = document.getElementById('menuBrochureSubmit');
   const navErr = document.getElementById('menuBrochureError');
   if (!navForm || !navBtn) return;
@@ -2160,6 +2170,14 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     var btn = container.querySelector('#consultSubmitBtn');
     var success = container.querySelector('#consultSuccess');
     if (!btn) return;
+    var _cStarted=false;
+    container.querySelectorAll('input,textarea,select').forEach(function(inp){
+      inp.addEventListener('focus',function(){
+        if(_cStarted)return;_cStarted=true;
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({'event':'form_start','form_name':'consultation_detailed','page':window.location.pathname});
+      },{once:false});
+    });
     btn.addEventListener('click', async function(){
       var fn = container.querySelector('input[name="consult_first_name"]')?.value?.trim()||'';
       var ln = container.querySelector('input[name="consult_last_name"]')?.value?.trim()||'';
@@ -2201,6 +2219,8 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
         if (!r.ok) throw new Error('HTTP '+r.status);
         btn.style.display='none';
         if (success) success.style.display='block';
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({'event':'consultation_submit','form_name':'consultation_detailed','page':window.location.pathname});
       } catch(e) {
         btn.disabled=false; btn.textContent='Send Your Message';
         alert('Something went wrong. Please try again.');
