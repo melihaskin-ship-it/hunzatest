@@ -1933,6 +1933,16 @@ window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
 (function() {
   const WEBHOOK = 'https://hook.eu1.make.com/nw1zg92ggkiqvwuctjsvke6isid62fkq';
   const navForm = document.getElementById('menuBrochureForm');
+  if(navForm){
+    var _navStarted=false;
+    navForm.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('focus',function(){
+        if(_navStarted)return;_navStarted=true;
+        window.dataLayer=window.dataLayer||[];
+        window.dataLayer.push({'event':'form_start','form_name':'brochure_menu'});
+      },{once:false});
+    });
+  }
   const navBtn  = document.getElementById('menuBrochureSubmit');
   const navErr  = document.getElementById('menuBrochureError');
   if (!navForm || !navBtn) return;
