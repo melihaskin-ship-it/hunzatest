@@ -1797,6 +1797,8 @@ window.addEventListener('resize',syncFooterAccordions);
       buildSummary(body);
       step='success';
       panels.forEach(function(p){p.classList.toggle('active',p.dataset.panel==='success');});
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({'event':'assessment_submit','form_name':'assessment','program_id':pid});
       if(pActions)pActions.style.display='none';
       scrollToForm();
     }catch(e){
@@ -1844,6 +1846,10 @@ window.addEventListener('resize',syncFooterAccordions);
   if(nextBtn)nextBtn.addEventListener('click',async function(){
     if(step==='success')return;
     if(!validate(step))return;
+    if(step===1){
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({'event':'form_start','form_name':'assessment'});
+    }
     if(step===TOTAL){await submit();return;}
     step+=1;
     updateProgress();
