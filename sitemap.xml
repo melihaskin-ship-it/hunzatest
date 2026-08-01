@@ -117,6 +117,32 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Blog -->
+  <url>
+    <loc>https://hunzalongevity.com/blog/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hunzalongevity.com/blog/longevity-retreats-in-turkey/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hunzalongevity.com/blog/weight-loss-retreats-abroad/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hunzalongevity.com/blog/detox-retreats-abroad/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://hunzalongevity.com/privacy-policy/</loc>
