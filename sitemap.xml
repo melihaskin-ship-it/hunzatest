@@ -163,4 +163,22 @@
     <priority>0.3</priority>
   </url>
 
+  <url>
+    <loc>https://hunzalongevity.com/blog/medical-wellness-retreat-near-istanbul/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hunzalongevity.com/blog/sleep-retreat-burnout-recovery/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hunzalongevity.com/blog/gut-health-retreat/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
